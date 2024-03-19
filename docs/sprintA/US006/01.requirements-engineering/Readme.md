@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -17,13 +17,13 @@ As an organization employee, I want to create a new task in order to be further 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** If the Fm inserts the same vehicle by mistake, should it inform ther user of the mistake and give him the option to add another vehicle?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** again, duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates.
 
 ### 1.3. Acceptance Criteria
 
@@ -65,7 +65,7 @@ As an organization employee, I want to create a new task in order to be further 
 
 #### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+!
 
 ### 1.7 Other Relevant Remarks
 
