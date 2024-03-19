@@ -15,7 +15,7 @@ activate Employee
     Employee -> System : asks to register a collaborator
     activate System
 
-        System --> Employee : asks which job will choose
+        System --> Employee : show the list of jobs
     deactivate System
 
     Employee -> System : selects a job
