@@ -66,4 +66,4 @@ As an HRM, I want to register a collaborator with a job and fundamental characte
 
 ### 1.7 Other Relevant Remarks
 
-* 
+*  
