@@ -53,11 +53,7 @@ Teams are temporary associations of employees who will carry out a set of tasks 
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
