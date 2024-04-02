@@ -54,7 +54,7 @@ As an FM, I wish to register a vehicle’s check-up.
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us007-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
