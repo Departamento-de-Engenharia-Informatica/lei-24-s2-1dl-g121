@@ -42,7 +42,6 @@ or tractors; tree pruning; application of phytopharmaceuticals.
     * Skill description
     * Skill category
 
-
 **Output Data:**
 
 * (In)Success of the operation
@@ -51,13 +50,10 @@ or tractors; tree pruning; application of phytopharmaceuticals.
 
 **_Other alternatives might exist._**
 
-#### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram](svg/us001-system-sequence-diagram.svg)
 
-#### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
