@@ -45,7 +45,7 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](../../US006/03.design/svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](../../us006/03.design/svg/us006-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -53,24 +53,24 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](../../US006/03.design/svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](../../us006/03.design/svg/us006-sequence-diagram-split.svg)
 
 **Get Task Category List Partial SD**
 
-![Sequence Diagram - Partial - Get Task Category List](../../US006/03.design/svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![Sequence Diagram - Partial - Get Task Category List](../../us006/03.design/svg/us006-sequence-diagram-partial-get-task-category-list.svg)
 
 **Get Task Category Object**
 
-![Sequence Diagram - Partial - Get Task Category Object](../../US006/03.design/svg/us006-sequence-diagram-partial-get-task-category.svg)
+![Sequence Diagram - Partial - Get Task Category Object](../../us006/03.design/svg/us006-sequence-diagram-partial-get-task-category.svg)
 
 **Get Employee**
 
-![Sequence Diagram - Partial - Get Employee](../../US006/03.design/svg/us006-sequence-diagram-partial-get-employee.svg)
+![Sequence Diagram - Partial - Get Employee](../../us006/03.design/svg/us006-sequence-diagram-partial-get-employee.svg)
 
 **Create Task**
 
-![Sequence Diagram - Partial - Create Task](../../US006/03.design/svg/us006-sequence-diagram-partial-create-task.svg)
+![Sequence Diagram - Partial - Create Task](../../us006/03.design/svg/us006-sequence-diagram-partial-create-task.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](../../US006/03.design/svg/us006-class-diagram.svg)
+![Class Diagram](../../us006/03.design/svg/us006-class-diagram.svg)

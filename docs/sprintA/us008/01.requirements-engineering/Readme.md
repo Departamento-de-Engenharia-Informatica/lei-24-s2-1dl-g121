@@ -45,10 +45,10 @@ to be carried out.
 **Input Data:**
 
 * Typed data:
-    * 
+    * none
 	
 * Selected data:
-    *  
+    *  vehicles needing a checkup
 
 **Output Data:**
 
@@ -59,13 +59,9 @@ to be carried out.
 
 **_Other alternatives might exist._**
 
-#### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram](svg/us008-system-sequence-diagram.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
