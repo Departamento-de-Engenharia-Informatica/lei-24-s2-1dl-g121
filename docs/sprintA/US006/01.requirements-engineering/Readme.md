@@ -11,9 +11,8 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
 
 **From the client clarifications:**
 

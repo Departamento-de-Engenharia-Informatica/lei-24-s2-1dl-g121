@@ -11,9 +11,8 @@ As an HRM, I want to register a collaborator with a job and fundamental characte
 
 **From the specifications document:**
 
->	Which information is mandatory to insert a collaborator in the program (fundamental characteristics)?
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	Thus, an employee has a main occupation (job) and a set of skills that enable him to perform/take on certain tasks/responsibilities, for example, driving vehicles of different types (e.g. light, or heavy), operating machines such as backhoes or tractors; tree pruning; application of phytopharmaceuticals.
+ 
 
 **From the client clarifications:**
 
