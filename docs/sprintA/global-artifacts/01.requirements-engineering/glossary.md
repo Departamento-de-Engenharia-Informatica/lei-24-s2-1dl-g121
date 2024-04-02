@@ -4,11 +4,13 @@
 
 _(Complete according to the provided example)_
 
-| **_TEA_** (EN) | **_Description_** (EN)                                                                    |                                       
-|:---------------|:------------------------------------------------------------------------------------------|
-| **Clerk**      | Person responsible for carrying out various business supporting activities on the system. |
-| **CLK**        | Acronym for _Clerk_.                                                                      |
-| **...**        | ...                                                                                       |
+| **_TEA_** (EN)  | **_Description_** (EN)                          |                                       
+|:----------------|:------------------------------------------------|
+| **Colaborator** | A person who is an employee of the organization |
+| **FM**          | Person who manages the fleet park.              |
+| **GSM**         | Person who manages the green spaces.            |
+| **GSU**         | Person who uses the green spaces.               |
+| **HRM**         | Person who manages human resources.             |
 
 
 
