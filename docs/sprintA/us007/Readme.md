@@ -1,4 +1,4 @@
-# US004 - Assign a skill
+# US007 - Register vehicle's check-up
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
