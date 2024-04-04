@@ -1,4 +1,4 @@
-# US006 - Generate a team proposal automatically
+# US005 -  As a HRM, I want to generate a team proposal automatically.
 
 
 ## 1. Requirements Engineering
@@ -26,8 +26,8 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
+* **AC1:** The maximum team size and the set of skills need to be supplied by the HRM.
+* **AC2:** All required fields must be filled in.
 * **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
 
 ### 1.4. Found out Dependencies
