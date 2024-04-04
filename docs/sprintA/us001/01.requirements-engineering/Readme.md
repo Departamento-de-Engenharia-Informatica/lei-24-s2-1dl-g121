@@ -39,8 +39,6 @@ or tractors; tree pruning; application of phytopharmaceuticals.
 
 * Typed data:
     * Skill name
-    * Skill description
-    * Skill category
 
 **Output Data:**
 

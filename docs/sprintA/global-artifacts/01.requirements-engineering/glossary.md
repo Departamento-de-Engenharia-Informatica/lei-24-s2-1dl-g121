@@ -7,7 +7,7 @@ _(Complete according to the provided example)_
 | **_TEA_** (EN)  | **_Description_** (EN)                          |                                       
 |:----------------|:------------------------------------------------|
 | **Colaborator** | A person who is an employee of the organization |
-| **FM**          | Person who manages the fleet park.              |
+| **FM/VFM**      | Person who manages the fleet park.              |
 | **GSM**         | Person who manages the green spaces.            |
 | **GSU**         | Person who uses the green spaces.               |
 | **HRM**         | Person who manages human resources.             |
