@@ -14,9 +14,19 @@ hide methods
 '  -description
 '}
 
-class HRM
+class HRM{
+    name
+    email
+    phone number
+    identification document
+}
 
-class FM
+class FM{
+    name
+    email
+    phone number
+    identification document
+}
 
 class Skill{
     name
