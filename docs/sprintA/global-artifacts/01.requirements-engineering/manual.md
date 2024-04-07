@@ -44,10 +44,13 @@ Frequently Asked Questions (FAQ).
 
 ## System Overview
 
-This should include an overall description of the product, including the objectives of the
-application, its structure (its organization, and overall functions dependencies), the reference to
-the main features, and highlight of the main modules. A diagram illustrating the structure of the
-application may be included.
+The  program is a unified software solution designed
+to streamline the management of green space organizations.
+Its core objectives include centralizing HRM and FM functionalities, optimizing resource
+allocation based on skills and availability, ensuring timely vehicle maintenance, enhancing
+collaboration among team members, and improving overall productivity and efficiency. Structured
+hierarchically, the program consists of interconnected modules such as Skills Management,
+Collaborator Management, Job Management, Vehicle Registration, Maintenance Scheduling, and more.
 
 [//]: # (## System Requirements)
 
