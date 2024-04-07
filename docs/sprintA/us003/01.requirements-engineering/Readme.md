@@ -1,4 +1,5 @@
-# US006 - Create a Task 
+# US003 - As an HRM, I want to register a collaborator with a job and fundamental characteristics.
+
 
 
 ## 1. Requirements Engineering
