@@ -23,13 +23,13 @@ ISEP/LEI - 06/04/2024
 
 ### Glossary
 
-| **_TEA_** (EN)  | **_Description_** (EN)              
-|:----------------|:------------------------------------------------|
-| **Colaborator** | A person who is an employee of the organization |
-| **FM/VFM**      | Person who manages the fleet park.              |
-| **GSM**         | Person who manages the green spaces.            |
-| **GSU**         | Person who uses the green spaces.               |
-| **HRM**         | Person who manages human resources.             |
+| **_TEA_** (EN)   | **_Description_** (EN)              
+|:-----------------|:------------------------------------------------|
+| **Collaborator** | A person who is an employee of the organization |
+| **FM/VFM**       | Person who manages the fleet park.              |
+| **GSM**          | Person who manages the green spaces.            |
+| **GSU**          | Person who uses the green spaces.               |
+| **HRM**          | Person who manages human resources.             |
 
 
 ## Introduction
