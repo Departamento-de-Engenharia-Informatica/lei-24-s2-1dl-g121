@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US007 - Register vehicle's check-up
 
 ## 2. Analysis
 
