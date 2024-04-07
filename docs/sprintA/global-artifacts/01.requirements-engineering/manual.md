@@ -7,9 +7,9 @@ ISEP/LEI - 06/04/2024
 ### Group 131 - IQuê
 
 - Bruno Teixeira - 1231091
-- Diogo Garrett - 123xxxx
-- Pedro Lemos - 122xxxx
-- Salvador Machado - 123xxxx
+- Diogo Garrett - 1230556
+- Pedro Lemos - 1221009
+- Salvador Machado - 1230561
 
 
 ### Table of Contents
@@ -31,16 +31,16 @@ ISEP/LEI - 06/04/2024
 | **GSU**         | Person who uses the green spaces.               |
 | **HRM**         | Person who manages human resources.             |
 
-é para mudar
 
 ## Introduction
 
-In the introduction, the students should refer to the purpose of the document and to its scope,
-i.e., briefly point out the type of product the manual was developed to, the kind of information
-the reader/user may find in the manual, and who the manual (and the product) is addressed to.
-This section can have the subtitle: “Purpose and Scope”.
-Note that this user manual should be target firstly at the green spaces managers and
-administrators.
+Purpose and Scope
+
+The purpose of this document is to provide the reader with information
+on the application being developed for "MusgoSublime" to facilitate the 
+maintenance of green spaces. Below you will find various sections, such as 
+System Overview, System Features, System Requirements, Troubleshooting and 
+Frequently Asked Questions (FAQ).
 
 ## System Overview
 
