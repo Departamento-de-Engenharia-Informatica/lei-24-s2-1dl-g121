@@ -4,6 +4,6 @@
 
 [Analysis](02.analysis/Readme.md)
 
-[Design](../US003/03.design/Readme.md)
+[Design](../us003/03.design/Readme.md)
 
 [Tests & Implementation](04.tests-and-implementation/Readme.md)
