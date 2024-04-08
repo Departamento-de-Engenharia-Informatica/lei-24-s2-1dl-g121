@@ -4,7 +4,7 @@
 ISEP/LEI - 06/04/2024
 
 
-### Group 131 - IQuê
+### Group 121 - IQuê
 
 - Bruno Teixeira - 1231091
 - Diogo Garrett - 1230556
