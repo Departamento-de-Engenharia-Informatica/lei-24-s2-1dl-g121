@@ -36,9 +36,9 @@ Teams are temporary associations of employees who will carry out a set of tasks 
 **Input Data:**
 
 * Typed data:
-    * Skill name
-    * Skill description
-    * Skill category
+    * Job name
+    * Small description
+    * Set of skills needed
 
 
 **Output Data:**

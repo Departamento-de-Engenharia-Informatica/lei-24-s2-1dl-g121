@@ -15,7 +15,7 @@ activate Employee
     Employee -> System : asks to create a new job
     activate System
 
-        System --> Employee : requests data (i.e. Skill name, Skill description, Skill category, job's name)
+        System --> Employee : requests data (i.e. Job name, small description, set of skills needed)
     deactivate System
 
     Employee -> System : types requested data
