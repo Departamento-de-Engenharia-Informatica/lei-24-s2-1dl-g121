@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Human Resources Manager" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to register a collaborator
+    activate System
+
+        System --> Employee : show the list of jobs
+    deactivate System
+
+    Employee -> System : selects a job
+    activate System
+
+        System --> Employee : asks about fundamental characteristics (name, birth details, issuing details, address, contact (telephone and email), identification document and your number)
+    deactivate System
+
+    Employee -> System : insert data
+    activate System
+
+        System --> Employee : shows all data and requests confirmation
+    deactivate System
+
+    Employee -> System : confirms data
+    activate System
+
+        System --> Employee : displays operation success
+    deactivate System
+
+@enduml

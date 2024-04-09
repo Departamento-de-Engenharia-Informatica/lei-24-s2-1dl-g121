@@ -1,0 +1,89 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
+'left to right direction
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+'title Domain Model
+
+'class Platform {
+'  -description
+'}
+
+class HRM{
+    name
+    email
+    phone number
+    identification document
+}
+
+'class FM{
+ '    name
+ '    email
+ '    phone number
+ '    identification document
+ '}
+
+class Skill{
+    name
+}
+
+'class Job{
+'    name
+'}
+'
+class Collaborator{
+    name
+    birth details
+    issuing details
+    address
+    phone number
+    email
+    identification document
+}
+'
+'class Team
+'
+'class Task{
+'    name
+'}
+'
+'class Vehicle{
+'    Brand
+'    Model
+'    Type
+'    Tare
+'    Gross Weight
+'    Current Km
+'    Register Date
+'    Acquisition Date
+'    Maintenance/Check-up
+'}
+'
+'class Check-up{
+'    distance "km"
+'}
+'
+'class Check-upList{
+'    Vehicles needing check-up
+'}
+
+HRM "1" -- "*" Skill : registers >
+'HRM "1" -- "*" Job : registers >
+'HRM "1" -- "*" Collaborator : registers >
+Collaborator "1" -- "*" Skill : has a set of >
+'Collaborator "1" -- "1" Job : has >
+'Collaborator "*" -- "1" Team : generates >
+'Team "1" -- "*" Task : has >
+'FM "1" -- "*" Vehicle : registers >
+'FM "1" -- "*" "Check-up" : registers >
+'Vehicle "1" -- "1" "Check-up" : needs >
+'Team "1" -- "0..*" Vehicle : needs >
+'"Check-upList" "1" -- "*" "Check-up" :  creates <
+
+
+@enduml
