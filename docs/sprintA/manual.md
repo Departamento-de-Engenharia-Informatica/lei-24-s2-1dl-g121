@@ -16,10 +16,13 @@ ISEP/LEI - 06/04/2024
 
 - Introduction
 - System Overview
-- System Requirements
+
+[//]: # (- System Requirements)
 - System Features (based on the User Stories)
-- Troubleshooting
-- Frequently Asked Questions
+
+[//]: # (- Troubleshooting)
+
+[//]: # (- Frequently Asked Questions)
 
 ### Glossary
 

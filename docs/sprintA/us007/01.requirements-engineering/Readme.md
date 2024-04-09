@@ -1,11 +1,11 @@
-# US007 - Register vehicle's check-up 
+# US007 - Register vehicle's maintenance 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I wish to register a vehicle’s check-up.
+As an VFM, I wish to register a vehicle’s maintenance.
 
 ### 1.2. Customer Specifications and Clarifications
 
@@ -25,13 +25,13 @@ As an FM, I wish to register a vehicle’s check-up.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The FM should be able to enter relevant details about the vehicle check-up, including the km, time, location, and purpose (e.g., routine maintenance, repair).
-* **AC2:** The system should allow the FM to identify the vehicle undergoing the check-up accurately. This could be done by entering the vehicle's registration number or selecting it from a list of registered vehicles.
-* **AC3:** The FM should have the ability to edit or remove check-ups from vehicles if needed.
+* **AC1:** The VFM should be able to enter relevant details about the vehicle check-up, including the km, time, location, and purpose (e.g., routine maintenance, repair).
+* **AC2:** The system should allow the VFM to identify the vehicle undergoing the check-up accurately. This could be done by entering the vehicle's registration number or selecting it from a list of registered vehicles.
+* **AC3:** The VFM should have the ability to edit or remove check-ups from vehicles if needed.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check-up Frequency (in Kms)." as there must be at least one vehicle to assign a check-up to.
+* There is a dependency on "As an VFM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check-up Frequency (in Kms)." as there must be at least one vehicle to assign a check-up to.
 
 ### 1.5 Input and Output Data
 

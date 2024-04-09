@@ -1,11 +1,12 @@
-# US006 - As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
-
+# US006 - Register a vehicle.
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
+As a VFM, I wish to register a vehicle including Brand, Model,
+Type, Tare Weight, Gross Weight, Current Km, Register Date, Acqui-
+sition Date, and Maintenance/Check-up Frequency (in km).
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -26,7 +27,7 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** FM cant duplicate cars.
+* **AC1:** VFM cant duplicate cars.
 * **AC2:** Vehicles must be identified by the plate id.
 * **AC3:** Show car data for confirmation.
 
