@@ -4,13 +4,13 @@ public class HRM {
     private String name;
     private String email;
     private String ID;
-    private String phone;
+    private String phoneNumber;
 
-    public HRM (String name, String email, String ID, String phone){
+    public HRM (String name, String email, String ID, String phoneNumber){
         this.name = name;
         this.email = email;
         this.ID = ID;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
     }
 
     public void setName(String name) {
@@ -25,8 +25,8 @@ public class HRM {
         this.ID = ID;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -41,7 +41,7 @@ public class HRM {
         return name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
