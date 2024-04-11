@@ -37,8 +37,7 @@ ISEP/LEI - 06/04/2024
 
 ## Introduction
 
-Purpose and Scope
-
+#### Purpose and Scope
 The purpose of this document is to provide the reader with information
 on the application being developed for "MusgoSublime" to facilitate the 
 maintenance of green spaces. Below you will find various sections, such as 
