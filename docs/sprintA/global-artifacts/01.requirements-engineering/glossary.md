@@ -6,7 +6,7 @@ _(Complete according to the provided example)_
 
 | **_TEA_** (EN)                                        | **_Description_** (EN)                                                   |                                       
 |:------------------------------------------------------|:-------------------------------------------------------------------------|
-| **Collaborator**                                      | A person who is an employee of the organization                          |
+| **Collaborator**                                      | A person who is an employee of the organization.                         |
 | **Fleet Manager/Vehicle and Equipment Fleet Manager** | Person who manages the fleet park.                                       |
 | **Green Spaces Manager**                              | Person who manages the green spaces.                                     |
 | **Green Spaces User**                                 | Person who uses the green spaces.                                        |
