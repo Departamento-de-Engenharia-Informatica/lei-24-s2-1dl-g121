@@ -1,4 +1,5 @@
-# US002 - Register a job 
+# US010 -  As a GSM, I want to know which piece(s) of equipment is/are
+used in each day so that I can understand the users’ preferences.
 
 
 ## 1. Requirements Engineering
