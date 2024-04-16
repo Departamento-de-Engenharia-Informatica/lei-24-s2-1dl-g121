@@ -1,4 +1,4 @@
-# US004 - Assign a skill 
+# US012 - As a GSM, I want to import a .csv file containing lines with: "Water Point X, Water Point Y, Distance" into a unique data structure.
 
 
 ## 1. Requirements Engineering

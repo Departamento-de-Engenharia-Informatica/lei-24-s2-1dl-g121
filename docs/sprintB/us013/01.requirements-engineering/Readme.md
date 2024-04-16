@@ -1,4 +1,5 @@
-# US005 -  As a HRM, I want to generate a team proposal automatically.
+# US013 -  As a GSM, I want to apply an algorithm that returns the routes to be opened and pipes needed to be laid with a minimum accumulated cost, ensuring that all points are adequately supplied.
+
 
 
 ## 1. Requirements Engineering
