@@ -12,12 +12,12 @@ participant ":RegisterSkillsController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "skillRepository:\nSkillRepository" as SkillRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
+'participant ":ApplicationSession" as _APP
+'participant "appSession\n:ApplicationSession" as APP
+'participant "currentSession\n:UserSession" as SESSAO
 participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
 participant "organization\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
+participant "skill\n:Skill" as SKILL
 
 activate ADM
 
@@ -86,10 +86,10 @@ activate ADM
                 CTRL -> PLAT : getSkillRepository()
                 activate PLAT
 
-                    PLAT -> CTRL : skillCategoryRepository
+                    PLAT -> CTRL : skillRepository
                 deactivate PLAT
 
-                CTRL -> SkillRepository : getSkillCategoryByDescription(skillCategoryDescription)
+                CTRL -> SkillRepository : getSkillByDescription(skillDescription)
                 activate SkillRepository
 
                     SkillRepository --> CTRL : skillCategory
@@ -103,15 +103,15 @@ activate ADM
 
                 CTRL -> _APP: getInstance()
                 activate _APP
-                    _APP -> CTRL: appSession
-                deactivate _APP
+                 '   _APP -> CTRL: appSession
+                'deactivate _APP
 
 
-                CTRL -> APP: getCurrentSession()
-                activate APP
+                'CTRL -> APP: getCurrentSession()
+               ' activate APP
 
-                    APP --> CTRL: currentSession
-                deactivate APP
+                  '  APP --> CTRL: currentSession
+                'deactivate APP
 
                 CTRL -> SESSAO: email = getUserEmail()
                 activate SESSAO
@@ -150,15 +150,15 @@ activate ADM
             deactivate CTRL
 
             |||
-            CTRL -> ORG: createTask(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, , taskCategory, employee)
+            CTRL -> ORG: registerSkills(name)
             activate ORG
 
-                ORG -> TAREFA**: create(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
-                ORG -> ORG: addTask (task)
+                ORG -> SKILL**: register(name)
+                ORG -> ORG: addSkill (skill)
 
 
                 activate ORG
-                    ORG -> ORG: validateTask(task)
+                    ORG -> ORG: validateSkill(skill)
                     activate ORG
                         ORG --> ORG
                     deactivate ORG
@@ -166,11 +166,11 @@ activate ADM
                     ORG --> ORG
                 deactivate ORG
 
-                ORG --> CTRL : task
+                ORG --> CTRL : skill
 
             deactivate ORG
 
-            CTRL --> UI: task
+            CTRL --> UI: skill
             deactivate CTRL
             UI --> ADM: displays operation success
     deactivate UI

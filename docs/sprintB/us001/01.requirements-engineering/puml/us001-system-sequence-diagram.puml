@@ -15,7 +15,7 @@ activate Employee
     Employee -> System : asks to register skills
     activate System
 
-        System --> Employee : requests data (i.e. skill name, description)
+        System --> Employee : requests data (i.e. skill name)
     deactivate System
 
     Employee -> System : types requested data
