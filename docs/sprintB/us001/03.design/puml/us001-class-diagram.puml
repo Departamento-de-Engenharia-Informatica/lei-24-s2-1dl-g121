@@ -20,29 +20,20 @@ class UserSession
     + getUserEmail()
 }
 
-class Employee {
+class HRM {
     - name
     - email
     - position
     - phone
+    - ID
 }
 
-class Task {
-    - String reference
-    - String description
-    - String informalDescription
-    - String technicalDescription
-    - Integer duration
-    - Double cost
+class Skill {
+    - String name
 
-    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
+    + Skill(skill name)
 }
 
-class TaskCategory {
-    - String description
-
-    + TaskCategory(description)
-}
 
 class Organization {
     - String name
@@ -51,17 +42,17 @@ class Organization {
     - String phone
     - String email
 
-    - addTask(task)
-    - validateTask(task)
+    - addSkill(skill)
+    - validateSkill(skill)
     + anyEmployeeHasEmail(email)
     + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
-    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
+    + registerSkill(name)
     - getEmployeeByEmail(email)
 
 '  +saveTask(task)
 }
 
-class TaskCategoryRepository {
+class SkillRepository {
     + getTaskCategoryByDescription(description)
 }
 
@@ -76,55 +67,55 @@ class Repositories {
     + getOrganizationRepository()
 }
 
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
+class RegisterSkillsController {
+    + RegisterSkillsController(organizationRepository, taskCategoryRepository)
     + getTaskCategories()
     + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
     - getTaskCategoryByDescription(taskCategoryDescription)
     - getEmployeeFromSession()
 }
 
-note right of CreateTaskController
+note right of RegisterSkillsController
     - userEmail is obtained
     from the user session
     - categoryDescription
     is retrieved from selected data
 end note
 
-note bottom of TaskCategoryRepository
+note bottom of SkillRepository
     - used for displaying
     the category list
 end note
 
-class CreateTaskUI {
+class RegisterSkillsUI {
 }
 
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
-CreateTaskUI .> CreateTaskController
+RegisterSkillsUI .> RegisterSkillsController
 
-CreateTaskController .> Repositories : repositories
+RegisterSkillsController .> Repositories : repositories
 
-Repositories -> "1" TaskCategoryRepository
+Repositories -> "1" SkillRepository
 
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
+RegisterSkillsController ..> Skill
+RegisterSkillsController ..> OrganizationRepository : organizationRepository
+RegisterSkillsController ..> SkillRepository : SkillRepository
 
 Repositories --> "1" OrganizationRepository
 
 OrganizationRepository --> "*" Organization
 ApplicationSession --> "1" UserSession : userSession
 
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
-Task "*" --> "1" TaskCategory : taskCategory
-TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
-Organization "1" --> "*" Task : tasks
-Task --> Employee : createdBy
+RegisterSkillsController ..> "1" Organization : organization
+RegisterSkillsController ..> ApplicationSession
+RegisterSkillsController ..> UserSession
+Task "*" --> "1" Skill : skill
+SkillRepository "1" --> "*" Skill : skill
+Organization "1" --> "*" Skill : skills
+Skill --> HRM : registeredBy
 
-Organization --> "*" Employee : employs
+Organization --> "*" HRM : employs
 
 @enduml
