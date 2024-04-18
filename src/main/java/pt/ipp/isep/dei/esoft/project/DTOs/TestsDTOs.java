@@ -1,9 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.DTOs;
 
-import java.util.Collections;
 import java.util.Scanner;
 
-public class MainDTOs {
+public class TestsDTOs {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Choose the us you want to test: ");
