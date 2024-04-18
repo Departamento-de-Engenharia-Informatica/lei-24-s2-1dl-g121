@@ -61,7 +61,7 @@ As a HRM, I want to generate a team proposal automatically.
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us005-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us013-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
