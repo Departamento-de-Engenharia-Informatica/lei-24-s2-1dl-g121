@@ -21,11 +21,11 @@ activate Employee
     Employee -> System : types requested data
     activate System
 
-        System --> Employee : shows skill category list and asks to select one
-    deactivate System
-
-    Employee -> System : selects a skill category
-    activate System
+'        System --> Employee : shows skill category list and asks to select one
+'    deactivate System
+'
+'    Employee -> System : selects a skill category
+'    activate System
 
         System --> Employee : shows all data and requests confirmation
     deactivate System

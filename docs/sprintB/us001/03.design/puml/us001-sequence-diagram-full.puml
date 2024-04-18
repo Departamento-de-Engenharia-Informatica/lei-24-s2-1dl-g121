@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "HRM" as ADM
+actor "Human Resources Manager" as ADM
 participant ":RegisterSkillsUI" as UI
 participant ":RegisterSkillsController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -29,7 +29,7 @@ activate ADM
             'create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getSkillCategories()
+            UI -> CTRL : getSkill()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -44,20 +44,20 @@ activate ADM
                     PLAT --> CTRL: skillRepository
                 deactivate PLAT
 
-                CTRL -> SkillRepository : getSkillCategories()
-                activate SkillRepository
-
-                    SkillRepository --> CTRL : skillCategoryList
-                deactivate SkillRepository
-
-                CTRL --> UI : skillCategoryList
-            deactivate CTRL
-
-            UI --> ADM : shows skill category list\n and asks to select one
-        deactivate UI
-
-    ADM -> UI : selects a skill category
-    activate UI
+'                CTRL -> SkillRepository : getSkill()
+'                activate SkillRepository
+'
+'                    SkillRepository --> CTRL : skillCategoryList
+'                deactivate SkillRepository
+'
+'                CTRL --> UI : skillCategoryList
+'            deactivate CTRL
+'
+'            UI --> ADM : shows skill category list\n and asks to select one
+'        deactivate UI
+'
+'    ADM -> UI : selects a skill category
+'    activate UI
 
         UI --> ADM : requests data
     deactivate UI
@@ -65,16 +65,16 @@ activate ADM
     ADM -> UI : types requested data (skill name)
     activate UI
 
-        UI --> ADM : shows selected category and requested data
+        UI --> ADM : shows requested data
     deactivate UI
 
     ADM -> UI : submits data
     activate UI
 
-        UI -> CTRL : createSkill(name)
+        UI -> CTRL : registerSkill(name)
         activate CTRL
 
-            CTRL -> CTRL : getSkillCategoryByDescription(skillCategoryDescription)
+            CTRL -> CTRL : getSkillByDescription(skillDescription)
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -92,10 +92,10 @@ activate ADM
                 CTRL -> SkillRepository : getSkillByDescription(skillDescription)
                 activate SkillRepository
 
-                    SkillRepository --> CTRL : skillCategory
-                deactivate SkillRepository
-                    CTRL --> CTRL : skillCategory
-            deactivate CTRL
+'                    SkillRepository --> CTRL : skillCategory
+'                deactivate SkillRepository
+'                    CTRL --> CTRL : skillCategory
+'            deactivate CTRL
 
             |||
             CTRL -> CTRL : getEmployeeFromSession()
@@ -159,12 +159,6 @@ activate ADM
 
                 activate ORG
                     ORG -> ORG: validateSkill(skill)
-                    activate ORG
-                        ORG --> ORG
-                    deactivate ORG
-
-                    ORG --> ORG
-                deactivate ORG
 
                 ORG --> CTRL : skill
 
