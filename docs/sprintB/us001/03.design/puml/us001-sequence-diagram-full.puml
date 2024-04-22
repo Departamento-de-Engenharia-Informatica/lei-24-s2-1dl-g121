@@ -9,7 +9,7 @@ autonumber
 actor "Human Resources Manager" as ADM
 participant ":RegisterSkillsUI" as UI
 participant ":RegisterSkillsController" as CTRL
-participant ":Repositories" as RepositorySingleton
+participant "Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "skillRepository:\nSkillRepository" as SkillRepository
 'participant ":ApplicationSession" as _APP
@@ -77,11 +77,11 @@ activate ADM
             CTRL -> CTRL : getSkillByDescription(skillDescription)
             activate CTRL
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
+'                CTRL -> RepositorySingleton : getInstance()
+'                activate RepositorySingleton
+'
+'                    RepositorySingleton --> CTRL: repositories
+'                deactivate RepositorySingleton
 
                 CTRL -> PLAT : getSkillRepository()
                 activate PLAT
@@ -101,8 +101,8 @@ activate ADM
             CTRL -> CTRL : getEmployeeFromSession()
             activate CTRL
 
-                CTRL -> _APP: getInstance()
-                activate _APP
+'                CTRL -> _APP: getInstance()
+                'activate _APP
                  '   _APP -> CTRL: appSession
                 'deactivate _APP
 
@@ -113,11 +113,11 @@ activate ADM
                   '  APP --> CTRL: currentSession
                 'deactivate APP
 
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
-
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
+'                CTRL -> SESSAO: email = getUserEmail()
+'                'activate SESSAO
+'
+'                    SESSAO --> CTRL: email
+'                'activate SESSAO
 
 
                 CTRL -> PLAT: getOrganizationRepository(email)
