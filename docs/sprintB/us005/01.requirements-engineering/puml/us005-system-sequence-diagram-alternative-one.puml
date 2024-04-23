@@ -15,7 +15,7 @@ activate Employee
     Employee -> System : asks to generate a team proposal automatically
     activate System
 
-        System --> Employee : requests data (i.e. a reference, a designation, an informal description, a technical description)
+        System --> Employee : requests data (Max size of the team, set of skills needed)
     deactivate System
 
     Employee -> System : types requested data

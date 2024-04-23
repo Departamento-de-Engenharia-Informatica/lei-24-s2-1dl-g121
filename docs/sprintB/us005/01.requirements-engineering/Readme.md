@@ -32,27 +32,20 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on US03 and US04.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+    * Max size of the team;
+    * Set of skills needed;
 
 **Output Data:**
 
-* List of existing task categories
 * (In)Success of the operation
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
