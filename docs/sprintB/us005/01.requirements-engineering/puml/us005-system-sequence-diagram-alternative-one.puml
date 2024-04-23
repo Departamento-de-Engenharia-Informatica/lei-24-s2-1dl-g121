@@ -21,9 +21,6 @@ activate Employee
     Employee -> System : types requested data
     activate System
 
-        System --> Employee : shows list of existing task categories and (In)Success of the operation
-    deactivate System
-
     Employee -> System : selects a team automatically generated
     activate System
 

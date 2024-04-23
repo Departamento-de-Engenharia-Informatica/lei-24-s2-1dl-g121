@@ -10,19 +10,17 @@ As a HRM, I want to generate a team proposal automatically.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	The max and minimum team size and the set of skills must be supplied by the HRM
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** What information will the customer provide?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** The customer provide the max size of the team and a set of skills.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** What should the output of the automation be? (should it just store the team proposal or show it to the customer?)  Will the team proposal be a document about all the instructions of each team member/worker?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** The systems provide team proposals and HRM can accept of refuse the proposals. In the future (not in this sprint) HRM may decide to edit the team.
 
 ### 1.3. Acceptance Criteria
 
