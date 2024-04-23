@@ -6,10 +6,10 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization Employee" as ADM
+actor "Human Resources Manager" as ADM
 participant ":CreateTaskUI" as UI
 participant ":CreateTaskController" as CTRL
-participant ":Repositories" as RepositorySingleton
+participant "Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
 participant ":ApplicationSession" as _APP
@@ -21,7 +21,7 @@ participant "task\n:Task" as TAREFA
 
 activate ADM
 
-        ADM -> UI : asks to create a new task
+        ADM -> UI : asks to list the vehicles needing the check-up
 
         activate UI
 

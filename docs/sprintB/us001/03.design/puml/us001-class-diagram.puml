@@ -53,7 +53,7 @@ class Organization {
 }
 
 class SkillRepository {
-    + getTaskCategoryByDescription(description)
+    + getSkillByDescription(description)
 }
 
 class OrganizationRepository {
@@ -63,15 +63,15 @@ class OrganizationRepository {
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getTaskCategoryRepository()
+    + getSkillRepository()
     + getOrganizationRepository()
 }
 
 class RegisterSkillsController {
-    + RegisterSkillsController(organizationRepository, taskCategoryRepository)
-    + getTaskCategories()
-    + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
+    + RegisterSkillsController(organizationRepository, skillRepository)
+    '+ getTaskCategories()
+    + registerSkill(name)
+    '- getTaskCategoryByDescription(taskCategoryDescription)
     - getEmployeeFromSession()
 }
 
@@ -84,7 +84,7 @@ end note
 
 note bottom of SkillRepository
     - used for displaying
-    the category list
+    the skills list
 end note
 
 class RegisterSkillsUI {
@@ -111,7 +111,7 @@ ApplicationSession --> "1" UserSession : userSession
 RegisterSkillsController ..> "1" Organization : organization
 RegisterSkillsController ..> ApplicationSession
 RegisterSkillsController ..> UserSession
-Task "*" --> "1" Skill : skill
+' Task "*" --> "1" Skill : skill
 SkillRepository "1" --> "*" Skill : skill
 Organization "1" --> "*" Skill : skills
 Skill --> HRM : registeredBy
