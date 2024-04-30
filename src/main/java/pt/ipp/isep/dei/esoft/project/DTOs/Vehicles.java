@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.DTOs;
 
-public class Vehicle {
+public class Vehicles {
     private String brand;
     private String model;
     private String type;
@@ -11,7 +11,7 @@ public class Vehicle {
     private String acquisitionDate;
     private int maintenance;
 
-    public Vehicle(String brand, String model, String type, double tare, double grossWeight, double currentKm, int registerDate, String acquisitionDate, int maintenance){
+    public Vehicles(String brand, String model, String type, double tare, double grossWeight, double currentKm, int registerDate, String acquisitionDate, int maintenance){
         this.brand=brand;
         this.model=model;
         this.type=type;

@@ -12,12 +12,8 @@ participant ":RegisterSkillsController" as CTRL
 participant "Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "skillRepository:\nSkillRepository" as SkillRepository
-'participant ":ApplicationSession" as _APP
-'participant "appSession\n:ApplicationSession" as APP
-'participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
 participant "skill\n:Skill" as SKILL
+participant "organization\n:Organization" as ORG
 
 activate ADM
 
@@ -25,8 +21,7 @@ activate ADM
 
         activate UI
 
-            'UI --> ADM : requests data (i.e. skill name, description)
-            'create CTRL
+
             UI -> CTRL** : create
 
             UI -> CTRL : getSkill()
@@ -77,11 +72,11 @@ activate ADM
             CTRL -> CTRL : getSkillByDescription(skillDescription)
             activate CTRL
 
-'                CTRL -> RepositorySingleton : getInstance()
-'                activate RepositorySingleton
-'
-'                    RepositorySingleton --> CTRL: repositories
-'                deactivate RepositorySingleton
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
 
                 CTRL -> PLAT : getSkillRepository()
                 activate PLAT
@@ -92,62 +87,61 @@ activate ADM
                 CTRL -> SkillRepository : getSkillByDescription(skillDescription)
                 activate SkillRepository
 
-'                    SkillRepository --> CTRL : skillCategory
-'                deactivate SkillRepository
+                   SkillRepository --> CTRL : skill
+                deactivate SkillRepository
 '                    CTRL --> CTRL : skillCategory
 '            deactivate CTRL
-
-            |||
-            CTRL -> CTRL : getEmployeeFromSession()
-            activate CTRL
-
-'                CTRL -> _APP: getInstance()
-                'activate _APP
-                 '   _APP -> CTRL: appSession
-                'deactivate _APP
-
-
-                'CTRL -> APP: getCurrentSession()
-               ' activate APP
-
-                  '  APP --> CTRL: currentSession
-                'deactivate APP
-
-'                CTRL -> SESSAO: email = getUserEmail()
-'                'activate SESSAO
+'            |||
+'            CTRL -> CTRL : getEmployeeFromSession()
+'            activate CTRL
 '
-'                    SESSAO --> CTRL: email
-'                'activate SESSAO
-
-
-                CTRL -> PLAT: getOrganizationRepository(email)
-                activate PLAT
-
-                    PLAT --> CTRL: organizationRepository
-                deactivate PLAT
-
-
-                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                activate OrganizationRepository
-
-                    loop [for each organization
-                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                        activate ORG
-
-                             ORG --> OrganizationRepository : true/false
-                        deactivate ORG
-                    end
-                    OrganizationRepository --> CTRL : organization
-                deactivate OrganizationRepository
-
-                CTRL -> ORG: getEmployeeByEmail(email)
-                activate ORG
-
-                    ORG --> CTRL : employee
-                deactivate ORG
-
-                CTRL --> CTRL : employee
-            deactivate CTRL
+''                CTRL -> _APP: getInstance()
+'                'activate _APP
+'                 '   _APP -> CTRL: appSession
+'                'deactivate _APP
+'
+'
+'                'CTRL -> APP: getCurrentSession()
+'               ' activate APP
+'
+'                  '  APP --> CTRL: currentSession
+'                'deactivate APP
+'
+''                CTRL -> SESSAO: email = getUserEmail()
+''                'activate SESSAO
+''
+''                    SESSAO --> CTRL: email
+''                'activate SESSAO
+'
+'
+'                CTRL -> PLAT: getOrganizationRepository(email)
+'                activate PLAT
+'
+'                    PLAT --> CTRL: organizationRepository
+'                deactivate PLAT
+'
+'
+'                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
+'                activate OrganizationRepository
+'
+'                    loop [for each organization
+'                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
+'                        activate ORG
+'
+'                             ORG --> OrganizationRepository : true/false
+'                        deactivate ORG
+'                    end
+'                    OrganizationRepository --> CTRL : organization
+'                deactivate OrganizationRepository
+'
+'                CTRL -> ORG: getEmployeeByEmail(email)
+'                activate ORG
+'
+'                    ORG --> CTRL : employee
+'                deactivate ORG
+'
+'                CTRL --> CTRL : employee
+'            deactivate CTRL
 
             |||
             CTRL -> ORG: registerSkills(name)

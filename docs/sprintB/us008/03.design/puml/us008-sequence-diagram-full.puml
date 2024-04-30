@@ -11,7 +11,7 @@ participant ":CreateTaskUI" as UI
 participant ":CreateTaskController" as CTRL
 participant "Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
+participant "vehiclesRepository:\nVehiclesRepository" as VehiclesRepository
 participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
@@ -29,7 +29,7 @@ activate ADM
             'create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getTaskCategories()
+            UI -> CTRL : getVehicle()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -38,19 +38,19 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getTaskCategoryRepository()
+                CTRL -> PLAT : getVehiclesRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: taskCategoryRepository
+                    PLAT --> CTRL: VehiclesRepository
                 deactivate PLAT
 
-                CTRL -> TaskCategoryRepository : getTaskCategories()
-                activate TaskCategoryRepository
+                CTRL -> VehiclesRepository : getVehiclesList()
+                activate VehiclesRepository
 
-                    TaskCategoryRepository --> CTRL : taskCategoryList
-                deactivate TaskCategoryRepository
+                    VehiclesRepository --> CTRL : VehiclesList
+                deactivate VehicleRepository
 
-                CTRL --> UI : taskCategoryList
+                CTRL --> UI : vehiclesList
             deactivate CTRL
 
             UI --> ADM : shows task category list\n and asks to sleect one
@@ -83,18 +83,18 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getTaskCategoryRepository()
+                CTRL -> PLAT : getVehiclesRepository()
                 activate PLAT
 
-                    PLAT -> CTRL : taskCategoryRepository
+                    PLAT -> CTRL : vehiclesRepository
                 deactivate PLAT
 
-                CTRL -> TaskCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
-                activate TaskCategoryRepository
+                CTRL -> VehiclesRepository : getTaskCategoryByDescription(taskCategoryDescription)
+                activate VehiclesRepository
 
-                    TaskCategoryRepository --> CTRL : taskCategory
-                deactivate TaskCategoryRepository
-                    CTRL --> CTRL : taskCategory
+                    VehicleRepository --> CTRL : vehiclesList
+                deactivate VehicleRepository
+                    CTRL --> CTRL : vehiclesList
             deactivate CTRL
 
             |||
