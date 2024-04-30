@@ -6,13 +6,14 @@ public class Skill {
     private final String name;
 
     public Skill (String name){
+        validateName(name);
         this.name = name;
     }
-//    private void validateName(String name) {
-//        if (name == null || name.isEmpty()) {
-//            throw new IllegalArgumentException("Name cannot be null or empty.");
-//        }
-//    }
+    private void validateName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Skill name cannot be null or empty.");
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

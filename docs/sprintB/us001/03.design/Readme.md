@@ -10,7 +10,7 @@ _**Note that SSD - Alternative One is adopted.**_
 |:-------------  |:----------------------------------------------|:-------------------------|:--------------------------------------------------------------------------------------------------------------|
 | Step 1  		 | 	... interacting with the actor?              | RegisterSkillsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 | 			  		 | 	... coordinating the US?                     | RegisterSkillsController | Controller                                                                                                    |
-| 			  		 | 	... registering a new skill?                 | ??HRM??                  | ??Creator (Rule 1): in the DM Organization has a Task.??                                                      |
+| 			  		 | 	... registering a new skill?                 | Skill                    | ??Creator (Rule 1): in the DM Organization has a Task.??                                                      |
 | 			  		 | ... knowing the user using the system?        | UserSession              | IE: cf. A&A component documentation.                                                                          |
 | 			  		 | 			                                           | Organization             | IE: knows/has its own Employees                                                                               |
 | 			  		 | 							                                       | Employee                 | IE: knows its own data (e.g. email)                                                                           |
