@@ -12,9 +12,9 @@ participant ":CreateJobController" as CTRL
 participant "Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "jobRepository:\nJobRepository" as JobRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
+'participant ":ApplicationSession" as _APP
+'participant "appSession\n:ApplicationSession" as APP
+'participant "currentSession\n:UserSession" as SESSAO
 participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
 participant "organization\n:Organization" as ORG
 participant "job\n:Job" as TAREFA
@@ -113,11 +113,11 @@ activate ADM
                     APP --> CTRL: currentSession
                 deactivate APP
 
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
+                'CTRL -> SESSAO: email = getUserEmail()
+                'activate SESSAO
 
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
+                 '   SESSAO --> CTRL: email
+                'deactivate SESSAO
 
 
                 CTRL -> PLAT: getOrganizationRepository(email)
