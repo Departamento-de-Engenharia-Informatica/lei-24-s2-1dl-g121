@@ -9,16 +9,11 @@ autonumber
 actor "Human Resource Manager" as ADM
 participant ":AssignSkillUI" as UI
 participant ":AssignSkillController" as CTRL
-participant ":Repositories" as RepositorySingleton
+participant "Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "skillRepository:\n skillRepository" as skillRepository
 participant "collaboratorRepository:\n collaboratorRepository" as collaboratorRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
+
 
 activate ADM
 
@@ -93,103 +88,24 @@ activate ADM
         UI -> CTRL : assignSkill(skill, collaborator)
         activate CTRL
 
-            CTRL -> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
-            activate CTRL
-
                 CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
 
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getskillRepository()
+                CTRL -> PLAT : getCollaboratorRepository()
                 activate PLAT
 
-                    PLAT -> CTRL : skillRepository
+                    PLAT -> CTRL : collaboratorRepository
                 deactivate PLAT
 
-                CTRL -> skillRepository : getTaskCategoryByDescription(taskCategoryDescription)
-                activate skillRepository
+                CTRL -> collaboratorRepository : setSkill(collaborator, skill)
+                activate collaboratorRepository
 
-                    skillRepository --> CTRL : taskCategory
-                deactivate skillRepository
-                    CTRL --> CTRL : taskCategory
-            deactivate CTRL
-
-            |||
-            CTRL -> CTRL : getEmployeeFromSession()
-            activate CTRL
-
-                CTRL -> _APP: getInstance()
-                activate _APP
-                    _APP -> CTRL: appSession
-                deactivate _APP
-
-
-                CTRL -> APP: getCurrentSession()
-                activate APP
-
-                    APP --> CTRL: currentSession
-                deactivate APP
-
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
-
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
-
-
-                CTRL -> PLAT: getOrganizationRepository(email)
-                activate PLAT
-
-                    PLAT --> CTRL: organizationRepository
-                deactivate PLAT
-
-
-                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                activate OrganizationRepository
-
-                    loop [for each organization
-                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                        activate ORG
-
-                             ORG --> OrganizationRepository : true/false
-                        deactivate ORG
-                    end
-                    OrganizationRepository --> CTRL : organization
-                deactivate OrganizationRepository
-
-                CTRL -> ORG: getEmployeeByEmail(email)
-                activate ORG
-
-                    ORG --> CTRL : employee
-                deactivate ORG
-
-                CTRL --> CTRL : employee
-            deactivate CTRL
-
-            |||
-            CTRL -> ORG: createTask(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, , taskCategory, employee)
-            activate ORG
-
-                ORG -> TAREFA**: create(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
-                ORG -> ORG: addTask (task)
-
-
-                activate ORG
-                    ORG -> ORG: validateTask(task)
-                    activate ORG
-                        ORG --> ORG
-                    deactivate ORG
-
-                    ORG --> ORG
-                deactivate ORG
-
-                ORG --> CTRL : task
-
-            deactivate ORG
-
-            CTRL --> UI: task
+                    collaboratorRepository --> CTRL : collaborator(name, birth details,\n issuing details, address, phone number,\n email, identification document, skills, job)
+                deactivate collaboratorRepository
+                    CTRL --> UI : collaborator(name, birth details,\n issuing details, address, phone number,\n email, identification document, skills, job)
             deactivate CTRL
             UI --> ADM: displays operation success
     deactivate UI
