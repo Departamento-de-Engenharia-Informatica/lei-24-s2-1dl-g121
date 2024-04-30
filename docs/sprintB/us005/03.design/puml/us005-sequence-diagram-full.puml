@@ -1,0 +1,34 @@
+@startuml
+actor HRM as HRM
+participant ":CreateJobUI" as UI
+participant ":CreateJobController" as Controller
+participant "Repositories" as Repositories
+participant "Organization" as Organization
+participant "Job" as Job
+
+autonumber
+
+HRM -> UI: Request to generate team proposal
+activate UI
+UI -> Controller: Request to generate team proposal
+activate Controller
+Controller -> Repositories: Get max team size and skills
+activate Repositories
+Repositories --> Controller: Max team size, skills
+deactivate Repositories
+Controller -> UI: Confirm receipt of data
+deactivate Controller
+UI -> Controller: Submit data (team size, skills)
+activate Controller
+Controller -> Organization: Create job with skills and team size
+activate Organization
+Organization -> Job: Create job with skills and team size
+Job --> Organization: Job object created
+deactivate Job
+Organization --> Controller: Confirmation of job creation
+deactivate Organization
+Controller --> UI: Confirmation of job creation
+deactivate Controller
+UI --> HRM: Display confirmation message
+deactivate UI
+@enduml

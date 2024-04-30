@@ -15,7 +15,7 @@ participant "jobRepository:\nJobRepository" as JobRepository
 'participant ":ApplicationSession" as _APP
 'participant "appSession\n:ApplicationSession" as APP
 'participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
+'participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
 participant "organization\n:Organization" as ORG
 participant "job\n:Job" as TAREFA
 
