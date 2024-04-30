@@ -15,27 +15,6 @@ public class SkillRepository {
     }
 
     /**
-     * This method returns an existing Skill by its name. If the skill does not exist,
-     * it adds the skill to the list.
-     *
-     * @param skillName The name of the skill to be retrieved or added.
-     * @return The skill.
-     */
-    public Skill getSkillByName(String skillName) {
-        Skill newSkill = new Skill(skillName);
-        Skill skill = null;
-        if (skills.contains(newSkill)) {
-            skill = skills.get(skills.indexOf(newSkill));
-            System.out.println("Skill [" + skillName + "] already exists.");
-        } else {
-            skill = newSkill.clone();
-            skills.add(skill);
-            System.out.println("Skill [" + skillName + "] added.");
-        }
-        return skill;
-    }
-
-    /**
      * Adds a new skill to the repository.
      *
      * @param skill The skill to be added.

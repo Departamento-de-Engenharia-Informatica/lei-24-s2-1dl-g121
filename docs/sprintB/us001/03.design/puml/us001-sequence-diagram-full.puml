@@ -69,26 +69,26 @@ activate ADM
         UI -> CTRL : registerSkill(name)
         activate CTRL
 
-            CTRL -> CTRL : getSkillByDescription(skillDescription)
-            activate CTRL
+'            CTRL -> CTRL : getSkillByDescription(skillDescription)
+'            activate CTRL
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getSkillRepository()
-                activate PLAT
-
-                    PLAT -> CTRL : skillRepository
-                deactivate PLAT
-
-                CTRL -> SkillRepository : getSkillByDescription(skillDescription)
-                activate SkillRepository
-
-                   SkillRepository --> CTRL : skill
-                deactivate SkillRepository
+'                CTRL -> RepositorySingleton : getInstance()
+'                activate RepositorySingleton
+'
+'                    RepositorySingleton --> CTRL: repositories
+'                deactivate RepositorySingleton
+'
+'                CTRL -> PLAT : getSkillRepository()
+'                activate PLAT
+'
+'                    PLAT -> CTRL : skillRepository
+'                deactivate PLAT
+'
+'                CTRL -> SkillRepository : getSkillByDescription(skillDescription)
+'                activate SkillRepository
+'
+'                   SkillRepository --> CTRL : skill
+'                deactivate SkillRepository
 '                    CTRL --> CTRL : skillCategory
 '            deactivate CTRL
 '            |||
