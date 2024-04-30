@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.DTOs;
 
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
+
 import java.util.Scanner;
 
 public class TestsDTOs {
