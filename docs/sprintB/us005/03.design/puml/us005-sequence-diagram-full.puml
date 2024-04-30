@@ -1,34 +1,166 @@
 @startuml
-actor HRM as HRM
-participant ":CreateJobUI" as UI
-participant ":CreateJobController" as Controller
-participant "Repositories" as Repositories
-participant "Organization" as Organization
-participant "Job" as Job
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
 
 autonumber
 
-HRM -> UI: Request to generate team proposal
-activate UI
-UI -> Controller: Request to generate team proposal
-activate Controller
-Controller -> Repositories: Get max team size and skills
-activate Repositories
-Repositories --> Controller: Max team size, skills
-deactivate Repositories
-Controller -> UI: Confirm receipt of data
-deactivate Controller
-UI -> Controller: Submit data (team size, skills)
-activate Controller
-Controller -> Organization: Create job with skills and team size
-activate Organization
-Organization -> Job: Create job with skills and team size
-Job --> Organization: Job object created
-deactivate Job
-Organization --> Controller: Confirmation of job creation
-deactivate Organization
-Controller --> UI: Confirmation of job creation
-deactivate Controller
-UI --> HRM: Display confirmation message
-deactivate UI
+'hide footbox
+actor "HRM" as HRM
+participant ":CreateTeamUI" as UI
+participant ":CreateTeamController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "CreateTeamRepository:\nCreateTeamRepository" as CreateTeamRepository
+'participant ":ApplicationSession" as _APP
+'participant "appSession\n:ApplicationSession" as APP
+'participant "currentSession\n:UserSession" as SESSAO
+'participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
+'participant "organization\n:Organization" as ORG
+participant "team\n:Team" as TAREFA
+
+activate HRM
+
+        HRM -> UI : asks to create a team proposal
+
+        activate UI
+
+'            UI --> HRM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getCollaborator()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getCreateTeamRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: CreateTeamRepository
+                deactivate PLAT
+
+                CTRL -> CreateTeamRepository : getCollaborator()
+                activate CreateTeamRepository
+
+                    CreateTeamRepository --> CTRL : collaboratorList
+                deactivate CreateTeamRepository
+
+                CTRL --> UI : collaboratorList
+            deactivate CTRL
+
+            UI --> HRM : Requests data (Max size of the team and \n set of skills needed)
+        deactivate UI
+
+    HRM -> UI : Types requested data
+    activate UI
+
+        UI --> HRM : Shows team proposals
+    deactivate UI
+
+    HRM -> UI : Selects a team
+    activate UI
+
+    deactivate UI
+
+        UI -> CTRL : createTeam
+        activate CTRL
+
+            CTRL -> CTRL : getCreateTeam
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getCreateTeamRepository()
+                activate PLAT
+
+                    PLAT -> CTRL : CreateTeamRepository
+                deactivate PLAT
+
+                CTRL -> CreateTeamRepository : getCreateTeam
+                activate CreateTeamRepository
+
+                    CreateTeamRepository --> CTRL : collaboratorList
+                deactivate CreateTeamRepository
+
+            deactivate CTRL
+
+            |||
+'            CTRL -> CTRL : getEmployeeFromSession()
+'            activate CTRL
+'
+'                CTRL -> _APP: getInstance()
+'                activate _APP
+'                    _APP -> CTRL: appSession
+'                deactivate _APP
+'
+'
+'                CTRL -> APP: getCurrentSession()
+'                activate APP
+'
+'                    APP --> CTRL: currentSession
+'                deactivate APP
+'
+'                CTRL -> SESSAO: email = getUserEmail()
+'                activate SESSAO
+'
+'                    SESSAO --> CTRL: email
+'                deactivate SESSAO
+'
+'
+'                CTRL -> PLAT: getOrganizationRepository(email)
+'                activate PLAT
+'
+'                    PLAT --> CTRL: organizationRepository
+'                deactivate PLAT
+'
+'
+'                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
+'                activate OrganizationRepository
+'
+'                    loop [for each organization
+'                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
+'                        activate ORG
+'
+'                             ORG --> OrganizationRepository : true/false
+'                        deactivate ORG
+'                    end
+'                    OrganizationRepository --> CTRL : organization
+'                deactivate OrganizationRepository
+'
+'                CTRL -> ORG: getEmployeeByEmail(email)
+'                activate ORG
+'
+'                    ORG --> CTRL : employee
+'                deactivate ORG
+'
+'                CTRL --> CTRL : employee
+'            deactivate CTRL
+
+            |||
+            CTRL -> ORG: createTeam
+            activate ORG
+
+                ORG -> TAREFA**: createTeam
+
+
+                ORG --> CTRL : team
+
+            deactivate ORG
+
+            CTRL --> UI: team
+            deactivate CTRL
+            UI --> HRM: displays operation success
+    deactivate UI
+
+deactivate HRM
+
 @enduml
