@@ -3,15 +3,18 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.Objects;
 
 public class Skill {
-    private final String name;
+    private final String skillName;
 
     public Skill (String name){
         validateName(name);
-        this.name = name;
+        this.skillName = name;
     }
     private void validateName(String name) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Skill name cannot be null or empty.");
+        }
+        if (!name.matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("Skill name cannot contain special characters or digits.");
         }
     }
     @Override
@@ -23,18 +26,18 @@ public class Skill {
             return false;
         }
         Skill that = (Skill) o;
-        return name.equals(that.name);
+        return skillName.equals(that.skillName);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(skillName);
     }
 
-    public String getName() {
-        return name;
+    public String getSkillName() {
+        return skillName;
     }
     public Skill clone() {
-        return new Skill(this.name);
+        return new Skill(this.skillName);
     }
 
 }
