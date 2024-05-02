@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 
+import pt.ipp.isep.dei.esoft.project.ui.console.CreateJobUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterCollaboratorUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterSkillsUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.ShowTextUI;
@@ -20,7 +21,7 @@ public class AdminUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Register Skills", new RegisterSkillsUI()));
-        options.add(new MenuItem("Option 2", new ShowTextUI("You have chosen Option 2.")));
+        options.add(new MenuItem("Register a new Job", new CreateJobUI()));
         options.add(new MenuItem("Register Collaborator", new RegisterCollaboratorUI()));
         options.add(new MenuItem("Option 4", new ShowTextUI("You have chosen Option 4.")));
 

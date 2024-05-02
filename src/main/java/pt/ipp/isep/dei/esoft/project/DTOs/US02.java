@@ -1,16 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.DTOs;
 
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+
 import java.util.Objects;
 import java.util.Scanner;
 
-public class US02 {
+public class US02 implements Runnable{
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.printf("Hi! %nWhat's the name of the job you will register today?%n");
-        String job = sc.nextLine();
-        System.out.printf("How many skills are needed to this job?%n");
-        int numberOfSkills = sc.nextInt();
+        String job = Utils.readLineFromConsole("\"Hi! %nWhat's the name of the job you will register today?");
+        int numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
         String[] skills = new String[numberOfSkills];
         skillsNeeded(skills);
     }
@@ -23,5 +23,10 @@ public class US02 {
             System.out.println("Type the skill:");
             skills[i] = sc.next();
         }
+    }
+
+    @Override
+    public void run() {
+
     }
 }

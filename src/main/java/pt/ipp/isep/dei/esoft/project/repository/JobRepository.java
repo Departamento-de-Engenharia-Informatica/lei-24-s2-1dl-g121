@@ -13,7 +13,7 @@ public class JobRepository {
         jobs = new ArrayList<>();
     }
 
-    public Optional<Job> add(Job job) {
+    public Optional<Job> addJob(Job job) {
         Optional<Job> newJob = Optional.empty();
         if (validateJob(job)) {
             newJob = Optional.of(job.clone());
@@ -30,4 +30,5 @@ public class JobRepository {
     public List<Job> getJobs() {
         return List.copyOf(jobs);
     }
+
 }

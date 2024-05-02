@@ -3,128 +3,90 @@
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-'skinparam linetype orto
 
-skinparam classAttributeIconSize 0
+'class Employee {
+'    - name: String
+'    - email: String
+'    - position: String
+'    - phone: String
+'}
 
-'left to right direction
-
-class ApplicationSession
-{
-    + static getInstance()
-    + getCurrentSession()
+class Job {
+    - reference: String
+    - description: String
+    - informalDescription: String
+    - technicalDescription: String
+    - duration: Integer
+    - cost: Double
+    + Job(reference: String, description: String, informalDescription: String, technicalDescription: String, duration: Integer, cost: Double)
 }
 
-class UserSession
-{
-    + getUserEmail()
-}
-
-class Employee {
-    - name
-    - email
-    - position
-    - phone
-}
-
-class Task {
-    - String reference
-    - String description
-    - String informalDescription
-    - String technicalDescription
-    - Integer duration
-    - Double cost
-
-    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
-}
-
-class TaskCategory {
-    - String description
-
-    + TaskCategory(description)
-}
+'class JobCategory {
+'    - description: String
+'    + JobCategory(description: String)
+'}
 
 class Organization {
-    - String name
-    - String vatNumber
-    - String website
-    - String phone
-    - String email
-
-    - addTask(task)
-    - validateTask(task)
-    + anyEmployeeHasEmail(email)
-    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
-    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
-    - getEmployeeByEmail(email)
-
-'  +saveTask(task)
+    - name: String
+    - vatNumber: String
+    - website: String
+    - phone: String
+    - email: String
+    + Organization(name: String, vatNumber: String, website: String, phone: String, email: String)
+    - addJob(Job: Job)
+    - validateJob(Job: Job)
+    + anyEmployeeHasEmail(email: String)
+    - getEmployeeByEmail(email: String)
 }
 
-class TaskCategoryRepository {
-    + getTaskCategoryByDescription(description)
+class JobRepository {
+    
 }
 
 class OrganizationRepository {
-    + getOrganizationByEmployeeEmail(email)
+    + getOrganizationByEmployeeEmail(email: String)
 }
 
 class Repositories {
     - Repositories()
-    + getInstance() : Repositories
-    + getTaskCategoryRepository()
-    + getOrganizationRepository()
+    + getInstance(): Repositories
+    + getJobRepository(): JobRepository
+    + getOrganizationRepository(): OrganizationRepository
 }
 
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
-    + getTaskCategories()
-    + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
+class CreateJobController {
+    + CreateJobController(organizationRepository: OrganizationRepository, JobRepository: JobRepository)
+    + getJobCategories()
+    + createJob(userEmail: String, reference: String, description: String, informalDescription: String, technicalDescription: String, duration: Integer, cost: Double, categoryDescription: String)
+    - getJobCategoryByDescription(JobCategoryDescription: String)
     - getEmployeeFromSession()
 }
 
-note right of CreateTaskController
-    - userEmail is obtained
-    from the user session
-    - categoryDescription
-    is retrieved from selected data
+note right of CreateJobController
+    - userEmail is obtained from the user session
+    - categoryDescription is retrieved from selected data
 end note
 
-note bottom of TaskCategoryRepository
-    - used for displaying
-    the category list
+note bottom of JobRepository
+    - used for displaying the already existing jobs
 end note
 
-class CreateTaskUI {
+class CreateJobUI {
 }
 
 Repositories -> Repositories : instance
-ApplicationSession -> ApplicationSession : instance
-
-CreateTaskUI .> CreateTaskController
-
-CreateTaskController .> Repositories : repositories
-
-Repositories -> "1" TaskCategoryRepository
-
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
-
+CreateJobUI .> CreateJobController
+CreateJobController .> Repositories : repositories
+Repositories -> "1" JobRepository
+CreateJobController ..> JobCategory
+CreateJobController ..> OrganizationRepository : organizationRepository
+CreateJobController ..> JobRepository : JobRepository
 Repositories --> "1" OrganizationRepository
-
 OrganizationRepository --> "*" Organization
-ApplicationSession --> "1" UserSession : userSession
-
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
-Task "*" --> "1" TaskCategory : taskCategory
-TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
-Organization "1" --> "*" Task : tasks
-Task --> Employee : createdBy
-
-Organization --> "*" Employee : employs
-
+CreateJobController --> "1" Organization : organization
+Job "*" --> "1" JobCategory : JobCategory
+JobRepository "1" --> "*" JobCategory : JobCategory
+Organization "1" --> "*" Job : Jobs
+Job --> HRM : createdBy
+Organization --> "*" Collaborator : employs
 @enduml

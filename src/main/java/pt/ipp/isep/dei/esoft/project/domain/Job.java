@@ -1,14 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
 public class Job {
     private final String name;
     private final int numberOfSkills;
-    private final Set<String> setOfSkills;
+    private final ArrayList<Skill> setOfSkills;
 
-    public Job(String name, int numberOfSkills, Set<String> setOfSkills) {
+    public Job(String name, int numberOfSkills, ArrayList<Skill> setOfSkills) {
         validateName(name);
         validateNumberOfSkills(numberOfSkills);
         validateSetOfSkills(setOfSkills);
@@ -21,6 +22,9 @@ public class Job {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty.");
         }
+        if (!name.matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("Skill name cannot contain special characters or digits.");
+        }
     }
 
     private void validateNumberOfSkills(int numberOfSkills) {
@@ -29,7 +33,7 @@ public class Job {
         }
     }
 
-    private void validateSetOfSkills(Set<String> setOfSkills) {
+    private void validateSetOfSkills(ArrayList<Skill> setOfSkills) {
         if (setOfSkills == null || setOfSkills.isEmpty()) {
             throw new IllegalArgumentException("Set of skills cannot be null or empty.");
         }
@@ -43,7 +47,7 @@ public class Job {
         return numberOfSkills;
     }
 
-    public Set<String> getSetOfSkills() {
+    public ArrayList<Skill> getSetOfSkills() {
         return setOfSkills;
     }
     public Job clone() {
@@ -78,4 +82,5 @@ public class Job {
                 ", setOfSkills=" + setOfSkills +
                 '}';
     }
+
 }
