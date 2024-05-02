@@ -12,7 +12,13 @@ import java.util.List;
 public class AuthenticationController {
 
     public static final String ROLE_ADMIN = "ADMINISTRATOR";
-    public static final String ROLE_EMPLOYEE = "EMPLOYEE";
+    public static final String ROLE_HRM = "HUMAN RESOURCES MANAGER";
+    public static final String ROLE_GSM = "GREEN SPACES MANAGER";
+    public static final String ROLE_GSU = "GREEN SPACES USER";
+    public static final String ROLE_VFM = "VEHICLE AND EQUIPMENT FLEET MANAGER";
+    public static final String ROLE_QAM = "SOFTWARE QUALITY ASSESSMENT TEAM MANAGER";
+    public static final String ROLE_COLLAB = "COLLABORATOR";
+
 
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
