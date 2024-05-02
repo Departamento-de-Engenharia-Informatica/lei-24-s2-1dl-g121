@@ -47,10 +47,10 @@ public class Bootstrap implements Runnable {
 
         // Add skills to the repository
         skillRepository.add(new Skill("Communication"));
-        skillRepository.add(new Skill("Problem-solving"));
+        skillRepository.add(new Skill("Problemsolving"));
         skillRepository.add(new Skill("Teamwork"));
         skillRepository.add(new Skill("Leadership"));
-        skillRepository.add(new Skill("Time Management"));
+        skillRepository.add(new Skill("TimeManagement"));
     }
 
 
