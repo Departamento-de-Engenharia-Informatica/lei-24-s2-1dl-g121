@@ -13,10 +13,11 @@ public class Skill {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Skill name cannot be null or empty.");
         }
-        if (!name.matches("[a-zA-Z]+")) {
+        if (!name.matches("[a-zA-Z\\s]+")) {
             throw new IllegalArgumentException("Skill name cannot contain special characters or digits.");
         }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
