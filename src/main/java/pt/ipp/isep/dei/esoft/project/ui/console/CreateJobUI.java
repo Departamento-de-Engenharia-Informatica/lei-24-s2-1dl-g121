@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateJobController;
+import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -18,7 +19,7 @@ public class CreateJobUI implements Runnable{
     static Scanner sc = new Scanner(System.in);
 
     public CreateJobUI() {
-        this.controller = controller;
+        controller = new CreateJobController();
     }
     private CreateJobController getController() {
         return controller;
@@ -36,7 +37,7 @@ public class CreateJobUI implements Runnable{
     }
 
     /*
-     String job = Utils.readLineFromConsole("\"Hi! %nWhat's the name of the job you will register today?");
+     String job = Utils.readLineFromConsole()"\"Hi! %nWhat's the name of the job you will register today?");
         int numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
         String[] skills = new String[numberOfSkills];
         skillsNeeded(skills);
