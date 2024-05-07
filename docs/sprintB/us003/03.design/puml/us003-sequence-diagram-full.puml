@@ -1,0 +1,103 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as ADM
+participant ":CreateJobUI" as UI
+participant ":CreateJobController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "jobRepository:\njobRepository" as TaskCategoryRepository
+
+
+
+
+
+activate ADM
+
+        ADM -> UI : asks to register a collaborator
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getJobList
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getJobRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: jobRepository
+                deactivate PLAT
+
+                CTRL -> TaskCategoryRepository : getJobCategories()
+                activate TaskCategoryRepository
+
+                    TaskCategoryRepository --> CTRL : jobList
+                deactivate TaskCategoryRepository
+
+                CTRL --> UI : jobList
+            deactivate CTRL
+
+            UI --> ADM : show the list of jobs
+        deactivate UI
+
+    ADM -> UI : selects a job
+    activate UI
+
+        UI --> ADM : asks about fundamental characteristics (name, birth details, issuing details, address, contact (telephone and email), identification document and your number)
+    deactivate UI
+
+    ADM -> UI : insert data
+    activate UI
+
+        UI --> ADM : shows all data and requests confirmation
+    deactivate UI
+
+    ADM -> UI : confirms data
+    activate UI
+
+        UI -> CTRL : registerCollaborator(name, birth date, admission date, address, contact info (mobile and email), \n taxpayer number, ID doc type, and respective number)
+        activate CTRL
+
+
+
+
+                CTRL -> PLAT : registerCollaborator()
+                activate PLAT
+
+                    PLAT -> CTRL : Collaborator
+                deactivate PLAT
+
+                CTRL -> TaskCategoryRepository : getJob()
+                activate TaskCategoryRepository
+
+                    TaskCategoryRepository --> UI : registerJobToCollaborator
+                deactivate TaskCategoryRepository
+
+
+
+
+
+
+            deactivate CTRL
+
+            deactivate CTRL
+            UI --> ADM: displays operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml

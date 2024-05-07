@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization Employee" as ADM
+actor " Human Resources Manager" as ADM
 participant ":CreateTaskUI" as UI
 participant ":CreateTaskController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -21,7 +21,7 @@ participant "task\n:Task" as TAREFA
 
 activate ADM
 
-        ADM -> UI : asks to create a new task
+        ADM -> UI : asks to register a vehicle
 
         activate UI
 
@@ -53,23 +53,13 @@ activate ADM
                 CTRL --> UI : taskCategoryList
             deactivate CTRL
 
-            UI --> ADM : shows task category list\n and asks to sleect one
+            UI --> ADM : requests data (Brand, Model, Type, Tare, Gross Weight ,\n Current Km, Register Date, Acquisition Date,\n Maintenance/Check- up Frequency (in Kms))
         deactivate UI
 
-    ADM -> UI : selects a task category
+    ADM -> UI : types requested data
     activate UI
+    ADM -> UI : confirms data
 
-        UI --> ADM : requests data
-    deactivate UI
-
-    ADM -> UI : types requested data (reference, description, \ninformal description, technical description,\nduration, cost)
-    activate UI
-
-        UI --> ADM : shows selected category and requested data
-    deactivate UI
-
-    ADM -> UI : submits data
-    activate UI
 
         UI -> CTRL : createTask(reference,\ndescription,\ninformalDescription,\ntechnicalDescription,\nduration, cost,\ntaskCategoryDescription)
         activate CTRL
