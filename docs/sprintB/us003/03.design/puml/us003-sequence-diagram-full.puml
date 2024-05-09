@@ -7,7 +7,7 @@ autonumber
 
 'hide footbox
 actor "Human Resources Manager" as ADM
-participant ":CreateJobUI" as UI
+participant ":CreateCollaboratorUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "jobRepository:\njobRepository" as TaskCategoryRepository
