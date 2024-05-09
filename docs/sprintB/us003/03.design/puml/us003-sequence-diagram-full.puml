@@ -10,11 +10,9 @@ actor "Human Resources Manager" as ADM
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
 participant "jobRepository:\njobRepository" as TaskCategoryRepository
-
-
-
+participant "CollaboratorRepository" as SIU
+participant "RegisterCollaboratorController" as POP
 
 
 activate ADM
@@ -36,11 +34,11 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getJobRepository()
-                activate PLAT
+                CTRL -> RepositorySingleton : getJobRepository()
+                activate RepositorySingleton
 
-                    PLAT --> CTRL: jobRepository
-                deactivate PLAT
+                    RepositorySingleton --> CTRL: jobRepository
+                deactivate RepositorySingleton
 
                 CTRL -> TaskCategoryRepository : getJobCategories()
                 activate TaskCategoryRepository
@@ -69,25 +67,26 @@ activate ADM
     ADM -> UI : confirms data
     activate UI
 
-        UI -> CTRL : registerCollaborator(name, birth date, admission date, address, contact info (mobile and email), \n taxpayer number, ID doc type, and respective number)
-        activate CTRL
+        UI -> RepositorySingleton : registerCollaborator(name, birth date, admission date, \n address, contact info (mobile and email), \n taxpayer number, ID doc type, and respective number)
+        activate RepositorySingleton
 
 
 
 
-                CTRL -> PLAT : registerCollaborator()
-                activate PLAT
 
-                    PLAT -> CTRL : Collaborator
-                deactivate PLAT
+                RepositorySingleton -> SIU : registerCollaborator()
+            activate SIU
 
-                CTRL -> TaskCategoryRepository : getJob()
-                activate TaskCategoryRepository
+                SIU -> RepositorySingleton : Collaborator
+            deactivate SIU
 
-                    TaskCategoryRepository --> UI : registerJobToCollaborator
-                deactivate TaskCategoryRepository
+            RepositorySingleton -> POP : getJob()
+            deactivate RepositorySingleton
+                 activate POP
 
 
+                    POP --> UI : registerJobToCollaborator
+                    deactivate POP
 
 
 

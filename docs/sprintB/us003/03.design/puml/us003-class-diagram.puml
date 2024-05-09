@@ -10,23 +10,30 @@ skinparam classAttributeIconSize 0
 'left to right direction
 'COLLABORATOR REPOSITORY JOB REPOSITORY
 
-class ApplicationSession
-{
-    + static getInstance()
-    + getCurrentSession()
+class HRM{
+    -name
+    -email
+    -phone number
+    -identification document
 }
 
-class UserSession
-{
-    + getUserEmail()
+
+class Job{
+    -name
 }
 
-class Employee {
-    - name
-    - email
-    - position
-    - phone
+class Collaborator{
+    -name
+    -birth details
+    -issuing details
+    -address
+    -phone number
+    -email
+    -identification document
 }
+
+
+
 
 class Task {
     - String reference
@@ -97,6 +104,10 @@ class CreateTaskUI {
 
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
+
+HRM "1" -- "*" Job : registers >
+HRM "1" -- "*" Collaborator : registers >
+Collaborator "1" -- "1" Job : has >
 
 CreateTaskUI .> CreateTaskController
 
