@@ -6,23 +6,22 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                   | Justification (with patterns)                                                                                 |
-|:-------------  |:----------------------------------------------|:-------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 | 	... interacting with the actor?              | RegisterSkillsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 | 	... coordinating the US?                     | RegisterSkillsController | Controller                                                                                                    |
-| 			  		 | 	... registering a new skill?                 | Skill                    | ??Creator (Rule 1): in the DM Organization has a Task.??                                                      |
-| 			  		 | ... knowing the user using the system?        | UserSession              | IE: cf. A&A component documentation.                                                                          |
-| 			  		 | 			                                           | Organization             | IE: knows/has its own Employees                                                                               |
-| 			  		 | 							                                       | Employee                 | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 | 							                                       |                          |                                                                                                               |
-| Step 3  		 | 	...saving the inputted data?                 | Skill                    | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 | 	...knowing the task categories to show?      | System                   | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 | 	... saving the selected category?            | Skill                    | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 | 							                                       |                          |                                                                                                               |              
-| Step 7  		 | 	... validating all data (local validation)?  | Skill                    | IE: owns its data.                                                                                            | 
-| 			  		 | 	... validating all data (global validation)? | Organization             | IE: knows all its tasks.                                                                                      | 
-| 			  		 | 	... saving the registered skill?             | ??Organization??         | IE: ??owns all its tasks.??                                                                                   | 
-| Step 8  		 | 	... informing operation success?             | RegisterSkillsUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID  | Question: Which class is responsible for...   | Answer                   | Justification (with patterns)                                                                                 |
+|:----------------|:----------------------------------------------|:-------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		      | 	... interacting with the actor?              | RegisterSkillsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		         | 	... coordinating the US?                     | RegisterSkillsController | Controller                                                                                                    |
+| 			  		         | 	... registering a new skill?                 | HRM                      | Creator (Rule 1): in the DM HRM registers the skills.                                                         |
+| 			  		         | ... knowing the user using the system?        | UserSession              | IE: cf. A&A component documentation.                                                                          |
+| 			  		         | 			                                           | Organization             | IE: knows/has its own Employees                                                                               |
+| 			  		         | 							                                       | Employee                 | IE: knows its own data (e.g. email)                                                                           |
+| Step 2  		      | 							                                       |                          |                                                                                                               |
+| Step 3  		      | 	...saving the inputted data?                 | Skill                    | IE: object created in step 1 has its own data.                                                                |
+| Step 4  		      | 	... saving the selected category?            | Skill                    | IE: object created in step 1 is classified in one Category.                                                   |
+| Step 5  		      | 							                                       |                          |                                                                                                               |              
+| Step 6  		      | 	... validating all data (local validation)?  | Skill                    | IE: owns its data.                                                                                            | 
+| 			  		         | 	... validating all data (global validation)? | Organization             | IE: knows all its tasks.                                                                                      | 
+| 			  		         | 	... saving the registered skill?             | Organization             | IE: owns all its skills.                                                                                      | 
+| Step 7  		      | 	... informing operation success?             | RegisterSkillsUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
