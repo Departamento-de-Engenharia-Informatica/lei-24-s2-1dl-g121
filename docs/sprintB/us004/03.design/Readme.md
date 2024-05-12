@@ -1,51 +1,42 @@
-# US006 - Create a Task 
+# US004 - Assign a skill 
 
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
-_**Note that SSD - Alternative One is adopted.**_
-
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...                   | Answer                 | Justification (with patterns)                                                                                                           |
+|:---------------|:--------------------------------------------------------------|:-----------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?                              | AssignSkillUI          | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
+| 			  		        | 	... coordinating the US?                                     | AssignSkillController  | Controller                                                                                                                              |
+| 			  		        | 	... adding the skills?                                       | Collaborator           | IE: The skills will be stored in the collaborator that has them making it the only class that makes sense to be used to add it's skills |
+| Step 2  		     | 							                                                       |                        |                                                                                                                                         |
+| Step 3  		     | ... retrieving the typed collaborator associated with the ID	 | CollaboratorRepository | IE: Knows all its collaborators.                                                                                                        |
+| Step 4  		     | 	                                                             |                        |                                                                                                                                         |
+| Step 5  		     | 	                                                             |                        |                                                                                                                                         |
+| Step 6  		     | 	... retrieving the list?                                     | SkillRepository        | IE: Knows all its skills.                                                                                                               |              
+| Step 7  		     | 	... saving the selected skills?                              | Collaborator           | IE: object that has a skill list associated.                                                                                            |
+| Step 8  		     | 	... informing operation success?                             | AssignSkillUI          | IE: is responsible for user interactions.                                                                                               | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Collaborator
+* Skill
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* AssignSkillUI 
+* AssignSkillController
 
 
 ## 3.2. Sequence Diagram (SD)
-
-_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us004-sequence-diagram-full.png)
 
 ### Split Diagrams
 
@@ -53,24 +44,21 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg\us004-sequence-diagram-split.png)
 
-**Get Task Category List Partial SD**
+**Assign Skill to the Collaborator**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![Sequence Diagram - Partial - Assign Skill](svg/us004-sequence-diagram-partial-assign-skill.png)
 
-**Get Task Category Object**
+**Get Collaborator List**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
+![Sequence Diagram - Partial - Get Collaborator List](svg/us004-sequence-diagram-partial-get-collaborator-list.png)
 
-**Get Employee**
+**Get Skill List**
 
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
+![Sequence Diagram - Partial - Get Skill List](svg/us004-sequence-diagram-partial-get-skill-list.png)
 
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us004-class-diagram.png)

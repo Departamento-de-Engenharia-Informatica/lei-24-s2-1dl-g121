@@ -20,7 +20,7 @@ public class HRMUI implements Runnable {
         options.add(new MenuItem("Register Skills", new RegisterSkillsUI()));
         options.add(new MenuItem("Register a job", new CreateJobUI()));
         options.add(new MenuItem("Register Collaborator", new RegisterCollaboratorUI()));
-        options.add(new MenuItem("Option 4", new ShowTextUI("You have chosen Option 4.")));
+        options.add(new MenuItem("Assign a Skill to a Collaborator", new AssignSkillUI()));
         options.add(new MenuItem("Create a team", new CreateTeamUI()));
 
         int option = 0;

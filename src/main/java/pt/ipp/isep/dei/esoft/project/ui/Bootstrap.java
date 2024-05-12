@@ -80,5 +80,7 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserWithRole("Jorge", "jorge.pais@musgo.sublime", "jorginho123",
                 AuthenticationController.ROLE_HRM);
+        authenticationRepository.addUserWithRole("João", "jonny@musgo.sublime", "joao123",
+                AuthenticationController.ROLE_VFM);
     }
 }

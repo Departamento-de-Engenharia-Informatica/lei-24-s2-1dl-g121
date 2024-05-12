@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Collaborator class.
+ * Represents a Collaborator in the system.
+ * A Collaborator has a name, birth details, issuing details, address, phone number, email, identification document, job, and a list of skills.
  */
 public class Collaborator {
     private String name;
@@ -18,6 +19,18 @@ public class Collaborator {
     private Job job;
     private List<Skill> skillList;
 
+    /**
+     * Constructs a new Collaborator with the given details.
+     *
+     * @param name the name of the Collaborator
+     * @param birthDetails the birth details of the Collaborator
+     * @param issuingDetails the issuing details of the Collaborator
+     * @param address the address of the Collaborator
+     * @param phoneNumber the phone number of the Collaborator
+     * @param email the email of the Collaborator
+     * @param identificationDocument the identification document of the Collaborator
+     * @param job the job of the Collaborator
+     */
     public Collaborator(String name, String birthDetails, String issuingDetails, String address, String phoneNumber, String email, String identificationDocument, Job job){
         this.name= name;
         this.birthDetails= birthDetails;
@@ -30,14 +43,30 @@ public class Collaborator {
         this.skillList= new ArrayList<>();
     }
 
+    /**
+     * Returns the name of the Collaborator.
+     *
+     * @return the name of the Collaborator
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the identification document of the Collaborator.
+     *
+     * @return the identification document of the Collaborator
+     */
     public String getIdentificationDocument() {
         return identificationDocument;
     }
 
+    /**
+     * Adds a skill to the Collaborator's skill list.
+     *
+     * @param skill the skill to add
+     * @return true if the skill was added successfully, false otherwise
+     */
     public boolean addSkill(Skill skill){
         if(!this.skillList.contains(skill)){
             this.skillList.add(skill);
@@ -46,12 +75,17 @@ public class Collaborator {
         return false;
     }
 
+    /**
+     * Removes a skill from the Collaborator's skill list.
+     *
+     * @param skill the skill to remove
+     */
     public void removeSkill(Skill skill){
         this.skillList.remove(skill);
     }
 
     /**
-     * Checks if this collaborator is equal to another object.
+     * Checks if this Collaborator is equal to another object.
      *
      * @param o the other object to compare
      * @return true if the other object is a Collaborator and has the same ID, false otherwise
@@ -74,18 +108,28 @@ public class Collaborator {
     }
 
     /**
-     * Clone method.
+     * Returns a clone of the current Collaborator instance.
      *
-     * @return A clone of the current instance.
+     * @return a clone of the current Collaborator instance
      */
     public Collaborator clone() {
         return new Collaborator(this.name, this.birthDetails, this.issuingDetails, this.address, this.phoneNumber, this.email, this.identificationDocument, this.job);
     }
 
+    /**
+     * Returns the ID of the Collaborator.
+     *
+     * @return the ID of the Collaborator
+     */
     public String getCollaboratorID() {
         return this.identificationDocument;
     }
 
+    /**
+     * Returns the list of skills of the Collaborator.
+     *
+     * @return the list of skills of the Collaborator
+     */
     public List<Skill> getSkillList() {
         return this.skillList;
     }
