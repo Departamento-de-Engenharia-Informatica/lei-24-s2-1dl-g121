@@ -1,5 +1,5 @@
 @startuml
-skinparam monochrome false
+skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
@@ -11,9 +11,9 @@ participant ":AssignSkillUI" as UI
 participant ":AssignSkillController" as CTRL
 participant "Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "skillRepository:\n skillRepository" as skillRepository
 participant "collaboratorRepository:\n collaboratorRepository" as collaboratorRepository
-
+participant "skillRepository:\n skillRepository" as skillRepository
+participant "collaborator:\nCollaborator" as collaborator
 
 activate ADM
 
@@ -21,18 +21,48 @@ activate ADM
 
         activate UI
 
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
-            UI -> CTRL** : create
+        UI -> CTRL** : create
 
-            UI -> CTRL : getSkill()
+        UI -> CTRL : getCollaboratorList()
+                    activate CTRL
+
+                        CTRL -> RepositorySingleton : getInstance()
+                                        activate RepositorySingleton
+
+                                            RepositorySingleton --> CTRL: repositories
+                                        deactivate RepositorySingleton
+
+                        CTRL -> PLAT : getCollaboratorRepository()
+                        activate PLAT
+
+                            PLAT --> CTRL: collaboratorRepository
+                        deactivate PLAT
+
+                        CTRL -> collaboratorRepository : getCollaborators()
+                        activate collaboratorRepository
+
+                            collaboratorRepository --> CTRL : collaboratorList
+                        deactivate collaboratorRepository
+
+                        CTRL --> UI : collaboratorList
+                    deactivate CTRL
+
+        UI -> ADM : shows list of existing collaborators
+        deactivate UI
+
+        ADM -> UI : selects a collaborator by id
+        activate UI
+
+        UI -> ADM : asks how many skills are going to be added
+        deactivate UI
+
+        ADM -> UI : informs the number of skills
+        activate UI
+
+            UI -> CTRL : getSkillList()
             activate CTRL
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
 
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
 
                 CTRL -> PLAT : getSkillRepository()
                 activate PLAT
@@ -49,43 +79,13 @@ activate ADM
                 CTRL --> UI : skillList
             deactivate CTRL
 
-            UI --> ADM : shows skills list\n and asks to select one
+            UI --> ADM : shows skills list and asks to select one
         deactivate UI
 
-    ADM -> UI : selects a skill
+    ADM -> UI : selects one or more skills
     activate UI
 
-            UI -> CTRL : getCollaborator()
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getCollaboratorRepository()
-                activate PLAT
-
-                    PLAT --> CTRL: collaboratorRepository
-                deactivate PLAT
-
-                CTRL -> collaboratorRepository : getCollaborators()
-                activate collaboratorRepository
-
-                    collaboratorRepository --> CTRL : collaboratorList
-                deactivate collaboratorRepository
-
-                CTRL --> UI : collaboratorList
-            deactivate CTRL
-
-        UI --> ADM : shows collaborator list\n and asks to select one
-    deactivate UI
-
-    ADM -> UI : selects a collaborator
-    activate UI
-
-        UI -> CTRL : assignSkill(skill, collaborator)
+        UI --> CTRL : assignSkill(skill, collaborator)
         activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -100,13 +100,33 @@ activate ADM
                     PLAT -> CTRL : collaboratorRepository
                 deactivate PLAT
 
-                CTRL -> collaboratorRepository : setSkill(collaborator, skill)
+                CTRL -> collaboratorRepository : getCollaboratorByID()
                 activate collaboratorRepository
 
-                    collaboratorRepository --> CTRL : collaborator(name, birth details,\n issuing details, address, phone number,\n email, identification document, skills, job)
+                    collaboratorRepository --> CTRL : collaborator
                 deactivate collaboratorRepository
-                    CTRL --> UI : collaborator(name, birth details,\n issuing details, address, phone number,\n email, identification document, skills, job)
+
+                CTRL -> PLAT : getSkillRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : skillRepository
+                deactivate PLAT
+
+                CTRL -> skillRepository : getSkillByName()
+                activate skillRepository
+
+                    skillRepository --> CTRL : skill
+                deactivate skillRepository
+
+                CTRL -> collaborator : assignSkill()
+                activate collaborator
+
+                    collaborator --> CTRL : collaborator
+                deactivate collaborator
+
+                CTRL --> UI : collaborator
             deactivate CTRL
+
             UI --> ADM: displays operation success
     deactivate UI
 
