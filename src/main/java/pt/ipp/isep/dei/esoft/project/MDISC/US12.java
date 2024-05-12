@@ -1,9 +1,7 @@
-package pt.ipp.isep.dei.esoft.project.DTOs;
+package pt.ipp.isep.dei.esoft.project.MDISC;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class US12 {
         public static void main(String[] args) {
