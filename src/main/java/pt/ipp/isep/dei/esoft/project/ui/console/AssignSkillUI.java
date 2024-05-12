@@ -55,7 +55,7 @@ public class AssignSkillUI implements Runnable {
             if(collaborator.getIdentificationDocument().equals(ID)){
                 System.out.println("Skills assigned to " + collaborator.getName() + " successfully!");
                 System.out.println("Skills:");
-                for(Skill skill : collaborator.getSkills()){
+                for(Skill skill : collaborator.getSkillList()){
                     System.out.println(skill.getName());
                 }
             }

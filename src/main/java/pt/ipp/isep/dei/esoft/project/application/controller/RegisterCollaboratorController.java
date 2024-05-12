@@ -25,10 +25,9 @@ public class RegisterCollaboratorController {
 
 
     //Allows receiving the repositories as parameters for testing purposes
-    public RegisterCollaboratorController(CollaboratorRepository collaboratorRepository,
-                                          AuthenticationRepository authenticationRepository) {
+    public RegisterCollaboratorController(CollaboratorRepository collaboratorRepository, JobRepository jobRepository) {
         this.collaboratorRepository = collaboratorRepository;
-        this.authenticationRepository = authenticationRepository;
+        this.jobRepository = jobRepository;
     }
 
     private JobRepository getJobRepository() {

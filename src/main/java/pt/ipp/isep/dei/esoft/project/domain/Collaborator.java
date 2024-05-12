@@ -86,7 +86,7 @@ public class Collaborator {
         return this.identificationDocument;
     }
 
-    public Skill[] getSkills() {
-        return this.skillList.toArray(new Skill[0]);
+    public List<Skill> getSkillList() {
+        return this.skillList;
     }
 }
