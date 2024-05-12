@@ -30,6 +30,16 @@ public class Collaborator {
         this.skillList= new ArrayList<>();
     }
 
+    public void addSkill(Skill skill){
+        if(!this.skillList.contains(skill)){
+            this.skillList.add(skill);
+        }
+    }
+
+    public void removeSkill(Skill skill){
+        this.skillList.remove(skill);
+    }
+
     /**
      * Checks if this collaborator is equal to another object.
      *

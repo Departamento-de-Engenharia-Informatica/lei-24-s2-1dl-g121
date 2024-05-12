@@ -34,10 +34,18 @@ public class RegisterCollaboratorUI implements Runnable {
     }
 
     private void registerCollaboratorData() {
-        presentJobList();
-        System.out.println("Choose Job: (Type the name)");
-        String jobString = scanner.nextLine();
-        Job job = controller.getJobByName(jobString);
+        Job job;
+        do {
+            presentJobList();
+            System.out.println("Choose Job: ");
+            String jobString = scanner.nextLine();
+            job = controller.getJobByName(jobString);
+            if (job == null) {
+                System.out.println("Job not found!");
+                return;
+            } else break;
+        } while (true);
+
 
         String name = requestName();
         String birthDetails = requestBirthDetails();

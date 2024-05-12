@@ -9,6 +9,7 @@ public class Bootstrap implements Runnable {
     //Add some task categories to the repository as bootstrap
     public void run() {
         addSkills();
+        addJobs();
         addOrganization();
         addUsers();
     }
@@ -52,12 +53,10 @@ public class Bootstrap implements Runnable {
 
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
-        jobRepository.addJob(new Job("Software Developer"));
-        jobRepository.addJob(new Job("Software Tester"));
-        jobRepository.addJob(new Job("Project Manager"));
-        jobRepository.addJob(new Job("Business Analyst"));
-        jobRepository.addJob(new Job("Quality Assurance Manager"));
-        jobRepository.addJob(new Job("Human Resources Manager"));
+        jobRepository.addJob(new Job("SoftwareDeveloper"));
+        jobRepository.addJob(new Job("SoftwareTester"));
+        jobRepository.addJob(new Job("ProjectManager"));
+        jobRepository.addJob(new Job("BusinessAnalyst"));
     }
 
     private void addUsers() {
