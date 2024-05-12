@@ -38,10 +38,12 @@ public class Collaborator {
         return identificationDocument;
     }
 
-    public void addSkill(Skill skill){
+    public boolean addSkill(Skill skill){
         if(!this.skillList.contains(skill)){
             this.skillList.add(skill);
+            return true;
         }
+        return false;
     }
 
     public void removeSkill(Skill skill){
