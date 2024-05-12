@@ -20,13 +20,12 @@ public class JobTest {
         ));
 
         // Act
-        Job job = new Job(name, numberOfSkills, setOfSkills);
+        Job job = new Job(name);
 
         // Assert
         assertNotNull(job);
         assertEquals(name, job.getName());
-        assertEquals(numberOfSkills, job.getNumberOfSkills());
-        assertEquals(setOfSkills, job.getSetOfSkills());
+
     }
 
     @Test
@@ -43,7 +42,7 @@ public class JobTest {
         // Assert
         assertThrows(IllegalArgumentException.class, () -> {
             // Act
-            new Job(name, numberOfSkills, setOfSkills);
+            new Job(name);
         });
     }
 
@@ -61,7 +60,7 @@ public class JobTest {
         // Assert
         assertThrows(IllegalArgumentException.class, () -> {
             // Act
-            new Job(name, numberOfSkills, setOfSkills);
+            new Job(name);
         });
     }
 
@@ -79,7 +78,7 @@ public class JobTest {
         // Assert
         assertThrows(IllegalArgumentException.class, () -> {
             // Act
-            new Job(name, numberOfSkills, setOfSkills);
+            new Job(name);
         });
     }
 
@@ -93,7 +92,7 @@ public class JobTest {
         // Assert
         assertThrows(IllegalArgumentException.class, () -> {
             // Act
-            new Job(name, numberOfSkills, setOfSkills);
+            new Job(name);
         });
     }
 
@@ -107,7 +106,7 @@ public class JobTest {
         // Assert
         assertThrows(IllegalArgumentException.class, () -> {
             // Act
-            new Job(name, numberOfSkills, setOfSkills);
+            new Job(name);
         });
     }
 }
