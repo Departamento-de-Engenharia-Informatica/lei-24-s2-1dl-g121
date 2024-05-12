@@ -1,117 +1,58 @@
-//package pt.ipp.isep.dei.esoft.project.repository;
+package pt.ipp.isep.dei.esoft.project.repository;
 
-//import org.junit.jupiter.api.Test;
-//import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
-//
-//import java.util.Optional;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class SkillRepositoryTest {
-//
-//    @Test
-//    void getTaskCategoryByDescriptionEmptyList() {
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        String taskCategoryDescription = "Task Category Description";
-//        assertThrows(IllegalArgumentException.class,
-//                () -> taskCategoryRepository.getTaskCategoryByDescription(taskCategoryDescription));
-//    }
-//
-//    @Test
-//    void getTaskCategoryByDescriptionNullList() {
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        String taskCategoryDescription = "Task Category Description";
-//        assertThrows(IllegalArgumentException.class,
-//                () -> taskCategoryRepository.getTaskCategoryByDescription(taskCategoryDescription));
-//    }
-//
-//    @Test
-//    void ensureNewTaskCategorySuccessfullyAdded() {
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        String taskCategoryDescription = "Task Category Description";
-//        TaskCategory taskCategory = new TaskCategory(taskCategoryDescription);
-//        taskCategoryRepository.add(taskCategory);
-//    }
-//
-//    @Test
-//    void ensureGetTaskCategoryForExistingTaskCategory() {
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        String taskCategoryDescription = "Task Category Description";
-//        TaskCategory taskCategory = new TaskCategory(taskCategoryDescription);
-//        taskCategoryRepository.add(taskCategory);
-//        TaskCategory taskCategory1 = taskCategoryRepository.getTaskCategoryByDescription(taskCategoryDescription);
-//        assertEquals(taskCategory, taskCategory1);
-//    }
-//
-//    @Test
-//    void ensureGetTaskCategoryFailsForNonExistingTaskCategory() {
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        String taskCategoryDescription = "Task Category Description";
-//        TaskCategory taskCategory = new TaskCategory(taskCategoryDescription);
-//        taskCategoryRepository.add(taskCategory);
-//        String taskCategoryDescription1 = "Task Category Description 1";
-//        assertThrows(IllegalArgumentException.class,
-//                () -> taskCategoryRepository.getTaskCategoryByDescription(taskCategoryDescription1));
-//
-//    }
-//
-//    @Test
-//    void ensureGetTaskCategoriesReturnsAnImmutableList() {
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        String taskCategoryDescription = "Task Category Description";
-//        TaskCategory taskCategory = new TaskCategory(taskCategoryDescription);
-//        taskCategoryRepository.add(taskCategory);
-//
-//        assertThrows(UnsupportedOperationException.class,
-//                () -> taskCategoryRepository.getTaskCategories().add(new TaskCategory("Task Category Description 1")));
-//
-//    }
-//
-//    @Test
-//    void ensureGetTaskCategoriesReturnsTheCorrectList() {
-//        //Arrange
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        String taskCategoryDescription = "Task Category Description";
-//        TaskCategory taskCategory = new TaskCategory(taskCategoryDescription);
-//        taskCategoryRepository.add(taskCategory);
-//        int expectedSize = 1;
-//
-//        //Act
-//        int size = taskCategoryRepository.getTaskCategories().size();
-//
-//        //Assert
-//        assertEquals(expectedSize, size);
-//        assertEquals(taskCategory, taskCategoryRepository.getTaskCategories().get(size - 1));
-//    }
-//
-//    @Test
-//    void ensureAddingDuplicateTaskCategoryFails() {
-//        //Arrange
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        TaskCategory taskCategory = new TaskCategory("Task Category Description");
-//        //Add the first task
-//        taskCategoryRepository.add(taskCategory);
-//
-//        //Act
-//        Optional<TaskCategory> duplicateTaskCategory = taskCategoryRepository.add(taskCategory);
-//
-//        //Assert
-//        assertTrue(duplicateTaskCategory.isEmpty());
-//    }
-//
-//    @Test
-//    void ensureAddingDifferentTaskCategoriesWorks() {
-//        //Arrange
-//        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-//        TaskCategory taskCategoryOne = new TaskCategory("Task Category Description One");
-//        TaskCategory taskCategoryTwo = new TaskCategory("Task Category Description Two");
-//        //Add the first task
-//        taskCategoryRepository.add(taskCategoryOne);
-//
-//        //Act
-//        Optional<TaskCategory> result = taskCategoryRepository.add(taskCategoryTwo);
-//
-//        //Assert
-//        assertEquals(taskCategoryTwo, result.get());
-//    }
-//}
+import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class SkillRepositoryTest {
+
+    @Test
+    void ensureNewSkillSuccessfullyAdded() {
+        SkillRepository skillRepository = new SkillRepository();
+        Skill skill = new Skill("Programming");
+        Optional<Skill> addedSkill = skillRepository.add(skill);
+        assertTrue(addedSkill.isPresent());
+        assertEquals(skill, addedSkill.get());
+    }
+
+    @Test
+    void ensureAddingDuplicateSkillFails() {
+        SkillRepository skillRepository = new SkillRepository();
+        Skill skill = new Skill("Programming");
+        skillRepository.add(skill);
+        Optional<Skill> duplicateSkill = skillRepository.add(skill);
+        assertTrue(duplicateSkill.isEmpty());
+    }
+
+    @Test
+    void ensureAddingDifferentSkillsWorks() {
+        SkillRepository skillRepository = new SkillRepository();
+        Skill skillOne = new Skill("Programming");
+        Skill skillTwo = new Skill("Database Management");
+        skillRepository.add(skillOne);
+        Optional<Skill> addedSkill = skillRepository.add(skillTwo);
+        assertTrue(addedSkill.isPresent());
+        assertEquals(skillTwo, addedSkill.get());
+    }
+
+    @Test
+    void ensureGetSkillsReturnsAnImmutableList() {
+        SkillRepository skillRepository = new SkillRepository();
+        Skill skill = new Skill("Programming");
+        skillRepository.add(skill);
+        assertThrows(UnsupportedOperationException.class,
+                () -> skillRepository.getSkills().add(new Skill("Database Management")));
+    }
+
+    @Test
+    void ensureGetSkillsReturnsTheCorrectList() {
+        SkillRepository skillRepository = new SkillRepository();
+        Skill skill = new Skill("Programming");
+        skillRepository.add(skill);
+        assertEquals(1, skillRepository.getSkills().size());
+        assertEquals(skill, skillRepository.getSkills().get(0));
+    }
+}
