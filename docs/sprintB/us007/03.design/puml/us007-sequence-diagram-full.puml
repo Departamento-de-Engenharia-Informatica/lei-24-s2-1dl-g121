@@ -1,0 +1,80 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Fleet Manager" as ADM
+participant ":RegisterVehicleCheckUpUI" as UI
+participant ":RegisterVehicleCheckUpController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "vehicleCheckUpRepository:\nVehicleCheckUpRepository" as VehicleCheckUpRepository
+participant "vehicleCheckUp:\nVehicleCheckUp" as VehicleCheckUp
+
+activate ADM
+
+ADM -> UI : asks to register a vehicle's check-up
+activate UI
+
+UI --> ADM: Request vehicle license plate
+ADM -> UI: Enter vehicle license plate
+
+UI -> CTRL : getVehicleByLicensePlate(vehicleLicensePlate)
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getVehicleRepository()
+activate PLAT
+PLAT --> CTRL: VehicleRepository
+deactivate PLAT
+
+CTRL -> VehicleRepository : getVehicleByLicensePlate(vehicleLicensePlate)
+activate VehicleRepository
+VehicleRepository --> CTRL: vehicle
+deactivate VehicleRepository
+
+CTRL --> UI : vehicle
+deactivate CTRL
+
+UI --> ADM : Requests vehicle check-up date
+ADM -> UI : Enter vehicle check-up date
+
+UI -> CTRL : registerVehicleCheckUp(licensePlate, currentKM, checkUpDate)
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getVehicleCheckUpRepository()
+activate PLAT
+PLAT -> CTRL: VehicleCheckUpRepository
+deactivate PLAT
+
+CTRL -> VehicleCheckUpRepository : registerVehicleCheckUp(licensePlate, currentKM, checkUpDate)
+activate VehicleCheckUpRepository
+VehicleCheckUpRepository -> VehicleCheckUpRepository : validateVehicleCheckUp
+VehicleCheckUpRepository -> VehicleCheckUp: addVehicleCheckUp(licensePlate, currentKM, checkUpDate)
+activate VehicleCheckUp
+VehicleCheckUp --> VehicleCheckUpRepository : vehicleCheckUp
+deactivate VehicleCheckUp
+VehicleCheckUpRepository ->CTRL: checkUpAddedConfirmationMessage
+deactivate VehicleCheckUpRepository
+
+CTRL -> UI: checkUpAddedConfirmationMessage
+deactivate CTRL
+
+UI --> ADM: Displays confirmation message
+deactivate UI
+
+deactivate ADM
+
+@enduml

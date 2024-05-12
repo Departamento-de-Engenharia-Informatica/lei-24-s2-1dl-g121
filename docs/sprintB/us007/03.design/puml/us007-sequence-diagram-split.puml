@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Fleet Manager" as ADM
+participant ":RegisterVehicleCheckUpUI" as UI
+participant ":RegisterVehicleCheckUpController" as CTRL
+
+activate ADM
+
+ADM -> UI : asks to register a vehicle's check-up
+activate UI
+
+UI --> ADM: Request vehicle license plate
+ADM -> UI: Enter vehicle license plate
+
+UI -> CTRL : getVehicleByLicensePlate(vehicleLicensePlate)
+activate CTRL
+                ref over CTRL
+                  Get Vehicle
+                end ref
+CTRL --> UI : vehicle
+deactivate CTRL
+
+UI --> ADM : Requests vehicle check-up date
+ADM -> UI : Enter vehicle check-up date
+
+UI -> CTRL : registerVehicleCheckUp(licensePlate, currentKM, checkUpDate)
+activate CTRL
+
+ref over CTRL
+                 Register Vehicle Check-Up
+                 end ref
+
+CTRL -> UI: checkUpAddedConfirmationMessage
+deactivate CTRL
+
+UI --> ADM: Displays confirmation message
+deactivate UI
+
+deactivate ADM
+
+@enduml
