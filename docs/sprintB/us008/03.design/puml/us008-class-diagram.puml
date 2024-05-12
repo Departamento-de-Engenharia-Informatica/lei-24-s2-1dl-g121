@@ -5,9 +5,23 @@ skinparam shadowing false
 
 class FleetManager
 class CheckUpListUI
-class CheckUpListController
-class Repositories
-class VehiclesRepository
+class CheckUpListController{
++ CheckUpListController(organizationRepository, vehiclesRepository)
+    '+ getTaskCategories()
+    '+ registerSkill(name)
+    '- getTaskCategoryByDescription(taskCategoryDescription)
+    - getEmployeeFromSession()
+}
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehiclesRepository()
+    + getOrganizationRepository()
+}
+class VehiclesRepository{
+    + getVehicleByPlate(plate)
+
+}
 
 FleetManager --> CheckUpListUI : requests maintenance report
 CheckUpListUI --> CheckUpListController : generateCheckUpList()
