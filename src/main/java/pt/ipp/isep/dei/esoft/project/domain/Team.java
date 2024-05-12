@@ -29,9 +29,9 @@ public class Team {
     public ArrayList<Skill> getSetOfSkills() {
         return setOfSkills;
     }
-    public Job clone() {
+    public Team clone() {
         try {
-            return (Job) super.clone();
+            return (Team) super.clone();
         } catch (CloneNotSupportedException e) {
             // This should never happen since Job implements Cloneable
             throw new AssertionError();

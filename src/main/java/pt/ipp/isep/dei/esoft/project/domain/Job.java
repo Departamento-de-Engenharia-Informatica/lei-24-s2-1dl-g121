@@ -47,9 +47,7 @@ public class Job {
         return this;
     }
 
-//    public int getNumberOfSkills() {
-//        return numberOfSkills;
-//    }
+
 
 //    public ArrayList<Skill> getSetOfSkills() {
 //        return setOfSkills;
@@ -86,5 +84,6 @@ public class Job {
 //                ", setOfSkills=" + setOfSkills +
                 '}';
     }
+
 
 }
