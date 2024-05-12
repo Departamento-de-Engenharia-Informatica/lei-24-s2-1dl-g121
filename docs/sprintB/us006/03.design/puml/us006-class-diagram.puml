@@ -58,7 +58,7 @@ CreateVehicleUI -- CreateVehicleController
 Repositories -- VehicleRepository
 CreateVehicleController -- Repositories
 VehicleRepository -- Vehicle
-
+CreateVehicleController -- Vehicle
 FM "1" -- "*" Vehicle : registers >
 FM "1" -- "*" "Check-up" : registers >
 Vehicle "1" -- "1" "Check-up" : needs >

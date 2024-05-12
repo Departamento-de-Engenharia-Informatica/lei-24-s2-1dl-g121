@@ -13,9 +13,6 @@ participant ":Repositories" as RepositorySingleton
 participant "VehicleRepository:\nVehicleRepository" as TaskCategoryRepository
 
 
-
-
-
 activate ADM
 
         ADM -> UI : asks to register a vehicle
