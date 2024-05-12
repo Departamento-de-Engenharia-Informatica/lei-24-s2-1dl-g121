@@ -30,6 +30,14 @@ public class Collaborator {
         this.skillList= new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getIdentificationDocument() {
+        return identificationDocument;
+    }
+
     public void addSkill(Skill skill){
         if(!this.skillList.contains(skill)){
             this.skillList.add(skill);
@@ -70,5 +78,13 @@ public class Collaborator {
      */
     public Collaborator clone() {
         return new Collaborator(this.name, this.birthDetails, this.issuingDetails, this.address, this.phoneNumber, this.email, this.identificationDocument, this.job);
+    }
+
+    public String getCollaboratorID() {
+        return this.identificationDocument;
+    }
+
+    public Skill[] getSkills() {
+        return this.skillList.toArray(new Skill[0]);
     }
 }

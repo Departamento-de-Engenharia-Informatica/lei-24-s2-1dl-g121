@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class CollaboratorRepository {
@@ -53,5 +54,14 @@ public class CollaboratorRepository {
     public List<Collaborator> getCollaborators() {
         //This is a defensive copy, so that the repository cannot be modified from the outside.
         return List.copyOf(collaborators);
+    }
+
+    public Collaborator getCollaboratorById(String id) {
+        for (Collaborator collaborator : collaborators) {
+            if (collaborator.getCollaboratorID().equals(id)) {
+                return collaborator;
+            }
+        }
+        return null;
     }
 }

@@ -10,6 +10,7 @@ public class Bootstrap implements Runnable {
     public void run() {
         addSkills();
         addJobs();
+        addCollaborators();
         addOrganization();
         addUsers();
     }
@@ -57,6 +58,11 @@ public class Bootstrap implements Runnable {
         jobRepository.addJob(new Job("SoftwareTester"));
         jobRepository.addJob(new Job("ProjectManager"));
         jobRepository.addJob(new Job("BusinessAnalyst"));
+    }
+
+    private void addCollaborators() {
+        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "address", new Job("SoftwareDeveloper")));
     }
 
     private void addUsers() {

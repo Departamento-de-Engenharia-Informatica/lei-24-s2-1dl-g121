@@ -41,4 +41,7 @@ public class Skill {
         return new Skill(this.skillName);
     }
 
+    public String getName() {
+        return skillName;
+    }
 }

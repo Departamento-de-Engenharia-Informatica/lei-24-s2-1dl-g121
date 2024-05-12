@@ -75,7 +75,7 @@ public class RegisterCollaboratorController {
         Collaborator newCollaborator = new Collaborator(name,  birthDetails,  issuingDetails,  address,  phoneNumber,  email,  identificationDocument, job);
         if (!collaboratorRepository.getCollaborators().contains(newCollaborator)) {
             try{
-                collaboratorRepository.getCollaborators().add(newCollaborator);
+                collaboratorRepository.add(newCollaborator);
             } catch (UnsupportedOperationException e){
                 System.out.println("Error:" + e.getMessage());
             }

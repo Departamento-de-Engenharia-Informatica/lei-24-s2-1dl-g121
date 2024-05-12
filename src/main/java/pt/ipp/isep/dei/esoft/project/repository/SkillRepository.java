@@ -51,6 +51,15 @@ public class SkillRepository {
         // This is a defensive copy, so that the repository cannot be modified from the outside.
         return List.copyOf(skills);
     }
+
+    public Skill getSkillByName(String skillName) {
+        for (Skill skill : skills) {
+            if (skill.getName().equalsIgnoreCase(skillName)) {
+                return skill;
+            }
+        }
+        return null;
+    }
 }
 
 
