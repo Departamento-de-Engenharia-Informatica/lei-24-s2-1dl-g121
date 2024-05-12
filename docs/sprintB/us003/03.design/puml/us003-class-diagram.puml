@@ -1,0 +1,72 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+'COLLABORATOR REPOSITORY JOB REPOSITORY
+
+class HRM{
+    -name
+    -email
+    -phone number
+    -identification document
+}
+
+
+class Job{
+    -name
+}
+
+class Collaborator{
+    -name
+    -birth details
+    -issuing details
+    -address
+    -phone number
+    -email
+    -identification document
+}
+
+class RegisterCollaboratorController{
+    +getJob()
+
+}
+
+class jobRepository{
+    +getJobCategories()
+}
+
+class CollaboratorRepository{
+
+    +registerCollaborator
+}
+
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getCollaboratorRepository()
+    + getJobRepository()
+}
+
+class CreateJobController {
+    + getJobList()
+}
+
+
+class CreateCollaboratorUI {
+}
+
+
+
+HRM "1" -- "*" Job : registers >
+HRM "1" -- "*" Collaborator : registers >
+Collaborator "1" -- "1" Job : has >
+
+
+@enduml

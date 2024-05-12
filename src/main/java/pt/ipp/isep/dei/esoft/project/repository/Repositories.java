@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.application.session.ApplicationSession;
-
 public class Repositories {
 
     private static Repositories instance;
@@ -11,6 +9,7 @@ public class Repositories {
     private final SkillRepository skillRepository;
     private final CollaboratorRepository collaboratorRepository;
     private final JobRepository jobRepository;
+    private final CreateTeamRepository createTeamRepository;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
@@ -19,6 +18,7 @@ public class Repositories {
         skillRepository = new SkillRepository();
         collaboratorRepository = new CollaboratorRepository();
         jobRepository = new JobRepository();
+        createTeamRepository = new CreateTeamRepository();
     }
 
     public static Repositories getInstance() {
@@ -49,4 +49,6 @@ public class Repositories {
     }
 
     public JobRepository getJobRepository() {return jobRepository;}
+
+    public CreateTeamRepository getCreateTeamRepository() {return createTeamRepository;}
 }

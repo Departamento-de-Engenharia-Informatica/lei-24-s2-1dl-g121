@@ -1,33 +1,35 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateJobController;
-import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
+import pt.ipp.isep.dei.esoft.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class CreateJobUI implements Runnable{
-    private CreateJobController controller;
-    private String name;
+public class CreateTeamUI implements Runnable{
+
+    private CreateTeamController controller;
+    private int maxSize;
     private int numSkills;
     private ArrayList<Skill> requiredSkills;
 
     static Scanner sc = new Scanner(System.in);
 
-    public CreateJobUI() {
-        controller = new CreateJobController();
+    public CreateTeamUI() {
+        controller = new CreateTeamController();
     }
-    private CreateJobController getController() {
+    private CreateTeamController getController() {
         return controller;
     }
 
     @Override
     public void run() {
-        System.out.println("\n\n--- Create Job ------------------------");
+        System.out.println("\n\n--- Create Team ------------------------");
 
         //taskCategoryDescription = displayAndSelectTaskCategory();
 
@@ -51,22 +53,22 @@ public class CreateJobUI implements Runnable{
 //    }
 
     private void submitData() {
-        Optional<Job> job = getController().createJob(name, numSkills, requiredSkills);
+        Optional<Team> team = getController().createTeam(maxSize, requiredSkills);
 
-        if (job.isPresent()) {
-            System.out.println("\nJob successfully created!");
+        if (team.isPresent()) {
+            System.out.println("\nTeam successfully created!");
         } else {
-            System.out.println("\nJob not created!");
+            System.out.println("\nTeam not created!");
         }
     }
 
     private void requestData() {
 
         //Request the Task Reference from the console
-        name = requestName();
+         maxSize = requestSize();
 
         //Request the Task Description from the console
-        numSkills = requestNumSkills();
+         numSkills = requestNumSkills();
 
         //Request the Task Informal Description from the console
         requiredSkills = requestRequiredSkills(numSkills);
@@ -74,14 +76,14 @@ public class CreateJobUI implements Runnable{
     }
 
     private ArrayList<Skill> requestRequiredSkills(int numSkills) {
-            ArrayList<Skill> skills = new ArrayList<>();
-            for (int i = 0; i < numSkills; i++) {
-                System.out.println("Type the skill:");
-                String skillName = sc.next();
-                Skill skill = new Skill(skillName);
-                skills.add(skill);
-            }
-            return skills;
+        ArrayList<Skill> skills = new ArrayList<>();
+        for (int i = 0; i < numSkills; i++) {
+            System.out.println("Type the skill:");
+            String skillName = sc.next();
+            Skill skill = new Skill(skillName);
+            skills.add(skill);
+        }
+        return skills;
     }
 
     private int requestNumSkills() {
@@ -89,8 +91,8 @@ public class CreateJobUI implements Runnable{
         return numberOfSkills;
     }
 
-    private String requestName() {
-        String jobName = Utils.readLineFromConsole("What's the name of the job you will register today?");
-        return jobName;
+    private int requestSize() {
+        int maxSize = Integer.parseInt(Utils.readLineFromConsole("What's the max size of your team?"));
+        return maxSize;
     }
 }

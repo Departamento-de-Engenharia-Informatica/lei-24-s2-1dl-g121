@@ -1,0 +1,102 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as ADM
+participant ":CreateCollaboratorUI" as UI
+participant ":CreateJobController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "jobRepository:\njobRepository" as TaskCategoryRepository
+participant "CollaboratorRepository" as SIU
+participant "RegisterCollaboratorController" as POP
+
+
+activate ADM
+
+        ADM -> UI : asks to register a collaborator
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getJobList
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> RepositorySingleton : getJobRepository()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: jobRepository
+                deactivate RepositorySingleton
+
+                CTRL -> TaskCategoryRepository : getJobCategories()
+                activate TaskCategoryRepository
+
+                    TaskCategoryRepository --> CTRL : jobList
+                deactivate TaskCategoryRepository
+
+                CTRL --> UI : jobList
+            deactivate CTRL
+
+            UI --> ADM : show the list of jobs
+        deactivate UI
+
+    ADM -> UI : selects a job
+    activate UI
+
+        UI --> ADM : asks about fundamental characteristics (name, birth details, issuing details, address, contact (telephone and email), identification document and your number)
+    deactivate UI
+
+    ADM -> UI : insert data
+    activate UI
+
+        UI --> ADM : shows all data and requests confirmation
+    deactivate UI
+
+    ADM -> UI : confirms data
+    activate UI
+
+        UI -> RepositorySingleton : registerCollaborator(name, birth date, admission date, \n address, contact info (mobile and email), \n taxpayer number, ID doc type, and respective number)
+        activate RepositorySingleton
+
+
+
+
+
+                RepositorySingleton -> SIU : registerCollaborator()
+            activate SIU
+
+                SIU -> RepositorySingleton : Collaborator
+            deactivate SIU
+
+            RepositorySingleton -> POP : getJob()
+            deactivate RepositorySingleton
+                 activate POP
+
+
+                    POP --> UI : registerJobToCollaborator
+                    deactivate POP
+
+
+
+
+            deactivate CTRL
+
+            deactivate CTRL
+            UI --> ADM: displays operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml
