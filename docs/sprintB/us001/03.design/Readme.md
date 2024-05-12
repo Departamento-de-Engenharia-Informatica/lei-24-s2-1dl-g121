@@ -12,9 +12,6 @@ _**Note that SSD - Alternative One is adopted.**_
 | 			  		        | 	... coordinating the US?                     | RegisterSkillsController | Controller                                                                                                    |
 | 			  		        | 	... registering a new skill?                 | HRM                      | Creator (Rule 1): in the DM HRM registers the skills.                                                         |
 | 			  		        | ... knowing the user using the system?        | UserSession              | IE: cf. A&A component documentation.                                                                          |
-| 			  		        | 			                                           | Organization             | IE: knows/has its own Employees                                                                               |
-| 			  		        | 							                                       | Employee                 | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		     | 							                                       |                          |                                                                                                               |
 | Step 3  		     | 	...saving the inputted data?                 | Skill                    | IE: object created in step 1 has its own data.                                                                |
 | Step 4		       | 	... validating all data (local validation)?  | Skill                    | IE: owns its data.                                                                                            | 
 | 			  		        | 	... validating all data (global validation)? | Organization             | IE: knows all its tasks.                                                                                      | 
