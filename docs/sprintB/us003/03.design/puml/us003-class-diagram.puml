@@ -59,11 +59,17 @@ class CreateJobController {
 }
 
 
+
 class CreateCollaboratorUI {
 }
 
-
-
+CreateCollaboratorUI -- CreateJobController
+CreateJobController -- Repositories
+Repositories -- jobRepository
+Repositories --CollaboratorRepository
+RegisterCollaboratorController -- Collaborator
+Collaborator -- CollaboratorRepository
+CreateCollaboratorUI -- RegisterCollaboratorController
 HRM "1" -- "*" Job : registers >
 HRM "1" -- "*" Collaborator : registers >
 Collaborator "1" -- "1" Job : has >
