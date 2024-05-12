@@ -2,8 +2,10 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -13,13 +15,9 @@ import java.util.Scanner;
 public class RegisterCollaboratorUI implements Runnable {
 
     private final RegisterCollaboratorController controller;
-    private String name;
-    private String birthDetails;
-    private String issuingDetails;
-    private String address;
-    private String phoneNumber;
-    private String email;
-    private String identificationDocument;
+    private static final Scanner scanner = new Scanner(System.in);
+
+
 
     public RegisterCollaboratorUI() {
         controller = new RegisterCollaboratorController();
@@ -32,29 +30,37 @@ public class RegisterCollaboratorUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Register Collaborator ------------------------");
 
-        requestData();
-
-        submitData();
+        registerCollaboratorData();
     }
 
-    private void submitData() {
-        Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDetails, issuingDetails, address, phoneNumber, email, identificationDocument);
+    private void registerCollaboratorData() {
+        presentJobList();
+        System.out.println("Choose Job: (Type the name)");
+        String jobString = scanner.nextLine();
+        Job job = controller.getJobByName(jobString);
 
-        if (collaborator.isPresent()) {
-            System.out.println("\nCollaborator successfully registered!");
+        String name = requestName();
+        String birthDetails = requestBirthDetails();
+        String issuingDetails = requestIssuingDetails();
+        String address = requestAddress();
+        String phoneNumber = requestPhoneNumber();
+        String email = requestEmail();
+        String identificationDocument = requestIdentificationDocument();
+
+        Optional<Collaborator> optCollaborator = controller.registerCollaborator(name, birthDetails, issuingDetails, address, phoneNumber, email, identificationDocument, job);
+        if (optCollaborator.isPresent()) {
+            System.out.println("Collaborator registered successfully!");
         } else {
-            System.out.println("\nCollaborator not registered!");
+            System.out.println("Collaborator not registered!");
         }
     }
 
-    private void requestData() {
-        name = requestName();
-        birthDetails = requestBirthDetails();
-        issuingDetails = requestIssuingDetails();
-        address = requestAddress();
-        phoneNumber = requestPhoneNumber();
-        email = requestEmail();
-        identificationDocument = requestIdentificationDocument();
+    public void presentJobList(){
+        System.out.println("Jobs:");
+        List<Job> jobList = controller.getJobList();
+        for (Job job : jobList){
+            System.out.println(job.getName());
+        }
     }
 
     private String requestName() {

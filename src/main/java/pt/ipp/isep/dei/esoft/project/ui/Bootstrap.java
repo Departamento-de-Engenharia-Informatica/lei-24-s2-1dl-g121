@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.domain.Employee;
-import pt.ipp.isep.dei.esoft.project.domain.Organization;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class Bootstrap implements Runnable {
@@ -53,6 +50,15 @@ public class Bootstrap implements Runnable {
         skillRepository.add(new Skill("Time Management"));
     }
 
+    private void addJobs() {
+        JobRepository jobRepository = Repositories.getInstance().getJobRepository();
+        jobRepository.addJob(new Job("Software Developer"));
+        jobRepository.addJob(new Job("Software Tester"));
+        jobRepository.addJob(new Job("Project Manager"));
+        jobRepository.addJob(new Job("Business Analyst"));
+        jobRepository.addJob(new Job("Quality Assurance Manager"));
+        jobRepository.addJob(new Job("Human Resources Manager"));
+    }
 
     private void addUsers() {
         //TODO: add Authentication users here: should be created for each user in the organization

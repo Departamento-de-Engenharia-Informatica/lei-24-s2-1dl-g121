@@ -33,7 +33,7 @@ public class CreateJobController {
     }
 
     public Optional<Job> createJob(String name, int numSkills, ArrayList<Skill> requiredSkills) {
-        Job newJob = new Job(name, numSkills, requiredSkills);
+        Job newJob = new Job(name);
         if (!jobRepository.getJobs().contains(newJob)) {
             try {
                 jobRepository.addJob(newJob);

@@ -10,9 +10,12 @@ import java.util.Optional;
 public class CollaboratorRepository {
 
     private final List<Collaborator> collaborators;
+    private JobRepository jobRepository;
+
     public CollaboratorRepository() {
         collaborators = new ArrayList<>();
     }
+
 
     /**
      * Adds a new collaborator to the repository.

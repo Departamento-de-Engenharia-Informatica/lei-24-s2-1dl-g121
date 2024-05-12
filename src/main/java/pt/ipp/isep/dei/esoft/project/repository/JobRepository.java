@@ -13,13 +13,24 @@ public class JobRepository {
         jobs = new ArrayList<>();
     }
 
-    public Optional<Job> addJob(Job job) {
-        Optional<Job> newJob = Optional.empty();
+    public void addJob(Job job) {
         if (validateJob(job)) {
-            newJob = Optional.of(job.clone());
-            jobs.add(newJob.get());
+            jobs.add(job);
+        } else {
+            throw new UnsupportedOperationException("Job already exists");
         }
-        return newJob;
+    }
+
+    public Optional<Job> getJobByName(String name) {
+        Optional<Job> returnJob = Optional.empty();
+
+        for (Job job : jobs) {
+            if (job.getName().equals(name)) {
+                returnJob = Optional.of(job);
+            }
+        }
+
+        return returnJob;
     }
 
     private boolean validateJob(Job job) {
