@@ -53,7 +53,7 @@ public class RegisterSkillsController {
         Skill newSkill = new Skill(skillName);
         if (!skillRepository.getSkills().contains(newSkill)) {
             try{
-                skillRepository.getSkills().add(newSkill);
+                skillRepository.add(newSkill);
             } catch (UnsupportedOperationException e){
                 System.out.println("Error:" + e.getMessage());
             }
