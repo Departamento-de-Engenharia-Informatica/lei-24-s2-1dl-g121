@@ -20,8 +20,8 @@ _**Note that SSD - Alternative One is adopted.**_
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* jobRepository
-* RegisterCollaborator
+* Job
+* Collaborator
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
