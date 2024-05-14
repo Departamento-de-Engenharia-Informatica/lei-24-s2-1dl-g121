@@ -20,13 +20,13 @@ skinparam classAttributeIconSize 0
 '    + getUserEmail()
 '}
 
-class HRM {
-    - name
-    - email
-    - position
-    - phone
-    - ID
-}
+'class HRM {
+'    - name
+'    - email
+'    - position
+'    - phone
+'    - ID
+'}
 
 class Skill {
     - String name
@@ -112,8 +112,8 @@ RegisterSkillsController ..> "1" Organization : organization
 ' Task "*" --> "1" Skill : skill
 SkillRepository "1" --> "*" Skill : skill
 Organization "1" --> "*" Skill : skills
-Skill --> HRM : registeredBy
-
-Organization --> "*" HRM : employs
+'Skill --> HRM : registeredBy
+'
+'Organization --> "*" HRM : employs
 
 @enduml
