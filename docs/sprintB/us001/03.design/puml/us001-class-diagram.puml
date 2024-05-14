@@ -74,16 +74,16 @@ class RegisterSkillsController {
     '- getTaskCategoryByDescription(taskCategoryDescription)
     - getEmployeeFromSession()
 }
-
-note right of RegisterSkillsController
-    - userEmail is obtained
-    from the user session
-end note
-
-note bottom of SkillRepository
-    - used for displaying
-    the skills list
-end note
+'
+'note right of RegisterSkillsController
+'    - userEmail is obtained
+'    from the user session
+'end note
+'
+'note bottom of SkillRepository
+'    - used for displaying
+'    the skills list
+'end note
 
 class RegisterSkillsUI {
 }
