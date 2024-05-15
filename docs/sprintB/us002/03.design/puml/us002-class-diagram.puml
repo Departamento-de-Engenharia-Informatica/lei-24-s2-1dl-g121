@@ -12,13 +12,9 @@ skinparam linetype polyline
 '}
 
 class Job {
-    - reference: String
-    - description: String
-    - informalDescription: String
-    - technicalDescription: String
-    - duration: Integer
-    - cost: Double
-    + Job(reference: String, description: String, informalDescription: String, technicalDescription: String, duration: Integer, cost: Double)
+    + Job name
+    + number of skills needed
+    + name of the skills
 }
 
 'class JobCategory {
@@ -43,9 +39,7 @@ class JobRepository {
 
 }
 
-class OrganizationRepository {
-    + getOrganizationByEmployeeEmail(email: String)
-}
+
 
 class Repositories {
     - Repositories()
@@ -56,16 +50,9 @@ class Repositories {
 
 class CreateJobController {
     + CreateJobController(organizationRepository: OrganizationRepository, JobRepository: JobRepository)
-    + getJobCategories()
-    + createJob(userEmail: String, reference: String, description: String, informalDescription: String, technicalDescription: String, duration: Integer, cost: Double, categoryDescription: String)
-    - getJobCategoryByDescription(JobCategoryDescription: String)
-    - getEmployeeFromSession()
+
 }
 
-note right of CreateJobController
-    - userEmail is obtained from the user session
-    - categoryDescription is retrieved from selected data
-end note
 
 note bottom of JobRepository
     - used for displaying the already existing jobs
@@ -78,14 +65,8 @@ Repositories -> Repositories : instance
 CreateJobUI .> CreateJobController
 CreateJobController .> Repositories : repositories
 Repositories -> "1" JobRepository
-CreateJobController ..> JobCategory
-CreateJobController ..> OrganizationRepository : organizationRepository
 CreateJobController ..> JobRepository : JobRepository
-Repositories --> "1" OrganizationRepository
-OrganizationRepository --> "*" Organization
 CreateJobController --> "1" Organization : organization
-Job "*" --> "1" JobCategory : JobCategory
-JobRepository "1" --> "*" JobCategory : JobCategory
 Organization "1" --> "*" Job : Jobs
 Job --> HRM : createdBy
 Organization --> "*" Collaborator : employs

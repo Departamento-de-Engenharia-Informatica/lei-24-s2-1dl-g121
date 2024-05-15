@@ -9,10 +9,10 @@ fontsize=25;
 fontweight=bold;
     "C3" -- "F6" [label="2", color="red", len=2, penwidth=4.0, fontname="Arial"];
     "B2" -- "C3" [label="2", color="red", len=2, penwidth=4.0, fontname="Arial"];
-    "E5" -- "F6" [label="4", color="red", len=2, penwidth=4.0, fontname="Arial"];
     "B2" -- "A1" [label="4", color="red", len=2, penwidth=4.0, fontname="Arial"];
+    "E5" -- "F6" [label="4", color="red", len=2, penwidth=4.0, fontname="Arial"];
     "A1" -- "E5" [label="5", color="black", len=2, penwidth=1.0, fontname="Arial"];
     "B2" -- "F6" [label="5", color="black", len=2, penwidth=1.0, fontname="Arial"];
-    "D4" -- "E5" [label="6", color="red", len=2, penwidth=4.0, fontname="Arial"];
-    "C3" -- "D4" [label="6", color="black", len=2, penwidth=1.0, fontname="Arial"];
+    "C3" -- "D4" [label="6", color="red", len=2, penwidth=4.0, fontname="Arial"];
+    "D4" -- "E5" [label="6", color="black", len=2, penwidth=1.0, fontname="Arial"];
 }
