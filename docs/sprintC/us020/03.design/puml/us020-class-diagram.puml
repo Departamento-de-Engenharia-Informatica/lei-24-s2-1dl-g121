@@ -10,12 +10,12 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 ' vehicle Repository !!!1
-class VehicleRepository{
+class GreenSpaceRepository{
     +getVehicleRepository
     +registerVehicle
 }
 
-class CreateVehicleUI{
+class CreateGreenSpaceUI{
 
 }
 
@@ -25,12 +25,12 @@ class Repositories {
     + getVehicleRepository()
 }
 
-class CreateVehicleController{
+class CreateGreenSpaceController{
     +getVehicle
 
 }
 
-class FM{
+class GSM{
     name
     email
     phone number
@@ -38,30 +38,19 @@ class FM{
 }
 
 
-class Vehicle{
-    Brand
-    Model
-    Type
-    Tare
-    Gross Weight
-    Current Km
-    Register Date
-    Acquisition Date
-    Maintenance/Check-up
+class GreenSpace{
+    area
+    type
 }
 
-class Check-up{
-    distance "km"
-}
 
-CreateVehicleUI --> CreateVehicleController
-Repositories --> VehicleRepository
-CreateVehicleController --> Repositories
-VehicleRepository --> Vehicle
-CreateVehicleController --> Vehicle
-FM "1" -- "*" Vehicle : registers >
-FM "1" -- "*" "Check-up" : registers >
-Vehicle "1" -- "1" "Check-up" : needs >
+
+CreateGreenSpaceUI --> CreateGreenSpaceController
+Repositories --> GreenSpaceRepository
+CreateGreenSpaceController --> Repositories
+GreenSpaceRepository --> GreenSpace
+CreateGreenSpaceController --> GreenSpace
+GSM "1" -- "*" GreenSpace : registers >
 
 
 @enduml
