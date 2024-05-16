@@ -19,13 +19,19 @@ activate Employee
     deactivate System
 
     Employee -> System : types requested data
+
     activate System
 
         System --> Employee : shows the area and requests confirmation
     deactivate System
 
+
     Employee -> System : confirms area
     activate System
+
+    System -> Employee : asks about the type of space
+
+    Employee -> System : select type
 
         System --> Employee : displays operation success
     deactivate System

@@ -15,7 +15,7 @@ hide methods
 '}
 
 
-class FM{
+class GreenSpaceManager{
     name
     email
     phone number
@@ -23,27 +23,17 @@ class FM{
 }
 
 
-class Vehicle{
-    Brand
-    Model
-    Type
-    Tare
-    Gross Weight
-    Current Km
-    Register Date
-    Acquisition Date
-    Maintenance/Check-up
-}
-
-class Check-up{
-    distance "km"
+class GreenSpace{
+    area
+    type
 }
 
 
 
-FM "1" -- "*" Vehicle : registers >
-FM "1" -- "*" "Check-up" : registers >
-Vehicle "1" -- "1" "Check-up" : needs >
+
+
+GreenSpaceManager "1" -- "*" GreenSpace : registers >
+
 
 
 @enduml
