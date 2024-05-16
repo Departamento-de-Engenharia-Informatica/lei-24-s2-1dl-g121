@@ -1,0 +1,50 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+class FleetManager
+class CheckUpListUI
+class CheckUpListController{
++ CheckUpListController(organizationRepository, vehiclesRepository)
+    '+ getTaskCategories()
+    '+ registerSkill(name)
+    '- getTaskCategoryByDescription(taskCategoryDescription)
+    - getEmployeeFromSession()
+}
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehiclesRepository()
+    + getOrganizationRepository()
+}
+class VehiclesRepository{
+    + getVehicleByPlate(plate)
+
+}
+
+FleetManager --> CheckUpListUI : requests maintenance report
+CheckUpListUI --> CheckUpListController : generateCheckUpList()
+CheckUpListController --> Repositories : getInstance()
+CheckUpListController --> Repositories : getVehiclesRepository()
+CheckUpListController --> VehiclesRepository : getVehiclesNeedMaintenance()
+
+class CheckUpList {
+    - vehiclesNeedMaintenance: List<Vehicle>
+    + addVehicle(vehicle: Vehicle)
+    + getVehiclesNeedMaintenance(): List<Vehicle>
+}
+
+class Vehicle {
+    - plate: String
+    - brand: String
+    - model: String
+    - currentKms: double
+}
+
+CheckUpListController --> CheckUpList : creates
+CheckUpList --> Vehicle : contains
+
+Repositories --> VehiclesRepository : holds
+
+@enduml

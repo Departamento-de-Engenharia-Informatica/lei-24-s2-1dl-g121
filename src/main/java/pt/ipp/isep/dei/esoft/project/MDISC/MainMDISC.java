@@ -205,7 +205,7 @@ public class MainMDISC {
 
             writer.write("graph {\n");
             writer.write("fontname=\"Arial\";\n");
-            writer.write("overlap=\"scalexy\";\n");
+            //writer.write("overlap=\"scalexy\";\n");
             writer.write("splines=\"true\";\n");
             writer.write("sep=\"0.5\";\n");
             writer.write("labelloc=\"t\";\n");
@@ -346,7 +346,7 @@ public class MainMDISC {
         }else if(option == 2){
             kruskalTest();
             Runtime commandPrompt = Runtime.getRuntime();
-            commandPrompt.exec("gnuplot resorces\\plot.gp");
+            commandPrompt.exec("gnuplot --persist C:\\Users\\Bruno\\IdeaProjects\\lei-24-s2-1dl-g121\\src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\MDISC\\resouces\\plot.gp");
         }
         sc.close();
     }

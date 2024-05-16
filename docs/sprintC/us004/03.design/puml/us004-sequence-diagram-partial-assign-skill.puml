@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+participant ":AssignSkillController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository:\n collaboratorRepository" as collaboratorRepository
+participant "skillRepository:\n skillRepository" as skillRepository
+participant "collaborator:\nCollaborator" as collaborator
+
+autonumber 36
+    group Assign Skill
+
+        -> CTRL : assignSkill(skill, collaborator)
+                activate CTRL
+
+                        CTRL -> RepositorySingleton : getInstance()
+                        activate RepositorySingleton
+
+                            RepositorySingleton --> CTRL: repositories
+                        deactivate RepositorySingleton
+
+                        CTRL -> PLAT : getCollaboratorRepository()
+                        activate PLAT
+
+                            PLAT -> CTRL : collaboratorRepository
+                        deactivate PLAT
+
+                        CTRL -> collaboratorRepository : getCollaboratorByID()
+                        activate collaboratorRepository
+
+                            collaboratorRepository --> CTRL : collaborator
+                        deactivate collaboratorRepository
+
+                        CTRL -> PLAT : getSkillRepository()
+                        activate PLAT
+
+                            PLAT --> CTRL : skillRepository
+                        deactivate PLAT
+
+                        CTRL -> skillRepository : getSkillByName()
+                        activate skillRepository
+
+                            skillRepository --> CTRL : skill
+                        deactivate skillRepository
+
+                        CTRL -> collaborator : assignSkill()
+                        activate collaborator
+
+                            collaborator --> CTRL : collaborator
+                        deactivate collaborator
+
+                        <- CTRL : collaborator
+                    deactivate CTRL
+    end
+@enduml

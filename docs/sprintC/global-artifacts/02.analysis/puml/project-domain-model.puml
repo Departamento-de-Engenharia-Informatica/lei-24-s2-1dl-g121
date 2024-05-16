@@ -1,0 +1,133 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
+'left to right direction
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+'title Domain Model
+
+'class Platform {
+'  -description
+'}
+class Organization{
+    name
+}
+
+class HRM{
+    name
+    email
+    phone number
+    identification document
+}
+
+class VFM{
+    name
+    email
+    phone number
+    identification document
+}
+
+class GSM{
+    name
+    email
+    phone number
+    identification document
+}
+
+class GSU{
+    name
+    email
+    phone number
+    identification document
+}
+
+class QAM{
+    name
+    email
+    phone number
+    identification document
+}
+
+class Skill{
+    name
+}
+
+class Job{
+    name
+}
+
+class Collaborator{
+    name
+    birth details
+    issuing details
+    address
+    phone number
+    email
+    identification document
+}
+
+class Team
+
+class Task{
+    name
+}
+
+class Vehicle{
+    Brand
+    Model
+    Type
+    Tare
+    Gross Weight
+    Current Km
+    Register Date
+    Acquisition Date
+    Maintenance/Check-up
+}
+
+class Check-up{
+    distance "km"
+}
+
+class Check-upList{
+    Vehicles needing check-up
+}
+
+
+Organization -- "*" HRM : is a part of <
+Organization -- "*" VFM : is a part of <
+Organization -- "*" GSM : is a part of <
+Organization -- "*" GSU : is a part of <
+Organization -- "*" QAM : is a part of <
+Organization -- Vehicle : owns >
+HRM "1" -- "*" Skill : registers >
+HRM "1" -- "*" Job : registers >
+HRM "1" -- "*" Collaborator : registers >
+Collaborator "1" -- "*" Skill : has a set of >
+Collaborator "1" -- "1" Job : has >
+Collaborator "*" -- "1" Team : generates >
+Team "1" -- "*" Task : is assigned a >
+VFM "1" -- "*" Vehicle : registers >
+VFM "1" -- "*" "Check-up" : registers >
+Vehicle "1" -- "0..1" "Check-up" : needs >
+Team "1" -- "0..*" Vehicle : needs >
+"Check-upList" "1" -- "*" "Check-up" :  creates <
+
+
+'Organization "1" - "0..*" Employee : has >
+'Organization "1" - "0..*" Task: owns >
+''Task "*" -- "1" Employee: created by >
+'Employee "1" -- "*" Task : creates >
+''Employee "0..1" -- "1" User: acts as >
+'Task "*" - "1" Category: cataloged as >
+'TechnicalSkill "*" - "1" ActivityArea: regarding an >
+
+'Category "*" - "*" TechnicalSkill :  : requires >
+'(Category, TechnicalSkill) . FeatureTS
+
+'Organization "1" -left "1" PostalAddress : located At >
+
+@enduml

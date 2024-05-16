@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
+'left to right direction
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+'title Domain Model
+
+'class Platform {
+'  -description
+'}
+
+
+class HRM{
+    name
+    email
+    phone number
+    identification document
+}
+
+
+class Job{
+    name
+}
+
+class Collaborator{
+    name
+    birth details
+    issuing details
+    address
+    phone number
+    email
+    identification document
+}
+
+
+
+
+HRM "1" -- "*" Job : registers >
+HRM "1" -- "*" Collaborator : registers >
+Collaborator "1" -- "1" Job : has >
+
+
+@enduml

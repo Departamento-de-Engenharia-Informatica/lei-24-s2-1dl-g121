@@ -1,0 +1,119 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+'class ApplicationSession
+'{
+'    + static getInstance()
+'    + getCurrentSession()
+'}
+'
+'class UserSession
+'{
+'    + getUserEmail()
+'}
+
+'class HRM {
+'    - name
+'    - email
+'    - position
+'    - phone
+'    - ID
+'}
+
+class Skill {
+    - String name
+
+    + Skill(skill name)
+}
+
+
+class Organization {
+    - String name
+    - String vatNumber
+    - String website
+    - String phone
+    - String email
+
+    - addSkill(skill)
+    - validateSkill(skill)
+    + anyEmployeeHasEmail(email)
+    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
+    + registerSkill(name)
+    - getEmployeeByEmail(email)
+
+'  +saveTask(task)
+}
+
+class SkillRepository {
+    + getSkillByDescription(description)
+}
+
+class OrganizationRepository {
+    + getOrganizationByEmployeeEmail(email)
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getSkillRepository()
+    + getOrganizationRepository()
+}
+
+class RegisterSkillsController {
+    + RegisterSkillsController(organizationRepository, skillRepository)
+    '+ getTaskCategories()
+    + registerSkill(name)
+    '- getTaskCategoryByDescription(taskCategoryDescription)
+    - getEmployeeFromSession()
+}
+'
+'note right of RegisterSkillsController
+'    - userEmail is obtained
+'    from the user session
+'end note
+'
+'note bottom of SkillRepository
+'    - used for displaying
+'    the skills list
+'end note
+
+class RegisterSkillsUI {
+}
+
+Repositories -> Repositories : instance
+'ApplicationSession -> ApplicationSession : instance
+
+RegisterSkillsUI .> RegisterSkillsController
+
+RegisterSkillsController .> Repositories : repositories
+
+Repositories -> "1" SkillRepository
+
+RegisterSkillsController ..> Skill
+RegisterSkillsController ..> OrganizationRepository : organizationRepository
+RegisterSkillsController ..> SkillRepository : SkillRepository
+
+Repositories --> "1" OrganizationRepository
+
+OrganizationRepository --> "*" Organization
+'ApplicationSession --> "1" UserSession : userSession
+
+RegisterSkillsController ..> "1" Organization : organization
+'RegisterSkillsController ..> ApplicationSession
+'RegisterSkillsController ..> UserSession
+' Task "*" --> "1" Skill : skill
+SkillRepository "1" --> "*" Skill : skill
+Organization "1" --> "*" Skill : skills
+'Skill --> HRM : registeredBy
+'
+'Organization --> "*" HRM : employs
+
+@enduml

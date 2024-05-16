@@ -1,0 +1,122 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+'class ApplicationSession
+'{
+'    + static getInstance()
+'    + getCurrentSession()
+'}
+
+'class UserSession
+'{
+'    + getUserEmail()
+'}
+
+class Employee {
+    - name
+    - email
+    - position
+    - phone
+}
+
+'class Task {
+'    - String reference
+'    - String description
+'    - String informalDescription
+'    - String technicalDescription
+'    - Integer duration
+'    - Double cost
+'
+'    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
+'}
+
+'class TaskCategory {
+'    - String description
+'
+'    + TaskCategory(description)
+'}
+
+class Organization {
+    - Max number of workers in the team
+    - Skills needed to be part of the team
+
+'    - addTask(task)
+'    - validateTask(task)
+'    + anyEmployeeHasEmail(email)
+'    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
+'    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
+'    - getEmployeeByEmail(email)
+
+'  +saveTask(task)
+}
+
+class CreateTeamRepository {
+}
+
+'class OrganizationRepository {
+'    + getOrganizationByEmployeeEmail(email)
+'}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getCreateTeamRepository()
+    + getOrganizationRepository()
+}
+
+class CreateTeamController {
+    + CreateTeamController(organizationRepository, CreateTeamRepository)
+}
+
+'note right of CreateTeamController
+'    - userEmail is obtained
+'    from the user session
+'    - categoryDescription
+'    is retrieved from selected data
+'end note
+
+'note bottom of CreateTeamRepository
+'    - used for displaying
+'    the category list
+'end note
+
+class CreateTeamUI {
+}
+
+Repositories -> Repositories : instance
+'ApplicationSession -> ApplicationSession : instance
+
+CreateTeamUI .> CreateTeamController
+
+CreateTeamController .> Repositories : repositories
+
+Repositories -> "1" CreateTeamRepository
+
+'CreateTeamController ..> TaskCategory
+CreateTeamController ..> OrganizationRepository : organizationRepository
+CreateTeamController ..> CreateTeamRepository : CreateTeamRepository
+
+Repositories --> "1" OrganizationRepository
+
+OrganizationRepository --> "*" Organization
+'ApplicationSession --> "1" UserSession : userSession
+
+CreateTeamController ..> "1" Organization : organization
+'CreateTeamController ..> ApplicationSession
+'CreateTeamController ..> UserSession
+'Task "*" --> "1" TaskCategory : taskCategory
+'CreateTeamRepository "1" --> "*" TaskCategory : taskCategory
+Organization "1" --> "*" Team : teams
+Team --> HRM : createdBy
+
+'Organization --> "*" Employee : employs
+
+@enduml

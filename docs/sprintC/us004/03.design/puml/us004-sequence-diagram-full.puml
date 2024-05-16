@@ -1,0 +1,135 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resource Manager" as ADM
+participant ":AssignSkillUI" as UI
+participant ":AssignSkillController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository:\n collaboratorRepository" as collaboratorRepository
+participant "skillRepository:\n skillRepository" as skillRepository
+participant "collaborator:\nCollaborator" as collaborator
+
+activate ADM
+
+        ADM -> UI : asks to assign a skill to a collaborator
+
+        activate UI
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : getCollaboratorList()
+                    activate CTRL
+
+                        CTRL -> RepositorySingleton : getInstance()
+                                        activate RepositorySingleton
+
+                                            RepositorySingleton --> CTRL: repositories
+                                        deactivate RepositorySingleton
+
+                        CTRL -> PLAT : getCollaboratorRepository()
+                        activate PLAT
+
+                            PLAT --> CTRL: collaboratorRepository
+                        deactivate PLAT
+
+                        CTRL -> collaboratorRepository : getCollaborators()
+                        activate collaboratorRepository
+
+                            collaboratorRepository --> CTRL : collaboratorList
+                        deactivate collaboratorRepository
+
+                        CTRL --> UI : collaboratorList
+                    deactivate CTRL
+
+        UI -> ADM : shows list of existing collaborators
+        deactivate UI
+
+        ADM -> UI : selects a collaborator by id
+        activate UI
+
+        UI -> ADM : asks how many skills are going to be added
+        deactivate UI
+
+        ADM -> UI : informs the number of skills
+        activate UI
+
+            UI -> CTRL : getSkillList()
+            activate CTRL
+
+
+
+                CTRL -> PLAT : getSkillRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: skillRepository
+                deactivate PLAT
+
+                CTRL -> skillRepository : getSkills()
+                activate skillRepository
+
+                    skillRepository --> CTRL : skillList
+                deactivate skillRepository
+
+                CTRL --> UI : skillList
+            deactivate CTRL
+
+            UI --> ADM : shows skills list and asks to select one
+        deactivate UI
+
+    ADM -> UI : selects one or more skills
+    activate UI
+
+        UI --> CTRL : assignSkill(skill, collaborator)
+        activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getCollaboratorRepository()
+                activate PLAT
+
+                    PLAT -> CTRL : collaboratorRepository
+                deactivate PLAT
+
+                CTRL -> collaboratorRepository : getCollaboratorByID()
+                activate collaboratorRepository
+
+                    collaboratorRepository --> CTRL : collaborator
+                deactivate collaboratorRepository
+
+                CTRL -> PLAT : getSkillRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : skillRepository
+                deactivate PLAT
+
+                CTRL -> skillRepository : getSkillByName()
+                activate skillRepository
+
+                    skillRepository --> CTRL : skill
+                deactivate skillRepository
+
+                CTRL -> collaborator : assignSkill()
+                activate collaborator
+
+                    collaborator --> CTRL : collaborator
+                deactivate collaborator
+
+                CTRL --> UI : collaborator
+            deactivate CTRL
+
+            UI --> ADM: displays operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml

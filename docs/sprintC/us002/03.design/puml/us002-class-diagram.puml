@@ -1,0 +1,73 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+'class Employee {
+'    - name: String
+'    - email: String
+'    - position: String
+'    - phone: String
+'}
+
+class Job {
+    + Job name
+    + number of skills needed
+    + name of the skills
+}
+
+'class JobCategory {
+'    - description: String
+'    + JobCategory(description: String)
+'}
+
+class Organization {
+    - name: String
+    - vatNumber: String
+    - website: String
+    - phone: String
+    - email: String
+    + Organization(name: String, vatNumber: String, website: String, phone: String, email: String)
+    - addJob(Job: Job)
+    - validateJob(Job: Job)
+    + anyEmployeeHasEmail(email: String)
+    - getEmployeeByEmail(email: String)
+}
+
+class JobRepository {
+
+}
+
+
+
+class Repositories {
+    - Repositories()
+    + getInstance(): Repositories
+    + getJobRepository(): JobRepository
+    + getOrganizationRepository(): OrganizationRepository
+}
+
+class CreateJobController {
+    + CreateJobController(organizationRepository: OrganizationRepository, JobRepository: JobRepository)
+
+}
+
+
+note bottom of JobRepository
+    - used for displaying the already existing jobs
+end note
+
+class CreateJobUI {
+}
+
+Repositories -> Repositories : instance
+CreateJobUI .> CreateJobController
+CreateJobController .> Repositories : repositories
+Repositories -> "1" JobRepository
+CreateJobController ..> JobRepository : JobRepository
+CreateJobController --> "1" Organization : organization
+Organization "1" --> "*" Job : Jobs
+Job --> HRM : createdBy
+Organization --> "*" Collaborator : employs
+@enduml

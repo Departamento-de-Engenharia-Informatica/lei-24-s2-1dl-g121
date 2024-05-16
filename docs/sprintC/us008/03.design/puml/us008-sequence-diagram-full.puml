@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Fleet Manager" as ADM
+participant ":CheckUpListUI" as UI
+participant ":CheckUpListController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehiclesRepository:\nVehiclesRepository" as VehiclesRepository
+'participant ":ApplicationSession" as _APP
+'participant "appSession\n:ApplicationSession" as APP
+'participant "currentSession\n:UserSession" as SESSAO
+'participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
+'participant "organization\n:Organization" as ORG
+'participant "task\n:Task" as TAREFA
+
+ activate ADM
+
+        ADM -> UI : requests maintenance report for vehicles
+        activate UI
+
+            UI --> ADM : acknowledges request
+        deactivate UI
+
+        ADM -> CTRL : generateMaintenanceReport()
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getVehiclesRepository()
+            activate PLAT
+
+                PLAT --> CTRL: VehiclesRepository
+            deactivate PLAT
+
+            CTRL -> VehiclesRepository : getVehiclesNeedMaintenance()
+            activate VehiclesRepository
+
+                VehiclesRepository --> CTRL : VehiclesNeedMaintenance
+            deactivate VehiclesRepository
+
+            CTRL --> UI : maintenanceReport
+        deactivate CTRL
+
+        UI --> ADM : presents maintenance report and operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml

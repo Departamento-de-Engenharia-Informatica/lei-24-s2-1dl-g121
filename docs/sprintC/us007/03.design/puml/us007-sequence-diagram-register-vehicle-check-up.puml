@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+
+'hide footbox
+participant ":RegisterVehicleCheckUpController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleCheckUp:\nVehicleCheckUp" as VehicleCheckUp
+
+autonumber 14
+-> CTRL : registerVehicleCheckUp(licensePlate, currentKM, checkUpDate)
+activate CTRL
+group register vehicle check up
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getVehicleCheckUpRepository()
+activate PLAT
+PLAT -> CTRL: VehicleCheckUpRepository
+deactivate PLAT
+
+CTRL -> VehicleCheckUpRepository : registerVehicleCheckUp(licensePlate, currentKM, checkUpDate)
+activate VehicleCheckUpRepository
+VehicleCheckUpRepository -> VehicleCheckUpRepository : validateVehicleCheckUp
+VehicleCheckUpRepository -> VehicleCheckUp: addVehicleCheckUp(licensePlate, currentKM, checkUpDate)
+activate VehicleCheckUp
+VehicleCheckUp --> VehicleCheckUpRepository : vehicleCheckUp
+deactivate VehicleCheckUp
+VehicleCheckUpRepository ->CTRL: checkUpAddedConfirmationMessage
+deactivate VehicleCheckUpRepository
+end
+<- CTRL : checkUpAddedConfirmationMessage
+
+@enduml

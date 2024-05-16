@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "organization\n:Organization" as ORG
+participant "skill\n:Skill" as TAREFA
+
+autonumber 32
+-> ORG: registerSkill(name)
+
+autonumber 33
+activate ORG
+    group Register Skill
+
+        ORG -> TAREFA**: register(skill name)
+        ORG -> ORG: addSkill (skill)
+
+        activate ORG
+            ORG -> ORG: validateSkill(skill)
+
+    end
+
+    autonumber 36
+    <-- ORG : skill
+deactivate ORG
+
+
+@enduml
