@@ -6,16 +6,16 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Human Resources Manager" as ADM
-participant ":CreateVehicleUI" as UI
-participant ":CreateVehicleController" as CTRL
+actor "Green Space Manager " as ADM
+participant ":CreateGreenSpaceUI" as UI
+participant ":CreateGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "VehicleRepository:\nVehicleRepository" as TaskCategoryRepository
+participant "GreenSpaceRepository:\nGreenSpaceRepository" as TaskCategoryRepository
 
 
 activate ADM
 
-        ADM -> UI : asks to register a vehicle
+        ADM -> UI : asks to register a Green Space
 
         activate UI
 
@@ -23,7 +23,7 @@ activate ADM
             'create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getVehicle
+            UI -> CTRL : getGreenSpace
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -32,34 +32,43 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> TaskCategoryRepository : getVehicleRepository()
+                CTRL -> TaskCategoryRepository : getGreenSpaceRepository()
                 activate TaskCategoryRepository
 
-                    TaskCategoryRepository --> CTRL: vehicleRepository
+                    TaskCategoryRepository --> CTRL: greenSpaceRepository
                 deactivate TaskCategoryRepository
 
 
 
-                CTRL --> UI : vehicleRegister
+                CTRL --> UI : GreenSpaceRegister
             deactivate CTRL
 
-            UI --> ADM : requests data (Brand, Model, Type, Tare, Gross Weight ,\n Current Km, Register Date, Acquisition Date,\n Maintenance/Check- up Frequency (in Kms))
+            UI --> ADM : requests for the respective area of green space
         deactivate UI
 
-    ADM -> UI : types requested data
+    ADM -> UI : types requested area
     activate UI
 
-        UI --> ADM : shows all data and requests confirmation
+        UI --> ADM : asks about the type of space
     deactivate UI
 
-    ADM -> UI : confirms data
+    ADM -> UI : select the type
     activate UI
 
-    UI -> TaskCategoryRepository : registerVehicle
+    UI -> ADM :shows the area and type and requests confirmation
+    deactivate UI
+
+
+    ADM ->UI : confirms the area and type
+    activate UI
+
+    UI -> TaskCategoryRepository : registerGreenSpace
+
+
 
         activate TaskCategoryRepository
 
-        TaskCategoryRepository --> UI : Vehicle
+        TaskCategoryRepository --> UI : GreenSpace
 
 
         deactivate  TaskCategoryRepository

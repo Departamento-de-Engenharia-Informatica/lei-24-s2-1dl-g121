@@ -16,22 +16,18 @@ activate Employee
     activate System
 
         System --> Employee : requests for the respective area of green space
-    deactivate System
-
-    Employee -> System : types requested data
-
-    activate System
-
-        System --> Employee : shows the area and requests confirmation
-    deactivate System
 
 
-    Employee -> System : confirms area
-    activate System
+    Employee -> System : types requested area
 
     System -> Employee : asks about the type of space
 
     Employee -> System : select type
+
+        System --> Employee : shows the area and type and requests confirmation
+
+    Employee -> System : confirms area
+
 
         System --> Employee : displays operation success
     deactivate System
