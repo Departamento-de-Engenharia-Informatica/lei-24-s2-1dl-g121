@@ -13,8 +13,6 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
-
 public class MainApp extends Application {
 
     @Override
@@ -51,7 +49,7 @@ public class MainApp extends Application {
             });
             stage.show();
         } catch (IOException ex) {
-            criarAlertaErro(ex).show();
+            createErrorAlert(ex).show();
         }
     }
 
@@ -67,13 +65,13 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    private Alert criarAlertaErro(Exception ex) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
+    private Alert createErrorAlert(Exception ex) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
 
-        alerta.setTitle("Application");
-        alerta.setHeaderText("Problems starting the application.");
-        alerta.setContentText(ex.getMessage());
+        alert.setTitle("Application");
+        alert.setHeaderText("Problems starting the application.");
+        alert.setContentText(ex.getMessage());
 
-        return alerta;
+        return alert;
     }
 }
