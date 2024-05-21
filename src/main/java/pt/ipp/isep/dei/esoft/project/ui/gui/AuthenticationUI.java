@@ -1,6 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.AdminUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.HRMUI;
@@ -9,35 +18,50 @@ import pt.ipp.isep.dei.esoft.project.ui.console.menu.VFMUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
 public class AuthenticationUI implements Initializable {
-    private final AuthenticationController ctrl;
+    private AuthenticationController ctrl;
+    private Stage stage;
+
+    @FXML
+    public Button loginBtn;
+
+    @FXML
+    public TextField emailTxt;
+
+    @FXML
+    public PasswordField passwordTxt;
+
+    @FXML
+    public Label messageLbl;
+
 
     public AuthenticationUI() {
         ctrl = new AuthenticationController();
     }
 
-    public void run() {
-        boolean success = doLogin();
-
-        if (success) {
-            List<UserRoleDTO> roles = this.ctrl.getUserRoles();
-            if ((roles == null) || (roles.isEmpty())) {
-                System.out.println("No role assigned to user.");
-            } else {
-                UserRoleDTO role = selectsRole(roles);
-                if (!Objects.isNull(role)) {
-                    List<MenuItem> rolesUI = getMenuItemForRoles();
-                    this.redirectToRoleUI(rolesUI, role);
-                } else {
-                    System.out.println("No role selected.");
-                }
-            }
-        }
-        this.logout();
-    }
+//    public void run() {
+//        boolean success = doLogin();
+//
+//        if (success) {
+//            List<UserRoleDTO> roles = this.ctrl.getUserRoles();
+//            if ((roles == null) || (roles.isEmpty())) {
+//                System.out.println("No role assigned to user.");
+//            } else {
+//                UserRoleDTO role = selectsRole(roles);
+//                if (!Objects.isNull(role)) {
+//                    List<MenuItem> rolesUI = getMenuItemForRoles();
+//                    this.redirectToRoleUI(rolesUI, role);
+//                } else {
+//                    System.out.println("No role selected.");
+//                }
+//            }
+//        }
+//        this.logout();
+//    }
 
     private List<MenuItem> getMenuItemForRoles() {
         List<MenuItem> rolesUI = new ArrayList<>();
@@ -49,24 +73,42 @@ public class AuthenticationUI implements Initializable {
         return rolesUI;
     }
 
-    private boolean doLogin() {
-        System.out.println("\n\n--- LOGIN UI ---------------------------");
-
-        int maxAttempts = 3;
+    @FXML
+    public void doLogin() {
         boolean success = false;
-        do {
-            maxAttempts--;
-            String id = Utils.readLineFromConsole("Enter UserId/Email: ");
+        messageLbl.setText("");
 
-            String pwd = Utils.readLineFromConsole("Enter Password: ");
+            String id = emailTxt.getText();
+
+            String pwd = passwordTxt.getText();
 
             success = ctrl.doLogin(id, pwd);
             if (!success) {
-                System.out.println("Invalid UserId and/or Password. \n You have  " + maxAttempts + " more attempt(s).");
+                messageLbl.setText("Invalid UserId and/or Password.");
+                emailTxt.clear();
+                passwordTxt.clear();
             }
+            else{
+                //initialize RoleUI
+                if(Objects.equals(id, "admin@this.app") && Objects.equals(pwd, "admin")){
+                    try {
+                        // Load the AuthenticationUI FXML file
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+                        Parent root = loader.load();
 
-        } while (!success && maxAttempts > 0);
-        return success;
+                        // Create a new scene with the loaded parent root
+                        Scene scene = new Scene(root);
+
+                        // Get the current stage from one of your components (getScene in this case)
+                        Stage stage = (Stage) emailTxt.getScene().getWindow();
+
+                        // Set the new scene to the stage
+                        stage.setScene(scene);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
     }
 
     private void logout() {
@@ -98,6 +140,6 @@ public class AuthenticationUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //empty
     }
 }

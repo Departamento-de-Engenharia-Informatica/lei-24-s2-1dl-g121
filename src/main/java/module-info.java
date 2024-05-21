@@ -1,4 +1,4 @@
-module project.template {
+module pt.ipp.isep.dei.esoft.project {
     requires AuthLib;
     requires gs.core;
     requires java.datatransfer;

@@ -14,7 +14,6 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 
 public class MainApp extends Application {
-
     @Override
     public void start(Stage stage) {
         try {
@@ -49,7 +48,7 @@ public class MainApp extends Application {
             });
             stage.show();
         } catch (IOException ex) {
-            createErrorAlert(ex).show();
+           createErrorAlert(ex).show();
         }
     }
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AuthenticationUI">
+   <children>
+      <TextField fx:id="emailTxt" layoutX="207.0" layoutY="122.0" promptText="email" />
+      <PasswordField fx:id="passwordTxt" layoutX="207.0" layoutY="185.0" promptText="password" />
+      <Button fx:id="loginBtn" layoutX="207.0" layoutY="292.0" mnemonicParsing="false" onAction="#doLogin" text="Login" />
+      <Label fx:id="messageLbl" alignment="CENTER" layoutX="2.0" layoutY="216.0" prefHeight="53.0" prefWidth="600.0" textAlignment="CENTER" textFill="RED" />
+   </children>
+</AnchorPane>
