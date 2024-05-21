@@ -24,7 +24,6 @@ import java.util.*;
 
 public class AuthenticationUI implements Initializable {
     private AuthenticationController ctrl;
-    private Stage stage;
 
     @FXML
     public Button loginBtn;
