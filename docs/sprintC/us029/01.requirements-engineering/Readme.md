@@ -1,54 +1,53 @@
-# US006 - Register a vehicle.
+# US029 - Record the completion of a task.
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a VFM, I wish to register a vehicle including Brand, Model,
-Type, Tare Weight, Gross Weight, Current Km, Register Date, Acqui-
-sition Date, and Maintenance/Check-up Frequency (in km).
+As a Collaborator, I want to record the completion of a task.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks.
+>	In the daily
+management, the GSM uses two essential tools: the Agenda and the Task
+List (aka To-Do List). The To-Do List comprises all the tasks required to
+be done in order to assure the proper functioning of the parks.
 
 
 **From the client clarifications:**
 
-> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
+> **Question:** The collaborator can see what type of entrys? Like what status can he filter ? Can he see canceled Entry's?
 >
-> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
+> **Answer:** The ones assigned to him. He can filter by the different values the status of the status, like planned, executed, canceled ...
 
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform ther user of the mistake and give him the option to add another vehicle?
+> **Question:** Does the task associated with the Agenda entry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
 >
-> **Answer:** again, duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates.
+> **Answer:** Yes. I suppose when a task goes to the Agenda, it leaves the To-Do list but maybe a different flow could be considered.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** VFM cant duplicate cars.
-* **AC2:** Vehicles must be identified by the plate id.
-* **AC3:** Show car data for confirmation.
+* There are no acceptance criteria for this user story.
 
 ### 1.4. Found out Dependencies
 
-* This user story has no dependencies
+* This user story as a dependency on the US021 as there must be at list one task in the 
+To-Do List to be recorded as completed.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
+    * None
 	
 * Selected data:
- 
+    * User selects the task he wants to be marked as completed
 
 **Output Data:**
 
-* Confirmation of car data
-* Car registration
+* (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -56,7 +55,7 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us029-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 

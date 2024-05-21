@@ -36,8 +36,8 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us029-sequence-diagram-full.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us029-class-diagram.svg)

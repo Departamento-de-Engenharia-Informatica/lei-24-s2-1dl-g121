@@ -343,7 +343,7 @@ public class MainMDISC {
         }else if(option == 2){
             kruskalTest();
             Runtime commandPrompt = Runtime.getRuntime();
-            commandPrompt.exec("gnuplot --persist C:\\Users\\Bruno\\IdeaProjects\\lei-24-s2-1dl-g121\\src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\MDISC\\resouces\\plot.gp");
+            commandPrompt.exec("gnuplot --persist C:\\Users\\salva\\OneDrive\\Documentos\\GitHub\\lei-24-s2-1dl-g121\\src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\MDISC\\resouces\\plot.gp");
         }
         sc.close();
     }
