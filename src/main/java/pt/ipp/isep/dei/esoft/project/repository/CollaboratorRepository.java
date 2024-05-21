@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 
 import java.util.ArrayList;
@@ -82,4 +83,26 @@ public class CollaboratorRepository {
         }
         return null;
     }
+
+    public List<Collaborator> getCollaboratorsBySkills(List<Skill> skillsNeeded) {
+        List<Collaborator> collaboratorsWithSkills = new ArrayList<>();
+
+        // Iterate through all collaborators
+        for (Collaborator collaborator : collaborators) {
+            // Check if the collaborator possesses all the required skills
+            if (collaborator.hasAllSkills(skillsNeeded)) {
+                collaboratorsWithSkills.add(collaborator);
+            }
+        }
+
+        return collaboratorsWithSkills;
+    }
+//    public Collaborator getCollaboratorByName(Collaborator collaborator) {
+//        for (Collaborator collaborator1 : collaborators) {
+//            if (collaborator.getName().equalsIgnoreCase(String.valueOf(collaborator1))) {
+//                return collaborator;
+//            }
+//        }
+//        return null;
+//    }
 }

@@ -2,14 +2,13 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateJobController;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateTeamController;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 public class CreateTeamUI implements Runnable{
 
@@ -17,6 +16,8 @@ public class CreateTeamUI implements Runnable{
     private int maxSize;
     private int numSkills;
     private ArrayList<Skill> requiredSkills;
+
+    private ArrayList<Collaborator> team;
 
     static Scanner sc = new Scanner(System.in);
 
@@ -31,26 +32,12 @@ public class CreateTeamUI implements Runnable{
     public void run() {
         System.out.println("\n\n--- Create Team ------------------------");
 
-        //taskCategoryDescription = displayAndSelectTaskCategory();
 
         requestData();
 
         submitData();
     }
 
-    /*
-     String job = Utils.readLineFromConsole()"\"Hi! %nWhat's the name of the job you will register today?");
-        int numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
-        String[] skills = new String[numberOfSkills];
-        skillsNeeded(skills);
-     */
-
-//    private static void skillsNeeded(String[] skills) {
-//        for (int i = 0; i < skills.length; i++) {
-//            System.out.println("Type the skill:");
-//            skills[i] = sc.next();
-//        }
-//    }
 
     private void submitData() {
         Optional<Team> team = getController().createTeam(maxSize, requiredSkills);
@@ -73,18 +60,13 @@ public class CreateTeamUI implements Runnable{
         //Request the Task Informal Description from the console
         requiredSkills = requestRequiredSkills(numSkills);
 
+        team = generateTeam(requiredSkills, maxSize);
+
+        System.out.println(team);
+
+
     }
 
-    private ArrayList<Skill> requestRequiredSkills(int numSkills) {
-        ArrayList<Skill> skills = new ArrayList<>();
-        for (int i = 0; i < numSkills; i++) {
-            System.out.println("Type the skill:");
-            String skillName = sc.next();
-            Skill skill = new Skill(skillName);
-            skills.add(skill);
-        }
-        return skills;
-    }
 
     private int requestNumSkills() {
         int numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
@@ -94,5 +76,54 @@ public class CreateTeamUI implements Runnable{
     private int requestSize() {
         int maxSize = Integer.parseInt(Utils.readLineFromConsole("What's the max size of your team?"));
         return maxSize;
+    }
+
+
+    public ArrayList<Collaborator> generateTeam(ArrayList<Skill> requiredSkills, int maxSize) {
+            ArrayList<Collaborator> team = new ArrayList<>();
+
+            List<Collaborator> availableCollaborators = controller.getCollaboratorsBySkills(requiredSkills);
+
+            Collections.shuffle(availableCollaborators);
+
+            for (Collaborator collaborator : availableCollaborators) {
+                if (team.size() > maxSize) {
+                    break;
+                }
+                team.add(collaborator);
+            }
+
+            return team;
+        }
+
+
+    private ArrayList<Skill> requestRequiredSkills(int numSkills) {
+        presentSkillList();
+        ArrayList<Skill> skillsNeeded = new ArrayList<>();
+        int i = 0;
+        while (i < numSkills) {
+            String skillName;
+            do {
+                skillName = Utils.readLineFromConsole("Enter the Skill's name:");
+                if (controller.verifySkillByName(skillName)) {
+                    System.out.println("Skill not found!");
+                    System.out.println("Please enter a valid Skill name.");
+                } else {
+                    Skill skill = new Skill(skillName);
+                    skillsNeeded.add(skill);
+                }
+            } while (controller.verifySkillByName(skillName));
+            i++;
+        }
+        return skillsNeeded;
+    }
+
+
+    public void presentSkillList(){
+        System.out.println("Skills:");
+        List<Skill> skillList = controller.getSkillList();
+        for (Skill skill : skillList){
+            System.out.println(skill.getName());
+        }
     }
 }

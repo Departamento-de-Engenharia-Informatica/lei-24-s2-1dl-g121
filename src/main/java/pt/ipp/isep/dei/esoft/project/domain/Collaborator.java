@@ -133,4 +133,20 @@ public class Collaborator {
     public List<Skill> getSkillList() {
         return this.skillList;
     }
+
+    public boolean hasAllSkills(List<Skill> requiredSkills) {
+        for (Skill requiredSkill : requiredSkills) {
+            boolean hasSkill = false;
+            for (Skill skill : skillList) {
+                if (skill.getName().equals(requiredSkill.getName())) {
+                    hasSkill = true;
+                    break;
+                }
+            }
+            if (!hasSkill) {
+                return false; // If the collaborator doesn't have a required skill, return false
+            }
+        }
+        return true; // If the collaborator has all required skills, return true
+    }
 }
