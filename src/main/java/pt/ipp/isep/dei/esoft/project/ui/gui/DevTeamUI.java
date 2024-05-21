@@ -1,21 +1,49 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
- * @author Paulo Maio pam@isep.ipp.pt
+ * @author Bruno Teixeira 1231091@isep.ipp.pt
  */
-public class DevTeamUI implements Runnable {
+public class DevTeamUI implements Initializable {
 
-    public DevTeamUI() {
+    @FXML
+    public Button closeBtn;
 
+    @FXML
+    public void closeDevMenu() {
+        try {
+            // Load the AuthenticationUI FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenuUI.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene with the loaded parent root
+            Scene scene = new Scene(root);
+
+            // Get the current stage from one of your components (closeBtn in this case)
+            Stage stage = (Stage) closeBtn.getScene().getWindow();
+
+            // Set the new scene to the stage
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void run() {
-        System.out.println("\n");
-        System.out.println("--- DEVELOPMENT TEAM -------------------");
-        System.out.println("  Salvador Machado - 1230561@isep.ipp.pt");
-        System.out.println("  Diogo Garrett - 1230556@isep.ipp.pt");
-        System.out.println("  Bruno Teixeira - 1231091@isep.ipp.pt");
-        System.out.println("  Pedro Lemos - 1221009@isep.ipp.pt");
-        System.out.println("\n");
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // empty
     }
 }

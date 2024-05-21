@@ -30,6 +30,9 @@ public class AuthenticationUI implements Initializable {
     public Button loginBtn;
 
     @FXML
+    public Button closeBtn;
+
+    @FXML
     public TextField emailTxt;
 
     @FXML
@@ -42,26 +45,6 @@ public class AuthenticationUI implements Initializable {
     public AuthenticationUI() {
         ctrl = new AuthenticationController();
     }
-
-//    public void run() {
-//        boolean success = doLogin();
-//
-//        if (success) {
-//            List<UserRoleDTO> roles = this.ctrl.getUserRoles();
-//            if ((roles == null) || (roles.isEmpty())) {
-//                System.out.println("No role assigned to user.");
-//            } else {
-//                UserRoleDTO role = selectsRole(roles);
-//                if (!Objects.isNull(role)) {
-//                    List<MenuItem> rolesUI = getMenuItemForRoles();
-//                    this.redirectToRoleUI(rolesUI, role);
-//                } else {
-//                    System.out.println("No role selected.");
-//                }
-//            }
-//        }
-//        this.logout();
-//    }
 
     private List<MenuItem> getMenuItemForRoles() {
         List<MenuItem> rolesUI = new ArrayList<>();
@@ -89,7 +72,7 @@ public class AuthenticationUI implements Initializable {
                 passwordTxt.clear();
             }
             else{
-                //initialize RoleUI
+                //sadly, we had to do this
                 if(Objects.equals(id, "admin@this.app") && Objects.equals(pwd, "admin")){
                     try {
                         // Load the AuthenticationUI FXML file
@@ -111,30 +94,23 @@ public class AuthenticationUI implements Initializable {
             }
     }
 
-    private void logout() {
-        ctrl.doLogout();
-    }
+    @FXML
+    public void closeLoginMenu() {
+        try {
+            // Load the AuthenticationUI FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenuUI.fxml"));
+            Parent root = loader.load();
 
-    private void redirectToRoleUI(List<MenuItem> rolesUI, UserRoleDTO role) {
-        boolean found = false;
-        Iterator<MenuItem> it = rolesUI.iterator();
-        while (it.hasNext() && !found) {
-            MenuItem item = it.next();
-            found = item.hasDescription(role.getDescription());
-            if (found) {
-                item.run();
-            }
-        }
-        if (!found) {
-            System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
-        }
-    }
+            // Create a new scene with the loaded parent root
+            Scene scene = new Scene(root);
 
-    private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
-        if (roles.size() == 1) {
-            return roles.get(0);
-        } else {
-            return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
+            // Get the current stage from one of your components (closeBtn in this case)
+            Stage stage = (Stage) emailTxt.getScene().getWindow();
+
+            // Set the new scene to the stage
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
