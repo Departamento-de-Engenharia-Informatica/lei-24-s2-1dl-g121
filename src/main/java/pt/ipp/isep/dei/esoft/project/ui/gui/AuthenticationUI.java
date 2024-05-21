@@ -46,15 +46,13 @@ public class AuthenticationUI implements Initializable {
         ctrl = new AuthenticationController();
     }
 
-    private List<MenuItem> getMenuItemForRoles() {
-        List<MenuItem> rolesUI = new ArrayList<>();
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HRMUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VFMUI()));
-
-        //TODO: Complete with other user roles and related RoleUI
-        return rolesUI;
-    }
+//    private List<MenuItem> getMenuItemForRoles() {
+//        List<MenuItem> rolesUI = new ArrayList<>();
+//        rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
+//        rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HRMUI()));
+//        rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VFMUI()));
+//        return rolesUI;
+//    }
 
     @FXML
     public void doLogin() {
@@ -90,6 +88,11 @@ public class AuthenticationUI implements Initializable {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
+                else{
+                    messageLbl.setText("No menu available for this user's role. :(");
+                    emailTxt.clear();
+                    passwordTxt.clear();
                 }
             }
     }
