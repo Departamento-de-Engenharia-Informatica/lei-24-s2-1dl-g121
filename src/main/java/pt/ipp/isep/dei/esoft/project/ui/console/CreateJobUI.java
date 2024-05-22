@@ -85,12 +85,12 @@ public class CreateJobUI implements Runnable{
     }
 
     private int requestNumSkills() {
-        int numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
+        int numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job? ");
         return numberOfSkills;
     }
 
     private String requestName() {
-        String jobName = Utils.readLineFromConsole("What's the name of the job you will register today?");
+        String jobName = Utils.readLineFromConsole("What's the name of the job you will register today? ");
         return jobName;
     }
 }
