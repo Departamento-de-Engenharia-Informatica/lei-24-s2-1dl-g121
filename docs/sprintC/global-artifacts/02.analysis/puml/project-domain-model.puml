@@ -74,6 +74,9 @@ class Team
 
 class Task{
     name
+    urgency
+    expected duration
+    status
 }
 
 class Vehicle{
@@ -96,6 +99,19 @@ class Check-upList{
     Vehicles needing check-up
 }
 
+class ToDoList{
+    task description
+    urgency
+    expected duration
+}
+
+class Agenda{
+    task description
+    team
+    vehicles/equipment
+    expected duration
+    status
+}
 
 Organization -- "*" HRM : is a part of <
 Organization -- "*" VFM : is a part of <
@@ -115,19 +131,10 @@ VFM "1" -- "*" "Check-up" : registers >
 Vehicle "1" -- "0..1" "Check-up" : needs >
 Team "1" -- "0..*" Vehicle : needs >
 "Check-upList" "1" -- "*" "Check-up" :  creates <
-
-
-'Organization "1" - "0..*" Employee : has >
-'Organization "1" - "0..*" Task: owns >
-''Task "*" -- "1" Employee: created by >
-'Employee "1" -- "*" Task : creates >
-''Employee "0..1" -- "1" User: acts as >
-'Task "*" - "1" Category: cataloged as >
-'TechnicalSkill "*" - "1" ActivityArea: regarding an >
-
-'Category "*" - "*" TechnicalSkill :  : requires >
-'(Category, TechnicalSkill) . FeatureTS
-
-'Organization "1" -left "1" PostalAddress : located At >
+GSM "1" -- "*" ToDoList : has >
+ToDoList "1" -- "*" Task : includes >
+Agenda "1" -- "*" Task : schedules >
+Agenda "1" -- "*" Team : assigns >
+Agenda "1" -- "*" Vehicle : uses >
 
 @enduml
