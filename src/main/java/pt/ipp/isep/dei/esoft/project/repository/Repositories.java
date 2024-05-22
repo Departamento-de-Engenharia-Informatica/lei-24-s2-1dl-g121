@@ -10,6 +10,7 @@ public class Repositories {
     private final CollaboratorRepository collaboratorRepository;
     private final JobRepository jobRepository;
     private final CreateTeamRepository createTeamRepository;
+    private final GreenSpacesRepository greenSpacesRepository;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
@@ -19,6 +20,7 @@ public class Repositories {
         collaboratorRepository = new CollaboratorRepository();
         jobRepository = new JobRepository();
         createTeamRepository = new CreateTeamRepository();
+        greenSpacesRepository = new GreenSpacesRepository();
     }
 
     public static Repositories getInstance() {
@@ -51,4 +53,6 @@ public class Repositories {
     public JobRepository getJobRepository() {return jobRepository;}
 
     public CreateTeamRepository getCreateTeamRepository() {return createTeamRepository;}
+
+    public GreenSpacesRepository getGreenSpacesRepository() {return greenSpacesRepository;}
 }

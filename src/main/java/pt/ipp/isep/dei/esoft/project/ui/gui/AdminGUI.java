@@ -35,6 +35,7 @@ public class AdminGUI implements Initializable {
         options.add(new MenuItem("Assign a Skill to a Collaborator", new AssignSkillUI()));
         options.add(new MenuItem("Create a team", new CreateTeamUI()));
 
+
         chooseUserStoryBox.getItems().addAll(options);
     }
 }
