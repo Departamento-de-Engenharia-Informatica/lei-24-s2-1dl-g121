@@ -43,12 +43,12 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label text="123xxxx" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="1230556" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label text="123xxxx" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="1230561" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
