@@ -85,12 +85,12 @@ class OrganizationTest {
         Organization organization = new Organization("123456789");
 
         Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategory taskCategory = new TaskCategory("Task Category Description");
+        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
 
-        Task expected = new Task("Task Description", "Task Category Description", "informal description",
+        TaskModelo expected = new TaskModelo("Task Description", "Task Category Description", "informal description",
                 "technical description", 1, 1d, taskCategory, employee);
 
-        Optional<Task> task =
+        Optional<TaskModelo> task =
                 organization.createTask("Task Description", "Task Category Description", "informal description",
                         "technical description", 1, 1d, taskCategory, employee);
 
@@ -104,14 +104,14 @@ class OrganizationTest {
         //Arrange
         Organization organization = new Organization("123456789");
         Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategory taskCategory = new TaskCategory("Task Category Description");
+        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
         //Add the first task
-        Optional<Task> originalTask =
+        Optional<TaskModelo> originalTask =
                 organization.createTask("Task Description", "Task Category Description", "informal description",
                         "technical description", 1, 1d, taskCategory, employee);
 
         //Act
-        Optional<Task> duplicateTask =
+        Optional<TaskModelo> duplicateTask =
                 organization.createTask("Task Description", "Task Category Description", "informal description",
                         "technical description", 1, 1d, taskCategory, employee);
 
@@ -174,7 +174,7 @@ class OrganizationTest {
         Employee employee = new Employee("john.doe@this.company.com");
         organization.addEmployee(employee);
         organization.createTask("Task Description", "Task Category Description", "informal description",
-                "technical description", 1, 1d, new TaskCategory("Task Category Description"), employee);
+                "technical description", 1, 1d, new TaskCategoryModelo("Task Category Description"), employee);
 
         Organization clone = organization.clone();
         assertEquals(organization, clone);

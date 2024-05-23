@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Task;
-import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
+import pt.ipp.isep.dei.esoft.project.domain.TaskCategoryModelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Optional;
 
 public class TaskCategoryRepository {
 
-    private final List<TaskCategory> taskCategories;
+    private final List<TaskCategoryModelo> taskCategories;
     public TaskCategoryRepository() {
         taskCategories = new ArrayList<>();
     }
@@ -21,9 +20,9 @@ public class TaskCategoryRepository {
      * @return The task category.
      * @throws IllegalArgumentException if the task category does not exist, which should never happen.
      */
-    public TaskCategory getTaskCategoryByDescription(String taskCategoryDescription) {
-        TaskCategory newTaskCategory = new TaskCategory(taskCategoryDescription);
-        TaskCategory taskCategory = null;
+    public TaskCategoryModelo getTaskCategoryByDescription(String taskCategoryDescription) {
+        TaskCategoryModelo newTaskCategory = new TaskCategoryModelo(taskCategoryDescription);
+        TaskCategoryModelo taskCategory = null;
         if (taskCategories.contains(newTaskCategory)) {
             taskCategory = taskCategories.get(taskCategories.indexOf(newTaskCategory));
         }
@@ -34,9 +33,9 @@ public class TaskCategoryRepository {
         return taskCategory;
     }
 
-    public Optional<TaskCategory> add(TaskCategory taskCategory) {
+    public Optional<TaskCategoryModelo> add(TaskCategoryModelo taskCategory) {
 
-        Optional<TaskCategory> newTaskCategory = Optional.empty();
+        Optional<TaskCategoryModelo> newTaskCategory = Optional.empty();
         boolean operationSuccess = false;
 
         if (validateTaskCategory(taskCategory)) {
@@ -51,7 +50,7 @@ public class TaskCategoryRepository {
         return newTaskCategory;
     }
 
-    private boolean validateTaskCategory(TaskCategory taskCategory) {
+    private boolean validateTaskCategory(TaskCategoryModelo taskCategory) {
         boolean isValid = !taskCategories.contains(taskCategory);
         return isValid;
     }
@@ -61,7 +60,7 @@ public class TaskCategoryRepository {
      *
      * @return The list of task categories.
      */
-    public List<TaskCategory> getTaskCategories() {
+    public List<TaskCategoryModelo> getTaskCategories() {
         //This is a defensive copy, so that the repository cannot be modified from the outside.
         return List.copyOf(taskCategories);
     }

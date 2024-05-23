@@ -2,11 +2,11 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
-public class TaskCategory {
+public class TaskCategoryModelo {
 
     private final String description;
 
-    public TaskCategory(String description) {
+    public TaskCategoryModelo(String description) {
         this.description = description;
     }
 
@@ -15,10 +15,10 @@ public class TaskCategory {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof TaskCategory)) {
+        if (!(o instanceof TaskCategoryModelo)) {
             return false;
         }
-        TaskCategory that = (TaskCategory) o;
+        TaskCategoryModelo that = (TaskCategoryModelo) o;
         return description.equals(that.description);
     }
 
@@ -41,7 +41,7 @@ public class TaskCategory {
      *
      * @return A clone of the current task.
      */
-    public TaskCategory clone() {
-        return new TaskCategory(this.description);
+    public TaskCategoryModelo clone() {
+        return new TaskCategoryModelo(this.description);
     }
 }

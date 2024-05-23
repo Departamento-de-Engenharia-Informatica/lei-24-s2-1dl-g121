@@ -2,8 +2,8 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
-import pt.ipp.isep.dei.esoft.project.domain.Task;
-import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
+import pt.ipp.isep.dei.esoft.project.domain.TaskModelo;
+import pt.ipp.isep.dei.esoft.project.domain.TaskCategoryModelo;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -13,7 +13,7 @@ import pt.isep.lei.esoft.auth.domain.model.Email;
 import java.util.List;
 import java.util.Optional;
 
-public class CreateTaskController {
+public class CreateTaskControllerModelo {
 
     private OrganizationRepository organizationRepository;
     private TaskCategoryRepository taskCategoryRepository;
@@ -21,16 +21,16 @@ public class CreateTaskController {
 
 
     //Repository instances are obtained from the Repositories class
-    public CreateTaskController() {
+    public CreateTaskControllerModelo() {
         getOrganizationRepository();
         getTaskCategoryRepository();
         getAuthenticationRepository();
     }
 
     //Allows receiving the repositories as parameters for testing purposes
-    public CreateTaskController(OrganizationRepository organizationRepository,
-                                TaskCategoryRepository taskCategoryRepository,
-                                AuthenticationRepository authenticationRepository) {
+    public CreateTaskControllerModelo(OrganizationRepository organizationRepository,
+                                      TaskCategoryRepository taskCategoryRepository,
+                                      AuthenticationRepository authenticationRepository) {
         this.organizationRepository = organizationRepository;
         this.taskCategoryRepository = taskCategoryRepository;
         this.authenticationRepository = authenticationRepository;
@@ -65,16 +65,16 @@ public class CreateTaskController {
         return authenticationRepository;
     }
 
-    public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                     String technicalDescription, int duration, double cost,
-                                     String taskCategoryDescription) {
+    public Optional<TaskModelo> createTask(String reference, String description, String informalDescription,
+                                           String technicalDescription, int duration, double cost,
+                                           String taskCategoryDescription) {
 
-        TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+        TaskCategoryModelo taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
 
         Employee employee = getEmployeeFromSession();
         Optional<Organization> organization = getOrganizationRepository().getOrganizationByEmployee(employee);
 
-        Optional<Task> newTask = Optional.empty();
+        Optional<TaskModelo> newTask = Optional.empty();
 
         if (organization.isPresent()) {
             newTask = organization.get()
@@ -89,18 +89,18 @@ public class CreateTaskController {
         return new Employee(email.getEmail());
     }
 
-    private TaskCategory getTaskCategoryByDescription(String taskCategoryDescription) {
+    private TaskCategoryModelo getTaskCategoryByDescription(String taskCategoryDescription) {
         TaskCategoryRepository taskCategoryRepository = getTaskCategoryRepository();
 
         //Get the TaskCategory by its description
-        TaskCategory taskCategoryByDescription =
+        TaskCategoryModelo taskCategoryByDescription =
                 getTaskCategoryRepository().getTaskCategoryByDescription(taskCategoryDescription);
         return taskCategoryByDescription;
 
     }
 
     //return the list of task categories
-    public List<TaskCategory> getTaskCategories() {
+    public List<TaskCategoryModelo> getTaskCategories() {
         TaskCategoryRepository taskCategoryRepository = getTaskCategoryRepository();
         return taskCategoryRepository.getTaskCategories();
     }

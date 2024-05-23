@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
-import pt.ipp.isep.dei.esoft.project.domain.Task;
-import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
+import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskControllerModelo;
+import pt.ipp.isep.dei.esoft.project.domain.TaskModelo;
+import pt.ipp.isep.dei.esoft.project.domain.TaskCategoryModelo;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class CreateTaskUI implements Runnable {
 
-    private final CreateTaskController controller;
+    private final CreateTaskControllerModelo controller;
     private String taskReference;
     private String taskDescription;
     private String taskInformalDescription;
@@ -24,10 +24,10 @@ public class CreateTaskUI implements Runnable {
     private String empployeeEmail;
 
     public CreateTaskUI() {
-        controller = new CreateTaskController();
+        controller = new CreateTaskControllerModelo();
     }
 
-    private CreateTaskController getController() {
+    private CreateTaskControllerModelo getController() {
         return controller;
     }
 
@@ -42,7 +42,7 @@ public class CreateTaskUI implements Runnable {
     }
 
     private void submitData() {
-        Optional<Task> task = getController().createTask(taskReference, taskDescription, taskInformalDescription,
+        Optional<TaskModelo> task = getController().createTask(taskReference, taskDescription, taskInformalDescription,
                 taskTechnicalDescription, taskDuration, taskCost, taskCategoryDescription);
 
         if (task.isPresent()) {
@@ -111,7 +111,7 @@ public class CreateTaskUI implements Runnable {
 
     private String displayAndSelectTaskCategory() {
         //Display the list of task categories
-        List<TaskCategory> taskCategories = controller.getTaskCategories();
+        List<TaskCategoryModelo> taskCategories = controller.getTaskCategories();
 
         int listSize = taskCategories.size();
         int answer = -1;
@@ -128,10 +128,10 @@ public class CreateTaskUI implements Runnable {
         return description;
     }
 
-    private void displayTaskCategoryOptions(List<TaskCategory> taskCategories) {
+    private void displayTaskCategoryOptions(List<TaskCategoryModelo> taskCategories) {
         //display the task categories as a menu with number options to select
         int i = 1;
-        for (TaskCategory taskCategory : taskCategories) {
+        for (TaskCategoryModelo taskCategory : taskCategories) {
             System.out.println("  " + i + " - " + taskCategory.getDescription());
             i++;
         }

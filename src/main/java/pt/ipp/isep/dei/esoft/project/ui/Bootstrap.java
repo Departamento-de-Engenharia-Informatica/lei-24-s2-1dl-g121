@@ -30,13 +30,13 @@ public class Bootstrap implements Runnable {
 
         //get task category repository
         TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
-        taskCategoryRepository.add(new TaskCategory("Analysis"));
-        taskCategoryRepository.add(new TaskCategory("Design"));
-        taskCategoryRepository.add(new TaskCategory("Implementation"));
-        taskCategoryRepository.add(new TaskCategory("Development"));
-        taskCategoryRepository.add(new TaskCategory("Testing"));
-        taskCategoryRepository.add(new TaskCategory("Deployment"));
-        taskCategoryRepository.add(new TaskCategory("Maintenance"));
+        taskCategoryRepository.add(new TaskCategoryModelo("Analysis"));
+        taskCategoryRepository.add(new TaskCategoryModelo("Design"));
+        taskCategoryRepository.add(new TaskCategoryModelo("Implementation"));
+        taskCategoryRepository.add(new TaskCategoryModelo("Development"));
+        taskCategoryRepository.add(new TaskCategoryModelo("Testing"));
+        taskCategoryRepository.add(new TaskCategoryModelo("Deployment"));
+        taskCategoryRepository.add(new TaskCategoryModelo("Maintenance"));
     }
     private void addSkills() {
         //TODO: add bootstrap Skills here
