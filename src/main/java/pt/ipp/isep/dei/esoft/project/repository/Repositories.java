@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-public class Repositories {
+import java.io.Serializable;
+
+public class Repositories implements Serializable {
 
     private static Repositories instance;
     private final OrganizationRepository organizationRepository;

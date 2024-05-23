@@ -9,6 +9,7 @@ module pt.ipp.isep.dei.esoft.project {
     requires javafx.fxml;
     requires javafx.graphics;
     requires org.apache.commons.lang3;
+    requires java.sql.rowset;
 
     exports pt.ipp.isep.dei.esoft.project.ui;
     exports pt.ipp.isep.dei.esoft.project.ui.console.menu;
