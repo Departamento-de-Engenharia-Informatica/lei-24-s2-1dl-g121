@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.ui.console.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+import pt.ipp.isep.dei.esoft.project.ui.gui.GreenSpacesUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,6 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Register Collaborator", new RegisterCollaboratorUI()));
         options.add(new MenuItem("Assign a Skill to a Collaborator", new AssignSkillUI()));
         options.add(new MenuItem("Create a team", new CreateTeamUI()));
-        options.add(new MenuItem("Add a new Green Space", new GreenSpacesUI()));
 
         int option = 0;
         do {
