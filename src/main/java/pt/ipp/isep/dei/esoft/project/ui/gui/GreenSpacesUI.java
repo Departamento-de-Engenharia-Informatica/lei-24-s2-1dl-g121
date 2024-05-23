@@ -2,20 +2,17 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.ui.console.*;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.MenuItem;
-import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.awt.*;
 import java.net.URL;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class GreenSpacesUI implements Initializable {
 
@@ -29,6 +26,8 @@ public class GreenSpacesUI implements Initializable {
     public TextField areaTxt;
     @FXML
     public TextField nameTxt;
+    @FXML
+    public Button submitBtn;
 
     private GreenSpacesController controller;
     private String type;
@@ -63,8 +62,6 @@ public class GreenSpacesUI implements Initializable {
         name = nameTxt.getText();
 
         generalValidation();
-
-
     }
 
     private void generalValidation() {
