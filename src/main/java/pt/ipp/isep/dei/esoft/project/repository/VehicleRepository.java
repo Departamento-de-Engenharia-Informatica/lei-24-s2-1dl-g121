@@ -45,22 +45,4 @@ public class VehicleRepository {
                 .orElse(null);
     }
 
-    public boolean updateVehicle(String plate, Vehicle updatedVehicle) {
-        Vehicle existingVehicle = getVehicleByPlate(plate);
-        if (existingVehicle != null) {
-            int index = vehicles.indexOf(existingVehicle);
-            vehicles.set(index, updatedVehicle);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean deleteVehicle(String plate) {
-        Vehicle existingVehicle = getVehicleByPlate(plate);
-        if (existingVehicle != null) {
-            vehicles.remove(existingVehicle);
-            return true;
-        }
-        return false;
-    }
 }
