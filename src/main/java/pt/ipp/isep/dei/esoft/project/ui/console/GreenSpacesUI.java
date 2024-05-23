@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -44,16 +45,15 @@ public class GreenSpacesUI implements Runnable {
 
     private String requestName() {
         while(name == null){
-            System.out.printf("What's the name you want to give to the %s you added?%n", type);
-            name = sc.nextLine();
+            name = Utils.readLineFromConsole("What's the name you want to give to the "+ type + " you added?");
+
         }
         return name;
     }
 
     private double requestArea() {
         while(area <= 0) {
-            System.out.printf("What's the area of the %s?%n", type);
-            area = sc.nextDouble();
+            area = Utils.readDoubleFromConsole("What's the area of the "+type+"?");
         }
         return area;
     }

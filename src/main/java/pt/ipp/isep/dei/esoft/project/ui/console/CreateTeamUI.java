@@ -62,7 +62,9 @@ public class CreateTeamUI implements Runnable{
 
         team = generateTeam(requiredSkills, maxSize);
 
-        System.out.println(team);
+        for(Collaborator teammate : team){
+            System.out.println(teammate.getName());
+        }
 
 
     }
