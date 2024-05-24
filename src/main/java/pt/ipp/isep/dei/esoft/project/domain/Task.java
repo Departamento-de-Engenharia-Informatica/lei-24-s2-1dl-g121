@@ -6,14 +6,14 @@ public class Task {
     private final String reference;
     private String description;
     private int duration;
-    //urgency
+    private urgencyDegree urgencyDegree;
 
-    public Task(String reference, String description, int duration) {
-
+    public Task(String reference, String description, int duration, urgencyDegree urgencyDegree) {
         validateReference(reference);
         this.reference = reference;
         this.description = description;
         this.duration = duration;
+        this.urgencyDegree = pt.ipp.isep.dei.esoft.project.domain.urgencyDegree.PENDING;
     }
 
     private void validateReference(String reference) {
@@ -22,6 +22,8 @@ public class Task {
             throw new IllegalArgumentException("Reference cannot be null or empty.");
         }
     }
+
+
 
 //    @Override
 //    public boolean equals(Object o) {
@@ -41,6 +43,6 @@ public class Task {
      * @return A clone of the current instance.
      */
     public Task clone() {
-        return new Task(this.reference, this.description, this.duration);
+        return new Task(this.reference, this.description, this.duration, this.urgencyDegree);
     }
 }
