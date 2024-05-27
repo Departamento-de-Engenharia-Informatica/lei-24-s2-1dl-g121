@@ -55,9 +55,9 @@ public class GreenSpaces {
         System.out.println("Name: " + name);
     }
 
-    public static void main(String[] args) {
-        // Example usage
-        GreenSpaces greenSpace = new GreenSpaces("Park", 1000, "123 Green Street", "Big Guy");
-        greenSpace.registerGreenSpace();
-    }
+//    public static void main(String[] args) {
+//        // Example usage
+//        GreenSpaces greenSpace = new GreenSpaces("Park", 1000, "123 Green Street", "Big Guy");
+//        greenSpace.registerGreenSpace();
+//    }
 }

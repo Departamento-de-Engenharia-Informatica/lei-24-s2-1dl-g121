@@ -12,6 +12,7 @@ public class Bootstrap implements Runnable {
         addJobs();
         addCollaborators();
         addOrganization();
+        addGreenSpaces();
         addUsers();
     }
 
@@ -25,19 +26,20 @@ public class Bootstrap implements Runnable {
         organizationRepository.add(organization);
     }
 
-    private void addTaskCategories() {
-        //TODO: add bootstrap Task Categories here
+//    private void addTaskCategories() {
+//        //TODO: add bootstrap Task Categories here
+//
+//        //get task category repository
+//        TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
+//        taskCategoryRepository.add(new TaskCategoryModelo("Analysis"));
+//        taskCategoryRepository.add(new TaskCategoryModelo("Design"));
+//        taskCategoryRepository.add(new TaskCategoryModelo("Implementation"));
+//        taskCategoryRepository.add(new TaskCategoryModelo("Development"));
+//        taskCategoryRepository.add(new TaskCategoryModelo("Testing"));
+//        taskCategoryRepository.add(new TaskCategoryModelo("Deployment"));
+//        taskCategoryRepository.add(new TaskCategoryModelo("Maintenance"));
+//    }
 
-        //get task category repository
-        TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
-        taskCategoryRepository.add(new TaskCategoryModelo("Analysis"));
-        taskCategoryRepository.add(new TaskCategoryModelo("Design"));
-        taskCategoryRepository.add(new TaskCategoryModelo("Implementation"));
-        taskCategoryRepository.add(new TaskCategoryModelo("Development"));
-        taskCategoryRepository.add(new TaskCategoryModelo("Testing"));
-        taskCategoryRepository.add(new TaskCategoryModelo("Deployment"));
-        taskCategoryRepository.add(new TaskCategoryModelo("Maintenance"));
-    }
     private void addSkills() {
         //TODO: add bootstrap Skills here
 
@@ -63,6 +65,11 @@ public class Bootstrap implements Runnable {
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", new Job("SoftwareDeveloper")));
+    }
+
+    private void addGreenSpaces() {
+        GreenSpacesRepository greenSpacesRepository = Repositories.getInstance().getGreenSpacesRepository();
+        greenSpacesRepository.addGreenSpace(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto","ArcaAgua"));
     }
 
     private void addUsers() {

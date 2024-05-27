@@ -14,7 +14,6 @@ import java.util.Optional;
 public class CollaboratorRepository {
 
     private final List<Collaborator> collaborators;
-    private JobRepository jobRepository;
 
     /**
      * Constructs a new CollaboratorRepository.
