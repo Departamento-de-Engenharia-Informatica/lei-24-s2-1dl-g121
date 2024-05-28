@@ -5,12 +5,14 @@ public class GreenSpaces {
     private double area;
     private String address;
     private String name;
+    private String email;
 
-    public GreenSpaces(String type, double area, String address, String name) {
+    public GreenSpaces(String type, double area, String address, String name, String email) {
         this.type = type;
         this.area = area;
         this.address = address;
         this.name = name;
+        this.email = email;
     }
 
     // Getters and setters
@@ -46,6 +48,10 @@ public class GreenSpaces {
         this.name = name;
     }
 
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+
     // Method to register a green space
     public void registerGreenSpace() {
         System.out.println("Green space registered:");
@@ -53,6 +59,7 @@ public class GreenSpaces {
         System.out.println("Area: " + area + " square meters");
         System.out.println("Address: " + address);
         System.out.println("Name: " + name);
+        System.out.println("Email: " + email);
     }
 
 //    public static void main(String[] args) {
