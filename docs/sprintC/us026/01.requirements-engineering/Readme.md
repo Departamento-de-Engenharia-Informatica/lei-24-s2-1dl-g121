@@ -1,4 +1,4 @@
-# US006 - Register a vehicle.
+# US026 - As a GSM, I want to assign one or more vehicles to an entry in the Agenda..
 
 ## 1. Requirements Engineering
 
@@ -56,7 +56,7 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us026-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 
