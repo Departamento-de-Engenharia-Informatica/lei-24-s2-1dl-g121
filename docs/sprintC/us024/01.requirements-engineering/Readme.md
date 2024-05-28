@@ -1,4 +1,4 @@
-# US006 - Register a vehicle.
+# US024 - As a GSM, I want to Postpone an entry in the Agenda to a specific future date.
 
 ## 1. Requirements Engineering
 
@@ -56,7 +56,7 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us024-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 
