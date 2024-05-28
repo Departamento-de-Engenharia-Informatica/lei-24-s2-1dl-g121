@@ -30,8 +30,8 @@ public class GreenSpacesController {
         this.authenticationRepository = authenticationRepository;
         this.greenSpacesRepository = greenSpacesRepository;
     }
-    public Optional<GreenSpaces> createGreenSpace(String type, double area, String address, String name) {
-        GreenSpaces newGreenSpace = new GreenSpaces(type, area, address, name);
+    public Optional<GreenSpaces> createGreenSpace(String type, double area, String address, String name, String email) {
+        GreenSpaces newGreenSpace = new GreenSpaces(type, area, address, name, email);
         if (!greenSpacesRepository.getGreenSpaces().contains(newGreenSpace)) {
             try {
                 greenSpacesRepository.addGreenSpace(newGreenSpace);

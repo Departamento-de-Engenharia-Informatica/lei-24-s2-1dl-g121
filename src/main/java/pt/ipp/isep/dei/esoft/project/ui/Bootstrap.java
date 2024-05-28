@@ -69,7 +69,7 @@ public class Bootstrap implements Runnable {
 
     private void addGreenSpaces() {
         GreenSpacesRepository greenSpacesRepository = Repositories.getInstance().getGreenSpacesRepository();
-        greenSpacesRepository.addGreenSpace(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto","ArcaAgua"));
+        greenSpacesRepository.addGreenSpace(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto","ArcaAgua", "exemplo@exemplo.com"));
     }
 
     private void addUsers() {
