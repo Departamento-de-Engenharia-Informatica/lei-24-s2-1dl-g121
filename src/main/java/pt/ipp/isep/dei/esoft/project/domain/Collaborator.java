@@ -15,6 +15,7 @@ public class Collaborator {
     private String address;
     private String phoneNumber;
     private String email;
+    private String taxPayerDocument;
     private String identificationDocument;
     private Job job;
     private List<Skill> skillList;
@@ -31,13 +32,14 @@ public class Collaborator {
      * @param identificationDocument the identification document of the Collaborator
      * @param job the job of the Collaborator
      */
-    public Collaborator(String name, String birthDetails, String issuingDetails, String address, String phoneNumber, String email, String identificationDocument, Job job){
+    public Collaborator(String name, String birthDetails, String issuingDetails, String address, String phoneNumber, String email, String taxPayerDocument, String identificationDocument, Job job){
         this.name= name;
         this.birthDetails= birthDetails;
         this.issuingDetails= issuingDetails;
         this.address= address;
         this.phoneNumber= phoneNumber;
         this.email= email;
+        this.taxPayerDocument = taxPayerDocument;
         this.identificationDocument= identificationDocument;
         this.job= job;
         this.skillList= new ArrayList<>();
@@ -113,7 +115,7 @@ public class Collaborator {
      * @return a clone of the current Collaborator instance
      */
     public Collaborator clone() {
-        return new Collaborator(this.name, this.birthDetails, this.issuingDetails, this.address, this.phoneNumber, this.email, this.identificationDocument, this.job);
+        return new Collaborator(this.name, this.birthDetails, this.issuingDetails, this.address, this.phoneNumber, this.email,this.taxPayerDocument, this.identificationDocument, this.job);
     }
 
     /**

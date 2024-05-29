@@ -64,7 +64,7 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", new Job("SoftwareDeveloper")));
+        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "210396946", "15450998", new Job("SoftwareDeveloper")));
     }
 
     private void addGreenSpaces() {
