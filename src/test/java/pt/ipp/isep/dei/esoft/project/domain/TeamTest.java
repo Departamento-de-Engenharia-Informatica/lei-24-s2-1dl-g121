@@ -16,12 +16,13 @@ public class TeamTest {
         setOfSkills.add(new Skill("Java"));
         setOfSkills.add(new Skill("Python"));
         setOfSkills.add(new Skill("SQL"));
+        int maxSize = 3;
+        int minSize = 1;
 
         // Act
-        Team team = new Team(numberOfSkills, setOfSkills);
+        Team team = new Team(setOfSkills, maxSize, minSize);
 
         // Assert
-        assertEquals(numberOfSkills, team.getNumberOfSkills());
         assertEquals(setOfSkills, team.getSetOfSkills());
     }
 
@@ -33,9 +34,11 @@ public class TeamTest {
         setOfSkills.add(new Skill("Java"));
         setOfSkills.add(new Skill("Python"));
         setOfSkills.add(new Skill("SQL"));
+        int maxSize = 3;
+        int minSize = 1;
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Team(numberOfSkills, setOfSkills));
+        assertThrows(IllegalArgumentException.class, () -> new Team(setOfSkills, maxSize, minSize));
     }
 
     @Test
@@ -43,9 +46,11 @@ public class TeamTest {
         // Arrange
         int numberOfSkills = 3;
         ArrayList<Skill> setOfSkills = null;
+        int maxSize = 3;
+        int minSize = 1;
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Team(numberOfSkills, setOfSkills));
+        assertThrows(IllegalArgumentException.class, () -> new Team(setOfSkills, maxSize, minSize));
     }
 
     @Test
@@ -53,9 +58,11 @@ public class TeamTest {
         // Arrange
         int numberOfSkills = 0;
         ArrayList<Skill> setOfSkills = new ArrayList<>();
+        int maxSize = 3;
+        int minSize = 1;
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Team(numberOfSkills, setOfSkills));
+        assertThrows(IllegalArgumentException.class, () -> new Team(setOfSkills, maxSize, minSize));
     }
 
     @Test
@@ -66,14 +73,15 @@ public class TeamTest {
         setOfSkills.add(new Skill("Java"));
         setOfSkills.add(new Skill("Python"));
         setOfSkills.add(new Skill("SQL"));
-        Team team = new Team(numberOfSkills, setOfSkills);
+        int maxSize = 3;
+        int minSize = 1;
+        Team team = new Team(setOfSkills, maxSize, minSize);
 
         // Act
         Team clonedTeam = team.clone();
 
         // Assert
         assertNotSame(team, clonedTeam);
-        assertEquals(team.getNumberOfSkills(), clonedTeam.getNumberOfSkills());
         assertEquals(team.getSetOfSkills(), clonedTeam.getSetOfSkills());
     }
 
@@ -85,7 +93,9 @@ public class TeamTest {
         setOfSkills.add(new Skill("Java"));
         setOfSkills.add(new Skill("Python"));
         setOfSkills.add(new Skill("SQL"));
-        Team team = new Team(numberOfSkills, setOfSkills);
+        int maxSize = 3;
+        int minSize = 1;
+        Team team = new Team(setOfSkills, maxSize, minSize);
 
         // Act
         String toString = team.toString();

@@ -35,8 +35,8 @@ public class CreateTeamController {
         this.createTeamRepository = createTeamRepository;
         this.authenticationRepository = authenticationRepository;
     }
-    public Optional<Team> createTeam(int numSkills, ArrayList<Skill> requiredSkills) {
-        Team newTeam = new Team(numSkills, requiredSkills);
+    public Optional<Team> createTeam(ArrayList<Skill> requiredSkills, int maxSize, int minSize) {
+        Team newTeam = new Team(requiredSkills, maxSize, minSize);
         if (!createTeamRepository.getTeams().contains(newTeam)) {
             try {
                 createTeamRepository.addTeam(newTeam);

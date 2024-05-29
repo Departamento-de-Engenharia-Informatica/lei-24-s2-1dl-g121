@@ -14,6 +14,7 @@ public class CreateTeamUI implements Runnable{
 
     private CreateTeamController controller;
     private int maxSize;
+    private int minSize;
     private int numSkills;
     private ArrayList<Skill> requiredSkills;
 
@@ -40,10 +41,15 @@ public class CreateTeamUI implements Runnable{
 
 
     private void submitData() {
-        Optional<Team> team = getController().createTeam(maxSize, requiredSkills);
+        team = generateTeam(requiredSkills, maxSize, minSize);
+        Optional<Team> createdTeam = getController().createTeam(requiredSkills, maxSize, minSize);
 
-        if (team.isPresent()) {
+        if (createdTeam.isPresent()) {
             System.out.println("\nTeam successfully created!");
+            System.out.println("Team members:");
+            for (Collaborator collaborator : team) {
+                System.out.println(collaborator.getName());
+            }
         } else {
             System.out.println("\nTeam not created!");
         }
@@ -54,34 +60,55 @@ public class CreateTeamUI implements Runnable{
         //Request the Task Reference from the console
          maxSize = requestSize();
 
+         minSize = requestMinSize();
+
         //Request the Task Description from the console
          numSkills = requestNumSkills();
 
         //Request the Task Informal Description from the console
         requiredSkills = requestRequiredSkills(numSkills);
 
-        team = generateTeam(requiredSkills, maxSize);
-
-        for(Collaborator teammate : team){
-            System.out.println(teammate.getName());
-        }
 
 
+    }
+
+    private int requestMinSize() {
+                minSize = Integer.parseInt(Utils.readLineFromConsole("What's the minimun size of your team?"));
+            if(minSize<0||minSize > maxSize) {
+                while (minSize < 0 || minSize > maxSize) {
+                    System.out.println("Minimum size invalid");
+                    minSize = Integer.parseInt(Utils.readLineFromConsole("What's the minimun size of your team?"));
+                }
+            }
+        return minSize;
     }
 
 
     private int requestNumSkills() {
-        int numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
+        int numberOfSkills;
+        numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
+            if(numberOfSkills < 0) {
+                while (numberOfSkills < 0) {
+                    System.out.println("Number of Skills cannot be negative");
+                    numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
+                }
+            }
+
         return numberOfSkills;
     }
 
     private int requestSize() {
-        int maxSize = Integer.parseInt(Utils.readLineFromConsole("What's the max size of your team?"));
+        maxSize = Integer.parseInt(Utils.readLineFromConsole("What's the max size of your team?"));
+        if(maxSize < 0) {
+            while (maxSize < 0) {
+                maxSize = Integer.parseInt(Utils.readLineFromConsole("What's the max size of your team?"));
+            }
+        }
         return maxSize;
     }
 
 
-    public ArrayList<Collaborator> generateTeam(ArrayList<Skill> requiredSkills, int maxSize) {
+    public ArrayList<Collaborator> generateTeam(ArrayList<Skill> requiredSkills, int maxSize, int minSize) {
             ArrayList<Collaborator> team = new ArrayList<>();
 
             List<Collaborator> availableCollaborators = controller.getCollaboratorsBySkills(requiredSkills);
@@ -89,7 +116,7 @@ public class CreateTeamUI implements Runnable{
             Collections.shuffle(availableCollaborators);
 
             for (Collaborator collaborator : availableCollaborators) {
-                if (team.size() > maxSize) {
+                if (team.size() > maxSize || team.size() < minSize) {
                     break;
                 }
                 team.add(collaborator);

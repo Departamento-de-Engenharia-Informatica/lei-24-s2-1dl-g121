@@ -4,31 +4,30 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Team {
-    private final int numberOfSkills;
+    private  int numberOfSkills;
     private final ArrayList<Skill> setOfSkills;
+    private int maxSize;
+    private int minSize;
 
-    public Team(int numberOfSkills, ArrayList<Skill> setOfSkills) {
-        this.numberOfSkills = numberOfSkills;
+    public Team(ArrayList<Skill> setOfSkills, int maxSize, int minSize) {
         this.setOfSkills = setOfSkills;
-    }
-    private void validateNumberOfSkills(int numberOfSkills) {
-        if (numberOfSkills < 0) {
-            throw new IllegalArgumentException("Number of skills cannot be negative.");
-        }
+        this.maxSize = maxSize;
+        this.minSize = minSize;
     }
 
-    private void validateSetOfSkills(ArrayList<Skill> setOfSkills) {
-        if (setOfSkills == null || setOfSkills.isEmpty()) {
-            throw new IllegalArgumentException("Set of skills cannot be null or empty.");
-        }
-    }
-    public int getNumberOfSkills() {
-        return numberOfSkills;
-    }
 
     public ArrayList<Skill> getSetOfSkills() {
         return setOfSkills;
     }
+
+    public int getMaxSize() {return maxSize;}
+
+    public int getMinSize() {return minSize;}
+
+    public void setMaxSize(int maxSize) {this.maxSize = maxSize;}
+
+    public void setMinSize(int minSize) {this.minSize = minSize;}
+
     public Team clone() {
         try {
             return (Team) super.clone();
@@ -45,8 +44,9 @@ public class Team {
     @Override
     public String toString() {
         return "Team{" +
-                ", numberOfSkills=" + numberOfSkills +
                 ", setOfSkills=" + setOfSkills +
+                ", maxSize = " + maxSize +
+                ", minSize = " + minSize +
                 '}';
     }
 

@@ -1,22 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 
-import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.*;
 
 public class GreenSpacesUI implements Initializable {
@@ -55,7 +48,7 @@ public class GreenSpacesUI implements Initializable {
 
     @FXML
     private void submitData() {
-        Optional<GreenSpaces> greenSpace = getController().createGreenSpace(type, area, address, name);
+        //Optional<GreenSpaces> greenSpace = getController().createGreenSpace(type, area, address, name);
 
         messageLbl.setText("Green Space created successfully!!!");
     }
