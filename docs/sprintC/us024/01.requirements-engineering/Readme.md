@@ -4,9 +4,7 @@
 
 ### 1.1. User Story Description
 
-As a VFM, I wish to register a vehicle including Brand, Model,
-Type, Tare Weight, Gross Weight, Current Km, Register Date, Acqui-
-sition Date, and Maintenance/Check-up Frequency (in km).
+As a GSM, I want to Postpone an entry in the Agenda to a specific future date.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -17,51 +15,41 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 **From the client clarifications:**
 
-> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
->
-> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
+> **Question:** What are the input to postpone an entry? From my perspective the Green Spaces Manager only needs to select the entry and introduce the new date.
 
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform ther user of the mistake and give him the option to add another vehicle?
->
-> **Answer:** again, duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates.
+
+> **Answer:** Yes, you are correct!
+
+
+> **Question:** As a GSM, I want to Postpone an entry in the Agenda to a future date.
+The date you want to postpone in this US24 is the date referring to the "approximate expected duration" field when we registered the task?
+
+
+> **Answer:** No; sometimes, for various reasons (e.g. insufficient staff, faulty equipment or adverse weather conditions) a task has to be postponed to a new date; task duration is not directly related to this.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** VFM cant duplicate cars.
-* **AC2:** Vehicles must be identified by the plate id.
-* **AC3:** Show car data for confirmation.
 
 ### 1.4. Found out Dependencies
 
-* This user story has no dependencies
+* US21 Because this US regists entries
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
-	
-* Selected data:
- 
+    * New date
 
 **Output Data:**
 
-* Confirmation of car data
-* Car registration
+* Confirmation of new date
+
+
 
 ### 1.6. System Sequence Diagram (SSD)
-
-**_Other alternatives might exist._**
 
 #### Alternative One
 
 ![System Sequence Diagram - Alternative One](svg/us024-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-!
-
-### 1.7 Other Relevant Remarks
-
-* 
