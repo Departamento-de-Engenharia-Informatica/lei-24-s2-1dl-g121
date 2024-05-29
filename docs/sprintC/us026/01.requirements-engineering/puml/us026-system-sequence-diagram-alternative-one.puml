@@ -15,19 +15,19 @@ activate Employee
     Employee -> System : asks for agenda
     activate System
 
-        System --> Employee : requests the list of available vehicles from the Vehicle Inventory
+        System --> Employee : shows agenda
     deactivate System
 
-    Employee -> System :
+    Employee -> System : asks about the list of available vehicles
     activate System
 
         System --> Employee : returns the list of available vehicles
     deactivate System
 
-    Employee -> System : confirms data
+    Employee -> System : assign one or more vehicles to an entry
     activate System
 
-        System --> Employee : displays operation success
+        System --> Employee : confirm and display success message
     deactivate System
 
 @enduml
