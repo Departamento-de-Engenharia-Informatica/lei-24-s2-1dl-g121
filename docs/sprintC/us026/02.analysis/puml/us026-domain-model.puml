@@ -15,7 +15,7 @@ hide methods
 '}
 
 
-class FM{
+class GSM{
     name
     email
     phone number
@@ -35,15 +35,14 @@ class Vehicle{
     Maintenance/Check-up
 }
 
-class Check-up{
-    distance "km"
+class Agenda{
+
 }
 
 
-
-FM "1" -- "*" Vehicle : registers >
-FM "1" -- "*" "Check-up" : registers >
-Vehicle "1" -- "1" "Check-up" : needs >
+GSM "1" -- "*" Vehicle : registers >
+GSM "1" -- "*" "Agenda" : create >
+Vehicle "1" -- "1" "Agenda" : add an entry on >
 
 
 @enduml
