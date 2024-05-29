@@ -7,21 +7,21 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Vehicle Fleet Manager" as Employee
+actor "Green Space Manager" as Employee
 participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to register a vehicle
+    Employee -> System : asks for agenda
     activate System
 
-        System --> Employee : requests data (Brand, Model, Type, Tare, Gross Weight ,\n Current Km, Register Date, Acquisition Date,\n Maintenance/Check- up Frequency (in Kms))
+        System --> Employee : requests the list of available vehicles from the Vehicle Inventory
     deactivate System
 
-    Employee -> System : types requested data
+    Employee -> System :
     activate System
 
-        System --> Employee : shows all data and requests confirmation
+        System --> Employee : returns the list of available vehicles
     deactivate System
 
     Employee -> System : confirms data
