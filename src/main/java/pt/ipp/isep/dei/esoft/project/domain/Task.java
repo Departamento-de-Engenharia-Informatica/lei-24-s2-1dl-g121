@@ -1,13 +1,13 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class TaskEntry {
+public class Task {
     private final String reference;
     private String description;
     private int duration;
     private urgencyDegree urgencyDegree;
     private GreenSpaces greenSpace;
 
-    public TaskEntry(String reference, String description, int duration, urgencyDegree urgencyDegree, GreenSpaces greenSpace) {
+    public Task(String reference, String description, int duration, urgencyDegree urgencyDegree, GreenSpaces greenSpace) {
         this.reference = reference;
         this.description = description;
         this.duration = duration;
@@ -60,7 +60,7 @@ public class TaskEntry {
      *
      * @return A clone of the current instance.
      */
-    public TaskEntry clone() {
-        return new TaskEntry(this.reference, this.description, this.duration, this.urgencyDegree, this.greenSpace);
+    public Task clone() {
+        return new Task(this.reference, this.description, this.duration, this.urgencyDegree, this.greenSpace);
     }
 }

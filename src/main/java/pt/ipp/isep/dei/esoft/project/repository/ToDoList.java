@@ -1,22 +1,22 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.TaskEntry;
+import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.urgencyDegree;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ToDoListRepository {
+public class ToDoList {
 
-    private final List<TaskEntry> tasks;
-    public ToDoListRepository() {
+    private final List<Task> tasks;
+    public ToDoList() {
         tasks = new ArrayList<>();
     }
 
-    public Optional<TaskEntry> add(TaskEntry task) {
+    public Optional<Task> add(Task task) {
 
-        Optional<TaskEntry> newTask = Optional.empty();
+        Optional<Task> newTask = Optional.empty();
         boolean operationSuccess = false;
 
         if (validateTask(task)) {
@@ -31,19 +31,19 @@ public class ToDoListRepository {
         return newTask;
     }
 
-    private boolean validateTask(TaskEntry task) {
+    private boolean validateTask(Task task) {
         boolean isValid = !tasks.contains(task);
         return isValid;
     }
 
-    public List<TaskEntry> getTasks() {
+    public List<Task> getTasks() {
         //This is a defensive copy, so that the repository cannot be modified from the outside.
         return List.copyOf(tasks);
     }
 
-    public List<TaskEntry> getTasksByUrgencyDegree(urgencyDegree urgencyDegree) {
-        List<TaskEntry> tasksByUrgencyDegree = new ArrayList<>();
-        for (TaskEntry task : tasks) {
+    public List<Task> getTasksByUrgencyDegree(urgencyDegree urgencyDegree) {
+        List<Task> tasksByUrgencyDegree = new ArrayList<>();
+        for (Task task : tasks) {
             if (task.getUrgencyDegree().equals(urgencyDegree)) {
                 tasksByUrgencyDegree.add(task);
             }
