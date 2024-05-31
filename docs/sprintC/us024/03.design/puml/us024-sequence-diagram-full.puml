@@ -15,7 +15,7 @@ participant "VehicleRepository:\nVehicleRepository" as TaskCategoryRepository
 
 activate ADM
 
-        ADM -> UI : asks to register a vehicle
+        ADM -> UI : asks for agenda
 
         activate UI
 
@@ -43,16 +43,16 @@ activate ADM
                 CTRL --> UI : vehicleRegister
             deactivate CTRL
 
-            UI --> ADM : requests data (Brand, Model, Type, Tare, Gross Weight ,\n Current Km, Register Date, Acquisition Date,\n Maintenance/Check- up Frequency (in Kms))
+            UI --> ADM : shows agenda
         deactivate UI
 
-    ADM -> UI : types requested data
+    ADM -> UI : asks to postpone an entry
     activate UI
 
-        UI --> ADM : shows all data and requests confirmation
+        UI --> ADM : shows the calendar and asks what the new date is
     deactivate UI
 
-    ADM -> UI : confirms data
+    ADM -> UI : choose the date
     activate UI
 
     UI -> TaskCategoryRepository : registerVehicle
@@ -65,7 +65,7 @@ activate ADM
         deactivate  TaskCategoryRepository
 
             deactivate CTRL
-            UI --> ADM: displays operation success
+            UI --> ADM: confirm availability and display success message
     deactivate UI
 
 deactivate ADM
