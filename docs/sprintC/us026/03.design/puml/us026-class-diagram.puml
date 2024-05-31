@@ -12,25 +12,29 @@ skinparam classAttributeIconSize 0
 ' vehicle Repository !!!1
 class VehicleRepository{
     +getVehicleRepository
-    +registerVehicle
+    +addVehicle
 }
 
-class CreateVehicleUI{
+class AgendaUI{
 
+}
+class AgendaRepository{
+    +getAgendaRepository
 }
 
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
     + getVehicleRepository()
+    +getAgendaRepository
 }
 
-class CreateVehicleController{
-    +getVehicle
+class AgendaController{
+    +getAgenda
 
 }
 
-class FM{
+class GSM{
     name
     email
     phone number
@@ -49,19 +53,20 @@ class Vehicle{
     Acquisition Date
     Maintenance/Check-up
 }
-
-class Check-up{
-    distance "km"
+class Agenda {
 }
 
-CreateVehicleUI --> CreateVehicleController
+
+
+AgendaUI --> AgendaController
 Repositories --> VehicleRepository
-CreateVehicleController --> Repositories
+AgendaController --> Repositories
+AgendaController --> Agenda
 VehicleRepository --> Vehicle
-CreateVehicleController --> Vehicle
-FM "1" -- "*" Vehicle : registers >
-FM "1" -- "*" "Check-up" : registers >
-Vehicle "1" -- "1" "Check-up" : needs >
+AgendaController --> Vehicle
+GSM "1" -- "*" Agenda : registers >
+Repositories --> AgendaRepository
+
 
 
 @enduml

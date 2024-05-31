@@ -72,7 +72,7 @@ activate ADM
     ADM -> UI : assign one or more vehicles to an entry
     activate UI
 
-    UI -> TaskCategoryRepository : registerVehicle
+    UI -> TaskCategoryRepository : addVehicle
 
         activate TaskCategoryRepository
 
