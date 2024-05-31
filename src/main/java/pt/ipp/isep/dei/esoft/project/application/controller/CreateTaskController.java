@@ -1,33 +1,33 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.TaskEntry;
+import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.urgencyDegree;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.repository.ToDoListRepository;
+import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
 import java.util.Optional;
 
-public class CreateTaskEntryController {
-    private ToDoListRepository toDoListRepository;
+public class CreateTaskController {
+    private ToDoList toDoList;
     private AuthenticationRepository authenticationRepository;
 
-    public CreateTaskEntryController() {
+    public CreateTaskController() {
         getToDoListRepository();
         getAuthenticationRepository();
     }
 
-    public CreateTaskEntryController(ToDoListRepository toDoListRepository) {
-        this.toDoListRepository = toDoListRepository;
+    public CreateTaskController(ToDoList toDoListRepository) {
+        this.toDoList = toDoListRepository;
     }
 
-    private ToDoListRepository getToDoListRepository() {
-        if (toDoListRepository == null) {
+    private ToDoList getToDoListRepository() {
+        if (toDoList == null) {
             Repositories repositories = Repositories.getInstance();
-            toDoListRepository = repositories.getToDoListRepository();
+            toDoList = repositories.getToDoList();
         }
-        return toDoListRepository;
+        return toDoList;
     }
 
     private AuthenticationRepository getAuthenticationRepository() {
@@ -38,11 +38,11 @@ public class CreateTaskEntryController {
         return authenticationRepository;
     }
 
-    public Optional<TaskEntry> registerTaskEntry(String reference, String description, int duration, urgencyDegree urgencyDegree, GreenSpaces greenSpaces) {
-        TaskEntry newTask = new TaskEntry(reference, description, duration, urgencyDegree, greenSpaces);
-        if (!toDoListRepository.getTasks().contains(newTask)) {
+    public Optional<Task> registerTaskEntry(String reference, String description, int duration, urgencyDegree urgencyDegree, GreenSpaces greenSpaces) {
+        Task newTask = new Task(reference, description, duration, urgencyDegree, greenSpaces);
+        if (!toDoList.getTasks().contains(newTask)) {
             try{
-                toDoListRepository.add(newTask);
+                toDoList.add(newTask);
             } catch (UnsupportedOperationException e){
                 System.out.println("Error:" + e.getMessage());
             }
