@@ -6,36 +6,34 @@ import pt.ipp.isep.dei.esoft.project.domain.status;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Agenda {
-    private List<Entry> lstEntries = new ArrayList<>();
+    private final List<Entry> lstEntries;
 
-    public Entry newEntry(Task task, int duration, status status) {
-        return new Entry(task, duration, status);
+    public Agenda() {
+        lstEntries  = new ArrayList<>();
     }
 
-    public boolean registerEntry(Entry entry) {
-        if (entry != null) {
-            return this.lstEntries.add(entry);
+    public Optional<Entry> add(Entry Entry) {
+        Optional<Entry> newEntry = Optional.empty();
+        boolean operationSuccess = false;
+        if (validateEntry(Entry)) {
+            newEntry = Optional.of(Entry.clone());
+            operationSuccess = lstEntries.add(newEntry.get());
         }
-        return false;
+        if (!operationSuccess) {
+            newEntry = Optional.empty();
+        }
+        return newEntry;
     }
 
-    public boolean removeEntry(Entry entry) {
-        return this.lstEntries.remove(entry);
+    private boolean validateEntry(Entry entry) {
+        return !lstEntries.contains(entry);
     }
 
     public List<Entry> getEntries() {
-        return this.lstEntries;
-    }
-
-    public Entry getEntryByTask(Task task) {
-        for (Entry entry : this.lstEntries) {
-            if (entry.getTask().equals(task)) {
-                return entry;
-            }
-        }
-        return null;
+        return List.copyOf(lstEntries);
     }
 
     public List<Entry> getEntriesByStatus(status status) {
@@ -52,36 +50,6 @@ public class Agenda {
         List<Entry> lstEntries = new ArrayList<>();
         for (Entry entry : this.lstEntries) {
             if (entry.getTask().equals(task)) {
-                lstEntries.add(entry);
-            }
-        }
-        return lstEntries;
-    }
-
-    public List<Entry> getEntriesByDuration(int duration) {
-        List<Entry> lstEntries = new ArrayList<>();
-        for (Entry entry : this.lstEntries) {
-            if (entry.getDuration() == duration) {
-                lstEntries.add(entry);
-            }
-        }
-        return lstEntries;
-    }
-
-    public List<Entry> getEntriesByTask(Task task, status status) {
-        List<Entry> lstEntries = new ArrayList<>();
-        for (Entry entry : this.lstEntries) {
-            if (entry.getTask().equals(task) && entry.getStatus().equals(status)) {
-                lstEntries.add(entry);
-            }
-        }
-        return lstEntries;
-    }
-
-    public List<Entry> getEntriesByTask(Task task, int duration) {
-        List<Entry> lstEntries = new ArrayList<>();
-        for (Entry entry : this.lstEntries) {
-            if (entry.getTask().equals(task) && entry.getDuration() == duration) {
                 lstEntries.add(entry);
             }
         }
