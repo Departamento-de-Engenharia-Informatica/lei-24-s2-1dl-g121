@@ -1,147 +1,137 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
+import pt.ipp.isep.dei.esoft.project.ui.gui.ViewGreenSpacesUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GreenSpacesUI implements Initializable {
 
     @FXML
-    public ChoiceBox greenSpaceType;
+    private ChoiceBox<String> greenSpaceType;
     @FXML
-    public Label messageLbl;
+    private Label messageLbl;
     @FXML
-    public TextField addressTxt;
+    private TextField addressTxt;
     @FXML
-    public TextField areaTxt;
+    private TextField areaTxt;
     @FXML
-    public TextField nameTxt;
+    private TextField nameTxt;
     @FXML
-    public Button submitBtn;
+    private TextField emailTxt;
+    @FXML
+    private Button submitBtn;
+    @FXML
+    private Button backBtn;
 
     private GreenSpacesController controller;
-    private String type;
-    private String address;
-    private double area;
-    private String name;
-    String[] validTypes = {"garden", "medium-sized park", "large-sized park"};
+    private ViewGreenSpacesUI viewGreenSpacesUI;
 
-    static Scanner sc = new Scanner(System.in);
+    private List<String> validTypes = Arrays.asList("Garden", "Medium-sized Park", "Large-sized Park");
 
-    public GreenSpacesUI(){ controller = new GreenSpacesController();}
-    private GreenSpacesController getController(){ return controller;}
-
-//    public void run() {
-//        System.out.println("\n\n--- New Green Space ------------------------");
-//
-//        requestData();
-//        submitData();
-//    }
-
-    @FXML
-    private void submitData() {
-        //Optional<GreenSpaces> greenSpace = getController().createGreenSpace(type, area, address, name);
-
-        messageLbl.setText("Green Space created successfully!!!");
+    // No-argument constructor
+    public GreenSpacesUI() {
     }
 
-    @FXML
-    private void requestData() {
-        type = greenSpaceType.getValue().toString();
-        address = addressTxt.getText();
-        area = Double.parseDouble(areaTxt.getText());
-        name = nameTxt.getText();
-
-        generalValidation();
+    // Constructor with parameters
+    public GreenSpacesUI(GreenSpacesController controller, ViewGreenSpacesUI viewGreenSpacesUI) {
+        this.controller = controller;
+        this.viewGreenSpacesUI = viewGreenSpacesUI;
     }
-
-    private void generalValidation() {
-        boolean valid = true;
-
-        if (Objects.equals(addressTxt.getText(), "")) {
-            valid = false;
-        } else if (Objects.equals(areaTxt.getText(), "")) {
-            valid = false;
-        }else if (Objects.equals(nameTxt.getText(), "")){
-            valid = false;
-        }
-
-        if(valid){
-            submitData();
-        }
-        else {
-            messageLbl.setText("All the boxes should be filled!");
-        }
-    }
-
-//    private String requestName() {
-//        while(name == null){
-//            name = Utils.readLineFromConsole("What's the name you want to give to the "+ type + " you added?");
-//
-//        }
-//        return name;
-//    }
-//
-//    private double requestArea() {
-//        while(area <= 0) {
-//            area = Utils.readDoubleFromConsole("What's the area of the "+type+"?");
-//        }
-//        return area;
-//    }
-//
-//    private String requestAddress() {
-//        while(address == null) {
-//            System.out.println("What's the address?");
-//            address = sc.nextLine();
-//        }
-//        return address;
-//    }
-
-//    private String requestType() {
-//        System.out.println("What's the type of green space you want to add? (garden, medium-sized park, large-sized park) ");
-////        validateType();
-//        return type;
-//    }
-
-//    private void validateType() {
-//        while (true) {
-//            type = sc.nextLine().trim();
-//
-//            if (isValidType(type, validTypes)) {
-//                break;
-//            } else {
-//                System.out.println("Invalid type. Enter the type again (garden, medium-sized park, large-sized park): ");
-//            }
-//        }
-//    }
-//
-//
-//    private static boolean isValidType(String type, String[] validTypes) {
-//        for (String validName : validTypes) {
-//            if (validName.equalsIgnoreCase(type)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<String> stringList = new ArrayList<>();
-
-        stringList.add("Garden");
-        stringList.add("Medium-sized Park");
-        stringList.add("Large-sized Park");
-
-        greenSpaceType.getItems().addAll(stringList);
+        greenSpaceType.getItems().addAll(validTypes);
+        messageLbl.setVisible(false); // Hide the message label initially
+        submitBtn.setOnAction(event -> submitData()); // Set the button action to submitData method
+        backBtn.setOnAction(event -> handleBackButtonAction()); // Set the back button action
     }
 
+    @FXML
+    private void submitData() {
+        String type = greenSpaceType.getValue();
+        String address = addressTxt.getText();
+        double area;
+        try {
+            area = Double.parseDouble(areaTxt.getText());
+        } catch (NumberFormatException e) {
+            messageLbl.setText("Invalid area format.");
+            messageLbl.setVisible(true);
+            return;
+        }
+        String name = nameTxt.getText();
+        String email = emailTxt.getText();
+
+        // Validate email
+        if (!validateEmail(email)) {
+            messageLbl.setText("Invalid email format.");
+            messageLbl.setVisible(true);
+            return;
+        }
+
+        // Attempt to save the green space
+        if (controller!= null) {
+            GreenSpaces createdGreenSpace = controller.createGreenSpace(type, area, address, name, email);
+            if (createdGreenSpace!= null) {
+                // Add the created green space to the controller
+                controller.addRuntimeGreenSpace(createdGreenSpace);
+
+                // Refresh the table in the ViewGreenSpacesUI
+                if (viewGreenSpacesUI!= null) {
+                    viewGreenSpacesUI.loadGreenSpaces(controller.getRuntimeGreenSpaces());
+                }
+
+                messageLbl.setText("Green space added successfully!");
+                messageLbl.setVisible(true);
+            }
+        } else {
+            messageLbl.setText("Controller is not initialized.");
+            messageLbl.setVisible(true);
+        }
+    }
+
+    @FXML
+    private void handleBackButtonAction() {
+        try {
+            // Load AdminGUI.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+            Scene adminScene = new Scene(loader.load());
+
+            // Get the current stage
+            Stage stage = (Stage) backBtn.getScene().getWindow();
+
+            // Set the new scene (AdminGUI) to the stage
+            stage.setScene(adminScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            messageLbl.setText("Failed to load AdminGUI.");
+            messageLbl.setVisible(true);
+        }
+    }
+    public List<GreenSpaces> getRuntimeGreenSpaces() {
+        if (controller!= null) {
+            return controller.getRuntimeGreenSpaces();
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+
+    private boolean validateEmail(String email) {
+        String regex = "^[a-zA-Z]+@[a-zA-Z]+\\.[a-zA-Z]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 }

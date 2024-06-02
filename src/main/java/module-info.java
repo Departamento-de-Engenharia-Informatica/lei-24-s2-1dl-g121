@@ -16,4 +16,6 @@ module pt.ipp.isep.dei.esoft.project {
     exports pt.ipp.isep.dei.esoft.project.ui.gui;
 
     opens pt.ipp.isep.dei.esoft.project.ui to javafx.fxml;
+    opens pt.ipp.isep.dei.esoft.project.ui.gui to javafx.fxml;
+
 }

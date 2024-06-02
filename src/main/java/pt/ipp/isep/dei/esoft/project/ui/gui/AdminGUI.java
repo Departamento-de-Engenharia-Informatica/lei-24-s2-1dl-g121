@@ -19,60 +19,39 @@ import java.util.ResourceBundle;
 public class AdminGUI implements Initializable {
 
     @FXML
-    public static Button runBtn;
+    public Button runBtn;
 
     @FXML
-    public ChoiceBox chooseUserStoryBox;
+    public ChoiceBox<MenuItemGUI> chooseUserStoryBox;
 
     @FXML
     public void runUserStory() {
-        MenuItemGUI selected = (MenuItemGUI) chooseUserStoryBox.getValue();
-        String Path = "/fxml/" + selected.toString().replace(" ", "") + ".fxml";
-        System.out.println(Path);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(Path));
-            Parent root = loader.load();
+        MenuItemGUI selected = chooseUserStoryBox.getValue();
+        if (selected != null) {
+            String path = "/fxml/" + selected.getFxmlFileName() + ".fxml";
+            System.out.println(path);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+                Parent root = loader.load();
 
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) runBtn.getScene().getWindow(); // get the stage reference
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) runBtn.getScene().getWindow(); // get the stage reference
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<MenuItemGUI> options = new ArrayList<>();
-//        options.add(new MenuItem("Register Skills", new RegisterSkillsUI()));
-//        options.add(new MenuItem("Register a new Job", new CreateJobUI()));
-//        options.add(new MenuItem("Register Collaborator", new RegisterCollaboratorUI()));
-//        options.add(new MenuItem("Assign a Skill to a Collaborator", new AssignSkillUI()));
-//        options.add(new MenuItem("Create a team", new CreateTeamUI()));
-        options.add(new MenuItemGUI("GreenSpacesUI", new GreenSpacesUI()));
+        options.add(new MenuItemGUI("GreenSpacesUI", "GreenSpacesUI"));
+        options.add(new MenuItemGUI("View Existing Green Spaces", "ViewGreenSpaces"));
 
 
         chooseUserStoryBox.getItems().addAll(options);
-    }
-    @FXML
-    public void goToGreenSpacesUI() {
-        try {
-            // Load the GreenSpacesUI FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GreenSpacesUI.fxml"));
-            Parent root = loader.load();
-
-            // Create a new scene with the loaded parent root
-            Scene scene = new Scene(root);
-
-            // Get the current stage from one of your components (doLoginBtn in this case)
-            Stage stage = (Stage) runBtn.getScene().getWindow();
-
-            // Set the new scene to the stage
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

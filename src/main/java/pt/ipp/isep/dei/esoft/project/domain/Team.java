@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Team {
-    private  int numberOfSkills;
     private final ArrayList<Skill> setOfSkills;
     private int maxSize;
     private int minSize;
@@ -38,7 +37,7 @@ public class Team {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(numberOfSkills, setOfSkills);
+        return Objects.hash(setOfSkills);
     }
 
     @Override

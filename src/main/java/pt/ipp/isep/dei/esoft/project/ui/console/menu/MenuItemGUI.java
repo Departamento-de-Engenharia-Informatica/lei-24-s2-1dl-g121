@@ -10,30 +10,24 @@ import java.util.Objects;
  */
 
 public class MenuItemGUI {
-    private final String description;
-    private final Initializable gui;
+    private String displayName;
+    private String fxmlFileName;
 
-    public MenuItemGUI(String description, Initializable gui) {
-        if (StringUtils.isBlank(description)) {
-            throw new IllegalArgumentException("MenuItem description cannot be null or empty.");
-        }
-        if (Objects.isNull(gui)) {
-            throw new IllegalArgumentException("MenuItem does not support a null GUI.");
-        }
-
-        this.description = description;
-        this.gui = gui;
+    public MenuItemGUI(String displayName, String fxmlFileName) {
+        this.displayName = displayName;
+        this.fxmlFileName = fxmlFileName;
     }
 
-    public void run() {
-        this.gui.initialize(null, null);
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public boolean hasDescription(String description) {
-        return this.description.equals(description);
+    public String getFxmlFileName() {
+        return fxmlFileName;
     }
 
+    @Override
     public String toString() {
-        return this.description;
+        return displayName;
     }
 }

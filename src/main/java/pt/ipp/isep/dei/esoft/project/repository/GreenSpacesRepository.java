@@ -1,32 +1,25 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class GreenSpacesRepository {
-    private final List<GreenSpaces> greenSpaces;
+    private List<GreenSpaces> greenSpacesDatabase = new ArrayList<>();
 
-    public GreenSpacesRepository() {greenSpaces = new ArrayList<>();}
-
-    public Optional<GreenSpaces> addGreenSpace(GreenSpaces greenSpace) {
-        Optional<GreenSpaces> newGreenSpace = Optional.empty();
-        if (validateGreenSpace(greenSpace)) {
-            newGreenSpace = Optional.of(greenSpace);
-            greenSpaces.add(newGreenSpace.get());
-        }
-        return newGreenSpace;
+    // Method to add a single GreenSpaces object
+    public void addGreenSpace(GreenSpaces greenSpace) {
+        greenSpacesDatabase.add(greenSpace);
     }
 
-    private boolean validateGreenSpace(GreenSpaces greenSpace) {
-        boolean isValid = !greenSpaces.contains(greenSpace);
-        return isValid;
+    // Method to add a list of GreenSpaces objects
+    public void addGreenSpaces(List<GreenSpaces> greenSpaces) {
+        greenSpacesDatabase.addAll(greenSpaces);
     }
 
-    public List<GreenSpaces> getGreenSpaces() {
-        return List.copyOf(greenSpaces);
+    public List<GreenSpaces> getAllGreenSpaces() {
+        return new ArrayList<>(greenSpacesDatabase);
     }
 }
+

@@ -1,46 +1,42 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
-import pt.ipp.isep.dei.esoft.project.repository.*;
+import pt.ipp.isep.dei.esoft.project.repository.GreenSpacesRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class GreenSpacesController {
-    private OrganizationRepository organizationRepository;
-    private AuthenticationRepository authenticationRepository;
-    private GreenSpacesRepository greenSpacesRepository;
+    private List<GreenSpaces> runtimeGreenSpaces = new ArrayList<>();
+    private GreenSpacesRepository repository;
 
-    public GreenSpacesController() {
-        Repositories repositories = Repositories.getInstance();
-        organizationRepository = repositories.getOrganizationRepository();
-        authenticationRepository = repositories.getAuthenticationRepository();
-        greenSpacesRepository = repositories.getGreenSpacesRepository();
+    public GreenSpacesController(GreenSpacesRepository repository) {
+        this.repository = repository;
     }
 
-    // Allows receiving the repositories as parameters for testing purposes
-    public GreenSpacesController(OrganizationRepository organizationRepository,
-                               GreenSpacesRepository greenSpacesRepository,
-                                AuthenticationRepository authenticationRepository) {
-        this.organizationRepository = organizationRepository;
-        this.authenticationRepository = authenticationRepository;
-        this.greenSpacesRepository = greenSpacesRepository;
-    }
-    public Optional<GreenSpaces> createGreenSpace(String type, double area, String address, String name, String email) {
-        GreenSpaces newGreenSpace = new GreenSpaces(type, area, address, name, email);
-        if (!greenSpacesRepository.getGreenSpaces().contains(newGreenSpace)) {
-            try {
-                greenSpacesRepository.addGreenSpace(newGreenSpace);
-                return Optional.of(newGreenSpace);
-            } catch (UnsupportedOperationException e) {
-                System.out.println("Error:" + e.getMessage());
-            }
+    public GreenSpaces createGreenSpace(String type, double area, String address, String name, String email) {
+        GreenSpaces greenSpace = new GreenSpaces(type, area, address, name, email);
+        if (greenSpace.isValid()) {
+            return greenSpace;
         }
-        return Optional.empty();
+        return null;
     }
 
+    public void addRuntimeGreenSpace(GreenSpaces greenSpace) {
+        runtimeGreenSpaces.add(greenSpace);
+    }
+
+    public List<GreenSpaces> getRuntimeGreenSpaces() {
+        return new ArrayList<>(runtimeGreenSpaces);
+    }
+
+    public void clearRuntimeGreenSpaces() {
+        runtimeGreenSpaces.clear();
+    }
+
+    public void saveGreenSpaces() {
+        repository.addGreenSpaces(runtimeGreenSpaces); // Save all runtime green spaces
+        clearRuntimeGreenSpaces();
+    }
 }
