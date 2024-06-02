@@ -7,18 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.urgencyDegree;
-import pt.ipp.isep.dei.esoft.project.repository.GreenSpacesRepository;
-import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +36,11 @@ public class ToDoListUI implements Initializable {
     public ComboBox greenSpaceBox;
 
     @FXML
+    public Label errorMessageLbl;
+    @FXML
+    public Label successMessageLbl;
+
+    @FXML
     public Button addTaskBtn;
     @FXML
     public Button returnBtn;
@@ -48,7 +48,7 @@ public class ToDoListUI implements Initializable {
     public ListView showcaseListLst;
 
     @FXML
-    public void returnToMenu(){
+    public void returnToMenu() {
         try {
             // Load the AuthenticationUI FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
@@ -69,37 +69,140 @@ public class ToDoListUI implements Initializable {
 
     @FXML
     public void addTaskToToDoList() {
-        //TODO: Verifications
+        errorMessageLbl.setText("");
+        successMessageLbl.setText("");
 
-        String reference = referenceTxt.getText();
-        String description = descriptionTxt.getText();
-        int duration = Integer.parseInt(durationTxt.getText());
-        urgencyDegree urgencyDegree = (pt.ipp.isep.dei.esoft.project.domain.urgencyDegree) urgencyDegreeBox.getValue();
+        String reference = "";
+        String description = "";
+        int duration = 0;
+        urgencyDegree urgencyDegree = null;
+        GreenSpaces greenSpaces = null;
 
-        GreenSpacesController greenSpacesController = new GreenSpacesController();
-        GreenSpaces greenSpaces = greenSpacesController.getGreenSpaceByName(greenSpaceBox.getValue().toString());
+        boolean valid = true;
+        do {
+            reference = referenceTxt.getText();
+            if (!verifyReference(reference)) {
 
-        Optional<Task> optTask = controller.registerTask(reference, description, duration, urgencyDegree, greenSpaces);
+                valid = false;
+                break;
+            }
 
-        if (optTask.isPresent()) {
-            System.out.println("Task registered successfully!");
-            showcaseListLst.getItems().add(reference);
-        } else {
-            System.out.println("Task not registered!");
+            description = descriptionTxt.getText();
+            if (!verifyDescription(description)) {
+                errorMessageLbl.setText("Invalid description!");
+
+                valid = false;
+                break;
+            }
+
+            try {
+                duration = Integer.parseInt(durationTxt.getText());
+            } catch (NumberFormatException e) {
+                errorMessageLbl.setText("Invalid duration!");
+                valid = false;
+                break;
+            }
+            if (!validateDuration(duration)) {
+                errorMessageLbl.setText("Invalid duration!");
+
+                valid = false;
+                break;
+            }
+
+            urgencyDegree = (pt.ipp.isep.dei.esoft.project.domain.urgencyDegree) urgencyDegreeBox.getValue();
+            if (urgencyDegree == null) {
+                errorMessageLbl.setText("Must select urgency degree!");
+
+                valid = false;
+                break;
+            }
+
+            GreenSpacesController greenSpacesController = new GreenSpacesController();
+            try {
+                greenSpaces = greenSpacesController.getGreenSpaceByName(greenSpaceBox.getValue().toString());
+            } catch (NullPointerException e) {
+                errorMessageLbl.setText("Must select green space!");
+
+                valid = false;
+                break;
+            }
+        } while (false);
+
+
+
+        if (valid) {
+            Optional<Task> optTask = controller.registerTask(reference, description, duration, urgencyDegree, greenSpaces);
+            if (optTask.isPresent()) {
+                errorMessageLbl.setText("");
+                successMessageLbl.setText("Task registered successfully!");
+
+                showcaseListLst.getItems().add(reference);
+            } else {
+                successMessageLbl.setText("");
+                errorMessageLbl.setText("Task not registered!");
+            }
         }
+    }
+
+    private boolean verifyReference(String reference) {
+        // Check if the string is empty
+        if (reference == null || reference.trim().isEmpty()) {
+            errorMessageLbl.setText("Invalid reference!");
+            return false;
+        }
+
+        // Check if the string contains special characters
+        if (reference.matches(".*[^a-zA-Z0-9ç ].*")) {
+            errorMessageLbl.setText("Invalid reference!");
+            return false;
+        }
+
+        CreateTaskController createTaskController = new CreateTaskController();
+        List<String> tasks = createTaskController.getTasks();
+        if (tasks.contains(reference)) {
+            errorMessageLbl.setText("Already existing reference!");
+
+            return false;
+        }
+
+        // If the string is not empty and does not contain special characters, return true
+        return true;
+    }
+
+    private boolean validateDuration(int duration) {
+
+        return duration > 0;
+    }
+
+    private boolean verifyDescription(String string) {
+        // Check if the string is empty
+        if (string == null || string.trim().isEmpty()) {
+            return false;
+        }
+
+        // Check if the string contains special characters
+        if (string.matches(".*[^a-zA-Zç ].*")) {
+            return false;
+        }
+
+        // If the string is not empty and does not contain special characters, return true
+        return true;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Fill urgencyDegreeBox
         List<urgencyDegree> urgencyDegrees = List.of(urgencyDegree.LOW, urgencyDegree.MEDIUM, urgencyDegree.HIGH);
         ObservableList<urgencyDegree> urgencyDegreesObs = FXCollections.observableArrayList(urgencyDegrees);
         urgencyDegreeBox.setItems(urgencyDegreesObs);
 
+        // Fill greenSpaceBox
         GreenSpacesController controller = new GreenSpacesController();
         List<String> greenSpaces = controller.getGreenSpacesNames();
         ObservableList<String> greenSpacesObs = FXCollections.observableArrayList(greenSpaces);
         greenSpaceBox.setItems(greenSpacesObs);
 
+        // Show current to do list
         CreateTaskController createTaskController = new CreateTaskController();
         List<String> tasks = createTaskController.getTasks();
         showcaseListLst.getItems().addAll(tasks);
