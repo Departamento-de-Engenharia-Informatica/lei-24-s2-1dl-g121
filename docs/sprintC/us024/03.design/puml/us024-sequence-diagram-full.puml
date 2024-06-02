@@ -6,66 +6,70 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Human Resources Manager" as ADM
-participant ":CreateVehicleUI" as UI
-participant ":CreateVehicleController" as CTRL
+actor "Green Space Manager" as ADM
+participant ":AgendaUI" as UI
+participant ":CreateAgendaController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "VehicleRepository:\nVehicleRepository" as TaskCategoryRepository
 
+participant "AgendaRepository" as Agenda
 
 activate ADM
 
-        ADM -> UI : asks to register a vehicle
+        ADM -> UI : asks for agenda
 
         activate UI
 
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
-            UI -> CTRL** : create
+                      UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+                       'create CTRL
+                        UI -> CTRL** : create
 
-            UI -> CTRL : getVehicle
-            activate CTRL
+                        UI -> CTRL : getAgenda
+                        activate CTRL
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
+                            CTRL -> RepositorySingleton : getInstance()
+                            activate RepositorySingleton
 
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
+                                RepositorySingleton --> CTRL: repositories
+                            deactivate RepositorySingleton
 
-                CTRL -> TaskCategoryRepository : getVehicleRepository()
-                activate TaskCategoryRepository
+                            CTRL -> Agenda : getAgendaRepository()
+                            activate Agenda
 
-                    TaskCategoryRepository --> CTRL: vehicleRepository
-                deactivate TaskCategoryRepository
+                                Agenda --> CTRL: agendaRepository
+                            deactivate Agenda
 
 
 
-                CTRL --> UI : vehicleRegister
-            deactivate CTRL
+                            CTRL --> UI : Agenda
+                    deactivate CTRL
 
-            UI --> ADM : requests data (Brand, Model, Type, Tare, Gross Weight ,\n Current Km, Register Date, Acquisition Date,\n Maintenance/Check- up Frequency (in Kms))
+            UI --> ADM : shows agenda
         deactivate UI
 
-    ADM -> UI : types requested data
+    ADM -> UI : asks to postpone an entry
     activate UI
 
-        UI --> ADM : shows all data and requests confirmation
-    deactivate UI
-
-    ADM -> UI : confirms data
-    activate UI
-
-    UI -> TaskCategoryRepository : registerVehicle
-
-        activate TaskCategoryRepository
-
-        TaskCategoryRepository --> UI : Vehicle
+        UI --> ADM : asks what the new date is
 
 
-        deactivate  TaskCategoryRepository
+    ADM -> UI : choose the date
+
+    UI --> CTRL : newDate
+        activate CTRL
+
+        CTRL -->Agenda : getDateInformation
+
+        activate Agenda
+
+        Agenda --> CTRL : dateConfirmation
+
+        deactivate Agenda
+
+        CTRL --> UI : dateConfirmation
 
             deactivate CTRL
-            UI --> ADM: displays operation success
+            UI --> ADM: confirm availability and display success message
+
     deactivate UI
 
 deactivate ADM

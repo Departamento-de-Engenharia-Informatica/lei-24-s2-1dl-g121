@@ -6,16 +6,17 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Human Resources Manager" as ADM
-participant ":CreateVehicleUI" as UI
-participant ":CreateVehicleController" as CTRL
+actor "Green Space Manager" as ADM
+participant ":AgendaUI" as UI
+participant ":AgendaController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "VehicleRepository:\nVehicleRepository" as TaskCategoryRepository
+participant "AgendaRepository" as Agenda
 
 
 activate ADM
 
-        ADM -> UI : asks to register a vehicle
+        ADM -> UI : asks for agenda
 
         activate UI
 
@@ -23,7 +24,7 @@ activate ADM
             'create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getVehicle
+            UI -> CTRL : getAgenda
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -32,30 +33,46 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> TaskCategoryRepository : getVehicleRepository()
-                activate TaskCategoryRepository
+                CTRL -> Agenda : getAgendaRepository()
+                activate Agenda
 
-                    TaskCategoryRepository --> CTRL: vehicleRepository
-                deactivate TaskCategoryRepository
+                    Agenda --> CTRL: agendaRepository
+                deactivate Agenda
 
 
 
-                CTRL --> UI : vehicleRegister
+                CTRL --> UI : Agenda
             deactivate CTRL
 
-            UI --> ADM : requests data (Brand, Model, Type, Tare, Gross Weight ,\n Current Km, Register Date, Acquisition Date,\n Maintenance/Check- up Frequency (in Kms))
+            UI --> ADM : shows agenda
         deactivate UI
 
-    ADM -> UI : types requested data
+    ADM -> UI : asks about the list of available vehicles
     activate UI
 
-        UI --> ADM : shows all data and requests confirmation
+        UI --> CTRL : getVehicle
+
+    activate CTRL
+
+
+                    CTRL -> TaskCategoryRepository : getVehicleRepository()
+                    activate TaskCategoryRepository
+
+                        TaskCategoryRepository --> CTRL: vehicleRepository
+                    deactivate TaskCategoryRepository
+
+
+
+                    CTRL --> UI : vehicleList
+                deactivate CTRL
+
+        UI --> ADM : returns the list of available vehicles
     deactivate UI
 
-    ADM -> UI : confirms data
+    ADM -> UI : assign one or more vehicles to an entry
     activate UI
 
-    UI -> TaskCategoryRepository : registerVehicle
+    UI -> TaskCategoryRepository : addVehicle
 
         activate TaskCategoryRepository
 
@@ -65,7 +82,7 @@ activate ADM
         deactivate  TaskCategoryRepository
 
             deactivate CTRL
-            UI --> ADM: displays operation success
+            UI --> ADM:  confirm and display success message
     deactivate UI
 
 deactivate ADM

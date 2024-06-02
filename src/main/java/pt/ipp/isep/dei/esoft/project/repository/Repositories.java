@@ -13,7 +13,8 @@ public class Repositories implements Serializable {
     private final JobRepository jobRepository;
     private final CreateTeamRepository createTeamRepository;
     private final GreenSpacesRepository greenSpacesRepository;
-    private final ToDoListRepository toDoListRepository;
+    private final ToDoList toDoList;
+    private final Agenda agenda;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
@@ -24,7 +25,8 @@ public class Repositories implements Serializable {
         jobRepository = new JobRepository();
         createTeamRepository = new CreateTeamRepository();
         greenSpacesRepository = new GreenSpacesRepository();
-        toDoListRepository = new ToDoListRepository();
+        toDoList = new ToDoList();
+        agenda = new Agenda();
     }
 
     public static Repositories getInstance() {
@@ -60,5 +62,7 @@ public class Repositories implements Serializable {
 
     public GreenSpacesRepository getGreenSpacesRepository() {return greenSpacesRepository;}
 
-    public ToDoListRepository getToDoListRepository() {return toDoListRepository;}
+    public ToDoList getToDoList() {return toDoList;}
+
+    public Agenda getAgenda() {return agenda;}
 }
