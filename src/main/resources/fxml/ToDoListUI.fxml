@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.ToDoListUI">
+   <children>
+      <TextField fx:id="referenceTxt" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="303.0" promptText="Task Reference" />
+      <TextField fx:id="descriptionTxt" layoutX="14.0" layoutY="68.0" prefHeight="25.0" prefWidth="303.0" promptText="Task Description" />
+      <TextField fx:id="durationTxt" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="303.0" promptText="Duration" />
+      <Button fx:id="addTaskBtn" layoutX="41.0" layoutY="307.0" mnemonicParsing="false" onAction="#addTaskToToDoList" text="Add to To Do List" />
+      <Button fx:id="returnBtn" layoutX="233.0" layoutY="307.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return" />
+      <ComboBox fx:id="urgencyDegreeBox" layoutX="14.0" layoutY="175.0" prefHeight="25.0" prefWidth="303.0" promptText="Urgency Degree" />
+      <ComboBox fx:id="greenSpaceBox" layoutX="14.0" layoutY="229.0" prefHeight="25.0" prefWidth="303.0" promptText="Green Space" />
+      <ListView fx:id="showcaseListLst" disable="true" layoutX="386.0" layoutY="14.0" prefHeight="370.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

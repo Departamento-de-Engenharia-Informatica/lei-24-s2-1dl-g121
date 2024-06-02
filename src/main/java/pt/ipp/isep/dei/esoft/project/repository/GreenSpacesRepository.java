@@ -1,7 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
+import pt.ipp.isep.dei.esoft.project.domain.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +13,21 @@ public class GreenSpacesRepository {
 
     public GreenSpacesRepository() {greenSpaces = new ArrayList<>();}
 
-    public Optional<GreenSpaces> addGreenSpace(GreenSpaces greenSpace) {
-        Optional<GreenSpaces> newGreenSpace = Optional.empty();
+    public Optional<GreenSpaces> add(GreenSpaces greenSpace) {
+
+        Optional<GreenSpaces> newGreenSpaces = Optional.empty();
+        boolean operationSuccess = false;
+
         if (validateGreenSpace(greenSpace)) {
-            newGreenSpace = Optional.of(greenSpace);
-            greenSpaces.add(newGreenSpace.get());
+            newGreenSpaces = Optional.of(greenSpace.clone());
+            operationSuccess = greenSpaces.add(newGreenSpaces.get());
         }
-        return newGreenSpace;
+
+        if (!operationSuccess) {
+            newGreenSpaces = Optional.empty();
+        }
+
+        return newGreenSpaces;
     }
 
     private boolean validateGreenSpace(GreenSpaces greenSpace) {
@@ -29,4 +38,6 @@ public class GreenSpacesRepository {
     public List<GreenSpaces> getGreenSpaces() {
         return List.copyOf(greenSpaces);
     }
+
+
 }

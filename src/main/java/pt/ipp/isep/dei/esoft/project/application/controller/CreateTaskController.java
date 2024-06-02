@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CreateTaskController {
@@ -38,7 +39,7 @@ public class CreateTaskController {
         return authenticationRepository;
     }
 
-    public Optional<Task> registerTaskEntry(String reference, String description, int duration, urgencyDegree urgencyDegree, GreenSpaces greenSpaces) {
+    public Optional<Task> registerTask(String reference, String description, int duration, urgencyDegree urgencyDegree, GreenSpaces greenSpaces) {
         Task newTask = new Task(reference, description, duration, urgencyDegree, greenSpaces);
         if (!toDoList.getTasks().contains(newTask)) {
             try{
@@ -49,5 +50,9 @@ public class CreateTaskController {
             return Optional.of(newTask);
         }
         return Optional.empty();
+    }
+
+    public List<String> getTasks() {
+        return toDoList.getTasksReferences();
     }
 }

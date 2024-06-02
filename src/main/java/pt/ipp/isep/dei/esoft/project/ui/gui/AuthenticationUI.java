@@ -1,22 +1,13 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.AdminUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.HRMUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.MenuItem;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.VFMUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
-import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -94,6 +85,25 @@ public class AuthenticationUI implements Initializable {
                     passwordTxt.clear();
                 }
             }
+
+        if(Objects.equals(id, "") && Objects.equals(pwd, "")){
+            try {
+                // Load the AuthenticationUI FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+                Parent root = loader.load();
+
+                // Create a new scene with the loaded parent root
+                Scene scene = new Scene(root);
+
+                // Get the current stage from one of your components (getScene in this case)
+                Stage stage = (Stage) emailTxt.getScene().getWindow();
+
+                // Set the new scene to the stage
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

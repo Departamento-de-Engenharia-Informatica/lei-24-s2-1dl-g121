@@ -48,9 +48,13 @@ public class GreenSpaces {
         this.name = name;
     }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     // Method to register a green space
     public void registerGreenSpace() {
@@ -62,9 +66,8 @@ public class GreenSpaces {
         System.out.println("Email: " + email);
     }
 
-//    public static void main(String[] args) {
-//        // Example usage
-//        GreenSpaces greenSpace = new GreenSpaces("Park", 1000, "123 Green Street", "Big Guy");
-//        greenSpace.registerGreenSpace();
-//    }
+
+    public GreenSpaces clone() {
+        return new GreenSpaces(this.type, this.area, this.address, this.name, this.email);
+    }
 }

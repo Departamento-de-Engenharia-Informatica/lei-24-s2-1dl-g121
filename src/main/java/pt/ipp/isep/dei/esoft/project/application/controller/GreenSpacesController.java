@@ -34,7 +34,7 @@ public class GreenSpacesController {
         GreenSpaces newGreenSpace = new GreenSpaces(type, area, address, name, email);
         if (!greenSpacesRepository.getGreenSpaces().contains(newGreenSpace)) {
             try {
-                greenSpacesRepository.addGreenSpace(newGreenSpace);
+                greenSpacesRepository.add(newGreenSpace);
                 return Optional.of(newGreenSpace);
             } catch (UnsupportedOperationException e) {
                 System.out.println("Error:" + e.getMessage());
@@ -43,4 +43,24 @@ public class GreenSpacesController {
         return Optional.empty();
     }
 
+    public List<GreenSpaces> getGreenSpaces() {
+        return greenSpacesRepository.getGreenSpaces();
+    }
+
+    public List<String> getGreenSpacesNames() {
+        List<String> greenSpacesNames = new ArrayList<>();
+        for (GreenSpaces greenSpace : greenSpacesRepository.getGreenSpaces()) {
+            greenSpacesNames.add(greenSpace.getName());
+        }
+        return greenSpacesNames;
+    }
+
+    public GreenSpaces getGreenSpaceByName(String name) {
+        for (GreenSpaces greenSpace : greenSpacesRepository.getGreenSpaces()) {
+            if (greenSpace.getName().equals(name)) {
+                return greenSpace;
+            }
+        }
+        return null;
+    }
 }

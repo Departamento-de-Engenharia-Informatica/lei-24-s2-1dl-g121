@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
@@ -13,7 +15,16 @@ public class Bootstrap implements Runnable {
         addCollaborators();
         addOrganization();
         addGreenSpaces();
+        addTasks();
         addUsers();
+    }
+
+    private void addTasks() {
+        GreenSpacesController controller = new GreenSpacesController();
+        ToDoList toDoList = Repositories.getInstance().getToDoList();
+        toDoList.add(new Task("Task 1", "Description 1", 1, urgencyDegree.LOW, controller.getGreenSpaceByName("ArcaAgua")));
+        toDoList.add(new Task("Task 2", "Description 2", 1, urgencyDegree.MEDIUM, controller.getGreenSpaceByName("ArcaAgua")));
+        toDoList.add(new Task("Task 3", "Description 3", 1, urgencyDegree.HIGH, controller.getGreenSpaceByName("ArcaAgua")));
     }
 
     private void addOrganization() {
@@ -69,7 +80,7 @@ public class Bootstrap implements Runnable {
 
     private void addGreenSpaces() {
         GreenSpacesRepository greenSpacesRepository = Repositories.getInstance().getGreenSpacesRepository();
-        greenSpacesRepository.addGreenSpace(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto","ArcaAgua", "exemplo@exemplo.com"));
+        greenSpacesRepository.add(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto","ArcaAgua", "exemplo@exemplo.com"));
     }
 
     private void addUsers() {
