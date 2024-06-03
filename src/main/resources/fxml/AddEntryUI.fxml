@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AddEntryUI">
+   <children>
+      <ListView fx:id="agendaLst" layoutX="386.0" layoutY="14.0" prefHeight="371.0" prefWidth="200.0" />
+      <TextField fx:id="entryIDTxt" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="300.0" promptText="Entry ID" />
+      <ComboBox fx:id="tasksBox" layoutX="14.0" layoutY="66.0" prefHeight="31.0" prefWidth="300.0" promptText="Task" />
+      <TextField fx:id="duratuionTxt" layoutX="14.0" layoutY="117.0" prefHeight="31.0" prefWidth="300.0" promptText="Duration" />
+      <ComboBox fx:id="statusBox" layoutX="14.0" layoutY="169.0" prefHeight="31.0" prefWidth="300.0" promptText="Status" />
+      <Button fx:id="addEntryBtn" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#addEntryToAgenda" text="Add Entry to Agenda" />
+      <Button fx:id="returnBtn" layoutX="249.0" layoutY="355.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return" />
+   </children>
+</AnchorPane>

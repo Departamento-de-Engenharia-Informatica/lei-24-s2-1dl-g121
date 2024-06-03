@@ -55,4 +55,12 @@ public class Agenda {
         }
         return lstEntries;
     }
+
+    public List<String> getEntriesIDs() {
+        List<String> lstIDs = new ArrayList<>();
+        for (Entry entry : this.lstEntries) {
+            lstIDs.add(entry.getID());
+        }
+        return lstIDs;
+    }
 }
