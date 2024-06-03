@@ -7,6 +7,8 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.util.Date;
+
 public class Bootstrap implements Runnable {
 
     //Add some task categories to the repository as bootstrap
@@ -24,8 +26,8 @@ public class Bootstrap implements Runnable {
     private void addEntries() {
         ToDoListController controller = new ToDoListController();
         Agenda agenda = Repositories.getInstance().getAgenda();
-        agenda.add(new Entry("Entry 1", controller.getTaskByReference("Task 1"), 1, status.PLANNED));
-        agenda.add(new Entry("Entry 2", controller.getTaskByReference("Task 2"), 1, status.CANCELED));
+        agenda.add(new Entry("Entry 1", controller.getTaskByReference("Task 1"), new Date(2024,6,3), status.PLANNED));
+        agenda.add(new Entry("Entry 2", controller.getTaskByReference("Task 2"), new Date(2024,5,1), status.CANCELED));
     }
 
     private void addTasks() {

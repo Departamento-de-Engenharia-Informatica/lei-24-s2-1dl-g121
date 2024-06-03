@@ -1,17 +1,19 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.Date;
+
 public class Entry {
     private String ID;
     private Task task;
     // private Team team;
     //private Vehicle vehicle;
-    private int duration;
+    private Date dueDate;
     private status status;
 
-    public Entry(String ID, Task task, int duration, status status) {
+    public Entry(String ID, Task task, Date dueDate, status status) {
         this.ID = ID;
         this.task = task;
-        this.duration = duration;
+        this.dueDate = dueDate;
         this.status = status;
     }
 
@@ -23,8 +25,8 @@ public class Entry {
         this.task = task;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setDuration(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
     public void setStatus(status status) {
@@ -39,8 +41,8 @@ public class Entry {
         return task;
     }
 
-    public int getDuration() {
-        return duration;
+    public Date getDuration() {
+        return dueDate;
     }
 
     public status getStatus() {
@@ -48,7 +50,7 @@ public class Entry {
     }
 
     public String toString() {
-        return String.format("Entry: %s, %d, %s", task, duration, status);
+        return String.format("Entry: %s, %s, %s", task, dueDate.toString(), status);
     }
 
     /**
@@ -57,6 +59,6 @@ public class Entry {
      * @return copy of the object
      */
     public Entry clone() {
-        return new Entry(ID, task, duration, status);
+        return new Entry(ID, task, dueDate, status);
     }
 }

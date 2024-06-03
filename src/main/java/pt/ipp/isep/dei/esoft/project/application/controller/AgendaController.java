@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,8 +47,8 @@ public class AgendaController {
         this.toDoList = toDoList;
     }
 
-    public Optional<Entry> registerEntry(String ID, Task task, int duration, status status) {
-        Entry newEntry = new Entry(ID, task, duration, status);
+    public Optional<Entry> registerEntry(String ID, Task task, Date dueDate, status status) {
+        Entry newEntry = new Entry(ID, task, dueDate, status);
         if (!agenda.getEntries().contains(newEntry)) {
             try{
                 agenda.add(newEntry);

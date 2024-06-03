@@ -31,9 +31,9 @@ public class AddTaskUI implements Initializable {
     @FXML
     public TextField durationTxt;
     @FXML
-    public ComboBox urgencyDegreeBox;
+    public ComboBox<urgencyDegree> urgencyDegreeBox;
     @FXML
-    public ComboBox greenSpaceBox;
+    public ComboBox<String> greenSpaceBox;
 
     @FXML
     public Label errorMessageLbl;

@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
+import java.util.Date;
 import java.util.Optional;
 
 public class CreateEntryController {
@@ -39,8 +40,8 @@ public class CreateEntryController {
         return agenda;
     }
 
-    public Optional<Entry> registerEntry(String ID, Task task, int duration, status status) {
-        Entry newEntry = new Entry(ID, task, duration, status);
+    public Optional<Entry> registerEntry(String ID, Task task, Date dueDate, status status) {
+        Entry newEntry = new Entry(ID, task, dueDate, status);
         if (!agenda.getEntries().contains(newEntry) && !agenda.getEntriesByTask(task).isEmpty()) {
             try {
                 agenda.add(newEntry);
