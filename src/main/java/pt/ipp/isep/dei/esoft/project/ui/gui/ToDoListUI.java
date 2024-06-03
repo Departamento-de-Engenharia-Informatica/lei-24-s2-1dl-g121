@@ -129,7 +129,6 @@ public class ToDoListUI implements Initializable {
         } while (false);
 
 
-
         if (valid) {
             Optional<Task> optTask = controller.registerTask(reference, description, duration, urgencyDegree, greenSpaces);
             if (optTask.isPresent()) {
@@ -206,5 +205,20 @@ public class ToDoListUI implements Initializable {
         CreateTaskController createTaskController = new CreateTaskController();
         List<String> tasks = createTaskController.getTasks();
         showcaseListLst.getItems().addAll(tasks);
+        // Disable focus on the list view
+        showcaseListLst.setFocusTraversable(false);
+        showcaseListLst.setCellFactory(lv -> new ListCell<String>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(item);
+                    setMouseTransparent(true);
+                }
+            }
+        });
+
     }
 }

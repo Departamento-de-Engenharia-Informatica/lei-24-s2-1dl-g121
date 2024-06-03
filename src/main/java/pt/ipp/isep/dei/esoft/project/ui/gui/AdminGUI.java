@@ -9,11 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
-import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.repository.GreenSpacesRepository;
-import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +22,6 @@ public class AdminGUI implements Initializable {
 
     @FXML
     public ListView<String> toDoListLst;
-
 
 
     @FXML
