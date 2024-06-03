@@ -1,9 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ public class GreenSpacesController {
     private OrganizationRepository organizationRepository;
     private AuthenticationRepository authenticationRepository;
     private GreenSpacesRepository greenSpacesRepository;
+    private ObservableList<GreenSpaces> greenSpacesList = FXCollections.observableArrayList();
 
     public GreenSpacesController() {
         Repositories repositories = Repositories.getInstance();
@@ -62,5 +62,8 @@ public class GreenSpacesController {
             }
         }
         return null;
+    }
+    public ObservableList<GreenSpaces> getRuntimeGreenSpaces() {
+        return greenSpacesList;
     }
 }

@@ -23,6 +23,29 @@ public class AdminUI implements Initializable {
     @FXML
     public ListView<String> toDoListLst;
 
+    @FXML
+    public Button createGreenSpaceBtn;
+
+    @FXML
+    public void goToCreateGreenSpaceMenu(){
+        try {
+            // Load the AuthenticationUI FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GreenSpacesUI.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene with the loaded parent root
+            Scene scene = new Scene(root);
+
+            // Get the current stage from one of your components (getScene in this case)
+            Stage stage = (Stage) addTaskBtn.getScene().getWindow();
+
+            // Set the new scene to the stage
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     public void runAddTask() {

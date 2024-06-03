@@ -82,10 +82,10 @@ public class GreenSpacesUI implements Initializable {
 
         // Attempt to save the green space
         if (controller!= null) {
-            GreenSpaces createdGreenSpace = controller.createGreenSpace(type, area, address, name, email);
+            Optional<GreenSpaces> createdGreenSpace = controller.createGreenSpace(type, area, address, name, email);
             if (createdGreenSpace!= null) {
                 // Add the created green space to the controller
-                controller.addRuntimeGreenSpace(createdGreenSpace);
+                controller.createGreenSpace(type, area, address, name, email);
 
                 // Refresh the table in the ViewGreenSpacesUI
                 if (viewGreenSpacesUI!= null) {
