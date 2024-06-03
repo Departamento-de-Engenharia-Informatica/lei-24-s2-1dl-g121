@@ -6,9 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,40 @@ public class AdminUI implements Initializable {
 
     @FXML
     public Button createGreenSpaceBtn;
+    @FXML
+    public Button completeTaskBtn;
+    @FXML
+    public Label errorMessageLbl;
+
+    @FXML
+    public void markTaskAsCompleted(){
+        ToDoListController controller = new ToDoListController();
+        if (toDoListLst.getSelectionModel().getSelectedItem() == null){
+            errorMessageLbl.setText("Please select a task");
+        }
+        else {
+            errorMessageLbl.setText("");
+            controller.removeTask(toDoListLst.getSelectionModel().getSelectedItem());
+            toDoListLst.getSelectionModel().clearSelection();
+            try {
+                // Load the AuthenticationUI FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+                Parent root = loader.load();
+
+                // Create a new scene with the loaded parent root
+                Scene scene = new Scene(root);
+
+                // Get the current stage from one of your components (getScene in this case)
+                Stage stage = (Stage) addTaskBtn.getScene().getWindow();
+
+                // Set the new scene to the stage
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     @FXML
     public void goToCreateGreenSpaceMenu(){
@@ -69,7 +104,7 @@ public class AdminUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        CreateTaskController controller = new CreateTaskController();
+        ToDoListController controller = new ToDoListController();
         List<String> tasks = controller.getTasks();
         toDoListLst.getItems().addAll(tasks);
     }

@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.domain.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,9 @@ import java.util.Optional;
 public class GreenSpacesRepository {
     private final List<GreenSpaces> greenSpaces;
 
-    public GreenSpacesRepository() {greenSpaces = new ArrayList<>();}
+    public GreenSpacesRepository() {
+        greenSpaces = new ArrayList<>();
+    }
 
     public Optional<GreenSpaces> add(GreenSpaces greenSpace) {
 

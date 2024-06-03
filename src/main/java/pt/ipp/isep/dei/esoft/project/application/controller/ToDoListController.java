@@ -10,16 +10,16 @@ import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 import java.util.List;
 import java.util.Optional;
 
-public class CreateTaskController {
+public class ToDoListController {
     private ToDoList toDoList;
     private AuthenticationRepository authenticationRepository;
 
-    public CreateTaskController() {
+    public ToDoListController() {
         getToDoListRepository();
         getAuthenticationRepository();
     }
 
-    public CreateTaskController(ToDoList toDoListRepository) {
+    public ToDoListController(ToDoList toDoListRepository) {
         this.toDoList = toDoListRepository;
     }
 
@@ -54,5 +54,21 @@ public class CreateTaskController {
 
     public List<String> getTasks() {
         return toDoList.getTasksReferences();
+    }
+
+    public boolean removeTask(String reference) {
+        Optional<Task> taskToRemove = toDoList.getTasks().stream()
+                .filter(task -> task.getReference().equals(reference))
+                .findFirst();
+
+        if (taskToRemove.isPresent()) {
+            try {
+                toDoList.remove(taskToRemove.get());
+                return true;
+            } catch (UnsupportedOperationException e) {
+                System.out.println("Error:" + e.getMessage());
+            }
+        }
+        return false;
     }
 }

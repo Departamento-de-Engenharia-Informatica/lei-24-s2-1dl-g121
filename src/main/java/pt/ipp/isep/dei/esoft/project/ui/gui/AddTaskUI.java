@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import pt.ipp.isep.dei.esoft.project.application.controller.CreateTaskController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddTaskUI implements Initializable {
-    private final CreateTaskController controller = new CreateTaskController();
+    private final ToDoListController controller = new ToDoListController();
 
     @FXML
     public TextField referenceTxt;
@@ -156,8 +156,8 @@ public class AddTaskUI implements Initializable {
             return false;
         }
 
-        CreateTaskController createTaskController = new CreateTaskController();
-        List<String> tasks = createTaskController.getTasks();
+        ToDoListController toDoListController = new ToDoListController();
+        List<String> tasks = toDoListController.getTasks();
         if (tasks.contains(reference)) {
             errorMessageLbl.setText("Already existing reference!");
 
@@ -202,8 +202,8 @@ public class AddTaskUI implements Initializable {
         greenSpaceBox.setItems(greenSpacesObs);
 
         // Show current to do list
-        CreateTaskController createTaskController = new CreateTaskController();
-        List<String> tasks = createTaskController.getTasks();
+        ToDoListController toDoListController = new ToDoListController();
+        List<String> tasks = toDoListController.getTasks();
         showcaseListLst.getItems().addAll(tasks);
         // Disable focus on the list view
         showcaseListLst.setFocusTraversable(false);

@@ -59,4 +59,7 @@ public class ToDoList {
         }
         return references;
     }
+    public boolean remove(Task task) {
+        return tasks.remove(task);
+    }
 }
