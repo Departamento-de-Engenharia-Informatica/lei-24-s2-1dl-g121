@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class ToDoListUI implements Initializable {
+public class AddTaskUI implements Initializable {
     private final CreateTaskController controller = new CreateTaskController();
 
     @FXML
@@ -191,7 +191,7 @@ public class ToDoListUI implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Fill urgencyDegreeBox
-        List<urgencyDegree> urgencyDegrees = List.of(urgencyDegree.LOW, urgencyDegree.MEDIUM, urgencyDegree.HIGH);
+        List<urgencyDegree> urgencyDegrees = List.of(urgencyDegree.PENDING,urgencyDegree.LOW, urgencyDegree.MEDIUM, urgencyDegree.HIGH);
         ObservableList<urgencyDegree> urgencyDegreesObs = FXCollections.observableArrayList(urgencyDegrees);
         urgencyDegreeBox.setItems(urgencyDegreesObs);
 

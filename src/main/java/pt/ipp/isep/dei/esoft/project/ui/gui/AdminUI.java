@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdminGUI implements Initializable {
+public class AdminUI implements Initializable {
 
     @FXML
     public Button addTaskBtn;
@@ -28,7 +28,7 @@ public class AdminGUI implements Initializable {
     public void runAddTask() {
         try {
             // Load the AuthenticationUI FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ToDoListUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddTaskUI.fxml"));
             Parent root = loader.load();
 
             // Create a new scene with the loaded parent root

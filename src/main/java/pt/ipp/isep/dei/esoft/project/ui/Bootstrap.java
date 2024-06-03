@@ -7,7 +7,6 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class Bootstrap implements Runnable {
 
-
     //Add some task categories to the repository as bootstrap
     public void run() {
         addSkills();
@@ -61,8 +60,12 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "210396946", "15450998", new Job("SoftwareDeveloper")));
+        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", new Job("SoftwareDeveloper")));
+        collaboratorRepository.add(new Collaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", new Job("SoftwareDeveloper")));
+        collaboratorRepository.add(new Collaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", new Job("SoftwareDeveloper")));
     }
+
+
 
     private void addGreenSpaces() {
         GreenSpacesRepository greenSpacesRepository = Repositories.getInstance().getGreenSpacesRepository();
