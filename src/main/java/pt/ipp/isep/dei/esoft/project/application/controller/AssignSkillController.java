@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -30,7 +29,7 @@ public class AssignSkillController {
      * Constructor that allows the injection of repositories.
      *
      * @param collaboratorRepository the collaborator repository to use
-     * @param skillRepository the skill repository to use
+     * @param skillRepository        the skill repository to use
      */
     public AssignSkillController(CollaboratorRepository collaboratorRepository, SkillRepository skillRepository) {
         this.collaboratorRepository = collaboratorRepository;
@@ -66,7 +65,7 @@ public class AssignSkillController {
      *
      * @return the list of all collaborators
      */
-    public List<Collaborator> getCollaboratorList(){
+    public List<Collaborator> getCollaboratorList() {
         return collaboratorRepository.getCollaborators();
     }
 
@@ -82,7 +81,7 @@ public class AssignSkillController {
     /**
      * Assigns a skill to a collaborator.
      *
-     * @param ID the ID of the collaborator
+     * @param ID        the ID of the collaborator
      * @param skillName the name of the skill
      */
     public void assignSkill(String ID, String skillName) {

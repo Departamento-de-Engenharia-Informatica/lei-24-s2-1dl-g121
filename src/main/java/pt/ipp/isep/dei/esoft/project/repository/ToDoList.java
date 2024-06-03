@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.urgencyDegree;
 
@@ -49,5 +50,13 @@ public class ToDoList {
             }
         }
         return tasksByUrgencyDegree;
+    }
+
+    public List<String> getTasksReferences() {
+        List<String> references = new ArrayList<>();
+        for (Task task : tasks) {
+            references.add(task.getReference());
+        }
+        return references;
     }
 }

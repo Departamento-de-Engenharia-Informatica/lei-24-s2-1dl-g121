@@ -28,6 +28,7 @@ public class MainApp extends Application {
 
             stage.setTitle("Musgo Sublime");
             stage.setScene(scene);
+            stage.setResizable(false);
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
