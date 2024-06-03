@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 
 import java.io.IOException;
@@ -20,16 +21,40 @@ public class AdminUI implements Initializable {
 
     @FXML
     public Button addTaskBtn;
-
     @FXML
-    public ListView<String> toDoListLst;
-
+    public Button addEntryBtn;
     @FXML
     public Button createGreenSpaceBtn;
     @FXML
     public Button completeTaskBtn;
+
+    @FXML
+    public ListView<String> toDoListLst;
+    @FXML
+    public ListView<String> agendaLst;
+
     @FXML
     public Label errorMessageLbl;
+
+    @FXML
+    public void runAddEntry() {
+        try {
+            // Load the AuthenticationUI FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddEntryUI.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene with the loaded parent root
+            Scene scene = new Scene(root);
+
+            // Get the current stage from one of your components (getScene in this case)
+            Stage stage = (Stage) addTaskBtn.getScene().getWindow();
+
+            // Set the new scene to the stage
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void markTaskAsCompleted(){
@@ -104,9 +129,15 @@ public class AdminUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Initialize the to do list
         ToDoListController controller = new ToDoListController();
         List<String> tasks = controller.getTasks();
         toDoListLst.getItems().addAll(tasks);
+
+        //Initialize the agenda
+        AgendaController agendaController = new AgendaController();
+        List<String> entries = agendaController.getEntriesList();
+        agendaLst.getItems().addAll(entries);
     }
 
 }

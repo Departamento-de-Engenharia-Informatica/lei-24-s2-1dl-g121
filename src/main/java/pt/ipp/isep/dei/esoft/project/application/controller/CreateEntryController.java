@@ -39,8 +39,8 @@ public class CreateEntryController {
         return agenda;
     }
 
-    public Optional<Entry> registerEntry(Task task, int duration, status status) {
-        Entry newEntry = new Entry(task, duration, status);
+    public Optional<Entry> registerEntry(String ID, Task task, int duration, status status) {
+        Entry newEntry = new Entry(ID, task, duration, status);
         if (!agenda.getEntries().contains(newEntry) && !agenda.getEntriesByTask(task).isEmpty()) {
             try {
                 agenda.add(newEntry);

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
@@ -15,7 +17,15 @@ public class Bootstrap implements Runnable {
         addOrganization();
         addGreenSpaces();
         addTasks();
+        addEntries();
         addUsers();
+    }
+
+    private void addEntries() {
+        ToDoListController controller = new ToDoListController();
+        Agenda agenda = Repositories.getInstance().getAgenda();
+        agenda.add(new Entry("Entry 1", controller.getTaskByReference("Task 1"), 1, status.PLANNED));
+        agenda.add(new Entry("Entry 2", controller.getTaskByReference("Task 2"), 1, status.CANCELED));
     }
 
     private void addTasks() {

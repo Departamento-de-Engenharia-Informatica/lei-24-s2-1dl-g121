@@ -59,7 +59,7 @@ public class AgendaController {
         return Optional.empty();
     }
 
-    public List<String> getEntries() {
+    public List<String> getEntriesList() {
         return agenda.getEntriesIDs();
     }
 }

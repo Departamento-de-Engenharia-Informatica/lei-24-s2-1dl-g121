@@ -71,4 +71,11 @@ public class ToDoListController {
         }
         return false;
     }
+
+    public Task getTaskByReference(String reference) {
+        Optional<Task> task = toDoList.getTasks().stream()
+                .filter(t -> t.getReference().equals(reference))
+                .findFirst();
+        return task.orElse(null);
+    }
 }

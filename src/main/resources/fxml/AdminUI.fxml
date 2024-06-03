@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AdminUI">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AdminUI">
    <children>
       <Label layoutX="449.0" layoutY="14.0" text="To Do List:">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Button fx:id="addTaskBtn" layoutX="415.0" layoutY="308.0" mnemonicParsing="false" onAction="#runAddTask" text="Add Task to To Do List" />
-      <ListView fx:id="toDoListLst" layoutX="401.0" layoutY="46.0" prefHeight="240.0" prefWidth="200.0" />
-      <Button fx:id="createGreenSpaceBtn" layoutX="140.0" layoutY="292.0" mnemonicParsing="false" onAction="#goToCreateGreenSpaceMenu" text="Create Green Space" />
-      <Button fx:id="completeTaskBtn" layoutX="411.0" layoutY="360.0" mnemonicParsing="false" onAction="#markTaskAsCompleted" text="Mark task as completed" />
-      <Label fx:id="errorMessageLbl" layoutX="411.0" layoutY="391.0" prefHeight="16.0" prefWidth="131.0" textFill="RED" />
+      <Button fx:id="addTaskBtn" layoutX="429.0" layoutY="305.0" mnemonicParsing="false" onAction="#runAddTask" prefHeight="25.0" prefWidth="142.0" text="Add Task to To Do List" />
+      <ListView fx:id="toDoListLst" layoutX="400.0" layoutY="46.0" prefHeight="240.0" prefWidth="200.0" />
+      <Button fx:id="createGreenSpaceBtn" layoutX="124.0" layoutY="305.0" mnemonicParsing="false" onAction="#goToCreateGreenSpaceMenu" text="Create Green Space" />
+      <Button fx:id="completeTaskBtn" layoutX="429.0" layoutY="350.0" mnemonicParsing="false" onAction="#markTaskAsCompleted" text="Mark task as completed" />
+      <Label fx:id="errorMessageLbl" layoutX="400.0" layoutY="375.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" textFill="RED" />
+      <Label layoutX="805.0" layoutY="14.0" text="Agenda:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <ListView fx:id="agendaLst" layoutX="746.0" layoutY="46.0" prefHeight="240.0" prefWidth="200.0" />
+      <Button fx:id="addEntryBtn" layoutX="772.0" layoutY="305.0" mnemonicParsing="false" onAction="#runAddEntry" prefHeight="25.0" prefWidth="148.0" text="Add Entry to the Agenda" />
    </children>
 </AnchorPane>
