@@ -78,4 +78,8 @@ public class ToDoListController {
                 .findFirst();
         return task.orElse(null);
     }
+
+    public List<String> presentTasks() {
+        return toDoList.getTasksAndGreenSpaces();
+    }
 }

@@ -131,7 +131,7 @@ public class AdminUI implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Initialize the to do list
         ToDoListController controller = new ToDoListController();
-        List<String> tasks = controller.getTasks();
+        List<String> tasks = controller.presentTasks();
         toDoListLst.getItems().addAll(tasks);
 
         //Initialize the agenda

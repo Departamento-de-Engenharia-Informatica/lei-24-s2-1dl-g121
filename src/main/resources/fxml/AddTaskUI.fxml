@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -19,5 +20,6 @@
       <ListView fx:id="showcaseListLst" layoutX="386.0" layoutY="14.0" prefHeight="370.0" prefWidth="200.0" />
       <Label fx:id="errorMessageLbl" layoutX="14.0" layoutY="264.0" prefHeight="25.0" prefWidth="303.0" textFill="RED" />
       <Label fx:id="successMessageLbl" layoutX="14.0" layoutY="264.0" prefHeight="25.0" prefWidth="303.0" />
+      <CheckBox fx:id="anyGreenSpaceChk" layoutX="14.0" layoutY="256.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="303.0" text="Any Green Space" />
    </children>
 </AnchorPane>

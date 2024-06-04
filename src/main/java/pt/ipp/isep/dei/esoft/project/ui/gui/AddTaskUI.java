@@ -36,6 +36,9 @@ public class AddTaskUI implements Initializable {
     public ComboBox<String> greenSpaceBox;
 
     @FXML
+    public CheckBox anyGreenSpaceChk;
+
+    @FXML
     public Label errorMessageLbl;
     @FXML
     public Label successMessageLbl;
@@ -44,6 +47,7 @@ public class AddTaskUI implements Initializable {
     public Button addTaskBtn;
     @FXML
     public Button returnBtn;
+
     @FXML
     public ListView<String> showcaseListLst;
 
@@ -117,6 +121,10 @@ public class AddTaskUI implements Initializable {
                 break;
             }
 
+            if (anyGreenSpaceChk.isSelected()) {
+                break;
+            }
+
             GreenSpacesController greenSpacesController = new GreenSpacesController();
             try {
                 greenSpaces = greenSpacesController.getGreenSpaceByName(greenSpaceBox.getValue());
@@ -135,7 +143,7 @@ public class AddTaskUI implements Initializable {
                 errorMessageLbl.setText("");
                 successMessageLbl.setText("Task registered successfully!");
 
-                showcaseListLst.getItems().add(reference);
+                showcaseListLst.getItems().add(String.format("%s - %s", reference, greenSpaces == null ? "Any GreenSpace" : greenSpaces.getName()));
             } else {
                 successMessageLbl.setText("");
                 errorMessageLbl.setText("Task not registered!");
@@ -203,7 +211,7 @@ public class AddTaskUI implements Initializable {
 
         // Show current to do list
         ToDoListController toDoListController = new ToDoListController();
-        List<String> tasks = toDoListController.getTasks();
+        List<String> tasks = toDoListController.presentTasks();
         showcaseListLst.getItems().addAll(tasks);
         // Disable focus on the list view
         showcaseListLst.setFocusTraversable(false);

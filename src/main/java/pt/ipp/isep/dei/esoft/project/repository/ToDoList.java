@@ -62,4 +62,12 @@ public class ToDoList {
     public boolean remove(Task task) {
         return tasks.remove(task);
     }
+
+    public List<String> getTasksAndGreenSpaces() {
+        List<String> tasksAndGreenSpaces = new ArrayList<>();
+        for (Task task : tasks) {
+            tasksAndGreenSpaces.add(task.getTaskAndGreenSpace());
+        }
+        return tasksAndGreenSpaces;
+    }
 }

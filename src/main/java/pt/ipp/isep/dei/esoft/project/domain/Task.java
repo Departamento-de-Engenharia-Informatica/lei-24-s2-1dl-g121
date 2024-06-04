@@ -15,6 +15,13 @@ public class Task {
         this.greenSpace = greenSpace;
     }
 
+    public Task(String reference, String description, int duration, urgencyDegree urgencyDegree) {
+        this.reference = reference;
+        this.description = description;
+        this.duration = duration;
+        this.urgencyDegree = urgencyDegree;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -49,6 +56,13 @@ public class Task {
 
     public GreenSpaces getGreenSpace() {
         return greenSpace;
+    }
+
+    public String getTaskAndGreenSpace() {
+        if (this.greenSpace == null) {
+            return String.format("%s - Any GreenSpace", reference);
+        }
+        return String.format("%s - %s", reference, greenSpace.getName());
     }
 
     public String toString() {
