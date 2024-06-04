@@ -64,7 +64,10 @@ public class AdminUI implements Initializable {
         }
         else {
             errorMessageLbl.setText("");
-            controller.removeTask(toDoListLst.getSelectionModel().getSelectedItem());
+            String taskAndGreenSpace = toDoListLst.getSelectionModel().getSelectedItem();
+            String[] parts = taskAndGreenSpace.split(" - ");
+            String taskReference = parts[0];
+            controller.removeTask(taskReference);
             toDoListLst.getSelectionModel().clearSelection();
             try {
                 // Load the AuthenticationUI FXML file
