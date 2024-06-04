@@ -63,4 +63,8 @@ public class AgendaController {
     public List<String> getEntriesList() {
         return agenda.getEntriesIDs();
     }
+
+    public List<String> presentEntries() {
+        return agenda.getEntriesIdAndDate();
+    }
 }

@@ -49,7 +49,7 @@ public class RegisterCollaboratorUI implements Runnable {
             } else break;
         } while (true);
 
-
+        //TODO: Add validation for each field
         String name = requestName();
         String birthDetails = requestBirthDetails();
         String issuingDetails = requestIssuingDetails();

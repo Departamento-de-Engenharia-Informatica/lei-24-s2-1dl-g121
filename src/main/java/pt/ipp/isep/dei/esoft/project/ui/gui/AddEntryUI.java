@@ -166,14 +166,14 @@ public class AddEntryUI implements Initializable {
         statusBox.setItems(statusListObs);
 
         //Show current available entries
+        //Initialize the agenda
         AgendaController agendaController = new AgendaController();
-        List<String> entries = agendaController.getEntriesList();
-        ObservableList<String> entriesObs = FXCollections.observableArrayList(entries);
-        agendaLst.setItems(entriesObs);
+        List<String> entries = agendaController.presentEntries();
+        agendaLst.getItems().addAll(entries);
         // Disable focus on the list view
         agendaLst.setFocusTraversable(false);
         agendaLst.setCellFactory(
-                lv -> new ListCell<String>() {
+                lv -> new ListCell<>() {
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);

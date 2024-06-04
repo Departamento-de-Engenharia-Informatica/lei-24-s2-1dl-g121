@@ -63,4 +63,12 @@ public class Agenda {
         }
         return lstIDs;
     }
+
+    public List<String> getEntriesIdAndDate() {
+        List<String> lstEntries = new ArrayList<>();
+        for (Entry entry : this.lstEntries) {
+            lstEntries.add(entry.getIdAndDate());
+        }
+        return lstEntries;
+    }
 }

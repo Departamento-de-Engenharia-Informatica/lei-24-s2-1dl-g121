@@ -136,7 +136,7 @@ public class AdminUI implements Initializable {
 
         //Initialize the agenda
         AgendaController agendaController = new AgendaController();
-        List<String> entries = agendaController.getEntriesList();
+        List<String> entries = agendaController.presentEntries();
         agendaLst.getItems().addAll(entries);
     }
 

@@ -45,7 +45,7 @@ public class AddTaskUI implements Initializable {
     @FXML
     public Button returnBtn;
     @FXML
-    public ListView showcaseListLst;
+    public ListView<String> showcaseListLst;
 
     @FXML
     public void returnToMenu() {
@@ -109,7 +109,7 @@ public class AddTaskUI implements Initializable {
                 break;
             }
 
-            urgencyDegree = (pt.ipp.isep.dei.esoft.project.domain.urgencyDegree) urgencyDegreeBox.getValue();
+            urgencyDegree = urgencyDegreeBox.getValue();
             if (urgencyDegree == null) {
                 errorMessageLbl.setText("Must select urgency degree!");
 
@@ -119,7 +119,7 @@ public class AddTaskUI implements Initializable {
 
             GreenSpacesController greenSpacesController = new GreenSpacesController();
             try {
-                greenSpaces = greenSpacesController.getGreenSpaceByName(greenSpaceBox.getValue().toString());
+                greenSpaces = greenSpacesController.getGreenSpaceByName(greenSpaceBox.getValue());
             } catch (NullPointerException e) {
                 errorMessageLbl.setText("Must select green space!");
 

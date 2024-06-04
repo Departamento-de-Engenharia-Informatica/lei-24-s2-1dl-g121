@@ -53,6 +53,11 @@ public class Entry {
         return String.format("Entry: %s, %s, %s", task, dueDate.toString(), status);
     }
 
+
+    public String getIdAndDate() {
+        return String.format("%s - %d/%d/%d", ID, dueDate.getYear(), dueDate.getMonth(), dueDate.getDate());
+    }
+
     /**
      * Clone method.
      *
