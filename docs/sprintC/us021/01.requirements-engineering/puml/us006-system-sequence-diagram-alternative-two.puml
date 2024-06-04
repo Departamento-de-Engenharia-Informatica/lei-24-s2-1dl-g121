@@ -23,7 +23,7 @@ activate Employee
 
         System --> Employee : verifies data
 
-        System --> Employee : submits data and displays operation success
+        System --> Employee : displays error message if data is not valid
     deactivate System
 
 @enduml

@@ -60,7 +60,7 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 #### Alternative Two
 
-!
+![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
