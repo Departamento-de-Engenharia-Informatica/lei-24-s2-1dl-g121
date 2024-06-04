@@ -1,67 +1,72 @@
-# US006 - Register a vehicle.
+# US021 - Add a task to the To-Do List
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a VFM, I wish to register a vehicle including Brand, Model,
-Type, Tare Weight, Gross Weight, Current Km, Register Date, Acqui-
-sition Date, and Maintenance/Check-up Frequency (in km).
+As a GSM, I want to add a new entry to the To-Do List
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks.
+>	The To-Do List comprises all the tasks required to
+be done in order to assure the proper functioning of the parks. These tasks
+can be regular (e.g. pruning trees) or occasional (e.g. repairing a broken
+equipment).
 
 
 **From the client clarifications:**
 
-> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
+> **Question:** one task can be associated to more than one green space?
 >
-> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
+> **Answer:** A generic task, yes; like "Prunning Trees" but not a concrete task, like "Prunning Trees" in Parque da Cidade.
 
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform ther user of the mistake and give him the option to add another vehicle?
+> **Question:** Can different tasks have the same title?
 >
-> **Answer:** again, duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates.
+> **Answer:** A generic task can have the same title but a concrete needs further details. For instance:
+Generic Task: "Prunning Trees"
+Concrete Task at To-Do List: name(Prunning Trees); park(Arca De Agua); urgency(low); estimated duration(2 working days)
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** VFM cant duplicate cars.
-* **AC2:** Vehicles must be identified by the plate id.
-* **AC3:** Show car data for confirmation.
+* **AC1:** The new entry must be associated with a green space managed by the GSM.
+* **AC2:** The green space for the new entry should be chosen from a list presented to the GSM
 
 ### 1.4. Found out Dependencies
 
-* This user story has no dependencies
+* US020 - Create a Green Space
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
+    * Task reference
+    * Task description
 	
 * Selected data:
+    * Green space
+    * Urgency Degree
  
 
 **Output Data:**
 
-* Confirmation of car data
-* Car registration
+* Success message or error message
+* Shows the new task in the To-Do List
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
+[//]: # (**_Other alternatives might exist._**)
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us021-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative Two](svg/us021-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* 
+* n/a
