@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 
 import java.io.IOException;
@@ -90,20 +91,24 @@ public class AdminUI implements Initializable {
 
 
     @FXML
-    public void goToCreateGreenSpaceMenu(){
+    public void goToCreateGreenSpaceMenu() {
         try {
-            // Load the AuthenticationUI FXML file
+            // Load GreenSpacesUI.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GreenSpacesUI.fxml"));
-            Parent root = loader.load();
+            Scene greenSpacesScene = new Scene(loader.load());
 
-            // Create a new scene with the loaded parent root
-            Scene scene = new Scene(root);
+            // Get the controller for GreenSpacesUI
+            GreenSpacesUI greenSpacesUI = loader.getController();
 
-            // Get the current stage from one of your components (getScene in this case)
-            Stage stage = (Stage) addTaskBtn.getScene().getWindow();
+            // Create and set the GreenSpacesController
+            GreenSpacesController greenSpacesController = new GreenSpacesController();
+            greenSpacesUI.setController(greenSpacesController);
 
-            // Set the new scene to the stage
-            stage.setScene(scene);
+            // Get the current stage
+            Stage stage = (Stage) createGreenSpaceBtn.getScene().getWindow();
+
+            // Set the new scene (GreenSpacesUI) to the stage
+            stage.setScene(greenSpacesScene);
         } catch (IOException e) {
             e.printStackTrace();
         }

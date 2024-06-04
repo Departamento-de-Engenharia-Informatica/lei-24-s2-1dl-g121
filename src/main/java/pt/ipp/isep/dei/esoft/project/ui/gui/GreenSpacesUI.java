@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
-import pt.ipp.isep.dei.esoft.project.ui.gui.ViewGreenSpacesUI;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,12 +45,14 @@ public class GreenSpacesUI implements Initializable {
     // No-argument constructor
     public GreenSpacesUI() {
     }
-
-    // Constructor with parameters
-    public GreenSpacesUI(GreenSpacesController controller, ViewGreenSpacesUI viewGreenSpacesUI) {
+    public void setController(GreenSpacesController controller) {
         this.controller = controller;
+    }
+
+    public void setViewGreenSpacesUI(ViewGreenSpacesUI viewGreenSpacesUI) {
         this.viewGreenSpacesUI = viewGreenSpacesUI;
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,24 +85,24 @@ public class GreenSpacesUI implements Initializable {
         }
 
         // Attempt to save the green space
-        if (controller!= null) {
+        if(controller != null) {
             Optional<GreenSpaces> createdGreenSpace = controller.createGreenSpace(type, area, address, name, email);
-            if (createdGreenSpace!= null) {
-                // Add the created green space to the controller
+            if (createdGreenSpace.isPresent()) {
+                // Add the created green space to the controller (if necessary)
                 controller.createGreenSpace(type, area, address, name, email);
 
                 // Refresh the table in the ViewGreenSpacesUI
-                if (viewGreenSpacesUI!= null) {
-                    viewGreenSpacesUI.loadGreenSpaces(controller.getRuntimeGreenSpaces());
-                }
+//            if (viewGreenSpacesUI != null) {
+//                viewGreenSpacesUI.loadGreenSpaces(controller.getRuntimeGreenSpaces());
+//            }
 
                 messageLbl.setText("Green space added successfully!");
-                messageLbl.setVisible(true);
             }
-        } else {
-            messageLbl.setText("Controller is not initialized.");
             messageLbl.setVisible(true);
+        }else{
+            messageLbl.setText("Controller not intialized");
         }
+
     }
 
     @FXML
