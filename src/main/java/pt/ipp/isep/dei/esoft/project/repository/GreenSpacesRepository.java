@@ -38,9 +38,7 @@ public class GreenSpacesRepository {
         return newGreenSpaces;
     }
 
-    private boolean validateGreenSpace(GreenSpaces greenSpace) {
-        return !greenSpaces.contains(greenSpace);
-    }
+    private boolean validateGreenSpace(GreenSpaces greenSpace) {return greenSpaces.stream().noneMatch(gs -> gs.equals(greenSpace));}
 
     public List<GreenSpaces> getGreenSpaces() {
         return List.copyOf(greenSpaces);

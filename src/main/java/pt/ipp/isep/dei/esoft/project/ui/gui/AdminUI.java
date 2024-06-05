@@ -128,7 +128,7 @@ public class AdminUI implements Initializable {
         List<String> entries = agendaController.presentEntries();
         agendaLst.getItems().addAll(entries);
 
-        displayGreenSpaces(); // Only call displayGreenSpaces() once
+        displayGreenSpaces();
     }
-    
+
 }

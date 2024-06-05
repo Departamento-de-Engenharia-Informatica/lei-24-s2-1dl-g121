@@ -73,35 +73,52 @@ public class CreateTeamUI implements Runnable{
     }
 
     private int requestMinSize() {
-                minSize = Integer.parseInt(Utils.readLineFromConsole("What's the minimun size of your team?"));
-            if(minSize<0||minSize > maxSize) {
-                while (minSize < 0 || minSize > maxSize) {
-                    System.out.println("Minimum size invalid");
-                    minSize = Integer.parseInt(Utils.readLineFromConsole("What's the minimun size of your team?"));
+                minSize = -2;
+        while (minSize < 0) {
+            System.out.println("What's the minimum size of your team?");
+            String input = sc.nextLine();
+            try {
+                minSize = Integer.parseInt(input);
+                if (minSize < 0) {
+                    System.out.println("Number cannot be negative.");
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
             }
+        }
         return minSize;
     }
 
 
     private int requestNumSkills() {
-        int numberOfSkills;
-        numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
-            if(numberOfSkills < 0) {
-                while (numberOfSkills < 0) {
-                    System.out.println("Number of Skills cannot be negative");
-                    numberOfSkills = Utils.readIntegerFromConsole("How many skills are needed to this job?");
+        int numberOfSkills=-2;
+        while (numberOfSkills < 0) {
+            System.out.println("How many skills are needed for this job?");
+            String input = sc.nextLine();
+            try {
+                numberOfSkills = Integer.parseInt(input);
+                if (numberOfSkills < 0) {
+                    System.out.println("Number of skills cannot be negative.");
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
             }
+        }
 
         return numberOfSkills;
     }
-
     private int requestSize() {
-        maxSize = Integer.parseInt(Utils.readLineFromConsole("What's the max size of your team?"));
-        if(maxSize < 0) {
-            while (maxSize < 0) {
-                maxSize = Integer.parseInt(Utils.readLineFromConsole("What's the max size of your team?"));
+        maxSize = -2;
+        while (maxSize < 0) {
+            System.out.println("What's the max size of your team?");
+            String input = sc.nextLine();
+            try {
+                maxSize = Integer.parseInt(input);
+                if (maxSize < 0) {
+                    System.out.println("Max cannot be negative.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
             }
         }
         return maxSize;
