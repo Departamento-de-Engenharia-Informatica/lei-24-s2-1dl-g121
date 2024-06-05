@@ -21,6 +21,8 @@ import java.util.ResourceBundle;
 public class AdminUI implements Initializable {
 
     @FXML
+    public ListView<String> greenSpacesList;
+    @FXML
     public Button addTaskBtn;
     @FXML
     public Button addEntryBtn;
@@ -37,20 +39,28 @@ public class AdminUI implements Initializable {
     @FXML
     public Label errorMessageLbl;
 
+    private GreenSpacesController greenSpacesController;
+
+    public AdminUI() {
+        this.greenSpacesController = new GreenSpacesController();
+    }
+
+    @FXML
+    private void displayGreenSpaces() {
+        if (greenSpacesController != null) {
+            greenSpacesList.getItems().clear(); // Clear the list before adding new items
+            List<String> greenSpacesDetails = greenSpacesController.getGreenSpacesNamesAndEmails();
+            greenSpacesList.getItems().addAll(greenSpacesDetails);
+        }
+    }
+
     @FXML
     public void runAddEntry() {
         try {
-            // Load the AuthenticationUI FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddEntryUI.fxml"));
             Parent root = loader.load();
-
-            // Create a new scene with the loaded parent root
             Scene scene = new Scene(root);
-
-            // Get the current stage from one of your components (getScene in this case)
             Stage stage = (Stage) addTaskBtn.getScene().getWindow();
-
-            // Set the new scene to the stage
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,12 +68,11 @@ public class AdminUI implements Initializable {
     }
 
     @FXML
-    public void markTaskAsCompleted(){
+    public void markTaskAsCompleted() {
         ToDoListController controller = new ToDoListController();
-        if (toDoListLst.getSelectionModel().getSelectedItem() == null){
+        if (toDoListLst.getSelectionModel().getSelectedItem() == null) {
             errorMessageLbl.setText("Please select a task");
-        }
-        else {
+        } else {
             errorMessageLbl.setText("");
             String taskAndGreenSpace = toDoListLst.getSelectionModel().getSelectedItem();
             String[] parts = taskAndGreenSpace.split(" - ");
@@ -71,17 +80,10 @@ public class AdminUI implements Initializable {
             controller.removeTask(taskReference);
             toDoListLst.getSelectionModel().clearSelection();
             try {
-                // Load the AuthenticationUI FXML file
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
                 Parent root = loader.load();
-
-                // Create a new scene with the loaded parent root
                 Scene scene = new Scene(root);
-
-                // Get the current stage from one of your components (getScene in this case)
                 Stage stage = (Stage) addTaskBtn.getScene().getWindow();
-
-                // Set the new scene to the stage
                 stage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -89,46 +91,27 @@ public class AdminUI implements Initializable {
         }
     }
 
-
     @FXML
     public void goToCreateGreenSpaceMenu() {
         try {
-            // Load GreenSpacesUI.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GreenSpacesUI.fxml"));
             Scene greenSpacesScene = new Scene(loader.load());
-
-            // Get the controller for GreenSpacesUI
             GreenSpacesUI greenSpacesUI = loader.getController();
-
-            // Create and set the GreenSpacesController
-            GreenSpacesController greenSpacesController = new GreenSpacesController();
-            greenSpacesUI.setController(greenSpacesController);
-
-            // Get the current stage
+            greenSpacesUI.setController(new GreenSpacesController());
             Stage stage = (Stage) createGreenSpaceBtn.getScene().getWindow();
-
-            // Set the new scene (GreenSpacesUI) to the stage
             stage.setScene(greenSpacesScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     @FXML
     public void runAddTask() {
         try {
-            // Load the AuthenticationUI FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddTaskUI.fxml"));
             Parent root = loader.load();
-
-            // Create a new scene with the loaded parent root
             Scene scene = new Scene(root);
-
-            // Get the current stage from one of your components (getScene in this case)
             Stage stage = (Stage) addTaskBtn.getScene().getWindow();
-
-            // Set the new scene to the stage
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
@@ -137,15 +120,15 @@ public class AdminUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Initialize the to do list
         ToDoListController controller = new ToDoListController();
         List<String> tasks = controller.presentTasks();
         toDoListLst.getItems().addAll(tasks);
 
-        //Initialize the agenda
         AgendaController agendaController = new AgendaController();
         List<String> entries = agendaController.presentEntries();
         agendaLst.getItems().addAll(entries);
-    }
 
+        displayGreenSpaces(); // Only call displayGreenSpaces() once
+    }
+    
 }

@@ -9,12 +9,20 @@ import java.util.Optional;
 public class GreenSpacesRepository {
     private final List<GreenSpaces> greenSpaces;
 
+    private static GreenSpacesRepository instance;
+
     public GreenSpacesRepository() {
         greenSpaces = new ArrayList<>();
     }
 
-    public Optional<GreenSpaces> add(GreenSpaces greenSpace) {
+    public static synchronized GreenSpacesRepository getInstance() {
+        if (instance == null) {
+            instance = new GreenSpacesRepository();
+        }
+        return instance;
+    }
 
+    public Optional<GreenSpaces> add(GreenSpaces greenSpace) {
         Optional<GreenSpaces> newGreenSpaces = Optional.empty();
         boolean operationSuccess = false;
 
@@ -31,13 +39,10 @@ public class GreenSpacesRepository {
     }
 
     private boolean validateGreenSpace(GreenSpaces greenSpace) {
-        boolean isValid = !greenSpaces.contains(greenSpace);
-        return isValid;
+        return !greenSpaces.contains(greenSpace);
     }
 
     public List<GreenSpaces> getGreenSpaces() {
         return List.copyOf(greenSpaces);
     }
-
-
 }

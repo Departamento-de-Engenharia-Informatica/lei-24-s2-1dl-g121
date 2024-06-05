@@ -38,8 +38,6 @@ public class GreenSpacesUI implements Initializable {
     private Button backBtn;
 
     private GreenSpacesController controller;
-    private ViewGreenSpacesUI viewGreenSpacesUI;
-
     private List<String> validTypes = Arrays.asList("Garden", "Medium-sized Park", "Large-sized Park");
 
     // No-argument constructor
@@ -49,10 +47,9 @@ public class GreenSpacesUI implements Initializable {
         this.controller = controller;
     }
 
-    public void setViewGreenSpacesUI(ViewGreenSpacesUI viewGreenSpacesUI) {
-        this.viewGreenSpacesUI = viewGreenSpacesUI;
+    public TextField getEmailTxt() {
+        return emailTxt;
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -123,13 +120,7 @@ public class GreenSpacesUI implements Initializable {
             messageLbl.setVisible(true);
         }
     }
-    public List<GreenSpaces> getRuntimeGreenSpaces() {
-        if (controller!= null) {
-            return controller.getRuntimeGreenSpaces();
-        } else {
-            return new ArrayList<>();
-        }
-    }
+
 
 
     private boolean validateEmail(String email) {
