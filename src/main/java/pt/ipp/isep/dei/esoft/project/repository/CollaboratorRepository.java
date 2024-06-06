@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.Optional;
  * Represents a repository for storing Collaborator objects.
  * Provides methods to add collaborators and retrieve them by their ID.
  */
-public class CollaboratorRepository {
+public class CollaboratorRepository implements Serializable {
 
     private final List<Collaborator> collaborators;
 

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class GreenSpaces {
+import java.io.Serializable;
+
+public class GreenSpaces implements Serializable {
     private String type;
     private double area;
     private String address;

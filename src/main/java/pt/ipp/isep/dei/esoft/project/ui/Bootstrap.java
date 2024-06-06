@@ -7,7 +7,12 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Date;
+import java.util.List;
 
 public class Bootstrap implements Runnable {
 
@@ -24,18 +29,48 @@ public class Bootstrap implements Runnable {
     }
 
     private void addEntries() {
-        ToDoListController controller = new ToDoListController();
-        Agenda agenda = Repositories.getInstance().getAgenda();
-        agenda.add(new Entry("Entry 1", controller.getTaskByReference("Task 1"), new Date(2024,6,3), status.PLANNED));
-        agenda.add(new Entry("Entry 2", controller.getTaskByReference("Task 2"), new Date(2024,5,1), status.CANCELED));
+//        ToDoListController controller = new ToDoListController();
+//        Agenda agenda = Repositories.getInstance().getAgenda();
+//        agenda.add(new Entry("Entry 1", controller.getTaskByReference("Task 1"), new Date(2024,6,3), status.PLANNED));
+//        agenda.add(new Entry("Entry 2", controller.getTaskByReference("Task 2"), new Date(2024,5,1), status.CANCELED));
+
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/agenda.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setAgenda((Agenda) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Agenda class not found");
+            c.printStackTrace();
+        }
     }
 
     private void addTasks() {
-        GreenSpacesController controller = new GreenSpacesController();
-        ToDoList toDoList = Repositories.getInstance().getToDoList();
-        toDoList.add(new Task("Task 1", "Description 1", 1, urgencyDegree.LOW, controller.getGreenSpaceByName("ArcaAgua")));
-        toDoList.add(new Task("Task 2", "Description 2", 1, urgencyDegree.MEDIUM, controller.getGreenSpaceByName("ArcaAgua")));
-        toDoList.add(new Task("Task 3", "Description 3", 1, urgencyDegree.HIGH, controller.getGreenSpaceByName("ArcaAgua")));
+//        GreenSpacesController controller = new GreenSpacesController();
+//        ToDoList toDoList = Repositories.getInstance().getToDoList();
+//        toDoList.add(new Task("Task 1", "Description 1", 1, urgencyDegree.LOW, controller.getGreenSpaceByName("ArcaAgua")));
+//        toDoList.add(new Task("Task 2", "Description 2", 1, urgencyDegree.MEDIUM, controller.getGreenSpaceByName("ArcaAgua")));
+//        toDoList.add(new Task("Task 3", "Description 3", 1, urgencyDegree.HIGH, controller.getGreenSpaceByName("ArcaAgua")));
+
+            try {
+                FileInputStream fileIn = new FileInputStream("saveFiles/toDoList.ser");
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                Repositories.getInstance().setToDoList((ToDoList) in.readObject());
+                in.close();
+                fileIn.close();
+            } catch (FileNotFoundException f) {
+                // File does not exist yet, do nothing
+            } catch (IOException i) {
+                i.printStackTrace();
+            } catch (ClassNotFoundException c) {
+                System.out.println("ToDoList class not found");
+                c.printStackTrace();
+            }
     }
 
     private void addOrganization() {
@@ -80,10 +115,25 @@ public class Bootstrap implements Runnable {
 
 
     private void addGreenSpaces() {
-        GreenSpacesRepository greenSpacesRepository = GreenSpacesRepository.getInstance();
+        GreenSpacesRepository greenSpacesRepository = Repositories.getInstance().getGreenSpacesRepository();
         greenSpacesRepository.add(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto", "ArcaAgua", "exemplo@exemplo.com"));
         greenSpacesRepository.add(new GreenSpaces("garden", 200, "Praça de 10 de Abril 122, 4200-423 Porto", "Parque da Cidade", "exemplo@exemplo.com"));
         greenSpacesRepository.add(new GreenSpaces("garden", 150, "Praça de 11 de Abril 123, 4200-424 Porto", "Covelo", "outroexemplo@exemplo.com"));
+
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/greenSpaces.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setGreenSpacesRepository((GreenSpacesRepository) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("GreenSpacesRepository class not found");
+            c.printStackTrace();
+        }
     }
 
     private void addUsers() {

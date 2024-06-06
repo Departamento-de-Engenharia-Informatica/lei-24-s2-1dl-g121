@@ -1,10 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
-public class Job {
+public class Job implements Serializable {
     private final String name;
 //    private final int numberOfSkills;
 //    private final ArrayList<Skill> setOfSkills;

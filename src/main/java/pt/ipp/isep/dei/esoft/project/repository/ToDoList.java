@@ -1,16 +1,18 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.urgencyDegree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ToDoList {
+public class ToDoList implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private final List<Task> tasks;
+    private List<Task> tasks;
+
     public ToDoList() {
         tasks = new ArrayList<>();
     }
@@ -30,6 +32,10 @@ public class ToDoList {
         }
 
         return newTask;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     private boolean validateTask(Task task) {
@@ -59,6 +65,7 @@ public class ToDoList {
         }
         return references;
     }
+
     public boolean remove(Task task) {
         return tasks.remove(task);
     }

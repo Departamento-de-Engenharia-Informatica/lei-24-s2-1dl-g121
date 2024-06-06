@@ -126,14 +126,14 @@ public class AddTaskUI implements Initializable {
             }
 
             GreenSpacesController greenSpacesController = new GreenSpacesController();
-            try {
-                greenSpaces = greenSpacesController.getGreenSpaceByName(greenSpaceBox.getValue());
-            } catch (NullPointerException e) {
+            greenSpaces = greenSpacesController.getGreenSpaceByName(greenSpaceBox.getValue());
+            if(greenSpaces == null) {
                 errorMessageLbl.setText("Must select green space!");
 
                 valid = false;
                 break;
             }
+
         } while (false);
 
 

@@ -2,10 +2,10 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpacesRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.sorting.BubbleSortStrategy;
 import pt.ipp.isep.dei.esoft.project.sorting.QuickSortStrategy;
 import pt.ipp.isep.dei.esoft.project.sorting.SortingStrategy;
-import pt.ipp.isep.dei.esoft.project.ui.gui.GreenSpacesUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
 
@@ -23,8 +22,15 @@ public class GreenSpacesController {
 
 
     public GreenSpacesController() {
-        this.repository = GreenSpacesRepository.getInstance();
-        this.sortingStrategy = loadSortingStrategy();
+        getGreenSpacesRepository();
+        loadSortingStrategy();
+    }
+
+    private void getGreenSpacesRepository() {
+        if (repository == null) {
+            Repositories repositories = Repositories.getInstance();
+            repository = repositories.getGreenSpacesRepository();
+        }
     }
 
     public List<String> getGreenSpacesNamesAndEmails() {
@@ -54,9 +60,10 @@ public class GreenSpacesController {
         }
         return null;
     }
+
     private SortingStrategy loadSortingStrategy() {
         Properties props = new Properties();
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\salva\\OneDrive\\Documentos\\GitHub\\lei-24-s2-1dl-g121\\src\\main\\resources\\config.properties")) {
+        try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
             props.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,11 +79,13 @@ public class GreenSpacesController {
                 return new BubbleSortStrategy();
         }
     }
+
     public List<GreenSpaces> getSortedGreenSpaces() {
         List<GreenSpaces> greenSpacesList = repository.getGreenSpaces();
         sortingStrategy.sort(greenSpacesList);
         return greenSpacesList;
     }
+
     public List<String> getSortedGreenSpacesNamesAndEmails() {
         return getSortedGreenSpaces().stream()
                 .map(gs -> gs.getName() + " | " + gs.getEmail())

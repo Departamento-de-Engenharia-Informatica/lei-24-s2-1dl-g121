@@ -4,11 +4,12 @@ import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.status;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Agenda {
+public class Agenda implements Serializable {
     private final List<Entry> lstEntries;
 
     public Agenda() {

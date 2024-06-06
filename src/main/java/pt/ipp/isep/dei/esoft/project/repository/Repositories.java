@@ -6,19 +6,17 @@ public class Repositories implements Serializable {
 
     private static Repositories instance;
     private final OrganizationRepository organizationRepository;
-    private final TaskCategoryRepository taskCategoryRepository;
     private final AuthenticationRepository authenticationRepository;
     private final SkillRepository skillRepository;
     private final CollaboratorRepository collaboratorRepository;
     private final JobRepository jobRepository;
     private final CreateTeamRepository createTeamRepository;
-    private final GreenSpacesRepository greenSpacesRepository;
-    private final ToDoList toDoList;
-    private final Agenda agenda;
+    private GreenSpacesRepository greenSpacesRepository;
+    private ToDoList toDoList;
+    private Agenda agenda;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
-        taskCategoryRepository = new TaskCategoryRepository();
         authenticationRepository = new AuthenticationRepository();
         skillRepository = new SkillRepository();
         collaboratorRepository = new CollaboratorRepository();
@@ -42,10 +40,6 @@ public class Repositories implements Serializable {
         return organizationRepository;
     }
 
-    public TaskCategoryRepository getTaskCategoryRepository() {
-        return taskCategoryRepository;
-    }
-
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
     }
@@ -65,4 +59,16 @@ public class Repositories implements Serializable {
     public ToDoList getToDoList() {return toDoList;}
 
     public Agenda getAgenda() {return agenda;}
+
+    public void setToDoList(ToDoList toDoList) {
+        this.toDoList = toDoList;
+    }
+
+    public void setAgenda (Agenda agenda) {
+        this.agenda = agenda;
+    }
+
+    public void setGreenSpacesRepository (GreenSpacesRepository greenSpacesRepository) {
+        this.greenSpacesRepository = greenSpacesRepository;
+    }
 }

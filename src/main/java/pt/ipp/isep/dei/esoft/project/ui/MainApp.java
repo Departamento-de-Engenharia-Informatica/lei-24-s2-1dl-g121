@@ -10,8 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class MainApp extends Application {
     @Override
@@ -33,18 +36,19 @@ public class MainApp extends Application {
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
-                    Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-                    alerta.setTitle("Application");
-                    alerta.setHeaderText("Confirm Action.");
-                    alerta.setContentText("Do you really wish to close the application?");
+                    alert.setContentText("The current file is not saved. Save it?");
+                    alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 
-                    ((Button) alerta.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-                    ((Button) alerta.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-
-                    if (alerta.showAndWait().get() == ButtonType.CANCEL) {
+                    if (alert.showAndWait().get() == ButtonType.YES) {
+                        saveGreenSpaces();
+                        saveToDoList();
+                        saveAgenda();
+                    } else if (alert.getResult() == ButtonType.CANCEL) {
                         event.consume();
                     }
+
                 }
             });
             stage.show();
@@ -73,5 +77,41 @@ public class MainApp extends Application {
         alert.setContentText(ex.getMessage());
 
         return alert;
+    }
+
+    private void saveToDoList() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("saveFiles/toDoList.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(Repositories.getInstance().getToDoList());
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    private void saveAgenda() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("saveFiles/agenda.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(Repositories.getInstance().getAgenda());
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    private void saveGreenSpaces() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("saveFiles/greenSpaces.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(Repositories.getInstance().getGreenSpacesRepository());
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
     }
 }

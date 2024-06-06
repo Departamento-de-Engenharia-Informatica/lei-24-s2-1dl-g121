@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Entry {
+public class Entry implements Serializable {
     private String ID;
     private Task task;
     // private Team team;

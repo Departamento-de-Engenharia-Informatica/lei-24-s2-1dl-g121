@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Skill {
+public class Skill implements Serializable {
     private final String skillName;
 
     public Skill (String name){

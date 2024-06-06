@@ -49,8 +49,8 @@ public class AdminUI implements Initializable {
     private void displayGreenSpaces() {
         if (greenSpacesController != null) {
             greenSpacesList.getItems().clear(); // Clear the list before adding new items
-            //List<String> greenSpacesDetails = greenSpacesController.getGreenSpacesNamesAndEmails();
-            List<String> greenSpacesDetails = greenSpacesController.getSortedGreenSpacesNamesAndEmails();
+            List<String> greenSpacesDetails = greenSpacesController.getGreenSpacesNamesAndEmails();
+            //List<String> greenSpacesDetails = greenSpacesController.getSortedGreenSpacesNamesAndEmails();
             greenSpacesList.getItems().addAll(greenSpacesDetails);
         }
     }

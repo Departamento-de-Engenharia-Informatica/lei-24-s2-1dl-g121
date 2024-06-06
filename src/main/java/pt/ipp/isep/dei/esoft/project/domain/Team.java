@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Team {
+public class Team implements Serializable {
     private final ArrayList<Skill> setOfSkills;
     private int maxSize;
     private int minSize;

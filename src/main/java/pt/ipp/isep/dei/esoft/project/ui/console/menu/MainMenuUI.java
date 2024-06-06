@@ -25,6 +25,20 @@ public class MainMenuUI implements Runnable {
 
             if ((option >= 0) && (option < options.size())) {
                 options.get(option).run();
+            } else if (option == 0) {
+                boolean ok;
+                do {
+                    ok = true;
+                    int answer = Utils.readIntegerFromConsole("Save? 1- Yes, 2- No");
+                    if (answer == 1) {
+                        //save
+                        ok = false;
+                    } else if (answer == 2) {
+                        ok = false;
+                    }
+                } while (ok);
+
+                //save
             }
         } while (option != -1);
     }

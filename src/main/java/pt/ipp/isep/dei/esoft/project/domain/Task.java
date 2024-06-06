@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     private final String reference;
     private String description;
     private int duration;

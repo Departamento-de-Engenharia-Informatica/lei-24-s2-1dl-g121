@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Objects;
  * Represents a Collaborator in the system.
  * A Collaborator has a name, birth details, issuing details, address, phone number, email, identification document, job, and a list of skills.
  */
-public class Collaborator {
+public class Collaborator implements Serializable {
     private String name;
     private String birthDetails;
     private String issuingDetails;
