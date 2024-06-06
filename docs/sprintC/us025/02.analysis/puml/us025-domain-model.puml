@@ -15,7 +15,7 @@ hide methods
 '}
 
 
-class FM{
+class GSM{
     name
     email
     phone number
@@ -23,27 +23,21 @@ class FM{
 }
 
 
-class Vehicle{
-    Brand
-    Model
-    Type
-    Tare
-    Gross Weight
-    Current Km
-    Register Date
-    Acquisition Date
-    Maintenance/Check-up
-}
+class Agenda{
 
-class Check-up{
-    distance "km"
+}
+class entry{
+ entryID
+    task
+    dueDate
+    status
 }
 
 
 
-FM "1" -- "*" Vehicle : registers >
-FM "1" -- "*" "Check-up" : registers >
-Vehicle "1" -- "1" "Check-up" : needs >
+GSM "1" -- "*" entry : can cancel an  >
+Agenda "1" -- "*" "entry" : made of >
+GSM "1" -- "1" "Agenda" : manages >
 
 
 @enduml
