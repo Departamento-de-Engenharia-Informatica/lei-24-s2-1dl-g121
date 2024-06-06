@@ -24,7 +24,7 @@ public class QuickSortStrategy implements SortingStrategy {
         double pivot = list.get(high).getArea();
         int i = low - 1;
         for (int j = low; j < high; j++) {
-            if (list.get(j).getArea() > pivot) {
+            if (list.get(j).getArea() > pivot) {  // For descending order
                 i++;
                 swap(list, i, j);
             }
