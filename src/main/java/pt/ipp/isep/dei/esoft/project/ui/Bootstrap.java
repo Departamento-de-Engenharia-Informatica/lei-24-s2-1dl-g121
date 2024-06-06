@@ -81,6 +81,21 @@ public class Bootstrap implements Runnable {
         organization.addEmployee(new Employee("admin@this.app"));
         organization.addEmployee(new Employee("employee@this.app"));
         organizationRepository.add(organization);
+
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/organizationRepository.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setOrganizationRepository((OrganizationRepository) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("OrganizationRepository class not found");
+            c.printStackTrace();
+        }
     }
 
     private void addSkills() {
@@ -95,6 +110,21 @@ public class Bootstrap implements Runnable {
         skillRepository.add(new Skill("Teamwork"));
         skillRepository.add(new Skill("Leadership"));
         skillRepository.add(new Skill("Time Management"));
+
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/skillRepository.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setSkillRepository((SkillRepository) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("SkillRepository class not found");
+            c.printStackTrace();
+        }
     }
 
     private void addJobs() {
@@ -103,13 +133,43 @@ public class Bootstrap implements Runnable {
         jobRepository.addJob(new Job("SoftwareTester"));
         jobRepository.addJob(new Job("ProjectManager"));
         jobRepository.addJob(new Job("BusinessAnalyst"));
+
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/jobRepository.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setJobRepository((JobRepository) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("JobRepository class not found");
+            c.printStackTrace();
+        }
     }
 
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", new Job("SoftwareDeveloper")));
-        collaboratorRepository.add(new Collaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", new Job("SoftwareDeveloper")));
-        collaboratorRepository.add(new Collaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", new Job("SoftwareDeveloper")));
+        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", "001", new Job("SoftwareDeveloper")));
+        collaboratorRepository.add(new Collaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", "002", new Job("SoftwareDeveloper")));
+        collaboratorRepository.add(new Collaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", "003", new Job("SoftwareDeveloper")));
+
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/collaboratorRepository.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setCollaboratorRepository((CollaboratorRepository) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("CollaboratorRepository class not found");
+            c.printStackTrace();
+        }
     }
 
 
@@ -161,5 +221,20 @@ public class Bootstrap implements Runnable {
                     AuthenticationController.ROLE_HRM);
             authenticationRepository.addUserWithRole("VFM", "vfm@this.app", "vfm",
                     AuthenticationController.ROLE_VFM);
+
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/authenticationRepository.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setAuthenticationRepository((AuthenticationRepository) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("AuthenticationRepository class not found");
+            c.printStackTrace();
+        }
     }
 }

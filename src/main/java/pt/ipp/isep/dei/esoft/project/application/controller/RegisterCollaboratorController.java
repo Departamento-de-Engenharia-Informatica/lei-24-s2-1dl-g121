@@ -116,7 +116,7 @@ public class RegisterCollaboratorController {
      * @return an optional containing the registered collaborator if the registration was successful, empty otherwise
      */
     public Optional<Collaborator> registerCollaborator(String name, String birthDetails, String issuingDetails, String address, String phoneNumber, String email, String taxPayerDocument, String identificationDocument, Job job) {
-        Collaborator newCollaborator = new Collaborator(name,  birthDetails,  issuingDetails,  address,  phoneNumber,  email, taxPayerDocument, job);
+        Collaborator newCollaborator = new Collaborator(name,  birthDetails,  issuingDetails,  address,  phoneNumber,  email, taxPayerDocument, identificationDocument, job);
         if (!collaboratorRepository.getCollaborators().contains(newCollaborator)) {
             try{
                 collaboratorRepository.add(newCollaborator);

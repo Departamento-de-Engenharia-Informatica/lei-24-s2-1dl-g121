@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class Repositories implements Serializable {
 
     private static Repositories instance;
-    private final OrganizationRepository organizationRepository;
-    private final AuthenticationRepository authenticationRepository;
-    private final SkillRepository skillRepository;
-    private final CollaboratorRepository collaboratorRepository;
-    private final JobRepository jobRepository;
-    private final CreateTeamRepository createTeamRepository;
+    private OrganizationRepository organizationRepository;
+    private AuthenticationRepository authenticationRepository;
+    private SkillRepository skillRepository;
+    private CollaboratorRepository collaboratorRepository;
+    private JobRepository jobRepository;
+    private CreateTeamRepository createTeamRepository;
     private GreenSpacesRepository greenSpacesRepository;
     private ToDoList toDoList;
     private Agenda agenda;
@@ -39,36 +39,59 @@ public class Repositories implements Serializable {
     public OrganizationRepository getOrganizationRepository() {
         return organizationRepository;
     }
+    public void setOrganizationRepository(OrganizationRepository organizationRepository) {
+        this.organizationRepository = organizationRepository;
+    }
 
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
     }
+    public void setAuthenticationRepository(AuthenticationRepository authenticationRepository) {
+        this.authenticationRepository = authenticationRepository;
+    }
 
     public SkillRepository getSkillRepository() { return skillRepository; }
+    public void setSkillRepository(SkillRepository skillRepository) {
+        this.skillRepository = skillRepository;
+    }
 
     public CollaboratorRepository getCollaboratorRepository() {
         return collaboratorRepository;
     }
+    public void setCollaboratorRepository(CollaboratorRepository collaboratorRepository) {
+        this.collaboratorRepository = collaboratorRepository;
+    }
 
     public JobRepository getJobRepository() {return jobRepository;}
+    public void setJobRepository(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     public CreateTeamRepository getCreateTeamRepository() {return createTeamRepository;}
+    public void setCreateTeamRepository(CreateTeamRepository createTeamRepository) {
+        this.createTeamRepository = createTeamRepository;
+    }
 
     public GreenSpacesRepository getGreenSpacesRepository() {return greenSpacesRepository;}
+    public void setGreenSpacesRepository (GreenSpacesRepository greenSpacesRepository) {
+        this.greenSpacesRepository = greenSpacesRepository;
+    }
 
     public ToDoList getToDoList() {return toDoList;}
-
-    public Agenda getAgenda() {return agenda;}
-
     public void setToDoList(ToDoList toDoList) {
         this.toDoList = toDoList;
     }
 
+    public Agenda getAgenda() {return agenda;}
     public void setAgenda (Agenda agenda) {
         this.agenda = agenda;
     }
 
-    public void setGreenSpacesRepository (GreenSpacesRepository greenSpacesRepository) {
-        this.greenSpacesRepository = greenSpacesRepository;
-    }
+
+
+
+
+
+
+
 }

@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -53,7 +52,7 @@ public class MainApp extends Application {
             });
             stage.show();
         } catch (IOException ex) {
-           createErrorAlert(ex).show();
+            createErrorAlert(ex).show();
         }
     }
 

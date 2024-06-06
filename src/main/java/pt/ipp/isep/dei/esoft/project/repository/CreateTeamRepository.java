@@ -10,7 +10,8 @@ import java.util.Optional;
 public class CreateTeamRepository implements Serializable {
     private final List<Team> teams;
 
-    public CreateTeamRepository() {teams = new ArrayList<>();
+    public CreateTeamRepository() {
+        teams = new ArrayList<>();
     }
 
     public Optional<Team> addTeam(Team team) {

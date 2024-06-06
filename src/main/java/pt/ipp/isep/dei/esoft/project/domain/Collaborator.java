@@ -32,7 +32,7 @@ public class Collaborator implements Serializable {
      * @param email          the email of the Collaborator
      * @param job            the job of the Collaborator
      */
-    public Collaborator(String name, String birthDetails, String issuingDetails, String address, String phoneNumber, String email, String taxPayerDocument, Job job){
+    public Collaborator(String name, String birthDetails, String issuingDetails, String address, String phoneNumber, String email, String taxPayerDocument,String identificationDocument, Job job){
         this.name= name;
         this.birthDetails= birthDetails;
         this.issuingDetails= issuingDetails;
@@ -115,7 +115,7 @@ public class Collaborator implements Serializable {
      * @return a clone of the current Collaborator instance
      */
     public Collaborator clone() {
-        return new Collaborator(this.name, this.birthDetails, this.issuingDetails, this.address, this.phoneNumber, this.email,this.taxPayerDocument, this.job);
+        return new Collaborator(this.name, this.birthDetails, this.issuingDetails, this.address, this.phoneNumber, this.email,this.taxPayerDocument,this.identificationDocument, this.job);
     }
 
     /**
