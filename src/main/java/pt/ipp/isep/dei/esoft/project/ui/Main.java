@@ -20,7 +20,6 @@ public class Main {
                 MainApp.main(args);
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }

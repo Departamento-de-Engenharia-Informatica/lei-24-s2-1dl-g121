@@ -38,26 +38,20 @@ public class AssignSkillController {
 
     /**
      * Retrieves the collaborator repository from the singleton instance if it's not already set.
-     *
-     * @return the collaborator repository
      */
-    private CollaboratorRepository getCollaboratorRepository() {
+    private void getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         }
-        return collaboratorRepository;
     }
 
     /**
      * Retrieves the skill repository from the singleton instance if it's not already set.
-     *
-     * @return the skill repository
      */
-    private SkillRepository getSkillRepository() {
+    private void getSkillRepository() {
         if (skillRepository == null) {
             skillRepository = Repositories.getInstance().getSkillRepository();
         }
-        return skillRepository;
     }
 
     /**

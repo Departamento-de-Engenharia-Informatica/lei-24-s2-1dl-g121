@@ -72,4 +72,8 @@ public class Agenda implements Serializable {
         }
         return lstEntries;
     }
+
+    public boolean remove(Entry entry) {
+        return lstEntries.remove(entry);
+    }
 }

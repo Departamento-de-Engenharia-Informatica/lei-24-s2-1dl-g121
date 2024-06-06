@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.gui;
+package pt.ipp.isep.dei.esoft.project.ui.gui.menu;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -67,4 +67,20 @@ public class AgendaController {
     public List<String> presentEntries() {
         return agenda.getEntriesIdAndDate();
     }
+
+    public boolean removeEntry(String ID) {
+        Optional<Entry> entryToRemove = agenda.getEntries().stream()
+                .filter(entry -> entry.getID().equals(ID))
+                .findFirst();
+
+        if (entryToRemove.isPresent()) {
+            try {
+                agenda.remove(entryToRemove.get());
+                return true;
+            } catch (UnsupportedOperationException e) {
+                System.out.println("Error:" + e.getMessage());
+            }
+        }
+        return false;
+    }
 }

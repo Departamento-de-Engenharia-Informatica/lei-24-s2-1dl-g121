@@ -1,0 +1,86 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getAgenda()
+    + getToDoList()
+}
+class ToDoList{
+    -List<Task>toDoList
+    +add(task)
+    +getTaskByName(name)
+    +validateEntry(task)
+    +getToDoList()
+    +addTask(title, description, urgency, duration, GreenSpace)
+    }
+
+
+class Task{
+    -String name
+    -String description
+    -String urgency
+    -String duration
+    -GreenSpace greenSpace
+    +ToDoEntry(name, description, urgency, duration, greenSpace)
+    +validateEntryName(name)
+    +validateEntryDescription(description)
+    +validateEntryDuration(duration)
+    +validateEntryUrgency(urgency)
+
+
+}
+
+class AgendaEntry{
+-Task task
+-String startingDate
++validateStartingDate()
+}
+
+
+class Agenda{
+- List<AgendaEntry> agendaEntryList
++registerAgendaEntry()
++add()
++validateAgendaEntry()
++getAgendaEntries()
+}
+
+
+class AgendaEntryController{
+-ToDoList toDoList
+-Agenda agenda
+getAgenda()
+getToDoList()
+registerAgendaEntry(String startingDate, Task task)
+}
+
+class AgendaEntryUI{
+-ToDoList toDoList
+-AgendaController agendaController
++getToDoList()
++getTaskByName (String taskName)
++listToDoList()
+}
+
+Repositories -> Repositories : instance
+
+ToDoList "1"-> "*"Task : task
+
+Repositories --> "1"ToDoList : toDoList
+
+Repositories --> "1"Agenda : agenda
+
+
+
+
+
+@enduml

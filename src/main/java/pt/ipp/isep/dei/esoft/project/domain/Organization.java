@@ -8,7 +8,6 @@ import java.util.Optional;
 public class Organization {
     private final String vatNumber;
     private final List<Employee> employees;
-    private final List<TaskModelo> tasks;
     private String name;
     private String website;
     private String phone;
@@ -23,7 +22,6 @@ public class Organization {
     public Organization(String vatNumber) {
         this.vatNumber = vatNumber;
         employees = new ArrayList<>();
-        tasks = new ArrayList<>();
     }
 
     /**
@@ -49,25 +47,25 @@ public class Organization {
      * @param employee             The employee of the task to be created.
      * @return
      */
-    public Optional<TaskModelo> createTask(String reference, String description, String informalDescription,
-                                           String technicalDescription, int duration, double cost,
-                                           TaskCategoryModelo taskCategory, Employee employee) {
-
-        //TODO: we could also check if the employee works for the organization before proceeding
-        //checkIfEmployeeWorksForOrganization(employee);
-
-        // When a Task is added, it should fail if the Task already exists in the list of Tasks.
-        // In order to not return null if the operation fails, we use the Optional class.
-        Optional<TaskModelo> optionalValue = Optional.empty();
-
-        TaskModelo task = new TaskModelo(reference, description, informalDescription, technicalDescription, duration, cost,
-                taskCategory, employee);
-
-        if (addTask(task)) {
-            optionalValue = Optional.of(task);
-        }
-        return optionalValue;
-    }
+//    public Optional<TaskModelo> createTask(String reference, String description, String informalDescription,
+//                                           String technicalDescription, int duration, double cost,
+//                                           TaskCategoryModelo taskCategory, Employee employee) {
+//
+//        //TODO: we could also check if the employee works for the organization before proceeding
+//        //checkIfEmployeeWorksForOrganization(employee);
+//
+//        // When a Task is added, it should fail if the Task already exists in the list of Tasks.
+//        // In order to not return null if the operation fails, we use the Optional class.
+//        Optional<TaskModelo> optionalValue = Optional.empty();
+//
+//        TaskModelo task = new TaskModelo(reference, description, informalDescription, technicalDescription, duration, cost,
+//                taskCategory, employee);
+//
+//        if (addTask(task)) {
+//            optionalValue = Optional.of(task);
+//        }
+//        return optionalValue;
+//    }
 
     /**
      * This method adds a task to the list of tasks.
@@ -75,15 +73,15 @@ public class Organization {
      * @param task The task to be added.
      * @return True if the task was added successfully.
      */
-    private boolean addTask(TaskModelo task) {
-        boolean success = false;
-        if (validate(task)) {
-            // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
-            success = tasks.add(task.clone());
-        }
-        return success;
-
-    }
+//    private boolean addTask(TaskModelo task) {
+//        boolean success = false;
+//        if (validate(task)) {
+//            // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
+//            success = tasks.add(task.clone());
+//        }
+//        return success;
+//
+//    }
 
     /**
      * This method validates the task, checking for duplicates.
@@ -91,9 +89,9 @@ public class Organization {
      * @param task The task to be validated.
      * @return True if the task is valid.
      */
-    private boolean validate(TaskModelo task) {
-        return tasksDoNotContain(task);
-    }
+//    private boolean validate(TaskModelo task) {
+//        return tasksDoNotContain(task);
+//    }
 
     /**
      * This method checks if the task is already in the list of tasks.
@@ -101,9 +99,9 @@ public class Organization {
      * @param task The task to be checked.
      * @return True if the task is not in the list of tasks.
      */
-    private boolean tasksDoNotContain(TaskModelo task) {
-        return !tasks.contains(task);
-    }
+//    private boolean tasksDoNotContain(TaskModelo task) {
+//        return !tasks.contains(task);
+//    }
 
     /**
      * This methos checks if the organization has an employee with the given email.
@@ -168,9 +166,9 @@ public class Organization {
         }
 
 
-        for (TaskModelo in : this.tasks) {
-            clone.tasks.add(in.clone());
-        }
+//        for (TaskModelo in : this.tasks) {
+//            clone.tasks.add(in.clone());
+//        }
 
         return clone;
     }

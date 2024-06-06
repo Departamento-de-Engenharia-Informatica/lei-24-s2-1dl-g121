@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,6 +21,7 @@ public class Collaborator implements Serializable {
     private String identificationDocument;
     private Job job;
     private List<Skill> skillList;
+    private Team team;
 
     /**
      * Constructs a new Collaborator with the given details.
@@ -43,6 +45,14 @@ public class Collaborator implements Serializable {
         this.identificationDocument= identificationDocument;
         this.job= job;
         this.skillList= new ArrayList<>();
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Team getTeam() {
+        return this.team;
     }
 
     /**
@@ -150,5 +160,9 @@ public class Collaborator implements Serializable {
             }
         }
         return true; // If the collaborator has all required skills, return true
+    }
+
+    public List<Skill> getSkills() {
+        return this.skillList;
     }
 }

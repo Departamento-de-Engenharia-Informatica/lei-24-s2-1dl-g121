@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.gui;
+package pt.ipp.isep.dei.esoft.project.ui.gui.menu;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
+import pt.ipp.isep.dei.esoft.project.repository.Agenda;
+import pt.ipp.isep.dei.esoft.project.ui.gui.GreenSpacesUI;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,8 +23,6 @@ import java.util.ResourceBundle;
 public class AdminUI implements Initializable {
 
     @FXML
-    public ListView<String> greenSpacesList;
-    @FXML
     public Button addTaskBtn;
     @FXML
     public Button addEntryBtn;
@@ -30,7 +30,13 @@ public class AdminUI implements Initializable {
     public Button createGreenSpaceBtn;
     @FXML
     public Button completeTaskBtn;
+    @FXML
+    public Button removeEntryBtn;
+    @FXML
+    public Button assignTeamBtn;
 
+    @FXML
+    public ListView<String> greenSpacesList;
     @FXML
     public ListView<String> toDoListLst;
     @FXML
@@ -38,11 +44,41 @@ public class AdminUI implements Initializable {
 
     @FXML
     public Label errorMessageLbl;
+    @FXML
+    public Label agendaMessageLbl;
 
     private GreenSpacesController greenSpacesController;
 
     public AdminUI() {
         this.greenSpacesController = new GreenSpacesController();
+    }
+
+    @FXML
+    private void assignTeamToEntry() {
+        //Todo
+    }
+
+    @FXML
+    private void removeEntry() {
+        agendaMessageLbl.setText("");
+        AgendaController agendaController = new AgendaController();
+        if (agendaLst.getSelectionModel().getSelectedItem() == null){
+            agendaMessageLbl.setText("No entry selected!");
+        }else{
+            String entry = agendaLst.getSelectionModel().getSelectedItem();
+            String[] parts = entry.split(" - ");
+            String entryReference = parts[0];
+            agendaController.removeEntry(entryReference);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) addTaskBtn.getScene().getWindow();
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

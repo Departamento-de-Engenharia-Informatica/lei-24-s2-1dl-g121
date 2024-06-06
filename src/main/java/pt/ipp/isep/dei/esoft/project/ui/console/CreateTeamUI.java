@@ -1,30 +1,29 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.CreateJobController;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.*;
 
-public class CreateTeamUI implements Runnable{
+public class CreateTeamUI implements Runnable {
 
-    private CreateTeamController controller;
+    private final CreateTeamController controller;
     private int maxSize;
     private int minSize;
     private int numSkills;
-    private ArrayList<Skill> requiredSkills;
+    private List<Skill> requiredSkills;
 
-    private ArrayList<Collaborator> team;
+    private List<Collaborator> team = new ArrayList<>();
 
     static Scanner sc = new Scanner(System.in);
 
     public CreateTeamUI() {
         controller = new CreateTeamController();
     }
+
     private CreateTeamController getController() {
         return controller;
     }
@@ -42,7 +41,7 @@ public class CreateTeamUI implements Runnable{
 
     private void submitData() {
         team = generateTeam(requiredSkills, maxSize, minSize);
-        Optional<Team> createdTeam = getController().createTeam(requiredSkills, maxSize, minSize);
+        Optional<Team> createdTeam = getController().createTeam(team);
 
         if (createdTeam.isPresent()) {
             System.out.println("\nTeam successfully created!");
@@ -57,23 +56,18 @@ public class CreateTeamUI implements Runnable{
 
     private void requestData() {
 
-        //Request the Task Reference from the console
-         maxSize = requestSize();
+        maxSize = requestSize();
 
-         minSize = requestMinSize();
+        minSize = requestMinSize();
 
-        //Request the Task Description from the console
-         numSkills = requestNumSkills();
+        numSkills = requestNumSkills();
 
-        //Request the Task Informal Description from the console
         requiredSkills = requestRequiredSkills(numSkills);
-
-
 
     }
 
     private int requestMinSize() {
-                minSize = -2;
+        minSize = -2;
         while (minSize < 0) {
             System.out.println("What's the minimum size of your team?");
             String input = sc.nextLine();
@@ -91,7 +85,7 @@ public class CreateTeamUI implements Runnable{
 
 
     private int requestNumSkills() {
-        int numberOfSkills=-2;
+        int numberOfSkills = -2;
         while (numberOfSkills < 0) {
             System.out.println("How many skills are needed for this job?");
             String input = sc.nextLine();
@@ -107,6 +101,7 @@ public class CreateTeamUI implements Runnable{
 
         return numberOfSkills;
     }
+
     private int requestSize() {
         maxSize = -2;
         while (maxSize < 0) {
@@ -125,22 +120,27 @@ public class CreateTeamUI implements Runnable{
     }
 
 
-    public ArrayList<Collaborator> generateTeam(ArrayList<Skill> requiredSkills, int maxSize, int minSize) {
-            ArrayList<Collaborator> team = new ArrayList<>();
+    public List<Collaborator> generateTeam(List<Skill> requiredSkills, int maxSize, int minSize) {
+        List<Collaborator> allCollaborators = controller.getCollaboratorsBySkills(requiredSkills);
+        List<Skill> remainingSkills = new ArrayList<>(requiredSkills);
 
-            List<Collaborator> availableCollaborators = controller.getCollaboratorsBySkills(requiredSkills);
-
-            Collections.shuffle(availableCollaborators);
-
-            for (Collaborator collaborator : availableCollaborators) {
-                if (team.size() > maxSize || team.size() < minSize) {
-                    break;
+        do{
+            for (int i = 0; i < allCollaborators.size(); i++) {
+                Collaborator collaborator = allCollaborators.get(i);
+                for (int j = 0; j < remainingSkills.size(); j++) {
+                    Skill skill = remainingSkills.get(i);
+                    if (collaborator.getSkillList().contains(skill)) {
+                        team.add(collaborator);
+                        allCollaborators.remove(collaborator);
+                        remainingSkills.remove(skill);
+                    }
                 }
-                team.add(collaborator);
             }
 
-            return team;
-        }
+        }while (team.size() < minSize || team.size() > maxSize && !remainingSkills.isEmpty());
+
+        return team;
+    }
 
 
     private ArrayList<Skill> requestRequiredSkills(int numSkills) {
@@ -165,10 +165,10 @@ public class CreateTeamUI implements Runnable{
     }
 
 
-    public void presentSkillList(){
+    public void presentSkillList() {
         System.out.println("Skills:");
         List<Skill> skillList = controller.getSkillList();
-        for (Skill skill : skillList){
+        for (Skill skill : skillList) {
             System.out.println(skill.getName());
         }
     }

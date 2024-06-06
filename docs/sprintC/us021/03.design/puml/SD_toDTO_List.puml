@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+title SD_toDTO_List
+
+'hide footbox
+participant "greenSpaceMapper \n:GreenSpaceMapper" as Mapper
+participant "greenSpaces\n:List<GreenSpace>" as List
+participant "greenSpaceDTOlist\n:List<GreenSpaceDTO>" as ListDto
+participant "greenSpaceDTO\n: GreenSpaceDTO" as Dto
+
+-> Mapper : toDTO(greenSpaces)
+activate Mapper
+
+    Mapper --> ListDto** : create
+
+    loop for each grenSpace in greenSpaces
+
+    Mapper -> List : greenSpace = get(i)
+    activate List
+    deactivate List
+
+    Mapper -> Mapper : greenSpaceDTOList = toDto(greenSpaces)
+    activate Mapper
+
+    Mapper --> Dto** : create()
+    deactivate Mapper
+
+    Mapper -> ListDto : add(greenSpaceDTO)
+    activate ListDto
+    deactivate ListDto
+
+    end
+<-- Mapper : greenSpaceDTOList
+
+@enduml

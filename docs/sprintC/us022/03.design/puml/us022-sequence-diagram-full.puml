@@ -1,0 +1,111 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Green spaces manager" as GSM
+participant ":AgendaEntryUI" as UI
+participant ":AgendaEntryController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "toDoList:\nToDoList" as TODO
+participant "agendaEntry\n:AgendaEntry" as ENTRY
+participant "agenda\n:Agenda" as Agenda
+
+
+activate GSM
+
+    GSM -> UI : asks to add a new entry to the Agenda
+
+        activate UI
+
+        UI -> CTRL** : create
+
+loop while flag==true
+        UI --> GSM : requests the starting date for the  new entry in the Agenda
+
+        deactivate UI
+
+    GSM -> UI : types the required information
+
+        activate UI
+        UI->CTRL:getToDoList()
+        activate CTRL
+         CTRL-> RepositorySingleton : getInstance()
+                                activate RepositorySingleton
+
+                                RepositorySingleton -> CTRL : repositories
+                                deactivate RepositorySingleton
+
+                                CTRL -> TODO : getToDoList()
+                                activate TODO
+
+                                TODO --> CTRL : toDoList
+                                deactivate TODO
+                                CTRL-> Agenda: getAgenda()
+                                activate Agenda
+                                Agenda--> CTRL: agenda
+                                deactivate Agenda
+                                CTRL-->UI: toDoList
+                                deactivate CTRL
+
+        UI --> GSM : shows the list of tasks in the To-Do list and asks to select the desired task
+                deactivate UI
+
+                GSM -> UI : selects the required information
+                activate UI
+
+        UI --> GSM : asks to continue adding more entries
+
+        deactivate UI
+
+    GSM -> UI : selects desired option
+            activate UI
+end
+        loop for each agendaEntry : agendaEntries
+            UI->CTRL: addAgendaEntry(startingDate)
+            activate CTRL
+
+                        CTRL -> RepositorySingleton : getInstance()
+                        activate RepositorySingleton
+
+                        RepositorySingleton -> CTRL : repositories
+                        deactivate RepositorySingleton
+
+                        CTRL -> PLAT : getAgenda()
+                        activate PLAT
+
+                        PLAT --> CTRL : Agenda
+                        deactivate PLAT
+
+                         CTRL ->Agenda: addAgendaEntry(startingDate)
+                                    activate Agenda
+
+                                    Agenda -> ENTRY**: add(agendaEntry)
+                                    Agenda ->Agenda:add(AgendaEntry)
+                                    activate Agenda
+                                    Agenda ->Agenda: validateAgendaEntry(AgendaEntry)
+                                    activate Agenda
+                                    Agenda -->Agenda
+                                    deactivate Agenda
+                                    Agenda -->Agenda
+                                    deactivate Agenda
+
+                                    Agenda -->CTRL:
+                                    deactivate Agenda
+
+
+        end
+        CTRL --> UI : agenda
+
+            deactivate CTRL
+
+        UI --> GSM : shows operation success message and\n displays the registered entry in the Agenda
+    deactivate UI
+
+deactivate GSM
+
+@enduml

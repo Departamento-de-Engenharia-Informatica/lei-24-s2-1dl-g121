@@ -10,7 +10,7 @@ public class Repositories implements Serializable {
     private SkillRepository skillRepository;
     private CollaboratorRepository collaboratorRepository;
     private JobRepository jobRepository;
-    private CreateTeamRepository createTeamRepository;
+    private TeamRepository createTeamRepository;
     private GreenSpacesRepository greenSpacesRepository;
     private ToDoList toDoList;
     private Agenda agenda;
@@ -21,7 +21,7 @@ public class Repositories implements Serializable {
         skillRepository = new SkillRepository();
         collaboratorRepository = new CollaboratorRepository();
         jobRepository = new JobRepository();
-        createTeamRepository = new CreateTeamRepository();
+        createTeamRepository = new TeamRepository();
         greenSpacesRepository = new GreenSpacesRepository();
         toDoList = new ToDoList();
         agenda = new Agenda();
@@ -67,9 +67,9 @@ public class Repositories implements Serializable {
         this.jobRepository = jobRepository;
     }
 
-    public CreateTeamRepository getCreateTeamRepository() {return createTeamRepository;}
-    public void setCreateTeamRepository(CreateTeamRepository createTeamRepository) {
-        this.createTeamRepository = createTeamRepository;
+    public TeamRepository getCreateTeamRepository() {return createTeamRepository;}
+    public void setCreateTeamRepository(TeamRepository teamRepository) {
+        this.createTeamRepository = teamRepository;
     }
 
     public GreenSpacesRepository getGreenSpacesRepository() {return greenSpacesRepository;}

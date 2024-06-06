@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CreateTeamRepository implements Serializable {
+public class TeamRepository implements Serializable {
     private final List<Team> teams;
 
-    public CreateTeamRepository() {
+    public TeamRepository() {
         teams = new ArrayList<>();
     }
 

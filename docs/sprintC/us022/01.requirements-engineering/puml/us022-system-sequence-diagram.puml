@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Green Spaces\n Manager" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to add a new entry to the Agenda
+    activate System
+
+        System --> Employee : requests the starting date for the  new entry in the Agenda
+    deactivate System
+
+    Employee -> System : types the required information
+    activate System
+
+    System --> Employee : shows the list of tasks in the To-Do list and asks to select the desired task
+        deactivate System
+
+        Employee -> System : selects the required information
+        activate System
+
+        System --> Employee : asks to continue adding more entries
+    deactivate System
+
+    Employee -> System : selects desired option
+    activate System
+
+        System --> Employee : shows operation success message and\n displays the registered entry in the Agenda
+    deactivate System
+@enduml

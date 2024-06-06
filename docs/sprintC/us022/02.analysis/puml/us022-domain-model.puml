@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+class Task {
+    name
+    description
+    urgency
+    duration
+}
+class ToDoList {
+tasks
+
+}
+
+class Agenda {
+agendaEntryList
+}
+
+class AgendaEntry{
+starting date
+task
+}
+
+
+Task "1" --> "*" AgendaEntry : "scheduled in"
+AgendaEntry "*" --> "1" Agenda : "is recorded in"
+Task "*" --> "1" ToDoList : "captured in"
+ToDoList "1" --> "*" Task : "contains"
+
+@enduml

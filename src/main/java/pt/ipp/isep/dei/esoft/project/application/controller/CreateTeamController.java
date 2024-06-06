@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.*;
@@ -11,39 +10,50 @@ import java.util.List;
 import java.util.Optional;
 
 public class CreateTeamController {
-    private OrganizationRepository organizationRepository;
-    private CreateTeamRepository createTeamRepository;
-    private AuthenticationRepository authenticationRepository;
+    private TeamRepository teamRepository;
     private SkillRepository skillRepository;
     private CollaboratorRepository collaboratorRepository;
-    private  List<Collaborator> collaborators;
 
     public CreateTeamController() {
-        Repositories repositories = Repositories.getInstance();
-        organizationRepository = repositories.getOrganizationRepository();
-        createTeamRepository = repositories.getCreateTeamRepository();
-        authenticationRepository = repositories.getAuthenticationRepository();
-        skillRepository = repositories.getSkillRepository();
-        collaboratorRepository = repositories.getCollaboratorRepository();
+        getTeamRepository();
+        getSkillRepository();
+        getCollaboratorRepository();
+    }
+
+    private void getCollaboratorRepository() {
+        if (collaboratorRepository == null) {
+            collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+        }
+    }
+
+    private void getSkillRepository() {
+        if (skillRepository == null) {
+            skillRepository = Repositories.getInstance().getSkillRepository();
+        }
+    }
+
+    private void getTeamRepository() {
+        if (teamRepository == null) {
+            teamRepository = Repositories.getInstance().getCreateTeamRepository();
+        }
     }
 
     // Allows receiving the repositories as parameters for testing purposes
-    public CreateTeamController(OrganizationRepository organizationRepository,
-                               CreateTeamRepository createTeamRepository,
-                               AuthenticationRepository authenticationRepository) {
-        this.organizationRepository = organizationRepository;
-        this.createTeamRepository = createTeamRepository;
-        this.authenticationRepository = authenticationRepository;
+    public CreateTeamController(TeamRepository teamRepository, SkillRepository skillRepository, CollaboratorRepository collaboratorRepository) {
+        this.teamRepository = teamRepository;
+        this.skillRepository = skillRepository;
+        this.collaboratorRepository = collaboratorRepository;
     }
-    public Optional<Team> createTeam(ArrayList<Skill> requiredSkills, int maxSize, int minSize) {
-        Team newTeam = new Team(requiredSkills, maxSize, minSize);
-        if (!createTeamRepository.getTeams().contains(newTeam)) {
+
+    public Optional<Team> createTeam(List<Collaborator> collaborators) {
+        Team newTeam = new Team(collaborators);
+        if (!teamRepository.getTeams().contains(newTeam)) {
             try {
-                createTeamRepository.addTeam(newTeam);
-                return Optional.of(newTeam);
+                teamRepository.addTeam(newTeam);
             } catch (UnsupportedOperationException e) {
                 System.out.println("Error:" + e.getMessage());
             }
+            return Optional.of(newTeam);
         }
         return Optional.empty();
     }
@@ -55,9 +65,6 @@ public class CreateTeamController {
     public List<Skill> getSkillList() {
         return skillRepository.getSkills();
     }
-
-
-
 
     public List<Collaborator> getCollaboratorsBySkills(List<Skill> skillsNeeded) {
         List<Collaborator> collaboratorsWithSkills = new ArrayList<>();
