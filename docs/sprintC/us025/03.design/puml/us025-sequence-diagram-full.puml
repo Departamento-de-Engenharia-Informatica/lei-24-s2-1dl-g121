@@ -1,0 +1,54 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Green Spaces Manager" as ADM
+participant ":AdminUI" as UI
+participant ":AgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "AgendaRepository:\nAgendaRepository" as TaskCategoryRepository
+
+
+activate ADM
+
+        ADM -> UI : asks to cancel an entry in the Agenda
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getEntry
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> TaskCategoryRepository : getAgendaRepository()
+                activate TaskCategoryRepository
+
+                    TaskCategoryRepository --> CTRL: agendaRepository
+                deactivate TaskCategoryRepository
+
+
+
+                CTRL --> UI : cancelEntry
+                CTRL --> UI : changeStatus
+            deactivate CTRL
+
+            UI --> ADM : agenda's entry changes its status to cancelled without being deleted
+        deactivate UI
+
+
+
+deactivate ADM
+
+@enduml

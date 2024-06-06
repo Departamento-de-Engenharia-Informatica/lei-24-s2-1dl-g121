@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Green Spaces Manager" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to cancel an entry in the agenda
+    activate System
+
+        System --> Employee : agenda's entry changes its status to cancelled without being deleted
+    deactivate System
+
+
+
+@enduml

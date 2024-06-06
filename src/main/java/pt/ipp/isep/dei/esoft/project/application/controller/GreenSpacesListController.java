@@ -1,6 +1,5 @@
-package pt.ipp.isep.dei.esoft.project.application.controller.authorization;
+package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpacesRepository;
 

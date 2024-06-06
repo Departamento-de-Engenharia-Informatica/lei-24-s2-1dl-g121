@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BubbleSortStrategy implements SortingStrategy {
     @Override
-    public void sort(List<GreenSpaces> greenSpaces) {
+    public List<GreenSpaces> sort(List<GreenSpaces> greenSpaces) {
         int n = greenSpaces.size();
         for (int i = 0; i < n-1; i++) {
             for (int j = 0; j < n-i-1; j++) {
@@ -18,5 +18,6 @@ public class BubbleSortStrategy implements SortingStrategy {
                 }
             }
         }
+        return greenSpaces;
     }
 }

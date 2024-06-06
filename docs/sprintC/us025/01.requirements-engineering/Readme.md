@@ -1,54 +1,53 @@
-# US006 - Register a vehicle.
+# US025 - Cancel a task.
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a VFM, I wish to register a vehicle including Brand, Model,
-Type, Tare Weight, Gross Weight, Current Km, Register Date, Acqui-
-sition Date, and Maintenance/Check-up Frequency (in km).
+As a GSM, I want to Cancel an entry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks.
-
+> A canceled task should not be deleted but rather change its
+state.
 
 **From the client clarifications:**
 
-> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
+> **Question:**  When the GSM wants to cancel a task, this task can only be canceled if its status is PLANNED or POSTPONED, correct?
 >
-> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
+> **Answer:** No, just planned because if there is a Postponed entry then there is also an Planned Entry with the new date.
 
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform ther user of the mistake and give him the option to add another vehicle?
+> **Question:** When a task is cancelled, is it possible to put it back on the agenda again later?\
+When we cancel a task, do we move it again to the To-Do List?
 >
-> **Answer:** again, duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates.
+> **Answer:** When a task is cancelled, is it possible to put it back on the agenda again later?\
+yes.\
+When we cancel a task, do we move it again to the To-Do List?\
+no.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** VFM cant duplicate cars.
-* **AC2:** Vehicles must be identified by the plate id.
-* **AC3:** Show car data for confirmation.
+* **AC1:** A canceled task should not be deleted but rather change its state.
+
 
 ### 1.4. Found out Dependencies
 
-* This user story has no dependencies
+* US022
+* US024
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* Typed data:
-    * Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
-	
-* Selected data:
+* Selected data: Cancel a task on the Agenda.
  
 
 **Output Data:**
 
-* Confirmation of car data
-* Car registration
+* Status changed to "Cancelled"
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -56,12 +55,5 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us025-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-!
-
-### 1.7 Other Relevant Remarks
-
-* 

@@ -40,17 +40,8 @@ class GSM{
 
 class GSU{
     name
-    email
-    phone number
-    identification document
 }
 
-class QAM{
-    name
-    email
-    phone number
-    identification document
-}
 
 class Skill{
     name
@@ -58,19 +49,33 @@ class Skill{
 
 class Job{
     name
+    necessary skills
 }
 
 class Collaborator{
-    name
-    birth details
-    issuing details
-    address
-    phone number
-    email
-    identification document
+    name,
+    birth Details,
+    admisison date,
+    address,
+    phoneNumber,
+    email,
+    taxPayer Document,
+    identification Document,
+    job
 }
 
-class Team
+class Team{
+collaborators
+skills needed
+}
+
+class GreenSpaces {
+type
+area
+address
+name
+ GSM email
+}
 
 class Task{
     name
@@ -83,21 +88,18 @@ class Vehicle{
     Brand
     Model
     Type
-    Tare
+    Tare Weight
     Gross Weight
     Current Km
     Register Date
     Acquisition Date
-    Maintenance/Check-up
+    Maintenance/Check-up Frequency
 }
 
-class Check-up{
+class VehiclesMaintenance{
     distance "km"
 }
 
-class Check-upList{
-    Vehicles needing check-up
-}
 
 class ToDoList{
     task description
@@ -117,21 +119,20 @@ Organization -- "*" HRM : is a part of <
 Organization -- "*" VFM : is a part of <
 Organization -- "*" GSM : is a part of <
 Organization -- "*" GSU : is a part of <
-Organization -- "*" QAM : is a part of <
 Organization -- Vehicle : owns >
 HRM "1" -- "*" Skill : registers >
 HRM "1" -- "*" Job : registers >
 HRM "1" -- "*" Collaborator : registers >
 Collaborator "1" -- "*" Skill : has a set of >
 Collaborator "1" -- "1" Job : has >
-Collaborator "*" -- "1" Team : generates >
 Team "1" -- "*" Task : is assigned a >
 VFM "1" -- "*" Vehicle : registers >
-VFM "1" -- "*" "Check-up" : registers >
-Vehicle "1" -- "0..1" "Check-up" : needs >
+VFM "1" -- "*" "VehiclesMaintenance" : registers >
+Vehicle "1" -- "0..1" "VehiclesMaintenance" : needs >
+VFM "1" -- "1" CheckupList : registers >
 Team "1" -- "0..*" Vehicle : needs >
-"Check-upList" "1" -- "*" "Check-up" :  creates <
 GSM "1" -- "*" ToDoList : has >
+GSM "1" -- "*" GreenSpaces : creates and manages >
 ToDoList "1" -- "*" Task : includes >
 Agenda "1" -- "*" Task : schedules >
 Agenda "1" -- "*" Team : assigns >

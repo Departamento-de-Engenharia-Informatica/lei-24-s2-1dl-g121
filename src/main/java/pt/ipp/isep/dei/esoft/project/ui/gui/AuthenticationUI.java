@@ -78,6 +78,25 @@ public class AuthenticationUI implements Initializable {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    if(Objects.equals(id, "") && Objects.equals(pwd, "")){
+                        try {
+                            // Load the AuthenticationUI FXML file
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+                            Parent root = loader.load();
+
+                            // Create a new scene with the loaded parent root
+                            Scene scene = new Scene(root);
+
+                            // Get the current stage from one of your components (getScene in this case)
+                            Stage stage = (Stage) emailTxt.getScene().getWindow();
+
+                            // Set the new scene to the stage
+                            stage.setScene(scene);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
                 else{
                     messageLbl.setText("No menu available for this user's role. :(");
@@ -85,25 +104,6 @@ public class AuthenticationUI implements Initializable {
                     passwordTxt.clear();
                 }
             }
-
-        if(Objects.equals(id, "") && Objects.equals(pwd, "")){
-            try {
-                // Load the AuthenticationUI FXML file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
-                Parent root = loader.load();
-
-                // Create a new scene with the loaded parent root
-                Scene scene = new Scene(root);
-
-                // Get the current stage from one of your components (getScene in this case)
-                Stage stage = (Stage) emailTxt.getScene().getWindow();
-
-                // Set the new scene to the stage
-                stage.setScene(scene);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @FXML
