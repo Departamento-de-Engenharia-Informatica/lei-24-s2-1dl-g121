@@ -7,14 +7,11 @@ import pt.ipp.isep.dei.esoft.project.sorting.QuickSortStrategy;
 import pt.ipp.isep.dei.esoft.project.sorting.SortingStrategy;
 import pt.ipp.isep.dei.esoft.project.ui.gui.GreenSpacesUI;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 
 
 public class GreenSpacesController {
@@ -78,9 +75,16 @@ public class GreenSpacesController {
         return greenSpacesList;
     }
     public List<String> getSortedGreenSpacesNamesAndEmails() {
-        return getSortedGreenSpaces().stream()
+        /*return getSortedGreenSpaces().stream()
                 .map(gs -> gs.getName() + " | " + gs.getEmail())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());/*
+         */
+        List<String> newList = new ArrayList<>();
+        for (GreenSpaces gp : getSortedGreenSpaces()){
+            newList.add(gp.getName() + " " + gp.getEmail());
+        }
+        Collections.sort(newList);
+        return newList;
     }
 }
 
