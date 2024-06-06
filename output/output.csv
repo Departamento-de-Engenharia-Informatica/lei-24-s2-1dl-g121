@@ -1,25 +1,6 @@
-Tilia;Camelia_e3;3
-Camelia_d3;Camelia_d2;4
-Camelia_e1;Camelia_e2;4
-Carvalho;Camelia_e1;4
-Abrunheiro;Ginkgo;4
-Camelia_d4;Camelia_d3;5
-Camelia_d2;Camelia_d1;5
-Camelia_e2;Camelia_e3;5
-Sobreiro;Camelia_d1;5
-Liquidanbar;Abrunheiro;5
-Camelia_d7;Camelia_d6;6
-Camelia_e8;Camelia_e9;6
-Camelia_d5;Camelia_d4;6
-Camelia_e4;Camelia_e6;6
-Camelia_d6;Camelia_d5;6
-Camelia_e3;Camelia_e4;6
-Abrunheiro;Camelia_e9;6
-Folhado;Camelia_d5;6
-Camelia_e7;Camelia_e8;7
-Castanheiro_India;Camelia_e6;7
-Olaia;Liquidanbar;7
-Magnolia;Camelia_d6;8
-Camelia_e2;Camelia_d2;10
-Castanheiro_India;Olaia;10
-MST cost: 141
+C3;F6;2
+B2;C3;2
+B2;A1;4
+E5;F6;4
+C3;D4;6
+MST cost: 18

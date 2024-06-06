@@ -37,7 +37,7 @@ public class MainApp extends Application {
 
                     alerta.setTitle("Application");
                     alerta.setHeaderText("Confirm Action.");
-                    alerta.setContentText("Do you really wish to cloes the application?");
+                    alerta.setContentText("Do you really wish to close the application?");
 
                     ((Button) alerta.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
                     ((Button) alerta.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");

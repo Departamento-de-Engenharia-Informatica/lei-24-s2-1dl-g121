@@ -82,6 +82,8 @@ public class Bootstrap implements Runnable {
     private void addGreenSpaces() {
         GreenSpacesRepository greenSpacesRepository = GreenSpacesRepository.getInstance();
         greenSpacesRepository.add(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto", "ArcaAgua", "exemplo@exemplo.com"));
+        greenSpacesRepository.add(new GreenSpaces("garden", 200, "Praça de 10 de Abril 122, 4200-423 Porto", "Parque da Cidade", "exemplo@exemplo.com"));
+        greenSpacesRepository.add(new GreenSpaces("garden", 150, "Praça de 11 de Abril 123, 4200-424 Porto", "Covelo", "outroexemplo@exemplo.com"));
     }
 
     private void addUsers() {
@@ -97,9 +99,17 @@ public class Bootstrap implements Runnable {
 
             authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                     AuthenticationController.ROLE_ADMIN);
-            authenticationRepository.addUserWithRole("Jorge", "jorge.pais@musgo.sublime", "jorginho123",
+            authenticationRepository.addUserWithRole("gsm", "gsm@this.app", "gsm",
+                AuthenticationController.ROLE_GSM);
+            authenticationRepository.addUserWithRole("qam", "qam@this.app", "qam",
+                AuthenticationController.ROLE_QAM);
+            authenticationRepository.addUserWithRole("gsu", "gsu@this.app", "gsu",
+                AuthenticationController.ROLE_GSU);
+            authenticationRepository.addUserWithRole("collab", "collab@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
+            authenticationRepository.addUserWithRole("HRM", "hrm@this.app", "hrm",
                     AuthenticationController.ROLE_HRM);
-            authenticationRepository.addUserWithRole("João", "jonny@musgo.sublime", "joao123",
+            authenticationRepository.addUserWithRole("VFM", "vfm@this.app", "vfm",
                     AuthenticationController.ROLE_VFM);
     }
 }
