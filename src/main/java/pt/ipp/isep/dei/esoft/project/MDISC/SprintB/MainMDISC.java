@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.MDISC;
+package pt.ipp.isep.dei.esoft.project.MDISC.SprintB;
 
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
@@ -35,9 +35,9 @@ public class MainMDISC {
         }
     }
 
-    static class Vertice{
+    public static class Vertice{
         int index; 
-        String name; 
+        public String name;
 
         public Vertice(int index, String name) {
             this.index = index; 
