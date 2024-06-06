@@ -1,15 +1,20 @@
 package pt.ipp.isep.dei.esoft.project.sorting;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class QuickSortStrategy implements SortingStrategy {
     @Override
-    public void sort(List<GreenSpaces> greenSpaces) {
+    public List<GreenSpaces> sort(List<GreenSpaces> greenSpaces) {
         if (greenSpaces == null || greenSpaces.size() <= 1) {
-            return;
+            return greenSpaces;
         }
-        quickSort(greenSpaces, 0, greenSpaces.size() - 1);
+        List<GreenSpaces> sortedList = new ArrayList<>(greenSpaces); // Create a mutable copy
+        quickSort(sortedList, 0, sortedList.size() - 1);
+        return sortedList;
     }
 
     private void quickSort(List<GreenSpaces> list, int low, int high) {
@@ -24,7 +29,7 @@ public class QuickSortStrategy implements SortingStrategy {
         double pivot = list.get(high).getArea();
         int i = low - 1;
         for (int j = low; j < high; j++) {
-            if (list.get(j).getArea() > pivot) {  // For descending order
+            if (list.get(j).getArea() > pivot) {
                 i++;
                 swap(list, i, j);
             }

@@ -5,6 +5,6 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import java.util.List;
 
 public interface SortingStrategy {
-    void sort(List<GreenSpaces> greenSpaces);
+    List<GreenSpaces> sort(List<GreenSpaces> greenSpaces);
 }
 

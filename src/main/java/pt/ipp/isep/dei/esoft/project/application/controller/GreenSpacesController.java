@@ -7,13 +7,10 @@ import pt.ipp.isep.dei.esoft.project.sorting.BubbleSortStrategy;
 import pt.ipp.isep.dei.esoft.project.sorting.QuickSortStrategy;
 import pt.ipp.isep.dei.esoft.project.sorting.SortingStrategy;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
 
 
 public class GreenSpacesController {
@@ -23,7 +20,7 @@ public class GreenSpacesController {
 
     public GreenSpacesController() {
         getGreenSpacesRepository();
-        loadSortingStrategy();
+        sortingStrategy = loadSortingStrategy();
     }
 
     private void getGreenSpacesRepository() {
@@ -61,12 +58,32 @@ public class GreenSpacesController {
         return null;
     }
 
+//    private SortingStrategy loadSortingStrategy() {
+//        Properties props = new Properties();
+//        try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
+//            props.load(fis);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        String strategy = props.getProperty("algorithm");
+//
+//        switch (strategy) {
+//            case "QuickSortStrategy":
+//                return new QuickSortStrategy();
+//            case "BubbleSortStrategy":
+//            default:
+//                return new BubbleSortStrategy();
+//        }
+//    }
     private SortingStrategy loadSortingStrategy() {
         Properties props = new Properties();
         try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
             props.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
+            // Return a default sorting strategy in case of an error
+            return new BubbleSortStrategy(); // Or any other default strategy you prefer
         }
 
         String strategy = props.getProperty("algorithm");
@@ -80,6 +97,7 @@ public class GreenSpacesController {
         }
     }
 
+
     public List<GreenSpaces> getSortedGreenSpaces() {
         List<GreenSpaces> greenSpacesList = repository.getGreenSpaces();
         sortingStrategy.sort(greenSpacesList);
@@ -87,9 +105,17 @@ public class GreenSpacesController {
     }
 
     public List<String> getSortedGreenSpacesNamesAndEmails() {
-        return getSortedGreenSpaces().stream()
+        /*return getSortedGreenSpaces().stream()
                 .map(gs -> gs.getName() + " | " + gs.getEmail())
                 .collect(Collectors.toList());
+                .collect(Collectors.toList());/*
+         */
+        List<String> newList = new ArrayList<>();
+        for (GreenSpaces gp : getSortedGreenSpaces()){
+            newList.add(gp.getName() + " | " + gp.getEmail());
+        }
+        Collections.sort(newList);
+        return newList;
     }
 }
 
