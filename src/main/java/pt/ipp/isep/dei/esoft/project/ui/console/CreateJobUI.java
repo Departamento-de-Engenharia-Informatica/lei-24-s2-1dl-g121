@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class CreateJobUI implements Runnable{
     private CreateJobController controller;
     private String name;
-    private ArrayList<Skill> requiredSkills;
 
     static Scanner sc = new Scanner(System.in);
 

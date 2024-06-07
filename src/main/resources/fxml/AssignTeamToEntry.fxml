@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignTeamToEntryUI">
+   <children>
+      <ListView fx:id="agendaLst" layoutX="386.0" layoutY="15.0" prefHeight="350.0" prefWidth="200.0" />
+      <ComboBox fx:id="teamBox" layoutX="22.0" layoutY="109.0" prefHeight="25.0" prefWidth="184.0" promptText="Team" />
+      <Button fx:id="assignTeamBtn" layoutX="22.0" layoutY="361.0" mnemonicParsing="false" onAction="#assignTeamToEntry" text="Assign Team to Entry" />
+      <Button fx:id="returnBtn" layoutX="257.0" layoutY="361.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return" />
+      <Label fx:id="teamErrorLbl" layoutX="22.0" layoutY="92.0" prefHeight="17.0" prefWidth="184.0" text="Label" textFill="RED" />
+      <Label fx:id="entryErrorLbl" layoutX="386.0" layoutY="365.0" prefHeight="17.0" prefWidth="200.0" text="Label" textFill="RED" />
+   </children>
+</AnchorPane>

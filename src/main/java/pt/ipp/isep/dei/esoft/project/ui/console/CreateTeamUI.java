@@ -11,6 +11,7 @@ import java.util.*;
 public class CreateTeamUI implements Runnable {
 
     private final CreateTeamController controller;
+    private String reference;
     private int maxSize;
     private int minSize;
     private int numSkills;
@@ -41,7 +42,7 @@ public class CreateTeamUI implements Runnable {
 
     private void submitData() {
         team = generateTeam(requiredSkills, maxSize, minSize);
-        Optional<Team> createdTeam = getController().createTeam(team);
+        Optional<Team> createdTeam = getController().createTeam(team, reference);
 
         if (createdTeam.isPresent()) {
             System.out.println("\nTeam successfully created!");
@@ -56,6 +57,8 @@ public class CreateTeamUI implements Runnable {
 
     private void requestData() {
 
+        reference = requestReference();
+
         maxSize = requestSize();
 
         minSize = requestMinSize();
@@ -64,6 +67,30 @@ public class CreateTeamUI implements Runnable {
 
         requiredSkills = requestRequiredSkills(numSkills);
 
+    }
+
+    private String requestReference() {
+        do{
+            reference = Utils.readLineFromConsole("Insert the team reference: ");
+        } while (!verifyReference(reference));
+        return reference;
+    }
+
+    private boolean verifyReference(String string) {
+        // Check if the string is empty
+        if (string == null || string.trim().isEmpty()) {
+            System.out.println("Name is empty or invalid!");
+            return false;
+        }
+
+        // Check if the string contains special characters
+        if (string.matches(".*[^a-zA-Zç ].*")) {
+            System.out.println("Name can not contain special characters!");
+            return false;
+        }
+
+        // If the string is not empty and does not contain special characters, return true
+        return true;
     }
 
     private int requestMinSize() {
@@ -121,23 +148,34 @@ public class CreateTeamUI implements Runnable {
 
 
     public List<Collaborator> generateTeam(List<Skill> requiredSkills, int maxSize, int minSize) {
-        List<Collaborator> allCollaborators = controller.getCollaboratorsBySkills(requiredSkills);
-        List<Skill> remainingSkills = new ArrayList<>(requiredSkills);
+        List<Collaborator> allCollaborators = new ArrayList<>(controller.getCollaboratorsBySkills(requiredSkills));
+        Map<Skill, Integer> requiredSkillsCount = new HashMap<>();
+        for (Skill skill : requiredSkills) {
+            requiredSkillsCount.put(skill, requiredSkillsCount.getOrDefault(skill, 0) + 1);
+        }
 
-        do{
-            for (int i = 0; i < allCollaborators.size(); i++) {
-                Collaborator collaborator = allCollaborators.get(i);
-                for (int j = 0; j < remainingSkills.size(); j++) {
-                    Skill skill = remainingSkills.get(i);
-                    if (collaborator.getSkillList().contains(skill)) {
-                        team.add(collaborator);
-                        allCollaborators.remove(collaborator);
-                        remainingSkills.remove(skill);
+        for (Collaborator collaborator : allCollaborators) {
+            for (Skill skill : new ArrayList<>(collaborator.getSkillList())) {
+                if (requiredSkillsCount.containsKey(skill)) {
+                    team.add(collaborator);
+                    int count = requiredSkillsCount.get(skill);
+                    if (count == 1) {
+                        requiredSkillsCount.remove(skill);
+                    } else {
+                        requiredSkillsCount.put(skill, count - 1);
                     }
                 }
             }
+        }
 
-        }while (team.size() < minSize || team.size() > maxSize && !remainingSkills.isEmpty());
+        while (team.size() < minSize || (team.size() > maxSize && !requiredSkillsCount.isEmpty())) {
+            Collaborator lastCollaborator = team.remove(team.size() - 1);
+            for (Skill skill : lastCollaborator.getSkillList()) {
+                if (requiredSkillsCount.containsKey(skill)) {
+                    requiredSkillsCount.put(skill, requiredSkillsCount.get(skill) + 1);
+                }
+            }
+        }
 
         return team;
     }

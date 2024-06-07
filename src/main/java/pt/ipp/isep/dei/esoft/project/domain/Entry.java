@@ -6,7 +6,7 @@ import java.util.Date;
 public class Entry implements Serializable {
     private String ID;
     private Task task;
-    // private Team team;
+    private Team team;
     //private Vehicle vehicle;
     private Date dueDate;
     private status status;
@@ -34,6 +34,10 @@ public class Entry implements Serializable {
         this.status = status;
     }
 
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     public String getID() {
         return ID;
     }
@@ -50,13 +54,21 @@ public class Entry implements Serializable {
         return status;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
     public String toString() {
         return String.format("Entry: %s, %s, %s", task, dueDate.toString(), status);
     }
 
 
     public String getIdAndDate() {
-        return String.format("%s - %d/%d/%d", ID, dueDate.getYear(), dueDate.getMonth(), dueDate.getDate());
+        if (team != null) {
+            return String.format("%s - %d/%d/%d - %s", ID, dueDate.getYear(), dueDate.getMonth(), dueDate.getDate(), team.getReference());
+        }
+
+        return String.format("%s - %d/%d/%d - No team assigned", ID, dueDate.getYear(), dueDate.getMonth(), dueDate.getDate());
     }
 
     /**

@@ -55,7 +55,23 @@ public class AdminUI implements Initializable {
 
     @FXML
     private void assignTeamToEntry() {
-        //Todo
+        try {
+            // Load the AuthenticationUI FXML file
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AuthenticationUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssignTeamToEntry.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene with the loaded parent root
+            Scene scene = new Scene(root);
+
+            // Get the current stage from one of your components (doLoginBtn in this case)
+            Stage stage = (Stage) addTaskBtn.getScene().getWindow();
+
+            // Set the new scene to the stage
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

@@ -14,9 +14,9 @@ public class TeamRepository implements Serializable {
         teams = new ArrayList<>();
     }
 
-    public Optional<Team> addTeam(Team team) {
+    public Optional<Team> add(Team team) {
         Optional<Team> newTeam = Optional.empty();
-        if (validateTeam(team)) {
+        if (true/*validateTeam(team)*/) {
             newTeam = Optional.of(team);
             teams.add(newTeam.get());
         }
@@ -30,5 +30,28 @@ public class TeamRepository implements Serializable {
 
     public List<Team> getTeams() {
         return List.copyOf(teams);
+    }
+
+    public List<String> getCollaboratorsNames(String TeamName) {
+        Team team = getTeamByReference(TeamName);
+
+        return new ArrayList<>(team.getCollaboratorsNames());
+    }
+
+    public List<String> getNames() {
+        List<String> names = new ArrayList<>();
+        for (Team team : teams) {
+            names.add(team.getReference());
+        }
+        return names;
+    }
+
+    public Team getTeamByReference(String reference) {
+        for (Team team : teams) {
+            if (team.getReference().equals(reference)) {
+                return team;
+            }
+        }
+        return null;
     }
 }

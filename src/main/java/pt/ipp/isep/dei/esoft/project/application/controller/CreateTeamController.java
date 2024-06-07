@@ -34,7 +34,7 @@ public class CreateTeamController {
 
     private void getTeamRepository() {
         if (teamRepository == null) {
-            teamRepository = Repositories.getInstance().getCreateTeamRepository();
+            teamRepository = Repositories.getInstance().getTeamRepository();
         }
     }
 
@@ -45,11 +45,11 @@ public class CreateTeamController {
         this.collaboratorRepository = collaboratorRepository;
     }
 
-    public Optional<Team> createTeam(List<Collaborator> collaborators) {
-        Team newTeam = new Team(collaborators);
+    public Optional<Team> createTeam(List<Collaborator> collaborators, String reference) {
+        Team newTeam = new Team(collaborators, reference);
         if (!teamRepository.getTeams().contains(newTeam)) {
             try {
-                teamRepository.addTeam(newTeam);
+                teamRepository.add(newTeam);
             } catch (UnsupportedOperationException e) {
                 System.out.println("Error:" + e.getMessage());
             }

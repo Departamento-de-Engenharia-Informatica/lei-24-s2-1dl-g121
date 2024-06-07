@@ -23,7 +23,8 @@ public class MainMenuUI implements Initializable {
     public void goToLogin() {
         try {
             // Load the AuthenticationUI FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AuthenticationUI.fxml"));
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AuthenticationUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssignTeamToEntry.fxml"));
             Parent root = loader.load();
 
             // Create a new scene with the loaded parent root

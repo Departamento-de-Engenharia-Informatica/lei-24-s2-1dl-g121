@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.Agenda;
-import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
+import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.util.Date;
 import java.util.List;
@@ -13,12 +10,21 @@ import java.util.Optional;
 public class AgendaController {
     private Agenda agenda;
     private ToDoList toDoList;
+    private TeamRepository teamRepository;
     private AuthenticationRepository authenticationRepository;
 
     public AgendaController() {
         getAgendaRepository();
         getToDoListRepository();
+        getTeamRepository();
         getAuthenticationRepository();
+    }
+
+    private void getTeamRepository() {
+        if (teamRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            teamRepository = repositories.getTeamRepository();
+        }
     }
 
     private void getAgendaRepository() {
@@ -42,9 +48,10 @@ public class AgendaController {
         }
     }
 
-    public AgendaController(Agenda agenda, ToDoList toDoList) {
+    public AgendaController(Agenda agenda, ToDoList toDoList, TeamRepository teamRepository) {
         this.agenda = agenda;
         this.toDoList = toDoList;
+        this.teamRepository = teamRepository;
     }
 
     public Optional<Entry> registerEntry(String ID, Task task, Date dueDate, status status) {
@@ -82,5 +89,16 @@ public class AgendaController {
             }
         }
         return false;
+    }
+
+    public boolean assignTeamToEntry (String teamName, String entryID) {
+        boolean result = false;
+        Team team = teamRepository.getTeamByReference(teamName);
+        Entry entry = agenda.getEntryByID(entryID);
+        if (team != null && entry != null) {
+            entry.setTeam(team);
+            result = true;
+        }
+        return result;
     }
 }

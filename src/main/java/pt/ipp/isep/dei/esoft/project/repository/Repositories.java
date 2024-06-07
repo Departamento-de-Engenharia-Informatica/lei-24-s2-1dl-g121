@@ -67,8 +67,8 @@ public class Repositories implements Serializable {
         this.jobRepository = jobRepository;
     }
 
-    public TeamRepository getCreateTeamRepository() {return createTeamRepository;}
-    public void setCreateTeamRepository(TeamRepository teamRepository) {
+    public TeamRepository getTeamRepository() {return createTeamRepository;}
+    public void setTeamRepository(TeamRepository teamRepository) {
         this.createTeamRepository = teamRepository;
     }
 
@@ -86,12 +86,4 @@ public class Repositories implements Serializable {
     public void setAgenda (Agenda agenda) {
         this.agenda = agenda;
     }
-
-
-
-
-
-
-
-
 }

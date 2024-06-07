@@ -47,6 +47,15 @@ public class Agenda implements Serializable {
         return lstEntries;
     }
 
+    public Entry getEntryByID(String ID) {
+        for (Entry entry : this.lstEntries) {
+            if (entry.getID().equals(ID)) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
     public List<Entry> getEntriesByTask(Task task) {
         List<Entry> lstEntries = new ArrayList<>();
         for (Entry entry : this.lstEntries) {
