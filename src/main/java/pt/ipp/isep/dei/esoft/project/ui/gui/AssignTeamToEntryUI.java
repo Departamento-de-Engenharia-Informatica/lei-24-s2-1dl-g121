@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
-import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
@@ -27,6 +26,8 @@ public class AssignTeamToEntryUI implements Initializable {
 
     @FXML
     public ListView<String> agendaLst;
+    @FXML
+    public ListView<String> teamMembersLst;
 
     @FXML
     public Button assignTeamBtn;
@@ -59,24 +60,32 @@ public class AssignTeamToEntryUI implements Initializable {
             entry = agendaLst.getSelectionModel().getSelectedItem();
             String[] parts = entry.split(" - ");
             entryReference = parts[0];
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             entryErrorLbl.setText("Must select an entry!");
             valid = false;
         }
 
-        
-        if(valid){
+
+        if (valid) {
             AgendaController agendaController = new AgendaController();
             Agenda agenda = Repositories.getInstance().getAgenda();
-            if (agenda.getEntryByID(entryReference).getTeam() != null){
+            if (agenda.getEntryByID(entryReference).getTeam() != null) {
                 //Entry already has a team
                 entryErrorLbl.setText("Entry already has a team assigned!");
-            }
-            else {
+            } else {
                 agendaController.assignTeamToEntry(teamName, entryReference);
                 reloadPage();
             }
         }
+    }
+
+    @FXML
+    private void showMembers() {
+        TeamRepository teamRepository = Repositories.getInstance().getTeamRepository();
+        String teamName = teamBox.getValue();
+        List<String> members = teamRepository.getCollaboratorsNames(teamName);
+        teamMembersLst.getItems().clear();
+        teamMembersLst.getItems().addAll(members);
     }
 
     private void reloadPage() {

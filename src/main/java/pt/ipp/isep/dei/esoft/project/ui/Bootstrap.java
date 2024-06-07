@@ -44,7 +44,20 @@ public class Bootstrap implements Runnable {
         team2.add(collaboratorRepository.getCollaboratorById("00400400"));
         teamRepository.add(new Team(team2, "Team 2"));
 
-        System.out.println(teamRepository.getTeams().size());
+        try {
+            FileInputStream fileIn = new FileInputStream("saveFiles/teamRepository.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories.getInstance().setTeamRepository((TeamRepository) in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException f) {
+            // File does not exist yet, do nothing
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("TeamRepository class not found");
+            c.printStackTrace();
+        }
     }
 
     private void assignSkillsToCollaborators() {
