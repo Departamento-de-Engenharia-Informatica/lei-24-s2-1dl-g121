@@ -73,6 +73,15 @@ public class GreenSpacesController {
                 .collect(Collectors.toList());
     }
 
+    public List<GreenSpaces> getSortedGreenSpacesByEmail(String email) {
+        List<GreenSpaces> greenSpacesList = repository.getGreenSpaces();
+        List<GreenSpaces> filteredList = greenSpacesList.stream()
+                .filter(gs -> gs.getEmail().equals(email))
+                .collect(Collectors.toList());
+        sortingStrategy.sort(filteredList);
+        return filteredList;
+    }
+
 //    private SortingStrategy loadSortingStrategy() {
 //        Properties props = new Properties();
 //        try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
