@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
-import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 import pt.ipp.isep.dei.esoft.project.ui.gui.GreenSpacesUI;
 
 import java.io.IOException;
@@ -86,7 +85,7 @@ public class AdminUI implements Initializable {
             String entryReference = parts[0];
             agendaController.removeEntry(entryReference);
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) addTaskBtn.getScene().getWindow();
@@ -133,7 +132,7 @@ public class AdminUI implements Initializable {
             controller.removeTask(taskReference);
             toDoListLst.getSelectionModel().clearSelection();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) addTaskBtn.getScene().getWindow();

@@ -106,7 +106,7 @@ public class GreenSpacesUI implements Initializable {
     private void handleBackButtonAction() {
         try {
             // Load AdminGUI.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
             Scene adminScene = new Scene(loader.load());
 
             // Get the current stage

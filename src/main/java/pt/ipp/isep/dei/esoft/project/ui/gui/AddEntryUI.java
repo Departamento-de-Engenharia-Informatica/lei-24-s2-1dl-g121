@@ -14,7 +14,6 @@ import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.status;
-import pt.ipp.isep.dei.esoft.project.domain.urgencyDegree;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,14 +44,11 @@ public class AddEntryUI implements Initializable {
 
     @FXML
     public Label errorMessageLbl;
-    @FXML
-    public Label successMessageLbl;
 
 
     @FXML
-    void addEntryToAgenda() {
+    void addEntryToAgenda() throws InterruptedException {
         errorMessageLbl.setText("");
-        successMessageLbl.setText("");
 
         String entryID = "";
         Task task = null;
@@ -77,6 +73,7 @@ public class AddEntryUI implements Initializable {
 
             try {
                 dueDate = java.sql.Date.valueOf(dueDateDat.getValue());
+                dueDate.setYear(dueDate.getYear() + 1900);
             }
             catch (Exception e){
                 errorMessageLbl.setText("Please select a due date");
@@ -97,13 +94,25 @@ public class AddEntryUI implements Initializable {
             Optional<Entry> optTask = agendaController.registerEntry(entryID, task, dueDate, status);
             if (optTask.isPresent()) {
                 errorMessageLbl.setText("");
-                successMessageLbl.setText("Task registered successfully!");
 
                 agendaLst.getItems().add(entryID);
+                reloadPage();
+
             } else {
-                successMessageLbl.setText("");
                 errorMessageLbl.setText("Task not registered!");
             }
+        }
+    }
+
+    private void reloadPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddEntryUI.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) entryIDTxt.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -136,7 +145,7 @@ public class AddEntryUI implements Initializable {
     void returnToMenu() {
         try {
             // Load the AuthenticationUI FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
             Parent root = loader.load();
 
             // Create a new scene with the loaded parent root

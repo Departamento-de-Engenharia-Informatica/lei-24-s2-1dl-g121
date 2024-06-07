@@ -16,7 +16,6 @@
       <ComboBox fx:id="statusBox" layoutX="14.0" layoutY="169.0" prefHeight="31.0" prefWidth="300.0" promptText="Status" />
       <Button fx:id="addEntryBtn" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#addEntryToAgenda" text="Add Entry to Agenda" />
       <Button fx:id="returnBtn" layoutX="249.0" layoutY="355.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return" />
-      <Label fx:id="successMessageLbl" layoutX="14.0" layoutY="331.0" prefHeight="17.0" prefWidth="300.0" />
       <Label fx:id="errorMessageLbl" layoutX="14.0" layoutY="331.0" prefHeight="17.0" prefWidth="300.0" textFill="RED" />
       <DatePicker fx:id="dueDateDat" layoutX="14.0" layoutY="120.0" prefHeight="31.0" prefWidth="300.0" promptText="Due Date" />
    </children>
