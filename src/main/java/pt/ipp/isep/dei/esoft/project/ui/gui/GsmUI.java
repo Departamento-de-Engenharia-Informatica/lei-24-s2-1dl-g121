@@ -49,6 +49,7 @@ public class GsmUI implements Initializable {
     // Method to set the logged-in user's email
     public void setLoggedInUserEmail(String email) {
         this.loggedInUserEmail = email;
+        displayGreenSpaces(); // Call displayGreenSpaces after setting the email
     }
 
     @FXML
@@ -110,6 +111,6 @@ public class GsmUI implements Initializable {
         List<String> entries = agendaController.presentEntries();
         agendaLst.getItems().addAll(entries);
 
-        displayGreenSpaces();
+        // Moved displayGreenSpaces() call to setLoggedInUserEmail()
     }
 }
