@@ -57,6 +57,21 @@ public class GreenSpacesController {
         }
         return null;
     }
+    public GreenSpaces getGreenSpaceByEmail(String email) {
+        for (GreenSpaces greenSpace : repository.getGreenSpaces()) {
+            if (greenSpace.getEmail().equals(email)) {
+                return greenSpace;
+            }
+        }
+        return null;
+    }
+    public List<String> getGreenSpacesNamesAndEmailsByEmail(String email) {
+        List<GreenSpaces> greenSpacesList = repository.getGreenSpaces();
+        return greenSpacesList.stream()
+                .filter(gs -> gs.getEmail().equals(email))
+                .map(gs -> gs.getName() + " | " + gs.getEmail())
+                .collect(Collectors.toList());
+    }
 
 //    private SortingStrategy loadSortingStrategy() {
 //        Properties props = new Properties();

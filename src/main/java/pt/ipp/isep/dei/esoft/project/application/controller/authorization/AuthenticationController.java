@@ -41,6 +41,17 @@ public class AuthenticationController {
         }
         return null;
     }
+    public String getUserRole(String email) {
+        // Implement logic to get the user's role based on email
+        // Return "admin", "gsm", or "collaborator" based on your application's logic
+        if (email.equals("admin@this.app")) {
+            return "admin";
+        } else if (email.equals("gsm@this.app") || email.equals("gsm1@this.app") || email.equals("gsm2@this.app") || email.equals("gsm3@this.app")) {
+            return "gsm";
+        } else {
+            return "collaborator";
+        }
+    }
 
     public void doLogout() {
         authenticationRepository.doLogout();
