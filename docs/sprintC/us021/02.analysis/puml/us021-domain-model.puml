@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+class Task {
+    name
+    description
+    urgency
+    duration
+}
+
+class ToDoList {}
+
+class GreenSpace {
+    name
+    type
+    area
+}
+
+Task "*" -- "1" ToDoList: captured in >
+Task "*" --- "1" GreenSpace: associated with >
+
+@enduml

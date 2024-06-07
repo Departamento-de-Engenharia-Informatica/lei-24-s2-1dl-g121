@@ -11,28 +11,23 @@ import java.util.Optional;
 
 public class CreateJobController {
 
-    private OrganizationRepository organizationRepository;
     private JobRepository jobRepository;
     private AuthenticationRepository authenticationRepository;
 
     // Repository instances are obtained from the Repositories class
     public CreateJobController() {
         Repositories repositories = Repositories.getInstance();
-        organizationRepository = repositories.getOrganizationRepository();
         jobRepository = repositories.getJobRepository();
         authenticationRepository = repositories.getAuthenticationRepository();
     }
 
     // Allows receiving the repositories as parameters for testing purposes
-    public CreateJobController(OrganizationRepository organizationRepository,
-                               JobRepository jobRepository,
-                               AuthenticationRepository authenticationRepository) {
-        this.organizationRepository = organizationRepository;
+    public CreateJobController(JobRepository jobRepository, AuthenticationRepository authenticationRepository) {
         this.jobRepository = jobRepository;
         this.authenticationRepository = authenticationRepository;
     }
 
-    public Optional<Job> createJob(String name, int numSkills, ArrayList<Skill> requiredSkills) {
+    public Optional<Job> createJob(String name) {
         Job newJob = new Job(name);
         if (!jobRepository.getJobs().contains(newJob)) {
             try {

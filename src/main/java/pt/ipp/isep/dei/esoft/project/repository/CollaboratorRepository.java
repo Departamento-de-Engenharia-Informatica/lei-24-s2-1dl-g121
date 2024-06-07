@@ -30,11 +30,12 @@ public class CollaboratorRepository implements Serializable {
      * @return An optional containing the added collaborator if it was added successfully, empty otherwise.
      */
     public Optional<Collaborator> add(Collaborator collaborator) {
-
+        System.out.println("Adding collaborator" + collaborator.getName());
         Optional<Collaborator> newCollaborator = Optional.empty();
         boolean operationSuccess = false;
 
-        if (validateCollaborator(collaborator)) {
+        if (true/*validateCollaborator(collaborator)*/) {
+            System.out.println("Collaborator added successfully");
             newCollaborator = Optional.of(collaborator.clone());
             operationSuccess = collaborators.add(newCollaborator.get());
         }
@@ -95,12 +96,4 @@ public class CollaboratorRepository implements Serializable {
 
         return collaboratorsWithSkills;
     }
-//    public Collaborator getCollaboratorByName(Collaborator collaborator) {
-//        for (Collaborator collaborator1 : collaborators) {
-//            if (collaborator.getName().equalsIgnoreCase(String.valueOf(collaborator1))) {
-//                return collaborator;
-//            }
-//        }
-//        return null;
-//    }
 }

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
+import pt.ipp.isep.dei.esoft.project.application.controller.RegisterCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
@@ -152,9 +153,14 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", "001", new Job("SoftwareDeveloper")));
-        collaboratorRepository.add(new Collaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", "002", new Job("SoftwareDeveloper")));
-        collaboratorRepository.add(new Collaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", "003", new Job("SoftwareDeveloper")));
+        RegisterCollaboratorController controller = new RegisterCollaboratorController();
+        controller.registerCollaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", "001", new Job("SoftwareDeveloper"));
+        controller.registerCollaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", "002", new Job("SoftwareTester"));
+        controller.registerCollaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", "003", new Job("SoftwareDeveloper"));
+
+//        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", "001", new Job("SoftwareDeveloper")));
+//        collaboratorRepository.add(new Collaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", "002", new Job("SoftwareTester")));
+//        collaboratorRepository.add(new Collaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", "003", new Job("SoftwareDeveloper")));
 
         try {
             FileInputStream fileIn = new FileInputStream("saveFiles/collaboratorRepository.ser");
