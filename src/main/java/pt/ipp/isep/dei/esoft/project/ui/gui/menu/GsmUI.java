@@ -59,23 +59,23 @@ public class GsmUI implements Initializable {
     private void removeSelectedGreenSpace() {
         String selectedGreenSpace = greenSpacesList.getSelectionModel().getSelectedItem();
 
-        if (selectedGreenSpace == null) {
-            errorMessageLbl.setText("Please select a green space to remove.");
-        } else {
-            errorMessageLbl.setText("");
-            String[] parts = selectedGreenSpace.split(" - ");
-            String greenSpaceName = parts[0];
-
-            System.out.println("Attempting to remove green space: " + greenSpaceName); // Debug statement
-
-            boolean success = greenSpacesController.removeGreenSpace(greenSpaceName);
-
-            if (success) {
-                System.out.println("Successfully removed green space: " + greenSpaceName); // Debug statement
-                displayGreenSpaces();
-            } else {
-                errorMessageLbl.setText("Failed to remove the selected green space.");
-                System.out.println("Failed to remove green space: " + greenSpaceName); // Debug statement
+        agendaMessageLbl.setText("");
+        AgendaController agendaController = new AgendaController();
+        if (agendaLst.getSelectionModel().getSelectedItem() == null){
+            agendaMessageLbl.setText("No entry selected!");
+        }else{
+            String entry = agendaLst.getSelectionModel().getSelectedItem();
+            String[] parts = entry.split(" - ");
+            String entryReference = parts[0];
+            agendaController.removeEntry(entryReference);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) addTaskBtn.getScene().getWindow();
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

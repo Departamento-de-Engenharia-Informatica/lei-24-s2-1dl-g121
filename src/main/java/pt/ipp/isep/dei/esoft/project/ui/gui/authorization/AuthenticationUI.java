@@ -61,7 +61,7 @@ public class AuthenticationUI implements Initializable {
             }
             else{
                 //sadly, we had to do this
-                if(Objects.equals(id, "admin@this.app") && Objects.equals(pwd, "admin")){
+                if(Objects.equals(id, "gsm@this.app") && Objects.equals(pwd, "gsm")){
                     try {
                         // Load the AuthenticationUI FXML file
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUI.fxml"));
