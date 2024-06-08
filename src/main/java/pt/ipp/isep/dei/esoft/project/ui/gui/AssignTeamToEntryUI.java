@@ -105,7 +105,7 @@ public class AssignTeamToEntryUI implements Initializable {
         try {
             // Load the AuthenticationUI FXML file
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AuthenticationUI.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUI.fxml"));
             Parent root = loader.load();
 
             // Create a new scene with the loaded parent root

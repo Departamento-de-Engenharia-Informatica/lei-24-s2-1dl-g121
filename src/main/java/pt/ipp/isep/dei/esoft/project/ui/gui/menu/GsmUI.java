@@ -19,8 +19,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdminUI implements Initializable {
+public class GsmUI implements Initializable {
 
+    @FXML
+    public Button removeGreenSpaceBtn;
     @FXML
     public Button addTaskBtn;
     @FXML
@@ -48,8 +50,34 @@ public class AdminUI implements Initializable {
 
     private GreenSpacesController greenSpacesController;
 
-    public AdminUI() {
+
+    public GsmUI() {
         this.greenSpacesController = new GreenSpacesController();
+    }
+
+    @FXML
+    private void removeSelectedGreenSpace() {
+        String selectedGreenSpace = greenSpacesList.getSelectionModel().getSelectedItem();
+
+        if (selectedGreenSpace == null) {
+            errorMessageLbl.setText("Please select a green space to remove.");
+        } else {
+            errorMessageLbl.setText("");
+            String[] parts = selectedGreenSpace.split(" - ");
+            String greenSpaceName = parts[0];
+
+            System.out.println("Attempting to remove green space: " + greenSpaceName); // Debug statement
+
+            boolean success = greenSpacesController.removeGreenSpace(greenSpaceName);
+
+            if (success) {
+                System.out.println("Successfully removed green space: " + greenSpaceName); // Debug statement
+                displayGreenSpaces();
+            } else {
+                errorMessageLbl.setText("Failed to remove the selected green space.");
+                System.out.println("Failed to remove green space: " + greenSpaceName); // Debug statement
+            }
+        }
     }
 
     @FXML
@@ -100,7 +128,6 @@ public class AdminUI implements Initializable {
     private void displayGreenSpaces() {
         if (greenSpacesController != null) {
             greenSpacesList.getItems().clear(); // Clear the list before adding new items
-            //List<String> greenSpacesDetails = greenSpacesController.getGreenSpacesNamesAndEmails();
             List<String> greenSpacesDetails = greenSpacesController.getSortedGreenSpacesNamesAndEmails();
             greenSpacesList.getItems().addAll(greenSpacesDetails);
         }
@@ -132,7 +159,7 @@ public class AdminUI implements Initializable {
             controller.removeTask(taskReference);
             toDoListLst.getSelectionModel().clearSelection();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUI.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) addTaskBtn.getScene().getWindow();
@@ -169,6 +196,7 @@ public class AdminUI implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

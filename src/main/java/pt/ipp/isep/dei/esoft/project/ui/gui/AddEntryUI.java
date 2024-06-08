@@ -145,7 +145,7 @@ public class AddEntryUI implements Initializable {
     void returnToMenu() {
         try {
             // Load the AuthenticationUI FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUI.fxml"));
             Parent root = loader.load();
 
             // Create a new scene with the loaded parent root

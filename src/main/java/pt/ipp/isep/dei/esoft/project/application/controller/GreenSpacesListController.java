@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpacesRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class GreenSpacesListController {
     private GreenSpacesRepository greenSpacesRepository;
@@ -17,4 +19,5 @@ public class GreenSpacesListController {
     public List<GreenSpaces> getGreenSpaces() {
         return greenSpacesRepository.getGreenSpaces();
     }
+
 }

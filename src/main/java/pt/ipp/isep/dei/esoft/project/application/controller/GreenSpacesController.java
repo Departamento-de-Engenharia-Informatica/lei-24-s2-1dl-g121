@@ -141,5 +141,9 @@ public class GreenSpacesController {
         Collections.sort(newList);
         return newList;
     }
+    public boolean removeGreenSpace(String name) {
+        return repository.removeGreenSpaceByName(name);
+    }
+
 }
 
