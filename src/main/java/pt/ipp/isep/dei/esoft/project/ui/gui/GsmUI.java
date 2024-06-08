@@ -83,6 +83,7 @@ public class GsmUI implements Initializable {
             greenSpacesUI.setController(new GreenSpacesController());
             Stage stage = (Stage) createGreenSpaceBtn.getScene().getWindow();
             stage.setScene(greenSpacesScene);
+            displayGreenSpaces();
         } catch (IOException e) {
             e.printStackTrace();
         }
