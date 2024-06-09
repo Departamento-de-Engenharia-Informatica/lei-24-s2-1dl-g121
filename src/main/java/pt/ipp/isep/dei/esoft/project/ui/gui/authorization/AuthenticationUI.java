@@ -44,124 +44,68 @@ public class AuthenticationUI implements Initializable {
         controller = new AuthenticationController();
     }
 
-
     @FXML
     public void doLogin() {
-        boolean success = false;
         messageLbl.setText("");
 
-            String id = emailTxt.getText();
+        String id = emailTxt.getText();
+        String pwd = passwordTxt.getText();
 
-            String pwd = passwordTxt.getText();
+        boolean success = controller.doLogin(id, pwd);
+        if (!success) {
+            messageLbl.setText("Invalid UserId and/or Password.");
+            emailTxt.clear();
+            passwordTxt.clear();
+        } else {
+            try {
+                // Check the user's role and load the corresponding UI
+                String role = controller.getUserRole(id); // Assume this method returns the role of the user
+                setLoggedInUserEmail(id);
 
-            success = controller.doLogin(id, pwd);
-            if (!success) {
-                messageLbl.setText("Invalid UserId and/or Password.");
-                emailTxt.clear();
-                passwordTxt.clear();
-            }
-            else{
-                //sadly, we had to do this
-                if(Objects.equals(id, "gsm@this.app") && Objects.equals(pwd, "gsm")){
-                    try {
-                        // Load the AuthenticationUI FXML file
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUI.fxml"));
-                        Parent root = loader.load();
-
-                        // Create a new scene with the loaded parent root
-                        Scene scene = new Scene(root);
-
-                        // Get the current stage from one of your components (getScene in this case)
-                        Stage stage = (Stage) emailTxt.getScene().getWindow();
-
-                        // Set the new scene to the stage
-                        stage.setScene(scene);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    if(Objects.equals(id, "") && Objects.equals(pwd, "")){
-                        try {
-                            // Load the AuthenticationUI FXML file
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUI.fxml"));
-                            Parent root = loader.load();
-
-                            // Create a new scene with the loaded parent root
-                            Scene scene = new Scene(root);
-
-                            // Get the current stage from one of your components (getScene in this case)
-                            Stage stage = (Stage) emailTxt.getScene().getWindow();
-
-                            // Set the new scene to the stage
-                            stage.setScene(scene);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                String fxmlFile;
+                switch (role) {
+                    case "gsm":
+                        fxmlFile = "/fxml/GsmUI.fxml";
+                        break;
+                    case "collaborator":
+                        fxmlFile = "/fxml/CollaboratorUI.fxml";
+                        break;
+                    default:
+                        messageLbl.setText("No menu available for this user's role. :(");
+                        emailTxt.clear();
+                        passwordTxt.clear();
+                        return;
                 }
-                else{
-                    messageLbl.setText("No menu available for this user's role. :(");
-                    emailTxt.clear();
-                    passwordTxt.clear();
+
+                // Load the corresponding FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+                Parent root = loader.load();
+
+                // Pass the logged-in user email to the respective controller
+                if ("gsm".equals(role)) {
+                    GsmUI gsmUI = loader.getController();
+                    gsmUI.setLoggedInUserEmail(loggedInUserEmail);
                 }
+
+                if ("collaborator".equals(role)) {
+                    CollaboratorUI collaboratorUI = loader.getController();
+                    collaboratorUI.setLoggedInUserEmail(loggedInUserEmail);
+                }
+
+                // Create a new scene with the loaded parent root
+                Scene scene = new Scene(root);
+
+                // Get the current stage from one of your components (emailTxt in this case)
+                Stage stage = (Stage) emailTxt.getScene().getWindow();
+
+                // Set the new scene to the stage
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
     }
 
-//    @FXML
-//    public void doLogin() {
-//        messageLbl.setText("");
-//
-//        String id = emailTxt.getText();
-//        String pwd = passwordTxt.getText();
-//
-//        boolean success = controller.doLogin(id, pwd);
-//        if (!success) {
-//            messageLbl.setText("Invalid UserId and/or Password.");
-//            emailTxt.clear();
-//            passwordTxt.clear();
-//        } else {
-//            try {
-//                // Check the user's role and load the corresponding UI
-//                String role = controller.getUserRole(id); // Assume this method returns the role of the user
-//
-//                String fxmlFile;
-//                switch (role) {
-//                    case "gsm":
-//                        fxmlFile = "/fxml/GsmUI.fxml";
-//                        break;
-//                    case "collaborator":
-//                        fxmlFile = "/fxml/CollaboratorUI.fxml";
-//                        break;
-//                    default:
-//                        messageLbl.setText("No menu available for this user's role. :(");
-//                        emailTxt.clear();
-//                        passwordTxt.clear();
-//                        return;
-//                }
-//
-//                // Load the corresponding FXML file
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-//                Parent root = loader.load();
-//
-//                // Pass the logged-in user email to the respective controller
-//                if ("gsm".equals(role)) {
-//                    GsmUI gsmUI = loader.getController();
-//                    gsmUI.setLoggedInUserEmail(loggedInUserEmail);
-//                }
-//
-//                // Create a new scene with the loaded parent root
-//                Scene scene = new Scene(root);
-//
-//                // Get the current stage from one of your components (emailTxt in this case)
-//                Stage stage = (Stage) emailTxt.getScene().getWindow();
-//
-//                // Set the new scene to the stage
-//                stage.setScene(scene);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
     public void setLoggedInUserEmail(String email) {
         this.loggedInUserEmail = email;
         if (emailTxt != null) {
