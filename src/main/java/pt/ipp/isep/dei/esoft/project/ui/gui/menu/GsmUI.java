@@ -67,7 +67,7 @@ public class GsmUI implements Initializable {
         if (greenSpacesController != null) {
             // && loggedInUserEmail != null
             greenSpacesList.getItems().clear(); // Clear the list before adding new items
-            List<String> greenSpacesDetails = greenSpacesController.getGreenSpacesNamesAndEmailsByEmail("gsm@this.app");
+            List<String> greenSpacesDetails = greenSpacesController.getSortedGreenSpacesNamesAndEmailsByEmail("gsm@this.app");
             greenSpacesList.getItems().addAll(greenSpacesDetails);
         }
     }
@@ -135,15 +135,6 @@ public class GsmUI implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    @FXML
-    private void displayGreenSpaces2() {
-        if (greenSpacesController != null) {
-            greenSpacesList.getItems().clear(); // Clear the list before adding new items
-            List<String> greenSpacesDetails = greenSpacesController.getSortedGreenSpacesNamesAndEmails();
-            greenSpacesList.getItems().addAll(greenSpacesDetails);
         }
     }
 

@@ -143,6 +143,18 @@ public class GreenSpacesController {
         Collections.sort(newList);
         return newList;
     }
+    public List<String> getSortedGreenSpacesNamesAndEmailsByEmail(String email) {
+        List<GreenSpaces> greenSpacesList = repository.getGreenSpaces();
+        List<GreenSpaces> filteredList = greenSpacesList.stream()
+                .filter(gs -> gs.getEmail().equals(email))
+                .collect(Collectors.toList());
+        List<GreenSpaces> sortedGreenSpaces = sortingStrategy.sort(filteredList);
+        List<String> sortedNamesAndEmails = new ArrayList<>();
+        for (GreenSpaces gp : sortedGreenSpaces){
+            sortedNamesAndEmails.add(gp.getName() + " | " + gp.getEmail());
+        }
+        return sortedNamesAndEmails;
+    }
     public boolean removeGreenSpace(String name) {
         // Get the green space to remove by its name
         GreenSpaces greenSpaceToRemove = getGreenSpaceByName(name);
