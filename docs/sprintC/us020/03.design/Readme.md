@@ -8,24 +8,24 @@ _**Note that SSD - Alternative One is adopted.**_
 
 | Interaction ID | Question: Which class is responsible for...   | Answer                  | Justification (with patterns)                                                                                 |
 |:-------------  |:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 | 	... interacting with the actor?              | CreateVehicleUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 | 	... coordinating the US?                     | CreateVehicleController | Controller                                                                                                    |
-| Step 3  		 | 	...saving the inputted data?                 | VehicleReposiory        | IE: object created in step 1 has its own data.                                                                |
-| Step 5  		 | 	... saving the selected category?            | VehicleRepository       | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 7  		 | 	... validating all data (local validation)?  | VehicleRepository       | IE: owns its data.                                                                                            | 
-| 			  		 | 	... saving the created collaborator?         | VehicleRepository       | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 | 	... informing operation success?             | CreateVehicleUI         | IE: is responsible for user interactions.                                                                     | 
+| Step 1  		 | 	... interacting with the actor?              | CreateGreenSpaceUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		 | 	... coordinating the US?                     | CreateGreenSpaceController | Controller                                                                                                    |
+| Step 3  		 | 	...saving the inputted data?                 | GreenSpaceRepository       | IE: object created in step 1 has its own data.                                                                |
+| Step 5  		 | 	... saving the selected category?            | GreenSpaceRepository     | IE: object created in step 1 is classified in one Category.                                                   |
+| Step 7  		 | 	... validating all data (local validation)?  | GreenSpaceRepository | IE: owns its data.                                                                                            | 
+| 			  		 | 	... saving the created collaborator?         | GreenSpaceRepository      | IE: owns all its tasks.                                                                                       | 
+| Step 8  		 | 	... informing operation success?             | CreateGreenSpaceUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Vehicle
+* GreenSpace
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateVehicleUI  
-* CreateVehicleController
+* CreateGreenSpaceUI
+* CreateGreenSpaceController
 
 
 ## 3.2. Sequence Diagram (SD)
