@@ -66,10 +66,10 @@ public class Entry implements Serializable {
 
     public String getIdAndDate() {
         if (team != null) {
-            return String.format("%s - %d/%d/%d - %s - %s", ID, dueDate.getDate(), dueDate.getMonth(), dueDate.getYear()+1900, team.getReference(), status);
+            return String.format("%s - %d/%d/%d - %s - %s", ID, dueDate.getDate(), dueDate.getMonth()+1, dueDate.getYear()+1900, team.getReference(), status);
         }
 
-        return String.format("%s - %d/%d/%d - No team assigned - %s", ID, dueDate.getDate(), dueDate.getMonth(), dueDate.getYear()+1900, status);
+        return String.format("%s - %d/%d/%d - No team assigned - %s", ID, dueDate.getDate(), dueDate.getMonth()+1, dueDate.getYear()+1900, status);
     }
 
     @Override

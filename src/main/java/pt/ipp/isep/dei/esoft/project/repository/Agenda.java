@@ -6,9 +6,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.domain.status;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Agenda implements Serializable {
     private final List<Entry> lstEntries;
@@ -36,6 +34,12 @@ public class Agenda implements Serializable {
 
     public List<Entry> getEntries() {
         return List.copyOf(lstEntries);
+    }
+
+    public List<Entry> getEntriesSortedByDate() {
+        List<Entry> sortedEntries = new ArrayList<>(lstEntries);
+        Collections.sort(sortedEntries, Comparator.comparing(Entry::getDueDate));
+        return sortedEntries;
     }
 
     public List<Entry> getEntriesByStatus(status status) {
@@ -77,7 +81,8 @@ public class Agenda implements Serializable {
 
     public List<String> getEntriesIdAndDate() {
         List<String> lstEntries = new ArrayList<>();
-        for (Entry entry : this.lstEntries) {
+        List<Entry> sortedEntries = getEntriesSortedByDate();
+        for (Entry entry : sortedEntries) {
             lstEntries.add(entry.getIdAndDate());
         }
         return lstEntries;
@@ -85,7 +90,8 @@ public class Agenda implements Serializable {
 
     public List<String> getEntriesIdAndDateByTeam(Team team) {
         List<String> lstEntries = new ArrayList<>();
-        for (Entry entry : this.lstEntries) {
+        List<Entry> sortedEntries = getEntriesSortedByDate();
+        for (Entry entry : sortedEntries) {
             if (entry.getTeam().equals(team)) {
                 lstEntries.add(entry.getIdAndDate());
             }

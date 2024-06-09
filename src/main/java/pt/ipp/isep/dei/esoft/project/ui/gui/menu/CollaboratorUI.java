@@ -1,12 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui.menu;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
+import pt.ipp.isep.dei.esoft.project.domain.status;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -26,6 +30,14 @@ public class CollaboratorUI implements Initializable {
     public DatePicker startDate;
     @FXML
     public DatePicker endDate;
+
+    @FXML
+    public ComboBox<String> statusBox;
+
+    @FXML
+    public void statusSelected() {
+        dateChoosen();
+    }
 
     @FXML
     private void dateChoosen() {
@@ -49,11 +61,18 @@ public class CollaboratorUI implements Initializable {
             valid = false;
         }
 
-        if (valid) {
+        if (valid && statusBox.getValue() != null) {
             AgendaController agendaController = new AgendaController();
             List<String> entries = agendaController.presentEntriesByTeamAndDateRange(userTeam,start,end);
-            entriesLst.getItems().clear();
-            entriesLst.getItems().addAll(entries);
+
+            if (statusBox.getValue().equals("All")) {
+                entriesLst.getItems().clear();
+                entriesLst.getItems().addAll(entries);
+            } else {
+                entries.removeIf(entry -> !entry.contains(statusBox.getValue()));
+                entriesLst.getItems().clear();
+                entriesLst.getItems().addAll(entries);
+            }
         }
     }
 
@@ -63,6 +82,8 @@ public class CollaboratorUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //empty
+        List<String> statusList = List.of("All" ,status.DONE.toString(), status.CANCELED.toString(), status.PLANNED.toString(), status.POSTPONED.toString());
+        ObservableList<String> statusListObs = FXCollections.observableArrayList(statusList);
+        statusBox.setItems(statusListObs);
     }
 }

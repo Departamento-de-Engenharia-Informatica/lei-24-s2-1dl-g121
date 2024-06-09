@@ -138,7 +138,7 @@ public class GreenSpacesController {
          */
         List<String> newList = new ArrayList<>();
         for (GreenSpaces gp : getSortedGreenSpaces()){
-            newList.add(gp.getName() + " | " + gp.getEmail());
+            newList.add(gp.getName() + " | " + gp.getEmail() + " | " + gp.getArea());
         }
         Collections.sort(newList);
         return newList;

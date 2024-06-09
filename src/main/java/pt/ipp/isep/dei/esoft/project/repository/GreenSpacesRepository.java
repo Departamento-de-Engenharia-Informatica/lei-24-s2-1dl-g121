@@ -47,4 +47,5 @@ public class GreenSpacesRepository implements Serializable {
     public boolean removeGreenSpaceByName(String name) {
         return greenSpaces.removeIf(greenSpace -> greenSpace.getName().equals(name));
     }
+
 }

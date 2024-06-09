@@ -299,14 +299,6 @@ public class US_17 {
             writer.write("}\n");
             writer.close();
 
-            //  Debug things
-//            System.out.println("==============================================");
-//            System.out.println("For vertex " + title + " the minimal spanning tree is:");
-//            for(Edge edge : minimalSpanningTreeEdges){
-//                System.out.println(edge.from.name + " -- " + edge.to.name);
-//            }
-//            System.out.println("==============================================");
-
             try {
                 title = title.replaceAll(" ", "_");
                 Runtime.getRuntime().exec("neato -Tsvg " + directoryPath + "/graph.dot -o " + directoryPath + "/" + title + ".svg").waitFor();
