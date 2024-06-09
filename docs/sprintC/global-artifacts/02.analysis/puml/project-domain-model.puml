@@ -108,11 +108,19 @@ class ToDoList{
 }
 
 class Agenda{
-    task description
+    entries
     team
     vehicles/equipment
     expected duration
     status
+}
+
+class Entry{
+    task
+    date
+    time
+    description
+    state
 }
 
 Organization -- "*" HRM : is a part of <
@@ -125,7 +133,10 @@ HRM "1" -- "*" Job : registers >
 HRM "1" -- "*" Collaborator : registers >
 Collaborator "1" -- "*" Skill : has a set of >
 Collaborator "1" -- "1" Job : has >
-Team "1" -- "*" Task : is assigned a >
+Collaborator "1" -- "1" Team : belongs to >
+GreenSpaces "0..1" -- "1" Task : is assigned to <
+Task "1" -- "*" Entry : is included in >
+Team "1" -- "*" Entry : is assigned a >
 VFM "1" -- "*" Vehicle : registers >
 VFM "1" -- "*" "VehiclesMaintenance" : registers >
 Vehicle "1" -- "0..1" "VehiclesMaintenance" : needs >
@@ -134,8 +145,7 @@ Team "1" -- "0..*" Vehicle : needs >
 GSM "1" -- "*" ToDoList : has >
 GSM "1" -- "*" GreenSpaces : creates and manages >
 ToDoList "1" -- "*" Task : includes >
-Agenda "1" -- "*" Task : schedules >
-Agenda "1" -- "*" Team : assigns >
-Agenda "1" -- "*" Vehicle : uses >
+Agenda "1" -- "*" Entry : schedules >
+Agenda "1" -- "*" Team : is assigned <
 
 @enduml
