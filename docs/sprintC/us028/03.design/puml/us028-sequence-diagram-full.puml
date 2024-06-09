@@ -1,0 +1,55 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Collaborator" as COL
+participant ":TaskController" as CTRL
+participant ":TaskRepository" as Repo
+participant "Task" as Task
+participant "TaskStatus" as Status
+
+activate COL
+
+    COL -> CTRL : requestTasksBetweenDates(startDate, endDate)
+    activate CTRL
+
+        CTRL -> Repo : getTasksBetweenDates(startDate, endDate)
+        activate Repo
+
+            Repo -> Repo : Query tasks between dates
+            Repo -> Task : Retrieve tasks
+            loop Each Task
+                Task --> Repo : Return Task
+            end
+
+            Repo --> CTRL : List of tasks
+        deactivate Repo
+
+        CTRL -> Task : Sort tasks by date
+        CTRL -> Status : Get list of task statuses
+        activate Status
+        Status --> CTRL : List of statuses
+        deactivate Status
+
+        CTRL -> Repo : getTasksByStatus(status)
+        activate Repo
+
+            Repo -> Repo : Query tasks by status
+            Repo -> Task : Retrieve tasks
+            loop Each Task
+                Task --> Repo : Return Task
+            end
+
+            Repo --> CTRL : List of tasks with given status
+        deactivate Repo
+
+        CTRL --> COL : List of tasks sorted by date and filtered by status
+    deactivate CTRL
+
+deactivate COL
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class TaskRepository {
+    +getTaskRepository()
+    +getTasksBetweenDates(startDate: Date, endDate: Date): List<Task>
+    +getTasksByStatus(status: TaskStatus): List<Task>
+}
+
+class TaskController {
+    +getTasksBetweenDates(startDate: Date, endDate: Date): List<Task>
+    +getTasksByStatus(status: TaskStatus): List<Task>
+}
+
+class Task {
+    -id: int
+    -title: String
+    -description: String
+    -dueDate: Date
+    -status: TaskStatus
+}
+
+class Entry {
+    TODO
+    IN_PROGRESS
+    DONE
+}
+
+TaskRepository --> Task
+TaskController --> TaskRepository
+TaskController --> Task
+Task --> Entry
+@enduml

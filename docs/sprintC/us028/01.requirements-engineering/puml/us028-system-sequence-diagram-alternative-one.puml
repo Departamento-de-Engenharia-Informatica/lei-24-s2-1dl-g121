@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Consult Tasks Assigned
+
+autonumber
+
+actor "Collaborator" as Collaborator
+participant ":System" as System
+
+activate Collaborator
+
+    Collaborator -> System : requests to consult tasks assigned
+    activate System
+
+        System --> Collaborator : asks for start and end dates
+    deactivate System
+
+    Collaborator -> System : provides start and end dates
+    activate System
+
+        System --> Collaborator : displays tasks assigned within specified dates
+    deactivate System
+
+    Collaborator -> System : selects sorting option by date
+    activate System
+
+        System --> Collaborator : sorts tasks by date
+    deactivate System
+
+    Collaborator -> System : selects filtering option by task status
+    activate System
+
+        System --> Collaborator : filters tasks by status
+    deactivate System
+
+@enduml

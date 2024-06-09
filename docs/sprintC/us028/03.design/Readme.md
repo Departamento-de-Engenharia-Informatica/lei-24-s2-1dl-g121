@@ -4,29 +4,27 @@
 
 ### 3.1. Rationale
 
-_**Note that SSD - Alternative One is adopted.**_
+For this user story, we need to modify the design and systematization based on the new requirements.
 
 | Interaction ID | Question: Which class is responsible for...   | Answer                  | Justification (with patterns)                                                                                 |
-|:-------------  |:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 | 	... interacting with the actor?              | CreateVehicleUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 | 	... coordinating the US?                     | CreateVehicleController | Controller                                                                                                    |
-| Step 3  		 | 	...saving the inputted data?                 | VehicleReposiory        | IE: object created in step 1 has its own data.                                                                |
-| Step 5  		 | 	... saving the selected category?            | VehicleRepository       | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 7  		 | 	... validating all data (local validation)?  | VehicleRepository       | IE: owns its data.                                                                                            | 
-| 			  		 | 	... saving the created collaborator?         | VehicleRepository       | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 | 	... informing operation success?             | CreateVehicleUI         | IE: is responsible for user interactions.                                                                     | 
+|:---------------|:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1         |   ... interacting with the actor?              | TaskUI                  | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                |   ... coordinating the US?                     | TaskController          | Controller                                                                                                    |
+| Step 2         |   ... retrieving tasks between two dates?      | TaskRepository          | IE: Object created in step 1 has its own data.                                                                |
+| Step 3         |   ... filtering tasks by status?               | TaskRepository          | IE: Object created in step 1 has its own data.                                                                |
+| Step 4         |   ... sorting tasks by date?                   | TaskRepository          | IE: Object created in step 1 has its own data.                                                                |
+|                |   ... presenting tasks to the collaborator?    | TaskUI                  | IE: Responsible for user interactions.                                                                       | 
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Vehicle
+* Task
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
-* CreateVehicleUI  
-* CreateVehicleController
-
+* TaskUI
+* TaskController
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -36,8 +34,8 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us028-sequence-diagram-full.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us028-class-diagram.svg)

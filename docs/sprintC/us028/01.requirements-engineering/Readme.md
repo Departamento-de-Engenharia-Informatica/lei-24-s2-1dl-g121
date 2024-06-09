@@ -1,35 +1,38 @@
-# US006 - Register a vehicle.
+# US028 - R consult the tasks assigned.
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a VFM, I wish to register a vehicle including Brand, Model,
-Type, Tare Weight, Gross Weight, Current Km, Register Date, Acqui-
-sition Date, and Maintenance/Check-up Frequency (in km).
+As a Collaborator, I wish to consult the tasks assigned to me
+between two dates.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks.
+>	The list of tasks spaces must be sorted by date.
 
 
 **From the client clarifications:**
 
-> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
+> **Question:** When a collaborator is registered, they are given an account with the registered email and a password? This allows them to log in and view their tasks later on. What should be the password for this collaborator's account?
 >
-> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
+> **Answer:** Yes, it make sense.
+About the password, not important in this stage of the project.
 
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform ther user of the mistake and give him the option to add another vehicle?
+> **Question:** While consulting tasks, how specific should be data presented to collaborator? Should it be all entries from the agenda with collaborator's team assigned or generic tasks that these entries refer to? As there is agenda entry, to-do list entry and task.
 >
-> **Answer:** again, duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates.
+> **Answer:** A "generic task" is something like "task type" or "template task", for instance "Prunning Trees".
+When a GSM decides to insert a entry in the To-Do list, he selects a generic task, selects a park, defines the expected duration and the urgency.
+Later, that To-do List entry will originate an Entry in the Agenda with a starting date/time. That Entry can be managed due to actions/events that happens, hence the Entry can be Canceled, Postponed or Completed.
+
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** VFM cant duplicate cars.
-* **AC2:** Vehicles must be identified by the plate id.
-* **AC3:** Show car data for confirmation.
+* **AC1:** The list of tasks spaces must be sorted by date.
+* **AC2:** The Collaborator should be able to filter the results by the
+  status of the task.
 
 ### 1.4. Found out Dependencies
 
@@ -40,15 +43,13 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 **Input Data:**
 
 * Typed data:
-    * Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
 	
 * Selected data:
- 
+  *Select to view the tasks assigned
 
 **Output Data:**
 
-* Confirmation of car data
-* Car registration
+* Tasks assigned to the specific collaborator
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -56,7 +57,7 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us028-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 
