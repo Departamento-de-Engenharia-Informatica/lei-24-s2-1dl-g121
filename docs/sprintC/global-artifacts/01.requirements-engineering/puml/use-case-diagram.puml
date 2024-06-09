@@ -27,16 +27,16 @@ rectangle " " as usecases{
     usecase "UC6 - Assign skills" as UC6
     usecase "UC7 - Assign skills" as UC7
     usecase "UC8 - Assign skills" as UC8
-    usecase "UC20 - Assign skills" as UC20
-    usecase "UC21 - Assign skills" as UC21
-    usecase "UC22 - Assign skills" as UC22
-    usecase "UC23 - Assign skills" as UC23
-    usecase "UC24 - Assign skills" as UC24
-    usecase "UC25 - Assign skills" as UC25
-    usecase "UC26 - Assign skills" as UC26
-    usecase "UC27 - Assign skills" as UC27
-    usecase "UC28 - Assign skills" as UC28
-    usecase "UC29 - Assign skills" as UC29
+    usecase "UC20 - Register green spaces" as UC20
+    usecase "UC21 - Add entry to ToDoList" as UC21
+    usecase "UC22 - Add entry to Agenda" as UC22
+    usecase "UC23 - Assign team to an entry in the Agenda" as UC23
+    usecase "UC24 - Postpone an entry in the Agenda" as UC24
+    usecase "UC25 - Cancel an entry in the Agenda" as UC25
+    usecase "UC26 - Assign vehicles to an entry in the Agenda" as UC26
+    usecase "UC27 - List all my green spaces" as UC27
+    usecase "UC28 - Consult tasks assigned to me" as UC28
+    usecase "UC29 - Record the completion of a task" as UC29
 
     Freelancer --> UC1
     Freelancer --> UC2
