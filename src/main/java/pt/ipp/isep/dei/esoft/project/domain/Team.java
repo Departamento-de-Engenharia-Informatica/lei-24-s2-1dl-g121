@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Team implements Serializable {
     private List<Collaborator> collaborators;
@@ -40,15 +41,17 @@ public class Team implements Serializable {
         this.reference = reference;
     }
 
-    public boolean equals(Object o) {
-        if (this == o) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || this.getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Team team = (Team) o;
-        return this.collaborators.equals(team.collaborators);
+        Team team = (Team) obj;
+        return Objects.equals(collaborators, team.collaborators) &&
+                Objects.equals(reference, team.reference);
     }
 
     public Team clone() {

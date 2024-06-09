@@ -19,7 +19,7 @@ class CollaboratorTest {
         job = new Job("Test");
         skill = new Skill("Test");
 
-        collaborator = new Collaborator("test", "Test", "test", "test", "test", "test", "test", job);
+        collaborator = new Collaborator("test", "Test", "test", "test", "test", "test", "test","12312312", job);
     }
 
     @Test
@@ -59,7 +59,7 @@ class CollaboratorTest {
 
     @Test
     void testEqualsDifferentObject() {
-        Collaborator collaborator1 = new Collaborator("test", "test", "test", "test", "test", "test","test", job);
+        Collaborator collaborator1 = new Collaborator("test", "test", "test", "test", "test", "test","test","12312312", job);
         assertEquals(collaborator, collaborator1);
     }
 

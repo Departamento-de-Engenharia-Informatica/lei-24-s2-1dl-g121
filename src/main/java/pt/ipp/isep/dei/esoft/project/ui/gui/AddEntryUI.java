@@ -73,7 +73,6 @@ public class AddEntryUI implements Initializable {
 
             try {
                 dueDate = java.sql.Date.valueOf(dueDateDat.getValue());
-                dueDate.setYear(dueDate.getYear() + 1900);
             }
             catch (Exception e){
                 errorMessageLbl.setText("Please select a due date");

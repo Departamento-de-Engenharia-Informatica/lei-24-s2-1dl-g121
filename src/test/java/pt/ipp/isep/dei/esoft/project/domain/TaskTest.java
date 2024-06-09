@@ -1,126 +1,71 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
+import pt.ipp.isep.dei.esoft.project.domain.Task;
+import pt.ipp.isep.dei.esoft.project.domain.urgencyDegree;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class TaskTest {
+public class TaskTest {
 
-    @Test
-    void ensureTaskIsCreatedSuccessfully() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
+    private Task task;
+    private GreenSpaces greenSpace;
+
+    @BeforeEach
+    public void setUp() {
+        greenSpace = new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto", "ArcaAgua", "exemplo@exemplo.com");
+        task = new Task("Task1", "Description1", 10, urgencyDegree.HIGH, greenSpace);
     }
 
     @Test
-    void ensureTaskReferenceIsNotNull() {
-        //Arrange
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-
-        //Act and Assert
-        assertThrows(IllegalArgumentException.class,
-                () -> new TaskModelo(null, "description", "informal description", "technical description", 1, 1d,
-                        taskCategory, employee));
+    public void shouldSetAndGetDescription() {
+        task.setDescription("Description2");
+        assertEquals("Description2", task.getDescription());
     }
 
     @Test
-    void testEqualsSameObject() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-
-        assertEquals(task, task);
+    public void shouldSetAndGetDuration() {
+        task.setDuration(20);
+        assertEquals(20, task.getDuration());
     }
 
     @Test
-    void testEqualsDifferentClass() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-
-        assertNotEquals(task, new Object());
+    public void shouldSetAndGetUrgencyDegree() {
+        task.setUrgencyDegree(urgencyDegree.LOW);
+        assertEquals(urgencyDegree.LOW, task.getUrgencyDegree());
     }
 
     @Test
-    void testEqualsNull() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-
-        assertNotEquals(task, null);
+    public void shouldSetAndGetGreenSpace() {
+        GreenSpaces greenSpace2 = new GreenSpaces("garden", 200, "Praça de 10 de Abril 122, 4200-423 Porto", "Parque da Cidade", "exemplo@exemplo.com");
+        task.setGreenSpace(greenSpace2);
+        assertEquals(greenSpace2, task.getGreenSpace());
     }
 
     @Test
-    void testEqualsDifferentObject() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-        TaskModelo task1 = new TaskModelo("reference1", "description1", "informal description1", "technical description1", 2, 2d,
-                taskCategory, employee);
-
-        assertNotEquals(task, task1);
+    public void shouldGetTaskAndGreenSpace() {
+        String expected = "Task1 - ArcaAgua";
+        assertEquals(expected, task.getTaskAndGreenSpace());
     }
 
     @Test
-    void testEqualsSameObjectDifferentDescription() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-        TaskModelo task1 = new TaskModelo("reference1", "description", "informal description1", "technical description1", 2, 2d,
-                taskCategory, employee);
-
-        assertNotEquals(task, task1);
+    public void shouldGetTaskAndGreenSpaceWhenGreenSpaceIsNull() {
+        task.setGreenSpace(null);
+        String expected = "Task1 - Any GreenSpace";
+        assertEquals(expected, task.getTaskAndGreenSpace());
     }
 
     @Test
-    void testEqualsSameObjectSameDescription() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-        TaskModelo task1 = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-
-        assertEquals(task, task1);
-    }
-
-    @Test
-    void testHashCodeSameObject() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-
-        assertEquals(task.hashCode(), task.hashCode());
-    }
-
-    @Test
-    void testHashCodeDifferentObject() {
-        Employee employee = new Employee("john.doe@this.company.com");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-        TaskModelo task1 = new TaskModelo("reference1", "description1", "informal description1", "technical description1", 2, 2d,
-                taskCategory, employee);
-
-        assertNotEquals(task.hashCode(), task1.hashCode());
-    }
-
-    @Test
-    void ensureCloneWorks() {
-        Employee employee = new Employee("john.doe@this.company.org");
-        TaskCategoryModelo taskCategory = new TaskCategoryModelo("Task Category Description");
-        TaskModelo task = new TaskModelo("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, employee);
-        TaskModelo clone = task.clone();
-        assertEquals(task, clone);
+    public void shouldCloneTask() {
+        Task clonedTask = task.clone();
+        assertNotNull(clonedTask);
+        assertEquals(task.getReference(), clonedTask.getReference());
+        assertEquals(task.getDescription(), clonedTask.getDescription());
+        assertEquals(task.getDuration(), clonedTask.getDuration());
+        assertEquals(task.getUrgencyDegree(), clonedTask.getUrgencyDegree());
+        assertEquals(task.getGreenSpace(), clonedTask.getGreenSpace());
     }
 }

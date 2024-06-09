@@ -83,6 +83,15 @@ public class CollaboratorRepository implements Serializable {
         return null;
     }
 
+    public Collaborator getCollaboratorByEmail(String email) {
+        for (Collaborator collaborator : collaborators) {
+            if (collaborator.getEmail().equals(email)) {
+                return collaborator;
+            }
+        }
+        return null;
+    }
+
     public List<Collaborator> getCollaboratorsBySkills(List<Skill> skillsNeeded) {
         List<Collaborator> collaboratorsWithSkills = new ArrayList<>();
 

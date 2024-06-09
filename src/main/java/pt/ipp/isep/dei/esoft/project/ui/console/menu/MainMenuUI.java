@@ -30,7 +30,7 @@ public class MainMenuUI implements Runnable {
                 saveCollaborators();
             }
         }));
-        int option = 0;
+        int option;
         do {
             option = Utils.showAndSelectIndex(options, "\n\n--- MAIN MENU --------------------------");
 

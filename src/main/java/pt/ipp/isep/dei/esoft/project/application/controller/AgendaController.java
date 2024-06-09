@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -73,6 +74,28 @@ public class AgendaController {
 
     public List<String> presentEntries() {
         return agenda.getEntriesIdAndDate();
+    }
+
+    public List<String> presentEntriesByTeamAndDateRange(Team team, Date startDate, Date endDate) {
+        List<String> lstEntries = new ArrayList<>();
+        System.out.println("Team: " + team);
+        System.out.println("Start date: " + startDate);
+        System.out.println("End date: " + endDate);
+        for (Entry entry : this.agenda.getEntries()) {
+            System.out.println("Current entry: " + entry);
+            System.out.println("Entry's team: " + entry.getTeam());
+            System.out.println("Entry's due date: " + entry.getDueDate());
+            if (entry.getTeam().equals(team) &&
+                    (entry.getDueDate().equals(startDate) || entry.getDueDate().after(startDate)) &&
+                    (entry.getDueDate().equals(endDate) || entry.getDueDate().before(endDate))) {
+                System.out.println("Entry added to the list.");
+                lstEntries.add(entry.getIdAndDate());
+            } else {
+                System.out.println("Entry not added to the list.");
+            }
+        }
+        System.out.println("Final list of entries: " + lstEntries);
+        return lstEntries;
     }
 
     public boolean removeEntry(String ID) {

@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Task implements Serializable {
     private final String reference;
@@ -69,6 +70,22 @@ public class Task implements Serializable {
 
     public String toString() {
         return String.format("Task: %s, %s, %d, %s", reference, description, duration, urgencyDegree);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Task task = (Task) obj;
+        return duration == task.duration &&
+                urgencyDegree == task.urgencyDegree &&
+                Objects.equals(reference, task.reference) &&
+                Objects.equals(description, task.description) &&
+                Objects.equals(greenSpace, task.greenSpace);
     }
 
     /**

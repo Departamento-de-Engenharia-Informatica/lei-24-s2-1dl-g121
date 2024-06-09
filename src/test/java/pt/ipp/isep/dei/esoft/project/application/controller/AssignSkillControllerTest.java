@@ -26,7 +26,7 @@ class AssignSkillControllerTest {
     void assignSkillToExistingCollaborator() {
         Skill skill = new Skill("Test");
         skillRepository.add(skill);
-        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test", new Job("Test"));
+        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test","12312312", new Job("Test"));
         collaboratorRepository.add(collaborator);
         controller.assignSkill("Test", "Test");
         assertTrue(collaborator.getSkillList().contains(skill));
@@ -34,7 +34,7 @@ class AssignSkillControllerTest {
 
     @Test
     void assignNonExistingSkillToCollaborator() {
-        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test", new Job("Test"));
+        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test","12312312", new Job("Test"));
         collaboratorRepository.add(collaborator);
         assertThrows(NullPointerException.class, () -> controller.assignSkill("Test", "NonExistingSkill"));
     }
@@ -53,7 +53,7 @@ class AssignSkillControllerTest {
 
     @Test
     void verifyExistingCollaboratorById() {
-        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test", new Job("Test"));
+        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test","12312312", new Job("Test"));
         collaboratorRepository.add(collaborator);
         assertFalse(controller.verifyCollaboratorById("Test"));
     }

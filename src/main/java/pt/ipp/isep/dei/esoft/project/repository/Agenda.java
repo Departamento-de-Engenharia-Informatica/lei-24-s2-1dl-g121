@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.domain.status;
 
 import java.io.Serializable;
@@ -78,6 +79,16 @@ public class Agenda implements Serializable {
         List<String> lstEntries = new ArrayList<>();
         for (Entry entry : this.lstEntries) {
             lstEntries.add(entry.getIdAndDate());
+        }
+        return lstEntries;
+    }
+
+    public List<String> getEntriesIdAndDateByTeam(Team team) {
+        List<String> lstEntries = new ArrayList<>();
+        for (Entry entry : this.lstEntries) {
+            if (entry.getTeam().equals(team)) {
+                lstEntries.add(entry.getIdAndDate());
+            }
         }
         return lstEntries;
     }

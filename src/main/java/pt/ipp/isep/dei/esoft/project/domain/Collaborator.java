@@ -165,4 +165,8 @@ public class Collaborator implements Serializable {
     public List<Skill> getSkills() {
         return this.skillList;
     }
+
+    public String getEmail() {
+        return this.email;
+    }
 }

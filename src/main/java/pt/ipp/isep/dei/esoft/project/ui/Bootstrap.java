@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
@@ -75,8 +76,8 @@ public class Bootstrap implements Runnable {
     private void addEntries() {
         ToDoListController controller = new ToDoListController();
         Agenda agenda = Repositories.getInstance().getAgenda();
-        agenda.add(new Entry("Entry 1", controller.getTaskByReference("Task 1"), new Date(2024, 6, 3), status.PLANNED));
-        agenda.add(new Entry("Entry 2", controller.getTaskByReference("Task 2"), new Date(2024, 5, 1), status.CANCELED));
+        agenda.add(new Entry("Entry 1", controller.getTaskByReference("Task 1"), new Date(124, 6, 3), status.PLANNED));
+        agenda.add(new Entry("Entry 2", controller.getTaskByReference("Task 2"), new Date(124, 6, 1), status.CANCELED));
 
         try {
             FileInputStream fileIn = new FileInputStream("saveFiles/agenda.ser");
@@ -95,11 +96,11 @@ public class Bootstrap implements Runnable {
     }
 
     private void addTasks() {
-//        GreenSpacesController controller = new GreenSpacesController();
-//        ToDoList toDoList = Repositories.getInstance().getToDoList();
-//        toDoList.add(new Task("Task 1", "Description 1", 1, urgencyDegree.LOW, controller.getGreenSpaceByName("ArcaAgua")));
-//        toDoList.add(new Task("Task 2", "Description 2", 1, urgencyDegree.MEDIUM, controller.getGreenSpaceByName("ArcaAgua")));
-//        toDoList.add(new Task("Task 3", "Description 3", 1, urgencyDegree.HIGH, controller.getGreenSpaceByName("ArcaAgua")));
+        GreenSpacesController controller = new GreenSpacesController();
+        ToDoList toDoList = Repositories.getInstance().getToDoList();
+        toDoList.add(new Task("Task 1", "Description 1", 1, urgencyDegree.LOW, controller.getGreenSpaceByName("ArcaAgua")));
+        toDoList.add(new Task("Task 2", "Description 2", 1, urgencyDegree.MEDIUM, controller.getGreenSpaceByName("ArcaAgua")));
+        toDoList.add(new Task("Task 3", "Description 3", 1, urgencyDegree.HIGH, controller.getGreenSpaceByName("ArcaAgua")));
 
         try {
             FileInputStream fileIn = new FileInputStream("saveFiles/toDoList.ser");
@@ -195,16 +196,11 @@ public class Bootstrap implements Runnable {
     }
 
     private void addCollaborators() {
-        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         RegisterCollaboratorController controller = new RegisterCollaboratorController();
-        controller.registerCollaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", "00100100", new Job("SoftwareDeveloper"));
+        controller.registerCollaborator("Jorge", "2000-01-01", "ns", "alias", "email", "collab@this.app", "10012", "00100100", new Job("SoftwareDeveloper"));
         controller.registerCollaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", "00200200", new Job("SoftwareTester"));
         controller.registerCollaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", "00300300", new Job("SoftwareDeveloper"));
-        controller.registerCollaborator("Simao", "2019-01-01", "ns", "alias", "email", "phone", "15", "00400400", new Job("SoftwareTester"));
-
-//        collaboratorRepository.add(new Collaborator("Jorge", "2019-01-01", "ns", "alias", "email", "phone", "10012", "001", new Job("SoftwareDeveloper")));
-//        collaboratorRepository.add(new Collaborator("Joao", "2019-01-01", "ns", "alias", "email", "phone", "13", "002", new Job("SoftwareTester")));
-//        collaboratorRepository.add(new Collaborator("Tiago", "2019-01-01", "ns", "alias", "email", "phone", "14", "003", new Job("SoftwareDeveloper")));
+        controller.registerCollaborator("Simao", "2000-01-01", "ns", "alias", "email", "collab2@this.app", "15", "00400400", new Job("SoftwareTester"));
 
         try {
             FileInputStream fileIn = new FileInputStream("saveFiles/collaboratorRepository.ser");
@@ -267,6 +263,8 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("gsu", "gsu@this.app", "gsu",
                 AuthenticationController.ROLE_GSU);
         authenticationRepository.addUserWithRole("collab", "collab@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
+        authenticationRepository.addUserWithRole("collab2", "collab2@this.app", "collab2",
                 AuthenticationController.ROLE_COLLAB);
         authenticationRepository.addUserWithRole("HRM", "hrm@this.app", "hrm",
                 AuthenticationController.ROLE_HRM);
