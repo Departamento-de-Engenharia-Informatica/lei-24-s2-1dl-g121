@@ -10,18 +10,20 @@ As a GSM, I need to list all green spaces managed by me.
 
 **From the specifications document:**
 
->	This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks.
+>	The list of green spaces must be sorted by size in descending
+order (area in hectares should be used).
 
 
 **From the client clarifications:**
 
-> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
+> **Question:** Dear client, in this user story you only want to list the Green Spaces manage by the GSM. Due to this, the GSM should be register in the app previusly, isn't it? Which atributes should it have? A  GSM is a collaborator?
 >
-> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
+> **Answer:** Yes, the app can have multiple GSM registered (for instance that can be done during usgin the boostrap);
+A collaborator is a person (an employee) that have a name, birthdate, a salary, etc, A GSM is a role played by a collaborator. Depending in the size of the company, you can have a collaborator playing multiple roles like GSM, VFM or HRM or different persons playing the same role like GSM.
 
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform ther user of the mistake and give him the option to add another vehicle?
+> **Question:** Dear client, which info about Green Spaces do you want the GSM see when listing? only the name ?
 >
-> **Answer:** again, duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates.
+> **Answer:** Each team can decide about the aspects related to UX/UI.
 
 ### 1.3. Acceptance Criteria
 
@@ -33,22 +35,18 @@ As a GSM, I need to list all green spaces managed by me.
 
 ### 1.4. Found out Dependencies
 
-* This user story depends
+* This user story depends on US020 as this user story is the one that registers green spaces and if there are no green spaces the list can't be created.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* Typed data:
-    * Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check- up Frequency (in Kms)
-	
-* Selected data:
+* None
  
 
 **Output Data:**
 
-* Confirmation of car data
-* Car registration
+* List with the sorted green spaces
 
 ### 1.6. System Sequence Diagram (SSD)
 

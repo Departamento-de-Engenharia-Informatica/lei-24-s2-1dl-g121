@@ -1,0 +1,59 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype ortho
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class GreenSpaceRepository {
+    +getGreenSpaceRepository()
+    +getGreenSpaces()
+}
+
+class GreenSpacesUI {
+
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getGreenSpaceRepository()
+    + getSortingAlgorithmRepository()
+}
+
+class GreenSpacesController {
+    +listGreenSpaces() : List<GreenSpace>
+}
+
+class GSM {
+    name
+    email
+    phone number
+}
+
+class GreenSpace {
+    name
+    area
+    address
+    gsmEmail
+}
+
+class SortingAlgorithm {
+    algorithmName
+    +sort(List<GreenSpace>) : List<GreenSpace>
+}
+
+
+GreenSpacesUI --> GreenSpacesController: interacts with >
+Repositories --> GreenSpaceRepository: provides >
+GreenSpacesController --> Repositories: uses >
+GreenSpaceRepository --> GreenSpace: contains >
+GreenSpacesController --> GreenSpaceRepository : gets green spaces from >
+GreenSpacesController --> SortingAlgorithm
+GSM "1" -- "*" GreenSpace : manages >
+
+@enduml

@@ -1,0 +1,80 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Green Space Manager" as GSM
+participant ":ListGreenSpacesUI" as UI
+participant ":ListGreenSpacesController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "GreenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
+participant "SortingAlgorithmRepository:\nSortingAlgorithmRepository" as SortingRepo
+
+activate GSM
+
+    GSM -> UI : requests to list green spaces
+
+    activate UI
+
+        UI -> CTRL : create
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> GreenSpaceRepo : getGreenSpaceRepository()
+            activate GreenSpaceRepo
+
+                GreenSpaceRepo --> CTRL: greenSpaceRepository
+            deactivate GreenSpaceRepo
+
+            CTRL -> SortingRepo : getSortingAlgorithmRepository()
+            activate SortingRepo
+
+                SortingRepo --> CTRL: sortingAlgorithmRepository
+            deactivate SortingRepo
+
+            CTRL -> GreenSpaceRepo : getGreenSpaces()
+            activate GreenSpaceRepo
+
+                GreenSpaceRepo --> CTRL: list of green spaces
+            deactivate GreenSpaceRepo
+
+            CTRL -> SortingRepo : getSortingAlgorithms()
+            activate SortingRepo
+
+                SortingRepo --> CTRL: sorting algorithms
+            deactivate SortingRepo
+
+            CTRL --> UI : greenSpacesList
+        deactivate CTRL
+
+        UI --> GSM : requests sorting preference
+    deactivate UI
+
+    GSM -> UI : selects sorting algorithm
+    activate UI
+
+        UI --> CTRL : sort green spaces
+        activate CTRL
+
+            CTRL -> SortingRepo : use selected sorting algorithm
+            activate SortingRepo
+
+                SortingRepo --> CTRL: sorted green spaces
+            deactivate SortingRepo
+
+            CTRL --> UI : sorted green spaces
+        deactivate CTRL
+
+        UI --> GSM : displays sorted green spaces
+    deactivate UI
+
+deactivate GSM
+
+@enduml

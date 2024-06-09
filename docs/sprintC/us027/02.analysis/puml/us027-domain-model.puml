@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+'title Domain Model for Listing Green Spaces
+
+class GSM {
+    name
+    email
+    phone number
+}
+
+class GreenSpace {
+    name
+    area
+    address
+    gsmEmail
+}
+
+class SortingAlgorithm {
+    quickSort
+    bubbleSort
+}
+
+class GreenSpaceList {
+    sortedBy
+    listOfGreenSpaces
+}
+
+GSM "1" -- "*" GreenSpace : manages >
+GreenSpaceList "1" -- "*" GreenSpace : contains >
+GreenSpaceList "1" -- "1" SortingAlgorithm : sorted by >
+
+@enduml
