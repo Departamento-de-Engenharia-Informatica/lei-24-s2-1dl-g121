@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaces;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpacesRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -16,6 +17,7 @@ import java.io.IOException;
 public class GreenSpacesController {
     private GreenSpacesRepository repository;
     private SortingStrategy sortingStrategy;
+    private GreenSpaces greenSpaces;
 
 
     public GreenSpacesController() {
@@ -142,8 +144,20 @@ public class GreenSpacesController {
         return newList;
     }
     public boolean removeGreenSpace(String name) {
-        return repository.removeGreenSpaceByName(name);
+        // Get the green space to remove by its name
+        GreenSpaces greenSpaceToRemove = getGreenSpaceByName(name);
+
+        // If the green space exists, remove it from the repository
+        if (greenSpaceToRemove != null) {
+            // Attempt to remove the green space from the repository
+            boolean removed = repository.removeGreenSpaceByName(name);
+            if (removed) {
+                return true; // Return true if removal is successful
+            }
+        }
+        return false; // Return false if removal failed or if green space does not exist
     }
+
 
 }
 

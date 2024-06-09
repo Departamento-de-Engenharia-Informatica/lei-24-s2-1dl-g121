@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class GreenSpaces implements Serializable {
     private String type;
@@ -57,6 +58,8 @@ public class GreenSpaces implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 
     // Method to register a green space
     public void registerGreenSpace() {

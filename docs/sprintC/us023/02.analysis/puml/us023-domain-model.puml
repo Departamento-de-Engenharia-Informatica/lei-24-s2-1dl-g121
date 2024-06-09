@@ -15,35 +15,30 @@ hide methods
 '}
 
 
-class FM{
+class GSM{
     name
     email
     phone number
     identification document
 }
-
-
-class Vehicle{
-    Brand
-    Model
-    Type
-    Tare
-    Gross Weight
-    Current Km
-    Register Date
-    Acquisition Date
-    Maintenance/Check-up
+class Entry{
+Name
+Task to assign
+due date
+status
 }
 
-class Check-up{
-    distance "km"
+class Team{
+Collaborators
 }
 
 
 
-FM "1" -- "*" Vehicle : registers >
-FM "1" -- "*" "Check-up" : registers >
-Vehicle "1" -- "1" "Check-up" : needs >
+
+
+
+GSM "1" -- "*" Entry : selects >
+GSM "1" -- "*" "Team" : assigns >
 
 
 @enduml

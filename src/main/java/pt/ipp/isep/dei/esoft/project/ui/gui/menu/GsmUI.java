@@ -57,28 +57,25 @@ public class GsmUI implements Initializable {
 
     @FXML
     private void removeSelectedGreenSpace() {
-        String selectedGreenSpace = greenSpacesList.getSelectionModel().getSelectedItem();
+        errorMessageLbl.setText(""); // Clear any previous error message
+        if (greenSpacesList.getSelectionModel().isEmpty()) {
+            errorMessageLbl.setText("No green space selected!"); // Show error if no green space is selected
+        } else {
+            String selectedGreenSpace = greenSpacesList.getSelectionModel().getSelectedItem();
+            String[] parts = selectedGreenSpace.split(" | ");
+            String greenSpaceName = parts[0]; // Extract the name of the selected green space
 
-        agendaMessageLbl.setText("");
-        AgendaController agendaController = new AgendaController();
-        if (agendaLst.getSelectionModel().getSelectedItem() == null){
-            agendaMessageLbl.setText("No entry selected!");
-        }else{
-            String entry = agendaLst.getSelectionModel().getSelectedItem();
-            String[] parts = entry.split(" - ");
-            String entryReference = parts[0];
-            agendaController.removeEntry(entryReference);
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gsmUI.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) addTaskBtn.getScene().getWindow();
-                stage.setScene(scene);
-            } catch (IOException e) {
-                e.printStackTrace();
+            boolean success = greenSpacesController.removeGreenSpace(greenSpaceName);
+            if (success) {
+                // Refresh the green spaces list after removal
+                displayGreenSpaces();
+                errorMessageLbl.setText("Green space removed successfully.");
+            } else {
+                errorMessageLbl.setText("Failed to remove green space.");
             }
         }
     }
+
 
     @FXML
     private void assignTeamToEntry() {

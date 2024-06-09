@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Green Spaces Manager" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to assign an Agenda's entry to a team
+    activate System
+
+        System --> Employee : request the team to which the entry will be assigned
+    deactivate System
+
+    Employee -> System : chooses the team
+    activate System
+
+        System --> Employee : request the entry that will be assigned to the team
+    deactivate System
+
+    Employee -> System : chooses the entry
+    activate System
+
+        System --> Employee : displays operation success
+    deactivate System
+
+@enduml
