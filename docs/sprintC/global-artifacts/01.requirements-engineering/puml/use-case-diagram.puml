@@ -14,6 +14,8 @@ left to right direction
 rectangle " " as actors {
     actor "Human Resources Manager" as Freelancer
     actor "Fleet Manager" as Employee
+    actor "Green Space Manager" as act
+    actor "Collaborator" as actore
 }
 
 rectangle " " as usecases{
@@ -22,6 +24,20 @@ rectangle " " as usecases{
     usecase "UC3 - Register a collaborator" as UC3
     usecase "UC4 - Assign skills" as UC4
     usecase "UC5 - Generate team proposal" as UC5
+    usecase "UC6 - Assign skills" as UC6
+    usecase "UC7 - Assign skills" as UC7
+    usecase "UC8 - Assign skills" as UC8
+    usecase "UC20 - Assign skills" as UC20
+    usecase "UC21 - Assign skills" as UC21
+    usecase "UC22 - Assign skills" as UC22
+    usecase "UC23 - Assign skills" as UC23
+    usecase "UC24 - Assign skills" as UC24
+    usecase "UC25 - Assign skills" as UC25
+    usecase "UC26 - Assign skills" as UC26
+    usecase "UC27 - Assign skills" as UC27
+    usecase "UC28 - Assign skills" as UC28
+    usecase "UC29 - Assign skills" as UC29
+
     Freelancer --> UC1
     Freelancer --> UC2
     Freelancer --> UC3
@@ -33,6 +49,23 @@ rectangle " " as usecases{
     Employee --> UC6
     Employee --> UC7
     Employee --> UC8
+    act --> UC20
+    act --> UC21
+    act --> UC22
+    act --> UC23
+    act --> UC24
+    act --> UC25
+    act --> UC26
+    act --> UC27
+    actore --> UC28
+    actore --> UC29
+
+
+
+
+
+
+
 
 
 @enduml
