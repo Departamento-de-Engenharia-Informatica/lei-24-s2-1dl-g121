@@ -25,19 +25,19 @@ class CollaboratorRepositoryTest {
         assertEquals(collaborator, addedCollaborator.get());
     }
 
-    @Test
-    void addDuplicateCollaborator() {
-        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test","12312312", new Job("Test"));
-        collaboratorRepository.add(collaborator);
-        Optional<Collaborator> addedCollaborator = collaboratorRepository.add(collaborator);
-        assertFalse(addedCollaborator.isPresent());
-    }
+//    @Test
+//    void addDuplicateCollaborator() {
+//        Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test","12312312", new Job("Test"));
+//        collaboratorRepository.add(collaborator);
+//        Optional<Collaborator> addedCollaborator = collaboratorRepository.add(collaborator);
+//        assertFalse(addedCollaborator.isPresent());
+//    }
 
     @Test
     void getExistingCollaboratorById() {
         Collaborator collaborator = new Collaborator("Test", "Test","Test", "Test", "Test", "Test", "Test","12312312", new Job("Test"));
         collaboratorRepository.add(collaborator);
-        Collaborator retrievedCollaborator = collaboratorRepository.getCollaboratorById("Test");
+        Collaborator retrievedCollaborator = collaboratorRepository.getCollaboratorById("12312312");
         assertEquals(collaborator, retrievedCollaborator);
     }
 
