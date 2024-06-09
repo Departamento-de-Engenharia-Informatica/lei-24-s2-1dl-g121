@@ -226,8 +226,10 @@ public class Bootstrap implements Runnable {
     private void addGreenSpaces() {
         GreenSpacesRepository greenSpacesRepository = Repositories.getInstance().getGreenSpacesRepository();
         greenSpacesRepository.add(new GreenSpaces("garden", 100, "Praça de 9 de Abril 121, 4200-422 Porto", "ArcaAgua", "exemplo@exemplo.com"));
-        greenSpacesRepository.add(new GreenSpaces("garden", 200, "Praça de 10 de Abril 122, 4200-423 Porto", "Parque da Cidade", "exemplo@exemplo.com"));
+        greenSpacesRepository.add(new GreenSpaces("garden", 200, "Praça de 10 de Abril 122, 4200-423 Porto", "Parque da Cidade", "gsm@this.app"));
         greenSpacesRepository.add(new GreenSpaces("garden", 150, "Praça de 11 de Abril 123, 4200-424 Porto", "Covelo", "outroexemplo@exemplo.com"));
+        greenSpacesRepository.add(new GreenSpaces("garden", 170, "Praça de 11 de Abril 124, 4200-425 Porto", "Varas", "gsm@this.app"));
+
 
         try {
             FileInputStream fileIn = new FileInputStream("saveFiles/greenSpaces.ser");

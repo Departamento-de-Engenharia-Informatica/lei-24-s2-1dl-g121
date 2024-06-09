@@ -49,10 +49,27 @@ public class GsmUI implements Initializable {
     public Label agendaMessageLbl;
 
     private GreenSpacesController greenSpacesController;
+    private String loggedInUserEmail; // Field to store the logged-in user's email
+
 
 
     public GsmUI() {
         this.greenSpacesController = new GreenSpacesController();
+    }
+
+    public void setLoggedInUserEmail(String email) {
+        this.loggedInUserEmail = email;
+        displayGreenSpaces(); // Call displayGreenSpaces after setting the email
+    }
+
+    @FXML
+    private void displayGreenSpaces() {
+        if (greenSpacesController != null) {
+            // && loggedInUserEmail != null
+            greenSpacesList.getItems().clear(); // Clear the list before adding new items
+            List<String> greenSpacesDetails = greenSpacesController.getGreenSpacesNamesAndEmailsByEmail("gsm@this.app");
+            greenSpacesList.getItems().addAll(greenSpacesDetails);
+        }
     }
 
     @FXML
@@ -122,7 +139,7 @@ public class GsmUI implements Initializable {
     }
 
     @FXML
-    private void displayGreenSpaces() {
+    private void displayGreenSpaces2() {
         if (greenSpacesController != null) {
             greenSpacesList.getItems().clear(); // Clear the list before adding new items
             List<String> greenSpacesDetails = greenSpacesController.getSortedGreenSpacesNamesAndEmails();

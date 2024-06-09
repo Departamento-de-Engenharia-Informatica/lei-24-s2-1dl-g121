@@ -102,10 +102,10 @@ public class GreenSpacesUI implements Initializable {
 
     }
 
+
     @FXML
     private void handleBackButtonAction() {
         try {
-            // Load AdminGUI.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUI.fxml"));
             Scene adminScene = new Scene(loader.load());
 
