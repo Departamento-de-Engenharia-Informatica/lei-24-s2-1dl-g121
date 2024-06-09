@@ -1,12 +1,10 @@
-# US006 - Register a vehicle.
+# US027 - List green spaces managed by me.
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a VFM, I wish to register a vehicle including Brand, Model,
-Type, Tare Weight, Gross Weight, Current Km, Register Date, Acqui-
-sition Date, and Maintenance/Check-up Frequency (in km).
+As a GSM, I need to list all green spaces managed by me.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -27,13 +25,15 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** VFM cant duplicate cars.
-* **AC2:** Vehicles must be identified by the plate id.
-* **AC3:** Show car data for confirmation.
+* **AC1:** The list of green spaces must be sorted by size in descending
+  order (area in hectares should be used). The sorting algorithm to
+  be used by the application must be defined through a configuration
+  file. At least two sorting algorithms should be available.
+
 
 ### 1.4. Found out Dependencies
 
-* This user story has no dependencies
+* This user story depends
 
 ### 1.5 Input and Output Data
 
@@ -56,7 +56,7 @@ sition Date, and Maintenance/Check-up Frequency (in km).
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us027-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 

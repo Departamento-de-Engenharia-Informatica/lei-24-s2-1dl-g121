@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - List Green Spaces
+
+autonumber
+
+actor "Green Space Manager" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : requests list of green spaces
+    activate System
+
+        System --> GSM : requests sorting algorithm preference
+    deactivate System
+
+    GSM -> System : selects sorting algorithm
+    activate System
+
+        System --> GSM : retrieves and sorts list of green spaces by size (descending)
+        System --> GSM : displays sorted list
+    deactivate System
+
+@enduml
