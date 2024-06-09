@@ -311,7 +311,7 @@ public class US_17 {
                 title = title.replaceAll(" ", "_");
                 Runtime.getRuntime().exec("neato -Tsvg " + directoryPath + "/graph.dot -o " + directoryPath + "/" + title + ".svg").waitFor();
             } catch (IOException e) {
-                System.out.println("Error generating SVG file");
+               // System.out.println("Error generating SVG file");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
