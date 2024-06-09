@@ -1,36 +1,32 @@
-# US006 - Register a vehicle. 
+# US029 - Record the completion of a task.
 
-## 3. Design - User Story Realization 
+# As a Collaborator, I want to record the completion of a task.
+
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                  | Justification (with patterns)                                                                                 |
-|:-------------  |:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 | 	... interacting with the actor?              | CreateVehicleUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 | 	... coordinating the US?                     | CreateVehicleController | Controller                                                                                                    |
-| Step 3  		 | 	...saving the inputted data?                 | VehicleReposiory        | IE: object created in step 1 has its own data.                                                                |
-| Step 5  		 | 	... saving the selected category?            | VehicleRepository       | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 7  		 | 	... validating all data (local validation)?  | VehicleRepository       | IE: owns its data.                                                                                            | 
-| 			  		 | 	... saving the created collaborator?         | VehicleRepository       | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 | 	... informing operation success?             | CreateVehicleUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...   | Answer             | Justification (with patterns)                                                                                 |
+|:-------------  |:----------------------------------------------|:-------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		 | 	... interacting with the actor?              | AddTaskUI          | Controller: Responsible for coordinating the recording of task completions.                                    |
+| Step 2         |  ... retrieving task details?                  | Task               | Entity: Provides details of the task to be completed.                                                          |
+| Step 3  		 | 	... recording the completion?                | ToDoListController | Controller: Coordinates the recording of task completions.                                                     |
+| Step 4  		 | 	... providing completion feedback?           | ToDoListController       | Controller: Informs the Collaborator about the successful completion of the task.                              |
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Vehicle
+* Task
+* TaskCompletion
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
-* CreateVehicleUI  
-* CreateVehicleController
-
+* ToDoList
 
 ## 3.2. Sequence Diagram (SD)
-
-_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 

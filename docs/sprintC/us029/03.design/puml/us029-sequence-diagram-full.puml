@@ -6,68 +6,32 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Human Resources Manager" as ADM
-participant ":CreateVehicleUI" as UI
-participant ":CreateVehicleController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "VehicleRepository:\nVehicleRepository" as TaskCategoryRepository
+actor "Collaborator" as Col
+participant ":TaskRecorder" as Recorder
+participant ":Task" as T
+participant ":TaskCompletion" as TC
 
+activate Col
 
-activate ADM
+        Col -> Recorder : records task completion
 
-        ADM -> UI : asks to register a vehicle
+        activate Recorder
 
-        activate UI
+            Recorder -> T : get task details
+            activate T
 
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
-            UI -> CTRL** : create
+                T --> Recorder : task details
+            deactivate T
 
-            UI -> CTRL : getVehicle
-            activate CTRL
+            Recorder -> TC : recordTaskCompletion(taskID, completionNotes)
+            activate TC
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
+                TC --> Recorder : completion record
+            deactivate TC
 
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
+            Recorder --> Col : displays operation success
+        deactivate Recorder
 
-                CTRL -> TaskCategoryRepository : getVehicleRepository()
-                activate TaskCategoryRepository
-
-                    TaskCategoryRepository --> CTRL: vehicleRepository
-                deactivate TaskCategoryRepository
-
-
-
-                CTRL --> UI : vehicleRegister
-            deactivate CTRL
-
-            UI --> ADM : requests data (Brand, Model, Type, Tare, Gross Weight ,\n Current Km, Register Date, Acquisition Date,\n Maintenance/Check- up Frequency (in Kms))
-        deactivate UI
-
-    ADM -> UI : types requested data
-    activate UI
-
-        UI --> ADM : shows all data and requests confirmation
-    deactivate UI
-
-    ADM -> UI : confirms data
-    activate UI
-
-    UI -> TaskCategoryRepository : registerVehicle
-
-        activate TaskCategoryRepository
-
-        TaskCategoryRepository --> UI : Vehicle
-
-
-        deactivate  TaskCategoryRepository
-
-            deactivate CTRL
-            UI --> ADM: displays operation success
-    deactivate UI
-
-deactivate ADM
+deactivate Col
 
 @enduml
