@@ -205,13 +205,13 @@ public class AddTaskUI implements Initializable {
 
         // Fill greenSpaceBox
         GreenSpacesController controller = new GreenSpacesController();
-        List<String> greenSpaces = controller.getGreenSpacesNames();
+        List<String> greenSpaces = controller.getGreenSpacesNamesByEmail("gsm@this.app");
         ObservableList<String> greenSpacesObs = FXCollections.observableArrayList(greenSpaces);
         greenSpaceBox.setItems(greenSpacesObs);
 
         // Show current to do list
         ToDoListController toDoListController = new ToDoListController();
-        List<String> tasks = toDoListController.presentTasks();
+        List<String> tasks = toDoListController.presentTasks("gsm@this.app");
         showcaseListLst.getItems().addAll(tasks);
         // Disable focus on the list view
         showcaseListLst.setFocusTraversable(false);

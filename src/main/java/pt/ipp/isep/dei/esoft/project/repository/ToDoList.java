@@ -77,4 +77,16 @@ public class ToDoList implements Serializable {
         }
         return tasksAndGreenSpaces;
     }
+
+    public List<String> getTasksAndGreenSpacesByEmail(String userEmail) {
+        List<String> tasksAndGreenSpaces = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getGreenSpace() == null) {
+                tasksAndGreenSpaces.add(task.getTaskAndGreenSpace());
+            } else if (task.getGreenSpace().getEmail().equals(userEmail)) {
+                tasksAndGreenSpaces.add(task.getTaskAndGreenSpace());
+            }
+        }
+        return tasksAndGreenSpaces;
+    }
 }

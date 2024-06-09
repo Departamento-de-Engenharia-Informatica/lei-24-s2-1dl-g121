@@ -223,25 +223,24 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.6.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>pt.ipp.isep.dei.esoft.project.ui.MainApp</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <archive>
-                                <manifest>
-                                    <mainClass>pt.ipp.isep.dei.esoft.project.ui.Main</mainClass>
-                                </manifest>
-                            </archive>
-                            <descriptorRefs>
-                                <descriptorRef>jar-with-dependencies</descriptorRef>
-                            </descriptorRefs>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -252,6 +251,10 @@
             <id>repsy</id>
             <name>lei-soft</name>
             <url>https://repo.repsy.io/mvn/pmaio/lei-soft</url>
+        </repository>
+        <repository>
+            <id>javafx-maven-plugin-repo</id>
+            <url>https://repo.openjfx.io/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
 

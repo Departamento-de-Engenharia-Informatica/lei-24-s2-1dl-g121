@@ -206,7 +206,7 @@ public class GsmUI implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ToDoListController controller = new ToDoListController();
-        List<String> tasks = controller.presentTasks();
+        List<String> tasks = controller.presentTasks("gsm@this.app");
         toDoListLst.getItems().addAll(tasks);
 
         AgendaController agendaController = new AgendaController();

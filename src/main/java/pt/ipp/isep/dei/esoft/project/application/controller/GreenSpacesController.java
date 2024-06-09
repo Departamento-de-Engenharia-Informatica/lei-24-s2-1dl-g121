@@ -51,6 +51,16 @@ public class GreenSpacesController {
         return greenSpacesNames;
     }
 
+    public List<String> getGreenSpacesNamesByEmail(String email) {
+        List<String> greenSpacesNames = new ArrayList<>();
+        for (GreenSpaces greenSpace : repository.getGreenSpaces()) {
+            if (greenSpace.getEmail().equals(email)) {
+                greenSpacesNames.add(greenSpace.getName());
+            }
+        }
+        return greenSpacesNames;
+    }
+
     public GreenSpaces getGreenSpaceByName(String name) {
         for (GreenSpaces greenSpace : repository.getGreenSpaces()) {
             if (greenSpace.getName().equals(name)) {

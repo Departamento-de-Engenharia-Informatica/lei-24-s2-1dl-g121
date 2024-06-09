@@ -79,7 +79,7 @@ public class ToDoListController {
         return task.orElse(null);
     }
 
-    public List<String> presentTasks() {
-        return toDoList.getTasksAndGreenSpaces();
+    public List<String> presentTasks(String email) {
+        return toDoList.getTasksAndGreenSpacesByEmail(email);
     }
 }
