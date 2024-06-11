@@ -1,4 +1,4 @@
-# US006 - Register a vehicle. 
+# US020 - As a Green Space Manager (GSM), I want to register a green space (garden, medium-sized park or large-sized park) and its respective area.
 
 ## 3. Design - User Story Realization 
 
