@@ -41,25 +41,26 @@ class Task{
 
 class Entry{
 -Task task
--Date date
+-String startingDate
++validateStartingDate()
 }
 
 
 class Agenda{
-- List<Entry> EntryList
-+registerEntry()
+- List<AgendaEntry> agendaEntryList
++registerAgendaEntry()
 +add()
-+validateEntry()
++validateAgendaEntry()
 +getAgendaEntries()
 }
 
 
-class AgendaController{
+class AgendaEntryController{
 -ToDoList toDoList
 -Agenda agenda
 getAgenda()
 getToDoList()
-registerEntry(String startingDate, Task task)
+registerAgendaEntry(String startingDate, Task task)
 }
 
 class AddEntryUI{
@@ -70,6 +71,8 @@ class AddEntryUI{
 +listToDoList()
 }
 
+AddEntryUI -> Repositories : repositories
+
 Repositories -> Repositories : instance
 
 ToDoList "1"-> "*"Task : task
@@ -78,13 +81,13 @@ Repositories --> "1"ToDoList : toDoList
 
 Repositories --> "1"Agenda : agenda
 
-AddEntryUI -> "1"AgendaController : controller
+Agenda --> "*"Entry
 
-AgendaController -> "1"Repositories
+Agenda - "1"AgendaEntryController : agendaEntryController
 
-Task "1" -> "*" Entry
+ToDoList - "1"AgendaEntryController : agendaEntryController
 
-Entry "1" -> "*" Agenda
+AgendaEntryController - "1"Entry
 
 
 

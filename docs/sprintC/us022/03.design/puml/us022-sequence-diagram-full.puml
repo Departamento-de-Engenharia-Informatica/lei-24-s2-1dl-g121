@@ -7,12 +7,12 @@ autonumber
 
 'hide footbox
 actor "Green spaces manager" as GSM
-participant ":AgendaEntryUI" as UI
-participant ":AgendaEntryController" as CTRL
+participant ":AddEntryUI" as UI
+participant ":EntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "toDoList:\nToDoList" as TODO
-participant "agendaEntry\n:AgendaEntry" as ENTRY
+participant "Entry\n:Entry" as ENTRY
 participant "agenda\n:Agenda" as Agenda
 
 
@@ -65,8 +65,8 @@ loop while flag==true
     GSM -> UI : selects desired option
             activate UI
 end
-        loop for each agendaEntry : agendaEntries
-            UI->CTRL: addAgendaEntry(startingDate)
+        loop for each Entry : agendaEntries
+            UI->CTRL: addEntry(startingDate)
             activate CTRL
 
                         CTRL -> RepositorySingleton : getInstance()
@@ -81,13 +81,13 @@ end
                         PLAT --> CTRL : Agenda
                         deactivate PLAT
 
-                         CTRL ->Agenda: addAgendaEntry(startingDate)
+                         CTRL ->Agenda: addEntry(startingDate)
                                     activate Agenda
 
-                                    Agenda -> ENTRY**: add(agendaEntry)
-                                    Agenda ->Agenda:add(AgendaEntry)
+                                    Agenda -> ENTRY**: add(Entry)
+                                    Agenda ->Agenda:add(Entry)
                                     activate Agenda
-                                    Agenda ->Agenda: validateAgendaEntry(AgendaEntry)
+                                    Agenda ->Agenda: validateEntry(Entry)
                                     activate Agenda
                                     Agenda -->Agenda
                                     deactivate Agenda

@@ -12,7 +12,7 @@ participant ":ToDoListController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
-participant "greenSpaceController \n:greenSpaceController" as Mapper
+participant "GreenSpacesController \n:GreenSpacesController" as Controller
 participant "toDoList\n :ToDoList" as ToDoList
 participant "task\n:Task" as Task
 
@@ -50,14 +50,14 @@ activate ADM
                                         deactivate GreenSpaceRepository
                                         CTRL -->UI: greenSpaces
 
-                                        CTRL ->Mapper: to(greenSpaces)
-                                        activate Mapper
-                                        ref over Mapper
-                                            SD_to_List
+                                        CTRL ->Controller: toDTO(greenSpaces)
+                                        activate Controller
+                                        ref over Controller
+                                            List
                                         end ref
 
-                                        Mapper --> CTRL: greenSpaces
-                                        deactivate Mapper
+                                        Controller --> CTRL: greenSpaces
+                                        deactivate Controller
 
                                         CTRL --> UI: greenSpaces
                                         deactivate CTRL

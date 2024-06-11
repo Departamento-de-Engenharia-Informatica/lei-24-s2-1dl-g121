@@ -38,8 +38,6 @@ public class AuthenticationUI implements Initializable {
     public Label messageLbl;
     private String loggedInUserEmail;
 
-
-
     public AuthenticationUI() {
         controller = new AuthenticationController();
     }

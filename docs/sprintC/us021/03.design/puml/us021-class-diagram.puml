@@ -64,7 +64,7 @@ class GreenSpaces {
 }
 
 class GreenSpaceController {
-    +List<GreenSpaces> GreenSpacesList
+    GreenSpaceList
     +List<GreenSpaces> to( greenSpaces)
 }
 class GreenSpaceRepository{
